@@ -44,8 +44,8 @@ body {
   min-width: 300px;
   background: rgba(20, 30, 60, 0.08);
   backdrop-filter: blur(10px);
-  padding: 24px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 50px;
 
   -webkit-text-fill-color: #ffffff;
 }
@@ -59,7 +59,7 @@ body {
 }
 
 .controls {
-  margin-top: 18px;
+  margin-top: 24px;
   display: flex;
   flex-wrap: nowrap;
   flex-shrink: 0;
@@ -74,13 +74,14 @@ body {
   color: #fff;
 }
 .question {
-  font-size: 18px;
+  font-size: 24px;
   margin-bottom: 16px;
   -webkit-text-fill-color: #deffdb;
   justify-content: center;
   text-align: center;
 }
 .answers {
+  margin-top: 48px;
   gap: 10px;
   -webkit-text-fill-color: #deffdb;
   display: flex;
@@ -88,8 +89,9 @@ body {
   justify-content: center;
 }
 .answer-btn {
-  padding: 12px 10px;
-  border-radius: 8px;
+  padding: 15px 10px;
+  font-size: 18px;
+  border-radius: 50px;
   min-width: 100px;
   max-width: 200px;
   flex: 1 1 500px;

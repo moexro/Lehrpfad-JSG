@@ -40,7 +40,7 @@ function renderQuestion() {
   answered = false;
   nextBtn.disabled = true;
   const q = questions[current];
-  questionEl.textContent = `${current + 1}. ${q.question}`;
+  questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {
     const btn = document.createElement("button");

@@ -5,9 +5,40 @@ function resetScore(q) {
   console.log(localStorage.getItem(`quizScore_${q}`));
 }
 
-const quizBtn = document.getElementById("quizBtn");
-if (quizBtn) {
-  quizBtn.addEventListener("click", () => {
-    resetScore(quizBtn.getAttribute("data-quiz"));
+const quizBtns = document.querySelectorAll(`[id^="quizBtn_"]`);
+if (quizBtns) {
+  quizBtns.forEach((quizBtn) => {
+    quizBtn.addEventListener("click", () => {
+      resetScore(quizBtn.getAttribute("data-quiz"));
+    });
   });
 }
+
+const quizData = localStorage.getItem("allQuizzes");
+let listQuiz = [];
+if (quizData) {
+  listQuiz = JSON.parse(quizData);
+  console.log(listQuiz);
+}
+
+function getQuizzes() {
+  Object.values(listQuiz).forEach((quiz) => {
+    const quizKey = quiz.name; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "get_to-quiz-btn";
+    btn.id = `quizBtn_${quizKey}`;
+    btn.setAttribute("data-quiz", quizKey);
+    btn.textContent = `Start ${quizKey}`;
+    btn.addEventListener("click", () => {
+      // Verwende forward slashes und encodiere den Parameter
+      const url = `../Quiz Seite/index.html?quiztype=${encodeURIComponent(
+        quizKey
+      )}`;
+      window.location.href = url;
+    });
+    document.getElementById("Quiz_button_container").appendChild(btn);
+  });
+}
+
+getQuizzes();

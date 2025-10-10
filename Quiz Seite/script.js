@@ -40,12 +40,20 @@ const questionsQ2 = [
 let nameQ2 = "Q2";
 let pointsQ2 = 0;
 
-let quizname = "3";
-
 const allQuiz = {
-  Q1: [questionsQ1, pointsQ1, nameQ1],
-  Q2: [questionsQ2, pointsQ2, nameQ2],
+  Q1: {
+    questions: questionsQ1,
+    points: pointsQ1,
+    name: nameQ1,
+  },
+  Q2: {
+    questions: questionsQ2,
+    points: pointsQ2,
+    name: nameQ2,
+  },
 };
+
+localStorage.setItem("allQuizzes", JSON.stringify(allQuiz));
 
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
@@ -53,24 +61,36 @@ const scoreEl = document.getElementById("score");
 const nextBtn = document.getElementById("nextBtn");
 
 let currentQuestion = 0;
-let currentQuiz = "Q2";
+let currentQuiz;
 let answered = false;
 
 function getScore() {
-  const q = allQuiz[currentQuiz][2];
+  const q = allQuiz[currentQuiz].points;
   return parseInt(localStorage.getItem(`quizScore_${q}`) || "0", 10);
 }
 
 function setScore(v) {
-  const q = allQuiz[currentQuiz][2];
+  const q = allQuiz["Q2"].points;
+  console.log(q);
   localStorage.setItem(`quizScore_${q}`, String(v));
+  console.log(`Punkte für ${q} gesetzt auf ${v}.`);
   scoreEl.textContent = `Punkte: ${getScore()}`;
+}
+
+function getQuizID() {
+  const parms = new URLSearchParams(window.location.search);
+  const q = parms.get("quiztype");
+
+  if (q && allQuiz[q]) {
+    currentQuiz = q;
+  }
+  console.log(`Aktuelles Quiz: ${currentQuiz}`);
 }
 
 function renderQuestion() {
   answered = false;
   nextBtn.disabled = true;
-  const q = allQuiz[currentQuiz][0][currentQuestion];
+  const q = allQuiz[currentQuiz].questions[currentQuestion];
   questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {
@@ -80,14 +100,12 @@ function renderQuestion() {
     btn.addEventListener("click", () => onAnswer(i, btn));
     answersEl.appendChild(btn);
   });
-
-  console.log(localStorage.getItem(`quizScore_${currentQuiz}`));
 }
 
 function onAnswer(index, btn) {
   if (answered) return;
   answered = true;
-  const q = allQuiz[currentQuiz][0][currentQuestion];
+  const q = allQuiz[currentQuiz].questions[currentQuestion];
   const buttons = Array.from(document.querySelectorAll(".answer-btn"));
   buttons.forEach((b, i) => {
     b.disabled = true;
@@ -109,7 +127,7 @@ function onAnswer(index, btn) {
 
 nextBtn.addEventListener("click", () => {
   currentQuestion += 1;
-  if (currentQuestion >= allQuiz[currentQuiz][0].length) {
+  if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
     // Quiz Ende
     questionEl.textContent = "Quiz beendet. Gut gemacht!";
     answersEl.innerHTML = "";
@@ -120,6 +138,8 @@ nextBtn.addEventListener("click", () => {
 });
 
 // initialisierung
+getQuizID();
+
 setScore(getScore());
 renderQuestion();
 

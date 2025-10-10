@@ -2,8 +2,8 @@ function resetScore() {
   localStorage.setItem("quizScore", 0);
 }
 
-const homeBtn = document.getElementById("homeBtn");
-if (homeBtn) {
-  homeBtn.addEventListener("click", () => {
+const quizBtn = document.getElementById("quizBtn");
+if (quizBtn) {
+  quizBtn.addEventListener("click", () => {
     	resetScore();
   });

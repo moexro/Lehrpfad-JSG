@@ -36,6 +36,7 @@ function setScore(v) {
   scoreEl.textContent = `Punkte: ${v}`;
 }
 
+
 function renderQuestion() {
   answered = false;
   nextBtn.disabled = true;

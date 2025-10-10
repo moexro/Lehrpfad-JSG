@@ -1,6 +1,4 @@
-// Einfaches Quiz-Skript
-
-const questions = [
+const questionsQ1 = [
   {
     question: "Was ist die Hauptstadt von Deutschland?",
     answers: ["Berlin", "München", "Hamburg", "Köln"],
@@ -18,29 +16,61 @@ const questions = [
   },
 ];
 
+let nameQ1 = "Q1";
+let pointsQ1 = 0;
+
+const questionsQ2 = [
+  {
+    question: "Was ist die Hauptstadt von Deutschland?",
+    answers: ["Bayern", "München", "Hamburg", "Köln"],
+    correctIndex: 0,
+  },
+  {
+    question: "Welche Programmiersprache läuft im Browser?",
+    answers: ["Python", "C#", "JavaScript", "Java"],
+    correctIndex: 2,
+  },
+  {
+    question: "2 + 2 = ?",
+    answers: ["3", "4", "22", "5"],
+    correctIndex: 1,
+  },
+];
+
+let nameQ2 = "Q2";
+let pointsQ2 = 0;
+
+let quizname = "3";
+
+const allQuiz = {
+  Q1: [questionsQ1, pointsQ1, nameQ1],
+  Q2: [questionsQ2, pointsQ2, nameQ2],
+};
+
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
 const scoreEl = document.getElementById("score");
 const nextBtn = document.getElementById("nextBtn");
-const resetBtn = document.getElementById("resetBtn");
 
-let current = 0;
+let currentQuestion = 0;
+let currentQuiz = "Q2";
 let answered = false;
 
 function getScore() {
-  return parseInt(localStorage.getItem("quizScore") || "0", 10);
+  const q = allQuiz[currentQuiz][2];
+  return parseInt(localStorage.getItem(`quizScore_${q}`) || "0", 10);
 }
 
 function setScore(v) {
-  localStorage.setItem("quizScore", String(v));
-  scoreEl.textContent = `Punkte: ${v}`;
+  const q = allQuiz[currentQuiz][2];
+  localStorage.setItem(`quizScore_${q}`, String(v));
+  scoreEl.textContent = `Punkte: ${getScore()}`;
 }
-
 
 function renderQuestion() {
   answered = false;
   nextBtn.disabled = true;
-  const q = questions[current];
+  const q = allQuiz[currentQuiz][0][currentQuestion];
   questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {
@@ -50,12 +80,14 @@ function renderQuestion() {
     btn.addEventListener("click", () => onAnswer(i, btn));
     answersEl.appendChild(btn);
   });
+
+  console.log(localStorage.getItem(`quizScore_${currentQuiz}`));
 }
 
 function onAnswer(index, btn) {
   if (answered) return;
   answered = true;
-  const q = questions[current];
+  const q = allQuiz[currentQuiz][0][currentQuestion];
   const buttons = Array.from(document.querySelectorAll(".answer-btn"));
   buttons.forEach((b, i) => {
     b.disabled = true;
@@ -67,7 +99,6 @@ function onAnswer(index, btn) {
   });
 
   if (index === q.correctIndex) {
-    // richtiger Antwort: +1 Punkt
     const newScore = getScore() + 1;
     setScore(newScore);
   }
@@ -77,8 +108,8 @@ function onAnswer(index, btn) {
 }
 
 nextBtn.addEventListener("click", () => {
-  current += 1;
-  if (current >= questions.length) {
+  currentQuestion += 1;
+  if (currentQuestion >= allQuiz[currentQuiz][0].length) {
     // Quiz Ende
     questionEl.textContent = "Quiz beendet. Gut gemacht!";
     answersEl.innerHTML = "";

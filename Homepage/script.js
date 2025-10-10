@@ -1,5 +1,6 @@
 function resetScore() {
-  localStorage.setItem("quizScore", 0);
+	v = 0;
+  localStorage.setItem("quizScore", String(v);
 }
 
 const quizBtn = document.getElementById("quizBtn");

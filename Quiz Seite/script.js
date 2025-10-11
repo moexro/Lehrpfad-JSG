@@ -70,7 +70,7 @@ function getScore() {
 }
 
 function setScore(v) {
-  const q = allQuiz["Q2"].points;
+  const q = allQuiz[currentQuiz].points;
   console.log(q);
   localStorage.setItem(`quizScore_${q}`, String(v));
   console.log(`Punkte für ${q} gesetzt auf ${v}.`);
@@ -85,6 +85,10 @@ function getQuizID() {
     currentQuiz = q;
   }
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
+  
+  const qs = allQuiz[currentQuiz].points;
+  qs = 0;
+  consolre.log(${qs})
 }
 
 function renderQuestion() {

@@ -65,12 +65,12 @@ let currentQuiz;
 let answered = false;
 
 function getScore() {
-  const q = allQuiz[currentQuiz].points;
+  const q = allQuiz[${currentQuiz}].points;
   return parseInt(localStorage.getItem(`quizScore_${q}`) || "0", 10);
 }
 
 function setScore(v) {
-  const q = allQuiz[currentQuiz].points;
+  const q = allQuiz[${currentQuiz}].points;
   console.log(q);
   localStorage.setItem(`quizScore_${q}`, String(v));
   console.log(`Punkte für ${q} gesetzt auf ${v}.`);
@@ -86,7 +86,7 @@ function getQuizID() {
   }
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
   
-  const qs = allQuiz[currentQuiz].points;
+  const qs = allQuiz[${currentQuiz}].points;
   qs = 0;
   consolre.log(${qs})
 }

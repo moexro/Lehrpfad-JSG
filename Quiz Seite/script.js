@@ -94,7 +94,7 @@ function getQuizID() {
 function renderQuestion() {
   answered = false;
   nextBtn.disabled = true;
-  const q = allQuiz[currentQuiz].questions[currentQuestion];
+  const q = allQuiz[${currentQuiz].questions[currentQuestion];
   questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {
@@ -109,7 +109,7 @@ function renderQuestion() {
 function onAnswer(index, btn) {
   if (answered) return;
   answered = true;
-  const q = allQuiz[currentQuiz].questions[currentQuestion];
+  const q = allQuiz[${currentQuiz].questions[currentQuestion];
   const buttons = Array.from(document.querySelectorAll(".answer-btn"));
   buttons.forEach((b, i) => {
     b.disabled = true;
@@ -131,7 +131,7 @@ function onAnswer(index, btn) {
 
 nextBtn.addEventListener("click", () => {
   currentQuestion += 1;
-  if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
+  if (currentQuestion >= allQuiz[${currentQuiz].questions.length) {
     // Quiz Ende
     questionEl.textContent = "Quiz beendet. Gut gemacht!";
     answersEl.innerHTML = "";

@@ -16,8 +16,6 @@ const questionsQ1 = [
   },
 ];
 
-let nameQ1 = "Q1";
-let pointsQ1 = 0;
 
 const questionsQ2 = [
   {
@@ -37,45 +35,19 @@ const questionsQ2 = [
   },
 ];
 
-let nameQ2 = "Q2";
-let pointsQ2 = 0;
 
-const allQuiz = {
+let allQuiz = {
   Q1: {
     questions: questionsQ1,
-    points: pointsQ1,
-    name: nameQ1,
   },
   Q2: {
     questions: questionsQ2,
-    points: pointsQ2,
-    name: nameQ2,
   },
 };
 
 localStorage.setItem("allQuizzes", JSON.stringify(allQuiz));
 
-const questionEl = document.getElementById("question");
-const answersEl = document.getElementById("answers");
-const scoreEl = document.getElementById("score");
-const nextBtn = document.getElementById("nextBtn");
-
-let currentQuestion = 0;
 let currentQuiz;
-let answered = false;
-
-function getScore() {
-  const q = allQuiz[currentQuiz].points;
-  return parseInt(localStorage.getItem(`quizScore_${q}`) || "0", 10);
-}
-
-function setScore(v) {
-  const q = allQuiz[currentQuiz].points;
-  console.log(q);
-  localStorage.setItem(`quizScore_${q}`, String(v));
-  console.log(`Punkte für ${q} gesetzt auf ${v}.`);
-  scoreEl.textContent = `Punkte: ${getScore()}`;
-}
 
 function getQuizID() {
   const parms = new URLSearchParams(window.location.search);
@@ -86,10 +58,31 @@ function getQuizID() {
   }
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
   
-  const qs = allQuiz[currentQuiz].points;
-  qs = 0;
-  consolre.log(${qs})
+  localStorage.setItem(`quizScore_${currentQuiz}`, 0);
 }
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const scoreEl = document.getElementById("score");
+const nextBtn = document.getElementById("nextBtn");
+
+let currentQuestion = 0;
+let answered = false;
+
+function getScore() {
+  const q = allQuiz[${currentQuiz}].points;
+  return parseInt(localStorage.getItem(`quizScore_${q}`) || "0", 10);
+}
+
+function setScore(v) {
+  const q = allQuiz[${currentQuiz}].points;
+  console.log(q);
+  localStorage.setItem(`quizScore_${q}`, String(v));
+  console.log(`Punkte für ${q} gesetzt auf ${v}.`);
+  scoreEl.textContent = `Punkte: ${getScore()}`;
+}
+
+
 
 function renderQuestion() {
   answered = false;

@@ -57,9 +57,11 @@ function getQuizID() {
 
   if (q && allQuiz[q]) {
     currentQuiz = q;
+  } else {
+    currentQuiz = "Q1"; // Fallback
   }
-  console.log(`Aktuelles Quiz: ${currentQuiz}`);
   
+  console.log(`Aktuelles Quiz: ${currentQuiz}`);
   localStorage.setItem(`quizScore_${currentQuiz}`, 0);
 }
 
@@ -72,14 +74,12 @@ let currentQuestion = 0;
 let answered = false;
 
 function getScore() {
-  const q = allQuiz[${currentQuiz}];
-  return parseInt(localStorage.getItem(`quizScore_${q}`) || "0", 10);
+  return parseInt(localStorage.getItem(`quizScore_${currentQuiz}`) || "0", 10);
 }
 
 function setScore(v) {
-  const q = allQuiz[${currentQuiz}];
-  localStorage.setItem(`quizScore_${q}`, String(v));
-  console.log(`Punkte für ${q} gesetzt auf ${v}.`);
+  localStorage.setItem(`quizScore_${currentQuiz}`, String(v));
+  console.log(`Punkte für ${currentQuiz} gesetzt auf ${v}.`);
   scoreEl.textContent = `Punkte: ${getScore()}`;
 }
 
@@ -103,7 +103,7 @@ function renderQuestion() {
 function onAnswer(index, btn) {
   if (answered) return;
   answered = true;
-  const q = allQuiz["Q1"].questions[currentQuestion];
+  const q = allQuiz[currentQuiz].questions[currentQuestion];
   const buttons = Array.from(document.querySelectorAll(".answer-btn"));
   buttons.forEach((b, i) => {
     b.disabled = true;
@@ -125,7 +125,7 @@ function onAnswer(index, btn) {
 
 nextBtn.addEventListener("click", () => {
   currentQuestion += 1;
-  if (currentQuestion >= allQuiz["Q1"].questions.length) {
+  if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
     // Quiz Ende
     questionEl.textContent = "Quiz beendet. Gut gemacht!";
     answersEl.innerHTML = "";

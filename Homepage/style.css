@@ -76,6 +76,7 @@ body {
 }
 
 .get_to-quiz-btn {
+  display: flex;
   font-size: 20px;
   padding: 16px 20px;
   border-radius: 10px;

@@ -39,9 +39,11 @@ const questionsQ2 = [
 let allQuiz = {
   Q1: {
     questions: questionsQ1,
+    name: "Q1",
   },
   Q2: {
     questions: questionsQ2,
+    name: "Q2",
   },
 };
 

@@ -24,7 +24,8 @@ if (quizData) {
 function getQuizzes() {
   Object.values(listQuiz).forEach((quiz) => {
     const quizKey = quiz.name; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
-		if(localStorage.getItem(`quizUnlock_${quizKey}`) {
+		const unlocked = JSON.parse(localStorage.getItem(`quizUnlock_${quizKey}`));
+		if(unlocked) {
 		const qscore = localStorage.getItem(`quizScore_${quizKey}`);
     const btn = document.createElement("button");
     btn.type = "button";
@@ -48,7 +49,7 @@ function resetQuizUnlock() {
 	const resetB = document.getElementById("resetQuizzes");
   		Object.values(listQuiz).forEach((quiz) => {
       const quizKey = quiz.name;
-      localStorage.getItem(`quizUnlock_${quizKey}`) = false;
+      localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(false));
       }
     }
     

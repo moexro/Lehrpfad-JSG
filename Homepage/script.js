@@ -57,7 +57,7 @@ function resetButton() {
   resetB.addEventListener("click", () => {
       // Verwende forward slashes und encodiere den Parameter
       resetQuizUnlock();
-    )};
+    });
 	}
 
 resetButton();

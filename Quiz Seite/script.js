@@ -63,7 +63,7 @@ function getQuizID() {
   
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
   localStorage.setItem(`quizScore_${currentQuiz}`, 0);
-  localStorage.setItem("quizUnlock_${currentQuiz}", true);
+  localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(true));
 }
 
 const questionEl = document.getElementById("question");

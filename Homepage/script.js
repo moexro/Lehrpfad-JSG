@@ -24,7 +24,7 @@ if (quizData) {
 function getQuizzes() {
   Object.values(listQuiz).forEach((quiz) => {
     const quizKey = quiz.name; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
-		const qscore = localStorage.getItem(`quizScore_${quizKey}`)
+		const qscore = localStorage.getItem(`quizScore_${quizKey}`);
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "get_to-quiz-btn";

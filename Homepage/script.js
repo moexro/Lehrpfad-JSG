@@ -46,11 +46,10 @@ function getQuizzes() {
 }
 
 function resetQuizUnlock() {
-	const resetB = document.getElementById("resetQuizzes");
   		Object.values(listQuiz).forEach((quiz) => {
       const quizKey = quiz.name;
       localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(false));
-      }
+      });
     }
     
 function resetButton() {
@@ -58,8 +57,8 @@ function resetButton() {
   resetB.addEventListener("click", () => {
       // Verwende forward slashes und encodiere den Parameter
       resetQuizUnlock();
-      )}`;
-    });
-}
+    )};
+	}
 
+resetButton();
 getQuizzes();

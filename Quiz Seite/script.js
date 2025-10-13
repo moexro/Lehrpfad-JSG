@@ -88,7 +88,7 @@ function setScore(v) {
 function renderQuestion() {
   answered = false;
   nextBtn.disabled = true;
-  const q = allQuiz["Q1"].questions[currentQuestion];
+  const q = allQuiz[currentQuiz].questions[currentQuestion];
   questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {

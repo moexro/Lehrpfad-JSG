@@ -6,9 +6,7 @@ const questionsQ1 = [
   },
   {
     question: "Was versteht man unter "Fruchtfolge"?",
-    answers: ["Die Reihenfolge der Ernte innerhalb eines Tages", 
-      				"Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre", 
-              "Das Sortieren der Ernte nach Größe", "Die Reihenfolge der Düngung"],
+    answers: ["Die Reihenfolge der Ernte innerhalb eines Tages", "Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre", "Das Sortieren der Ernte nach Größe", "Die Reihenfolge der Düngung"],
     correctIndex: 1,
   },
   {
@@ -27,8 +25,7 @@ const questionsQ2 = [
   },
   {
     question: "Was ist ein wichtiger Vorteil des ökologischen Landbaus?",
-    answers: ["Höhere Erträge", "Schnellere Erntezeiten", 
-      "Verzicht auf synthetische Pflanzenschutzmittel", "Niedrige Produktionskosten"],
+    answers: ["Höhere Erträge", "Schnellere Erntezeiten", "Verzicht auf synthetische Pflanzenschutzmittel", "Niedrige Produktionskosten"],
     correctIndex: 2,
   },
   {

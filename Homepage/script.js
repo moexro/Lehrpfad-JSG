@@ -44,4 +44,21 @@ function getQuizzes() {
   }
 }
 
+function resetQuizUnlock() {
+	const resetB = document.getElementById("resetQuizzes");
+  		Object.values(listQuiz).forEach((quiz) => {
+      const quizKey = quiz.name;
+      localStorage.getItem(`quizUnlock_${quizKey}`) = false;
+      }
+    }
+    
+function resetButton() {
+  const resetB = document.getElementById("resetQuizzes");
+  resetB.addEventListener("click", () => {
+      // Verwende forward slashes und encodiere den Parameter
+      resetQuizUnlock();
+      )}`;
+    });
+}
+
 getQuizzes();

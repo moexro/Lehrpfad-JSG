@@ -1,17 +1,19 @@
 const questionsQ1 = [
   {
-    question: "Was ist die Hauptstadt von Deutschland?",
-    answers: ["Berlin", "München", "Hamburg", "Köln"],
+    question: "Welche Pflanze wird in Deutschland am häufigsten angebaut?",
+    answers: ["Weizen", "Mais", "Gerste", "Raps"],
     correctIndex: 0,
   },
   {
-    question: "Welche Programmiersprache läuft im Browser?",
-    answers: ["Python", "C#", "JavaScript", "Java"],
-    correctIndex: 2,
+    question: "Was versteht man unter "Fruchtfolge"?",
+    answers: ["Die Reihenfolge der Ernte innerhalb eines Tages", 
+      				"Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre", 
+              "Das Sortieren der Ernte nach Größe", "Die Reihenfolge der Düngung"],
+    correctIndex: 1,
   },
   {
-    question: "2 + 2 = ?",
-    answers: ["3", "4", "22", "5"],
+    question: "Welche Maschine wird hauptsächlich zur Bodenbearbeitung vor der Aussaat eingesetzt?",
+    answers: ["Mähdrescher", "Pflug", "Ballenpresse", "Güllefass"],
     correctIndex: 1,
   },
 ];
@@ -19,18 +21,19 @@ const questionsQ1 = [
 
 const questionsQ2 = [
   {
-    question: "Was ist die Hauptstadt von Deutschland?",
-    answers: ["Bayern", "München", "Hamburg", "Köln"],
+    question: "Welche Nutztiere liefern sowohl Milch als auch Fleisch?",
+    answers: ["Schafe", "Schweine", "Hühner", "Pferde"],
     correctIndex: 0,
   },
   {
-    question: "Welche Programmiersprache läuft im Browser?",
-    answers: ["Python", "C#", "JavaScript", "Java"],
+    question: "Was ist ein wichtiger Vorteil des ökologischen Landbaus?",
+    answers: ["Höhere Erträge", "Schnellere Erntezeiten", 
+      "Verzicht auf synthetische Pflanzenschutzmittel", "Niedrige Produktionskosten"],
     correctIndex: 2,
   },
   {
-    question: "2 + 2 = ?",
-    answers: ["3", "4", "22", "5"],
+    question: "Wie nennt man die Haltung von Tieren auf dem gleichen Hof, auf dem auch ihre Futtermittel erzeugt werden?",
+    answers: ["Intensivhaltung", "Kreislaufwirtschat", "Stallfütterung", "Selbstversorgungshaltung"],
     correctIndex: 1,
   },
 ];

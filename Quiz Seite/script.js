@@ -57,13 +57,13 @@ function getQuizID() {
 
   if (q && allQuiz[q]) {
     currentQuiz = q;
+      localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
   } else {
     currentQuiz = "Q1"; // Fallback
   }
   
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
   localStorage.setItem(`quizScore_${currentQuiz}`, 0);
-  localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(true));
 }
 
 const questionEl = document.getElementById("question");

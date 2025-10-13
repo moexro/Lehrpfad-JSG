@@ -24,12 +24,13 @@ if (quizData) {
 function getQuizzes() {
   Object.values(listQuiz).forEach((quiz) => {
     const quizKey = quiz.name; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
+		const qscore = localStorage.getItem(`quizScore_${quizKey}`)
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "get_to-quiz-btn";
     btn.id = `quizBtn_${quizKey}`;
     btn.setAttribute("data-quiz", quizKey);
-    btn.textContent = `Start ${quizKey}`;
+    btn.textContent = `Start ${quizKey} Punkte: ${qscore}`;
     btn.addEventListener("click", () => {
       // Verwende forward slashes und encodiere den Parameter
       const url = `../Quiz Seite/index.html?quiztype=${encodeURIComponent(

@@ -24,6 +24,7 @@ if (quizData) {
 function getQuizzes() {
   Object.values(listQuiz).forEach((quiz) => {
     const quizKey = quiz.name; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
+		if(localStorage.getItem(`quizUnlock_${quizKey}`) {
 		const qscore = localStorage.getItem(`quizScore_${quizKey}`);
     const btn = document.createElement("button");
     btn.type = "button";
@@ -40,6 +41,7 @@ function getQuizzes() {
     });
     document.getElementById("Quiz_button_container").appendChild(btn);
   });
+  }
 }
 
 getQuizzes();

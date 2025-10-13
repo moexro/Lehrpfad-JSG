@@ -5,7 +5,7 @@ const questionsQ1 = [
     correctIndex: 0,
   },
   {
-    question: "Was versteht man unter "Fruchtfolge"?",
+    question: "Was versteht man unter Fruchtfolge?",
     answers: ["Die Reihenfolge der Ernte innerhalb eines Tages", "Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre", "Das Sortieren der Ernte nach Größe", "Die Reihenfolge der Düngung"],
     correctIndex: 1,
   },

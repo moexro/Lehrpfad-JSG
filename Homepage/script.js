@@ -15,7 +15,7 @@ if (quizBtns) {
 }
 
 const quizData = localStorage.getItem("allQuizzes");
-let listQuiz = [];
+let listQuiz ={};
 if (quizData) {
   listQuiz = JSON.parse(quizData);
   console.log(listQuiz);
@@ -24,9 +24,9 @@ if (quizData) {
 function getQuizzes() {
   Object.values(listQuiz).forEach((quiz) => {
     const quizKey = quiz.name; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
-		const unlocked = JSON.parse(localStorage.getItem(`quizUnlock_${quizKey}`));
+		const unlocked = JSON.parse(localStorage.getItem(`quizUnlock_${quizKey}`) || false;
 		if(unlocked) {
-		const qscore = localStorage.getItem(`quizScore_${quizKey}`);
+		const qscore = localStorage.getItem(`quizScore_${quizKey}`) || 0;
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "get_to-quiz-btn";

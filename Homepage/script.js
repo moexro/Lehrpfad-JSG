@@ -36,7 +36,7 @@ function getQuizzes() {
       btn.className = "get_to-quiz-btn";
       btn.id = `quizBtn_${quizKey}`;
       btn.setAttribute("data-quiz", quizKey);
-      btn.textContent = `${quizName}:  ${qscore} Punkte`;
+      btn.textContent = `${quizName}:  \n${qscore} Punkte`;
       btn.addEventListener("click", () => {
         // Verwende forward slashes und encodiere den Parameter
         const url = `../Quiz Seite/index.html?quiztype=${encodeURIComponent(

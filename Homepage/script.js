@@ -85,8 +85,17 @@ function unlockButton() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function unlockFromLink() {
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("from") === "quizLoaded") {
+  allQuizUnlock();
+  alert("Alle Quiz wurden freigeschaltet!");
+}
+}
+
+	unlockFromLink();
   getQuizzes();
   resetButton();
   unlockButton();
-});
+

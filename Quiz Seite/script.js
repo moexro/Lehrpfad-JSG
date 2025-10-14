@@ -77,7 +77,7 @@ function getQuizID() {
     localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
     console.log(`Quiz ${currentQuiz} freigeschaltet.`);
   } else {
-    currentQuiz = ""; // Fallback
+    currentQuiz = "Q_leer"; // Fallback
   }
 
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
@@ -162,6 +162,18 @@ nextBtn.addEventListener("click", () => {
   renderQuestion();
 });
 
+function loadOnlyData() {
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("loadOnly") === "true") {
+  // Nach kurzer Zeit zurück zur Homepage mit Rücksprung-Flag
+  setTimeout(() => {
+    window.location.href = "../Homepage/index.html?from=quizLoaded";
+  }, 500);
+}
+}
+
+loadOnlyData();
 // initialisierung
 getQuizID();
 
@@ -178,15 +190,4 @@ if (homeBtn) {
   });
 }
 
-function loadOnlyData() {
-const params = new URLSearchParams(window.location.search);
 
-if (params.get("loadOnly") === "true") {
-  // Nach kurzer Zeit zurück zur Homepage mit Rücksprung-Flag
-  setTimeout(() => {
-    window.location.href = "../Homepage/index.html?from=quizLoaded";
-  }, 500);
-}
-}
-
-loadOnlyData();

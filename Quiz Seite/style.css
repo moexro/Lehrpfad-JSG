@@ -17,7 +17,7 @@ body {
   background: var(--bg);
   margin: 0;
   padding: 20px;
-  display: flex;
+  display: inline-block;
   align-items: center;
   justify-content: center;
   min-height: 100vh;

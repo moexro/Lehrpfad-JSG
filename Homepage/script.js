@@ -70,8 +70,16 @@ function resetButton() {
     window.location.reload();
   });
 }
+function unlockButton() {
+  const unlockB = document.getElementById("unlockQuizzes");
+  resetB.addEventListener("click", () => {
+		allQuizUnlock();
+    window.location.reload();
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   getQuizzes();
   resetButton();
+  unlockButton();
 });

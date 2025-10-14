@@ -6,16 +6,21 @@ const questionsQ1 = [
   },
   {
     question: "Was versteht man unter Fruchtfolge?",
-    answers: ["Die Reihenfolge der Ernte innerhalb eines Tages", "Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre", "Das Sortieren der Ernte nach Größe", "Die Reihenfolge der Düngung"],
+    answers: [
+      "Die Reihenfolge der Ernte innerhalb eines Tages",
+      "Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre",
+      "Das Sortieren der Ernte nach Größe",
+      "Die Reihenfolge der Düngung",
+    ],
     correctIndex: 1,
   },
   {
-    question: "Welche Maschine wird hauptsächlich zur Bodenbearbeitung vor der Aussaat eingesetzt?",
+    question:
+      "Welche Maschine wird hauptsächlich zur Bodenbearbeitung vor der Aussaat eingesetzt?",
     answers: ["Mähdrescher", "Pflug", "Ballenpresse", "Güllefass"],
     correctIndex: 1,
   },
 ];
-
 
 const questionsQ2 = [
   {
@@ -25,16 +30,26 @@ const questionsQ2 = [
   },
   {
     question: "Was ist ein wichtiger Vorteil des ökologischen Landbaus?",
-    answers: ["Höhere Erträge", "Schnellere Erntezeiten", "Verzicht auf synthetische Pflanzenschutzmittel", "Niedrige Produktionskosten"],
+    answers: [
+      "Höhere Erträge",
+      "Schnellere Erntezeiten",
+      "Verzicht auf synthetische Pflanzenschutzmittel",
+      "Niedrige Produktionskosten",
+    ],
     correctIndex: 2,
   },
   {
-    question: "Wie nennt man die Haltung von Tieren auf dem gleichen Hof, auf dem auch ihre Futtermittel erzeugt werden?",
-    answers: ["Intensivhaltung", "Kreislaufwirtschaft", "Stallfütterung", "Selbstversorgungshaltung"],
+    question:
+      "Wie nennt man die Haltung von Tieren auf dem gleichen Hof, auf dem auch ihre Futtermittel erzeugt werden?",
+    answers: [
+      "Intensivhaltung",
+      "Kreislaufwirtschaft",
+      "Stallfütterung",
+      "Selbstversorgungshaltung",
+    ],
     correctIndex: 1,
   },
 ];
-
 
 let allQuiz = {
   Q1: {
@@ -57,11 +72,11 @@ function getQuizID() {
 
   if (q && allQuiz[q]) {
     currentQuiz = q;
-      localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
+    localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
   } else {
     currentQuiz = "Q1"; // Fallback
   }
-  
+
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
   localStorage.setItem(`quizScore_${currentQuiz}`, 0);
 }
@@ -83,8 +98,6 @@ function setScore(v) {
   console.log(`Punkte für ${currentQuiz} gesetzt auf ${v}.`);
   scoreEl.textContent = `Punkte: ${getScore()}`;
 }
-
-
 
 function renderQuestion() {
   answered = false;

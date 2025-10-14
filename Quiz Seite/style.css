@@ -84,34 +84,33 @@ body {
 }
 
 .answers {
-    display: flex;
-    flex-wrap: wrap; /* Erlaubt das Umfließen in die nächste Zeile */
-    justify-content: center; /* Zentriert die Buttons */
-    gap: 10px; /* Abstand zwischen den Buttons */
-    -webkit-text-fill-color: #deffdb;
-    text-align: center;   
+  display: flex;
+  flex-wrap: wrap; /* Erlaubt das Umfließen in die nächste Zeile */
+  justify-content: center; /* Zentriert die Buttons */
+  gap: 10px; /* Abstand zwischen den Buttons */
+  -webkit-text-fill-color: #deffdb;
+  text-align: center;
 }
 
 .answer-btn {
-    flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
-    min-width: 150px; /* Mindestbreite für die Buttons */
-    max-width: 200px; /* Maximale Breite der Buttons */
-    padding: 15px 10px;
-    font-size: 18px;
-    border-radius: 50px;
-    text-align: center;
-    background: var(--button);
-    cursor: pointer;
-    transition: transform 0.08s ease, box-shadow 0.08s ease;
+  flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
+  min-width: 150px; /* Mindestbreite für die Buttons */
+  max-width: 200px; /* Maximale Breite der Buttons */
+  padding: 15px 10px;
+  font-size: 18px;
+  border-radius: 50px;
+  text-align: center;
+  background: var(--button);
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 
 /* Zusätzliche Anpassung für sehr kleine Bildschirme */
 @media (max-width: 600px) {
-    .answer-btn {
-        flex: 1 1 100%; /* Nimmt auf kleinen Tabs 100% der Breite ein */
-    }
+  .answer-btn {
+    flex: 1 1 100%; /* Nimmt auf kleinen Tabs 100% der Breite ein */
+  }
 }
-
 
 .answer-btn:hover {
   transform: translateY(-2px);

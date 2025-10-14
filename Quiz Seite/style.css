@@ -90,7 +90,6 @@ body {
   line-height: 1.3;          /* angenehmer Zeilenabstand */
   max-width: 200px;          /* verhindert zu breite Buttons */
   min-width: 100px;          /* sorgt für etwas Gleichmäßigkeit */
-  display: flex;
   flex-wrap: wrap;          
   justify-content: center;  
   

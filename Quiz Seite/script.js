@@ -77,7 +77,7 @@ function getQuizID() {
     localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
     console.log(`Quiz ${currentQuiz} freigeschaltet.`);
   } else {
-    currentQuiz = "Q1"; // Fallback
+    currentQuiz = ""; // Fallback
   }
 
   console.log(`Aktuelles Quiz: ${currentQuiz}`);

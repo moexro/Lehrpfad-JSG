@@ -78,7 +78,6 @@ function loadOnlyData() {
   }
   return false;
 }
-loadOnlyData();
 
 if (loadOnlyData()) {
   // stoppe die weitere Ausführung, damit kein Quizcode läuft
@@ -181,16 +180,6 @@ nextBtn.addEventListener("click", () => {
   renderQuestion();
 });
 
-function loadOnlyData() {
-const params = new URLSearchParams(window.location.search);
-
-if (params.get("loadOnly") === "true") {
-  // Nach kurzer Zeit zurück zur Homepage mit Rücksprung-Flag
-  setTimeout(() => {
-    window.location.href = "../Homepage/index.html?from=quizLoaded";
-  }, 500);
-}
-}
 
 
 // initialisierung

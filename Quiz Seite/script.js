@@ -30,7 +30,7 @@ const questionsQ2 = [
   },
   {
     question: "Wie nennt man die Haltung von Tieren auf dem gleichen Hof, auf dem auch ihre Futtermittel erzeugt werden?",
-    answers: ["Intensivhaltung", "Kreislaufwirtschat", "Stallfütterung", "Selbstversorgungshaltung"],
+    answers: ["Intensivhaltung", "Kreislaufwirtschaft", "Stallfütterung", "Selbstversorgungshaltung"],
     correctIndex: 1,
   },
 ];

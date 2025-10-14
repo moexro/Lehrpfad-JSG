@@ -72,7 +72,7 @@ function resetButton() {
 }
 function unlockButton() {
   const unlockB = document.getElementById("unlockQuizzes");
-  resetB.addEventListener("click", () => {
+	  unlockB.addEventListener("click", () => {
 		allQuizUnlock();
     window.location.reload();
   });

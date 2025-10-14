@@ -17,7 +17,7 @@ body {
   background: var(--bg);
   margin: 0;
   padding: 20px;
-  display: inline-block;
+  display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
@@ -49,6 +49,7 @@ body {
   padding: 20px;
   border-radius: 50px;
   -webkit-text-fill-color: #ffffff;
+  display: inline-block;
 }
 
 .title {

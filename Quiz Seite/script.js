@@ -177,3 +177,16 @@ if (homeBtn) {
     window.location.href = target;
   });
 }
+
+function loadOnlyData() {
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("loadOnly") === "true") {
+  // Nach kurzer Zeit zurück zur Homepage mit Rücksprung-Flag
+  setTimeout(() => {
+    window.location.href = "../Homepage/index.html?from=quizLoaded";
+  }, 500);
+}
+}
+
+loadOnlyData();

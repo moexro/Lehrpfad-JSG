@@ -67,10 +67,9 @@ function resetButton() {
   const resetB = document.getElementById("resetQuizzes");
   resetB.addEventListener("click", () => {
     localStorage.clear();
+    window.location.reload();
   });
 }
-
-localStorage.setItem(`quizUnlock_Q1`, JSON.stringify(true));
 
 document.addEventListener("DOMContentLoaded", () => {
   getQuizzes();

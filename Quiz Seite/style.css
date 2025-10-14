@@ -95,7 +95,7 @@ body {
 .answer-btn {
     flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
     min-width: 150px; /* Mindestbreite für die Buttons */
-    max-width: 300px; /* Maximale Breite der Buttons */
+    max-width: 200px; /* Maximale Breite der Buttons */
     padding: 15px 10px;
     font-size: 18px;
     border-radius: 50px;

@@ -51,14 +51,14 @@ function getQuizzes() {
 
 function resetQuizUnlock() {
   Object.values(listQuiz).forEach((quiz) => {
-    const quizKey = quiz.name;
+    const quizKey = quiz.id;
     localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(false));
   });
 }
 
 function allQuizUnlock() {
   Object.values(listQuiz).forEach((quiz) => {
-    const quizKey = quiz.name;
+    const quizKey = quiz.id;
     localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(true));
   });
 }

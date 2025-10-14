@@ -63,6 +63,13 @@ function allQuizUnlock() {
   });
 }
 
+function allQuizUnlock() {
+	  Object.values(listQuiz).forEach((quiz) => {
+    const quizKey = quiz.id;
+    localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(true));
+  });
+}
+
 function resetButton() {
   const resetB = document.getElementById("resetQuizzes");
   resetB.addEventListener("click", () => {
@@ -73,8 +80,8 @@ function resetButton() {
 function unlockButton() {
   const unlockB = document.getElementById("unlockQuizzes");
 	  unlockB.addEventListener("click", () => {
-		allQuizUnlock();
-    window.location.reload();
+		window.location.href = "../Quiz Seite/index.html?loadOnlyQuizData=true";
+  
   });
 }
 

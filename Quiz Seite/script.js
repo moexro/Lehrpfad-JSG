@@ -64,7 +64,26 @@ let allQuiz = {
   },
 };
 
+
 localStorage.setItem("allQuizzes", JSON.stringify(allQuiz));
+
+function loadOnlyData() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("loadOnly") === "true") {
+    // Nach kurzer Zeit zurück zur Homepage mit Rücksprung-Flag
+    setTimeout(() => {
+      window.location.href = "../Homepage/index.html?from=quizLoaded";
+    }, 500);
+    return true; // signalisiert, dass kein weiteres Quiz geladen werden soll
+  }
+  return false;
+}
+loadOnlyData();
+
+if (loadOnlyData()) {
+  // stoppe die weitere Ausführung, damit kein Quizcode läuft
+  throw new Error("Nur Daten geladen, Rückleitung aktiviert.");
+}
 
 let currentQuiz;
 
@@ -173,7 +192,7 @@ if (params.get("loadOnly") === "true") {
 }
 }
 
-loadOnlyData();
+
 // initialisierung
 getQuizID();
 

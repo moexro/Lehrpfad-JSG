@@ -54,11 +54,13 @@ const questionsQ2 = [
 let allQuiz = {
   Q1: {
     questions: questionsQ1,
-    name: "Q1",
+    name: "Über den Ackerbau",
+    id: "Q1",
   },
   Q2: {
     questions: questionsQ2,
-    name: "Q2",
+    name: "Über die Tierhaltung",
+    id: "Q2",
   },
 };
 
@@ -73,6 +75,7 @@ function getQuizID() {
   if (q && allQuiz[q]) {
     currentQuiz = q;
     localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
+    console.log(`Quiz ${currentQuiz} freigeschaltet.`);
   } else {
     currentQuiz = "Q1"; // Fallback
   }
@@ -85,6 +88,8 @@ const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
 const scoreEl = document.getElementById("score");
 const nextBtn = document.getElementById("nextBtn");
+const homeBtn = document.getElementById("homeBtn");
+homeBtn.classList.toggle("hidden");
 
 let currentQuestion = 0;
 let answered = false;
@@ -97,6 +102,7 @@ function setScore(v) {
   localStorage.setItem(`quizScore_${currentQuiz}`, String(v));
   console.log(`Punkte für ${currentQuiz} gesetzt auf ${v}.`);
   scoreEl.textContent = `Punkte: ${getScore()}`;
+  console.log(getScore());
 }
 
 function renderQuestion() {
@@ -112,6 +118,9 @@ function renderQuestion() {
     btn.addEventListener("click", () => onAnswer(i, btn));
     answersEl.appendChild(btn);
   });
+
+  const quizname = allQuiz[currentQuiz].name || "Unbekannt";
+  document.getElementById("quizTitle").textContent = `${quizname}`;
 }
 
 function onAnswer(index, btn) {
@@ -141,9 +150,13 @@ nextBtn.addEventListener("click", () => {
   currentQuestion += 1;
   if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
     // Quiz Ende
-    questionEl.textContent = "Quiz beendet. Gut gemacht!";
+    questionEl.textContent =
+      "Quiz beendet. Gut gemacht! Du hast " + getScore() + " Punkte erreicht.";
     answersEl.innerHTML = "";
     nextBtn.disabled = true;
+    nextBtn.classList.toggle("hidden");
+    scoreEl.classList.toggle("hidden");
+    homeBtn.classList.toggle("hidden");
     return;
   }
   renderQuestion();
@@ -156,7 +169,7 @@ setScore(getScore());
 renderQuestion();
 
 // Home button: öffnet die in data-home angegebene URL in neuem Tab
-const homeBtn = document.getElementById("homeBtn");
+
 if (homeBtn) {
   homeBtn.addEventListener("click", () => {
     const target = homeBtn.getAttribute("data-home") || "#";

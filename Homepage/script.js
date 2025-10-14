@@ -23,18 +23,20 @@ if (quizData) {
 
 function getQuizzes() {
   Object.values(listQuiz).forEach((quiz) => {
-    const quizKey = quiz.name; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
+    const quizKey = quiz.id; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
     const unlocked = JSON.parse(
       localStorage.getItem(`quizUnlock_${quizKey}`) || false
     );
+    console.log(unlocked);
     if (unlocked) {
       const qscore = localStorage.getItem(`quizScore_${quizKey}`) || 0;
+      const quizName = quiz.name || quizKey;
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "get_to-quiz-btn";
       btn.id = `quizBtn_${quizKey}`;
       btn.setAttribute("data-quiz", quizKey);
-      btn.textContent = `Start ${quizKey} Punkte: ${qscore}`;
+      btn.textContent = `${quizName}:  ${qscore} Punkte`;
       btn.addEventListener("click", () => {
         // Verwende forward slashes und encodiere den Parameter
         const url = `../Quiz Seite/index.html?quiztype=${encodeURIComponent(
@@ -54,12 +56,21 @@ function resetQuizUnlock() {
   });
 }
 
+function allQuizUnlock() {
+  Object.values(listQuiz).forEach((quiz) => {
+    const quizKey = quiz.name;
+    localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(true));
+  });
+}
+
 function resetButton() {
   const resetB = document.getElementById("resetQuizzes");
   resetB.addEventListener("click", () => {
-    resetQuizUnlock();
+    localStorage.clear();
   });
 }
+
+localStorage.setItem(`quizUnlock_Q1`, JSON.stringify(true));
 
 document.addEventListener("DOMContentLoaded", () => {
   getQuizzes();

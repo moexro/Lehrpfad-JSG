@@ -12,13 +12,14 @@ html,
 body {
   height: 100%;
   margin: 0;
-}
-body {
+  padding: 0;
+  box-sizing: border-box;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial;
   background: var(--bg);
   color: var(--textdark);
   padding-top: var(--header-h);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* Top bar */
@@ -85,7 +86,6 @@ body {
   color: #fff;
   text-decoration: none;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 /* page container */
@@ -103,9 +103,13 @@ body {
   background: var(--container);
   text-align: center;
   color: var(--textlight);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
 }
 
-.placeholder {
+.second-container {
   border-radius: 10px;
   margin: 36px auto;
   padding: 36px;

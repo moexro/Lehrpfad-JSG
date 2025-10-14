@@ -21,17 +21,16 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .background {
   position: absolute;
   top: 0;
   left: 0;
-  min-height: 120vh;
+  min-height: 100vh;
   width: 100%;
   height: 100%;
-  /* background defined in long form so object-fit behavior is explicit */
-  background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
   background-repeat: no-repeat;
   background-position: center center;
   flex-shrink: 0;
@@ -93,12 +92,14 @@ body {
 }
 
 .answer-btn {
+  hyphens: auto;
+  word-break: break-word;
   flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
   min-width: 150px; /* Mindestbreite für die Buttons */
   max-width: 200px; /* Maximale Breite der Buttons */
-  padding: 15px 10px;
+  padding: 15px;
   font-size: 18px;
-  border-radius: 50px;
+  border-radius: 35px;
   text-align: center;
   background: var(--button);
   cursor: pointer;
@@ -175,4 +176,8 @@ img {
   height: 200px;
   object-fit: contain;
   background: transparent;
+}
+
+.hidden {
+  display: none !important;
 }

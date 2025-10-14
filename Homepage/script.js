@@ -60,5 +60,7 @@ function resetButton() {
     });
 	}
 
-resetButton();
-getQuizzes();
+document.addEventListener("DOMContentLoaded", () => {
+  getQuizzes();
+  resetButton();
+});

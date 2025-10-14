@@ -73,8 +73,12 @@ function allQuizUnlock() {
 function resetButton() {
   const resetB = document.getElementById("resetQuizzes");
   resetB.addEventListener("click", () => {
-    localStorage.clear();
+    const confirmed = confirm("Willst du wirklich alle gespeicherten Daten löschen?");
+    if (confirmed) {
+      localStorage.clear();
+      alert("Alle Daten wurden gelöscht!");
     window.location.reload();
+    };
   });
 }
 function unlockButton() {

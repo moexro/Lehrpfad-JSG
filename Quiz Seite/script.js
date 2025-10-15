@@ -172,7 +172,7 @@ function renderQuestion() {
   nextBtn.disabled = true;
   const q = allQuiz[currentQuiz].questions[currentQuestion];
   if (q) {
-  if (localStorage.getItem(`quizDone_${currentQuiz}`) !== true) {
+  if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true) {
   questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {
@@ -184,9 +184,15 @@ function renderQuestion() {
   });
   } else {
     questionEl.textContent = "Dieses Quiz hast du schon abgeschlossen";
+    nextBtn.classList.toggle("hidden");
+    scoreEl.classList.toggle("hidden");
+    homeBtn.classList.toggle("hidden");
   }
   } else {
     document.getElementById("quizTitle").textContent = "Dieses Quiz existiert nicht";
+    nextBtn.classList.toggle("hidden");
+    scoreEl.classList.toggle("hidden");
+    homeBtn.classList.toggle("hidden");
   }
 
   const quizname = allQuiz[currentQuiz].name || "Unbekannt";

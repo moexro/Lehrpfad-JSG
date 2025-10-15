@@ -69,7 +69,7 @@ localStorage.setItem("allQuizzes", JSON.stringify(allQuiz));
 
 // --- Prüfen, ob nur Daten geladen werden sollen ---
 const loadOnlyParm = new URLSearchParams(window.location.search);
-const loadOnly = loadOnlyParm.get("loadOnly") === "true";
+const loadOnly = loadOnlyParm.get("loadOnlyQuizData") === "true";
 
 if (loadOnly) {
   // nur Daten laden, Quiz nicht starten

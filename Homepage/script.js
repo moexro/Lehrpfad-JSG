@@ -63,13 +63,6 @@ function allQuizUnlock() {
   });
 }
 
-function allQuizUnlock() {
-	  Object.values(listQuiz).forEach((quiz) => {
-    const quizKey = quiz.id;
-    localStorage.setItem(`quizUnlock_${quizKey}`, JSON.stringify(true));
-  });
-}
-
 function resetButton() {
   const resetB = document.getElementById("resetQuizzes");
   resetB.addEventListener("click", () => {

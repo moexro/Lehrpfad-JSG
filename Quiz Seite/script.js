@@ -172,7 +172,7 @@ function renderQuestion() {
   nextBtn.disabled = true;
   const q = allQuiz[currentQuiz].questions[currentQuestion];
   if (q) {
-  if (localStorage.getItem(`quizDone_${currentQuiz}`) {
+  if (localStorage.getItem(`quizDone_${currentQuiz}`) !== true) {
   questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {

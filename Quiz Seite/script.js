@@ -51,6 +51,44 @@ const questionsQ2 = [
   },
 ];
 
+const questionsQ3 = [
+  {
+    question: "Welche Maschine wird zum Ernten von Getreide eingesetzt?",
+    answers: ["Mähdrescher", "Pflug", "Sämaschine", "Güllefass"],
+    correctIndex: 0
+  },
+  {
+    question: "Wofür wird eine Ballenpresse verwendet?",
+    answers: ["Zum Formen von Heu- oder Strohballen", "Zum Pflügen des Bodens", "Zum Düngen von Feldern", "Zum Säen von Getreide"],
+    correctIndex: 0
+  },
+  {
+    question: "Welche Maschine bringt Saatgut gleichmäßig auf dem Feld aus?",
+    answers: ["Sämaschine", "Miststreuer", "Mähdrescher", "Schlepper"],
+    correctIndex: 0
+  }
+];
+
+const questionsQ4 = [
+  {
+    question: "Was ist ein Ziel der nachhaltigen Landwirtschaft?",
+    answers: ["Maximaler kurzfristiger Gewinn", "Erhaltung der Bodenfruchtbarkeit", "Einsatz möglichst vieler Chemikalien", "Monokulturen auf großen Flächen"],
+    correctIndex: 1
+  },
+  {
+    question: "Welche Methode hilft, den Boden zu schützen?",
+    answers: ["Erosionsschutz durch Begrünung", "Tiefpflügen jedes Jahr", "Dauerhafte Brachlegung", "Intensive Düngung"],
+    correctIndex: 0
+  },
+  {
+    question: "Was bedeutet der Begriff 'Biodiversität'?",
+    answers: ["Die Vielfalt von Tier- und Pflanzenarten", "Die Menge des angebauten Getreides", "Die Reinheit des Grundwassers", "Die Anzahl der Maschinen auf einem Hof"],
+    correctIndex: 0
+  }
+];
+
+
+
 let allQuiz = {
   Q1: {
     questions: questionsQ1,
@@ -62,6 +100,16 @@ let allQuiz = {
     name: "Über die Tierhaltung",
     id: "Q2",
   },
+  Q3: {
+    questions: questionsQ3,
+    name: "Landwirtschaftliche Maschienen",
+    id: "Q3",
+  }
+  Q4: {
+    questions: questionsQ4,
+    name: "Nachhaltige Landwirtschaft",
+    id: "Q4",
+  }  
 };
 
 

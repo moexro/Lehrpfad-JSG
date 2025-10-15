@@ -135,8 +135,8 @@ function getQuizID() {
   const q = parms.get("quiztype");
 
   if (q && allQuiz[q]) {
-    currentQuiz = q;
-    localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
+    currentQuiz = q; 
+    	localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
     console.log(`Quiz ${currentQuiz} freigeschaltet.`);
   } else {
     currentQuiz = "Q_leer"; // Fallback
@@ -171,6 +171,8 @@ function renderQuestion() {
   answered = false;
   nextBtn.disabled = true;
   const q = allQuiz[currentQuiz].questions[currentQuestion];
+  if (q) {
+  if (localStorage.getItem(`quizDone_${currentQuiz}`) {
   questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {
@@ -180,6 +182,12 @@ function renderQuestion() {
     btn.addEventListener("click", () => onAnswer(i, btn));
     answersEl.appendChild(btn);
   });
+  } else {
+    questionEl.textContent = "Dieses Quiz hast du schon abgeschlossen";
+  }
+  } else {
+    document.getElementById("quizTitle").textContent = "Dieses Quiz existiert nicht";
+  }
 
   const quizname = allQuiz[currentQuiz].name || "Unbekannt";
   document.getElementById("quizTitle").textContent = `${quizname}`;
@@ -238,6 +246,7 @@ if (homeBtn) {
   homeBtn.addEventListener("click", () => {
     const target = homeBtn.getAttribute("data-home") || "#";
     if (target === "#") return; // Default-Placeholder; nichts tun
+		localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
     window.location.href = target;
   	});
 }

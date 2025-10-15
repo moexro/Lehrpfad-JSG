@@ -88,6 +88,7 @@ const questionsQ4 = [
 ];
 
 
+//Liste mit Namen und Fragen aller auf der Seite aufrufbaren Quizze
 
 let allQuiz = {
   Q1: {
@@ -102,7 +103,7 @@ let allQuiz = {
   },
   Q3: {
     questions: questionsQ3,
-    name: "Landwirtschaftliche Maschienen",
+    name: "Landwirtschaftliche Maschinen",
     id: "Q3",
   },
   Q4: {

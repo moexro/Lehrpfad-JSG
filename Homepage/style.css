@@ -91,6 +91,8 @@ body {
 }
 
 .get_to-quiz-btn {
+  flex: 1 1 200px;
+  max-width: 250px;
   display: flex;
   font-size: 20px;
   padding: 16px 20px;
@@ -98,7 +100,7 @@ body {
   margin: 16px auto;
   background: var(--accent);
   color: #fff;
-  text-decoration: none;
+  text-align: center;
   font-weight: 700;
 }
 

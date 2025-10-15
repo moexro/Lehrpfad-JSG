@@ -42,7 +42,7 @@ function getQuizzes() {
         const url = `../Quiz Seite/index.html?quiztype=${encodeURIComponent(
           quizKey
         )}`;
-        // window.location.href = url;
+        window.location.href = url;
       });
       document.getElementById("Quiz_button_container").appendChild(btn);
     }

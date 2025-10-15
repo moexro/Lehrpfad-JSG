@@ -93,27 +93,12 @@ body {
 .get_to-quiz-btn {
   flex: 1 1 200px;
   max-width: 250px;
+  min-height: 80px;
   display: flex;
   font-size: 20px;
   padding: 16px 20px;
   border-radius: 10px;
   margin: 16px auto;
-  background: var(--accent);
-  color: #fff;
-  text-align: center;
-  font-weight: 700;
-}
-
-.get_to-quiz-btn {
-  flex: 1 1 200px;         /* alle gleich breit (Basisgröße 220px) */
-  max-width: 250px;        /* maximale Breite */
-  height: 80px;            /* feste Höhe */
-  display: flex;
-  justify-content: center; /* Text mittig horizontal */
-  align-items: center;     /* Text mittig vertikal */
-  font-size: 20px;
-  border-radius: 10px;
-  margin: 10px;
   background: var(--accent);
   color: #fff;
   text-align: center;

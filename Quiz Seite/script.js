@@ -104,12 +104,12 @@ let allQuiz = {
     questions: questionsQ3,
     name: "Landwirtschaftliche Maschienen",
     id: "Q3",
-  }
+  },
   Q4: {
     questions: questionsQ4,
     name: "Nachhaltige Landwirtschaft",
     id: "Q4",
-  }  
+  },
 };
 
 

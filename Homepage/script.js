@@ -88,6 +88,7 @@ const params = new URLSearchParams(window.location.search);
 if (params.get("from") === "quizLoaded") {
   allQuizUnlock();
   alert("Alle Quiz wurden freigeschaltet!");
+  window.location.href = "../Homepage/index.html";
 }
 }
 

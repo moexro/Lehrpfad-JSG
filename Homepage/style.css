@@ -2,6 +2,7 @@
   --header-h: 72px;
   --bg: #f9fafb;
   --container: rgba(59, 73, 50, 0.575);
+  --topbar: rgba(59, 73, 50, 0.95);
   --accent: #506448;
   --textlight: #ffffff;
   --textdark: #172013;
@@ -47,7 +48,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  background: var(--container);
+  background: var(--topbar);
   color: #fff;
 
   z-index: 1000;

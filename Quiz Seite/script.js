@@ -143,7 +143,6 @@ function getQuizID() {
   }
 
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
-  localStorage.setItem(`quizScore_${currentQuiz}`, 0);
 }
 
 const questionEl = document.getElementById("question");
@@ -173,6 +172,7 @@ function renderQuestion() {
   const q = allQuiz[currentQuiz].questions[currentQuestion];
   if (q) {
   if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true) {
+  localStorage.setItem(`quizScore_${currentQuiz}`, 0);
   questionEl.textContent = `${q.question}`;
   answersEl.innerHTML = "";
   q.answers.forEach((ans, i) => {
@@ -242,8 +242,6 @@ nextBtn.addEventListener("click", () => {
 
 // initialisierung
 getQuizID();
-
-setScore(getScore());
 renderQuestion();
 
 // Home button: öffnet die in data-home angegebene URL in neuem Tab

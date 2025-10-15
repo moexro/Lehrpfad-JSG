@@ -239,6 +239,6 @@ if (homeBtn) {
     if (target === "#") return; // Default-Placeholder; nichts tun
     window.location.href = target;
   	});
-	}
+}
 }
 

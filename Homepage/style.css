@@ -149,7 +149,7 @@ body::before {
 /* page container */
 
 .container {
-  max-width: 70%
+  max-width: 70%;
   margin: 36px auto;
   padding: 20px;
   color: #fff;

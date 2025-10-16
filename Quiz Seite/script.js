@@ -188,6 +188,7 @@ function renderQuestion() {
     questionEl.textContent = "Dieses Quiz hast du schon abgeschlossen.";
     answersEl.innerHTML = "";
     nextBtn.classList.toggle("hidden");
+    scoreEl.classList.remove("hidden");
     scoreEl.textContent = `Punktzahl: ${getScore()}`;
     if (homeBtn) homeBtn.classList.toggle("hidden");
     return;

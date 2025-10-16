@@ -224,10 +224,6 @@ function renderQuestion() {
 }
 
 
-  const quizname = allQuiz[currentQuiz].name || "Unbekannt";
-  document.getElementById("quizTitle").textContent = `${quizname}`;
-}
-
 function onAnswer(index, btn) {
   if (answered) return;
   answered = true;

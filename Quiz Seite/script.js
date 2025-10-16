@@ -189,7 +189,6 @@ function renderQuestion() {
     answersEl.innerHTML = "";
     nextBtn.classList.toggle("hidden");
     scoreEl.textContent = `Punktzahl: ${getScore()}`;
-    scoreEl.classList.toggle("hidden");
     if (homeBtn) homeBtn.classList.toggle("hidden");
     return;
   }

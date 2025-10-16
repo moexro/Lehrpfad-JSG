@@ -160,7 +160,7 @@ body::before {
   flex-wrap: wrap;
   gap: 16px;
   align-items: stretch;
-  justify-content: center;
+  justify-content: stretch;
 }
 
 .second-container {

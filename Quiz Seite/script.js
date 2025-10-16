@@ -138,7 +138,7 @@ function getQuizID() {
     currentQuiz = q; 
     	localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
     console.log(`Quiz ${currentQuiz} freigeschaltet.`);
-    if(JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== false) {
+    if(JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true) {
         localStorage.setItem(`quizScore_${currentQuiz}`, "0");
     }
   } else {

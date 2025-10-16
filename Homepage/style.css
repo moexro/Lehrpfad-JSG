@@ -1,9 +1,9 @@
 :root {
   --header-h: 72px;
   --bg: #f9fafb;
-  --container: rgba(59, 73, 50, 0.575);
   --topbar: rgba(59, 73, 50, 0.95);
-  --accent: rgba(59, 80, 60, 0.7);
+  --container: rgba(59, 73, 50, 0.1);
+  --accent: rgba(59, 73, 50, 0.4);
   --textlight: #ffffff;
   --textdark: #172013;
   --button: #506448;
@@ -20,6 +20,7 @@ body {
   color: var(--textbright);
   padding-top: var(--header-h);
   box-sizing: border-box;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .background {
@@ -87,7 +88,7 @@ body {
   font-weight: 600;
 }
 .btn.secondary {
-  background: transparent;
+  background: var(--accent);
   border: 2px solid var(--button);
 }
 
@@ -97,13 +98,18 @@ body {
   min-height: 80px;
   display: flex;
   font-size: 20px;
-  padding: 16px 20px;
   border-radius: 10px;
   margin: 16px auto;
+  padding: 36px;
   background: var(--accent);
+  text-align: center;
+  color: var(--textlight);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   color: #fff;
   text-align: center;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 /* page container */
@@ -115,13 +121,7 @@ body {
   color: #fff;
 }
 
-.button-container {
-  border-radius: 10px;
-  margin: 36px auto;
-  padding: 36px;
-  background: var(--container);
-  text-align: center;
-  color: var(--textlight);
+.second-container#Quiz_button_container {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
@@ -136,6 +136,8 @@ body {
   text-align: center;
   color: var(--textlight);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 600px) {

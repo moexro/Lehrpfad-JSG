@@ -138,8 +138,11 @@ function getQuizID() {
     currentQuiz = q; 
     	localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
     console.log(`Quiz ${currentQuiz} freigeschaltet.`);
+    if(JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== false) {
+        localStorage.setItem(`quizScore_${currentQuiz}`, "0");
+    }
   } else {
-    currentQuiz = "Q_leer"; // Fallback
+    currentQuiz = "null"; // Fallback
   }
 
   console.log(`Aktuelles Quiz: ${currentQuiz}`);
@@ -166,34 +169,60 @@ function setScore(v) {
   console.log(getScore());
 }
 
+// --- Rendering ---
 function renderQuestion() {
+  // Validierung: existierendes Quiz ?
+  if (!currentQuiz || !allQuiz[currentQuiz]) {
+    document.getElementById("quizTitle").textContent = "Dieses Quiz existiert nicht";
+    questionEl.textContent = "";
+    answersEl.innerHTML = "";
+    nextBtn.classList.toggle("hidden");
+    scoreEl.classList.toggle("hidden");
+    if (homeBtn) homeBtn.classList.toggle("hidden");
+    return;
+  }
+
+  // Wenn Quiz bereits als "done" markiert:
+  if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`) || "false") === true) {
+    document.getElementById("quizTitle").textContent = allQuiz[currentQuiz].name || "Unbekannt";
+    questionEl.textContent = "Dieses Quiz hast du schon abgeschlossen.";
+    answersEl.innerHTML = "";
+    nextBtn.classList.toggle("hidden");
+    scoreEl.textContent = `Punktzahl: ${getScore()}`;
+    scoreEl.classList.toggle("hidden");
+    if (homeBtn) homeBtn.classList.toggle("hidden");
+    return;
+  }
+
+  // Normales Rendering einer Frage
+  const quiz = allQuiz[currentQuiz];
+  const q = quiz.questions[currentQuestion];
+  if (!q) {
+    questionEl.textContent = "Frage nicht gefunden.";
+    answersEl.innerHTML = "";
+    return;
+  }
+
+
   answered = false;
   nextBtn.disabled = true;
-  const q = allQuiz[currentQuiz].questions[currentQuestion];
-  if (q) {
-  if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true) {
-  localStorage.setItem(`quizScore_${currentQuiz}`, 0);
-  questionEl.textContent = `${q.question}`;
+  nextBtn.classList.remove("hidden");
+  scoreEl.classList.remove("hidden");
+  if (homeBtn) homeBtn.classList.add("hidden");
+
+  document.getElementById("quizTitle").textContent = quiz.name || "Unbekannt";
+  questionEl.textContent = q.question;
   answersEl.innerHTML = "";
+
   q.answers.forEach((ans, i) => {
     const btn = document.createElement("button");
     btn.className = "answer-btn";
     btn.textContent = ans;
-    btn.addEventListener("click", () => onAnswer(i, btn));
+    btn.addEventListener("click", () => onAnswer(i));
     answersEl.appendChild(btn);
   });
-  } else {
-    questionEl.textContent = "Dieses Quiz hast du schon abgeschlossen";
-    nextBtn.classList.toggle("hidden");
-    scoreEl.classList.toggle("hidden");
-    homeBtn.classList.toggle("hidden");
-  }
-  } else {
-    document.getElementById("quizTitle").textContent = "Dieses Quiz existiert nicht";
-    nextBtn.classList.toggle("hidden");
-    scoreEl.classList.toggle("hidden");
-    homeBtn.classList.toggle("hidden");
-  }
+}
+
 
   const quizname = allQuiz[currentQuiz].name || "Unbekannt";
   document.getElementById("quizTitle").textContent = `${quizname}`;

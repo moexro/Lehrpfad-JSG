@@ -1,43 +1,43 @@
 <div class="dropzone" id="zone1">Ziel 1</div>
 <div class="dropzone" id="zone2">Ziel 2</div>
 
-<img src="bild1.png" draggable="true" id="bild1" class="draggable">
-<img src="bild2.png" draggable="true" id="bild2" class="draggable">
+<img src="bild1.png" draggable="true" id="bild1" class="draggable" />
+<img src="bild2.png" draggable="true" id="bild2" class="draggable" />
 
 <script>
-const draggables = document.querySelectorAll('.draggable');
-const dropzones = document.querySelectorAll('.dropzone');
+  const draggables = document.querySelectorAll(".draggable");
+  const dropzones = document.querySelectorAll(".dropzone");
 
-draggables.forEach(el => {
-  el.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('text/plain', e.target.id);
+  draggables.forEach((el) => {
+    el.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", e.target.id);
+    });
   });
-});
 
-dropzones.forEach(zone => {
-  zone.addEventListener('dragover', e => e.preventDefault());
-  zone.addEventListener('drop', e => {
-    e.preventDefault();
-    const id = e.dataTransfer.getData('text/plain');
-    const el = document.getElementById(id);
-    zone.appendChild(el);
+  dropzones.forEach((zone) => {
+    zone.addEventListener("dragover", (e) => e.preventDefault());
+    zone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData("text/plain");
+      const el = document.getElementById(id);
+      zone.appendChild(el);
+    });
   });
-});
 </script>
 
 <style>
-.dropzone {
-  width: 150px;
-  height: 150px;
-  border: 2px dashed #506448;
-  display: inline-block;
-  margin: 10px;
-  vertical-align: top;
-}
+  .dropzone {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed #506448;
+    display: inline-block;
+    margin: 10px;
+    vertical-align: top;
+  }
 
-.draggable {
-  width: 100px;
-  cursor: grab;
-  margin: 10px;
-}
+  .draggable {
+    width: 100px;
+    cursor: grab;
+    margin: 10px;
+  }
 </style>

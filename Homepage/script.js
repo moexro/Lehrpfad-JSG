@@ -66,33 +66,33 @@ function allQuizUnlock() {
 function resetButton() {
   const resetB = document.getElementById("resetQuizzes");
   resetB.addEventListener("click", () => {
-    const confirmed = confirm("Willst du wirklich alle gespeicherten Daten löschen?");
+    const confirmed = confirm(
+      "Willst du wirklich alle gespeicherten Daten löschen?"
+    );
     if (confirmed) {
       localStorage.clear();
       alert("Alle Daten wurden gelöscht!");
-    window.location.reload();
-    };
+      window.location.reload();
+    }
   });
 }
 function unlockButton() {
   const unlockB = document.getElementById("unlockQuizzes");
-	  unlockB.addEventListener("click", () => {
-		window.location.href = "../Quiz Seite/index.html?loadOnlyQuizData=true";
-  
+  unlockB.addEventListener("click", () => {
+    window.location.href = "../Quiz Seite/index.html?loadOnlyQuizData=true";
   });
 }
 
 function unlockFromLink() {
-const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.search);
 
-if (params.get("from") === "quizLoaded") {
-  allQuizUnlock();
-  window.location.href = "../Homepage/index.html";
+  if (params.get("from") === "quizLoaded") {
+    allQuizUnlock();
+    window.location.href = "../Homepage/index.html";
+  }
 }
-}
 
-	unlockFromLink();
-  getQuizzes();
-  resetButton();
-  unlockButton();
-
+unlockFromLink();
+getQuizzes();
+resetButton();
+unlockButton();

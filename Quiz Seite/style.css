@@ -1,11 +1,12 @@
 :root {
-  --bg: rgba(59, 73, 50, 0.849);
-  --text: #fff;
+  --text: #deffdb;
   --card: #ffffff;
   --button: #506448;
+  --accent: rgba(59, 73, 50, 0.4);
   --buttonb: #172013;
-  --correct: #4caf50;
-  --wrong: #e53935;
+  --correct: #4caf4f8e;
+  --wrong: #9c3837c7;
+  --container: rgba(59, 73, 50, 0.1);
 }
 
 * {
@@ -14,7 +15,6 @@
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial;
-  background: var(--bg);
   margin: 0;
   padding: 20px;
   display: flex;
@@ -22,40 +22,33 @@ body {
   justify-content: center;
   min-height: 100vh;
   box-sizing: border-box;
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-height: 100vh;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  flex-shrink: 0;
-  object-fit: cover;
-  z-index: -1;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    url("../Quiz Seite/images/backgroundquizStandard.jpg") no-repeat center
+      center;
+  background-size: cover;
 }
 
 .container {
   width: 100%;
   max-width: 960px;
   min-width: 300px;
-  background: rgba(20, 30, 60, 0.08);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  background: var(--container);
+  backdrop-filter: blur(15px);
   padding: 20px;
   border-radius: 50px;
   -webkit-text-fill-color: #ffffff;
   display: inline-block;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 4px 40px 50px rgba(0, 0, 0, 0.7);
 }
 
 .title {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 24px;
-  -webkit-text-fill-color: #deffdb;
+  -webkit-text-fill-color: var(--text);
   text-align: center;
 }
 
@@ -72,12 +65,14 @@ body {
 
 .score {
   text-align: center;
+  font-size: 20px;
+  font-style: bold;
   color: #fff;
 }
 .question {
   font-size: 24px;
   margin-bottom: 16px;
-  -webkit-text-fill-color: #deffdb;
+  -webkit-text-fill-color: var(--text);
   justify-content: center;
   text-align: center;
 }
@@ -104,6 +99,9 @@ body {
   background: var(--button);
   cursor: pointer;
   transition: transform 0.08s ease, box-shadow 0.08s ease;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 4px 40px 50px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* Zusätzliche Anpassung für sehr kleine Bildschirme */
@@ -137,9 +135,11 @@ button#nextBtn {
   padding: 15px 14px;
   border-radius: 8px;
   border: 0;
-  background: var(--buttonb);
+  background: var(--accent);
   color: #fff;
   cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 4px 40px 50px rgba(0, 0, 0, 0.7);
 }
 
 .home-container {
@@ -180,4 +180,62 @@ img {
 
 .hidden {
   display: none !important;
+}
+
+.dragdrop-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.drag-container,
+.drop-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.drag-item,
+.drop-slot {
+  width: 120px;
+  height: auto;
+  padding: 5%;
+  border: 2px dashed var(--text);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: 0.2s;
+  cursor: grab;
+}
+
+.drag-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.drag-item.locked {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.drop-slot.hover {
+  border-color: #007bff;
+  background: transparent;
+}
+
+.drop-slot.correct {
+  border-color: #28a745;
+  background: transparent;
+}
+
+.drop-slot.wrong {
+  border-color: #dc3545;
+  background: transparent;
 }

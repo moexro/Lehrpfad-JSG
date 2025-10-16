@@ -3,6 +3,7 @@ const questionsQ1 = [
     question: "Welche Pflanze wird in Deutschland am häufigsten angebaut?",
     answers: ["Weizen", "Mais", "Gerste", "Raps"],
     correctIndex: 0,
+    type: "multipleChoice",
   },
   {
     question: "Was versteht man unter Fruchtfolge?",
@@ -13,12 +14,14 @@ const questionsQ1 = [
       "Die Reihenfolge der Düngung",
     ],
     correctIndex: 1,
+    type: "multipleChoice",
   },
   {
     question:
       "Welche Maschine wird hauptsächlich zur Bodenbearbeitung vor der Aussaat eingesetzt?",
     answers: ["Mähdrescher", "Pflug", "Ballenpresse", "Güllefass"],
     correctIndex: 1,
+    type: "multipleChoice",
   },
 ];
 
@@ -27,6 +30,7 @@ const questionsQ2 = [
     question: "Welche Nutztiere liefern sowohl Milch als auch Fleisch?",
     answers: ["Schafe", "Schweine", "Hühner", "Pferde"],
     correctIndex: 0,
+    type: "multipleChoice",
   },
   {
     question: "Was ist ein wichtiger Vorteil des ökologischen Landbaus?",
@@ -37,6 +41,7 @@ const questionsQ2 = [
       "Niedrige Produktionskosten",
     ],
     correctIndex: 2,
+    type: "multipleChoice",
   },
   {
     question:
@@ -48,6 +53,7 @@ const questionsQ2 = [
       "Selbstversorgungshaltung",
     ],
     correctIndex: 1,
+    type: "multipleChoice",
   },
 ];
 
@@ -56,6 +62,7 @@ const questionsQ3 = [
     question: "Welche Maschine wird zum Ernten von Getreide eingesetzt?",
     answers: ["Mähdrescher", "Pflug", "Sämaschine", "Güllefass"],
     correctIndex: 0,
+    type: "multipleChoice",
   },
   {
     question: "Wofür wird eine Ballenpresse verwendet?",
@@ -66,11 +73,13 @@ const questionsQ3 = [
       "Zum Säen von Getreide",
     ],
     correctIndex: 0,
+    type: "multipleChoice",
   },
   {
     question: "Welche Maschine bringt Saatgut gleichmäßig auf dem Feld aus?",
     answers: ["Sämaschine", "Miststreuer", "Mähdrescher", "Schlepper"],
     correctIndex: 0,
+    type: "multipleChoice",
   },
 ];
 
@@ -84,6 +93,7 @@ const questionsQ4 = [
       "Monokulturen auf großen Flächen",
     ],
     correctIndex: 1,
+    type: "multipleChoice",
   },
   {
     question: "Welche Methode hilft, den Boden zu schützen?",
@@ -94,6 +104,7 @@ const questionsQ4 = [
       "Intensive Düngung",
     ],
     correctIndex: 0,
+    type: "multipleChoice",
   },
   {
     question: "Was bedeutet der Begriff 'Biodiversität'?",
@@ -104,6 +115,21 @@ const questionsQ4 = [
       "Die Anzahl der Maschinen auf einem Hof",
     ],
     correctIndex: 0,
+    type: "multipleChoice",
+  },
+];
+
+const questionsQ5 = [
+  {
+    question: "Ordne die Bilder den richtigen Begriffen zu:",
+    type: "DragAndDrop",
+    items: [
+      { text: "Weizen", correctDrop: "Getreide" },
+      { text: "Gerste", correctDrop: "Getreide" },
+      { text: "Kuh", correctDrop: "Tier" },
+      { text: "Traktor", correctDrop: "Maschine" },
+    ],
+    drops: [{ label: "Getreide" }, { label: "Tier" }, { label: "Maschine" }],
   },
 ];
 
@@ -129,6 +155,11 @@ let allQuiz = {
     questions: questionsQ4,
     name: "Nachhaltige Landwirtschaft",
     id: "Q4",
+  },
+  Q5: {
+    questions: questionsQ5,
+    name: "Zuordnungsspiel",
+    id: "Q5",
   },
 };
 
@@ -220,9 +251,10 @@ if (loadOnly) {
       return;
     }
 
-    // Normales Rendering einer Frage
     const quiz = allQuiz[currentQuiz];
     const q = quiz.questions[currentQuestion];
+    const quizType = q.type;
+
     if (!q) {
       questionEl.textContent = "Frage nicht gefunden.";
       answersEl.innerHTML = "";
@@ -237,18 +269,128 @@ if (loadOnly) {
 
     document.getElementById("quizTitle").textContent = quiz.name || "Unbekannt";
     questionEl.textContent = q.question;
+
+    if (quizType === "multipleChoice") {
+      renderMultipleChoice(q);
+    } else {
+      if (quizType === "DragAndDrop") {
+        renderDragAndDrop(q);
+      }
+    }
+  }
+
+  function renderMultipleChoice(q) {
+    // Normales Rendering einer Frage
+
     answersEl.innerHTML = "";
 
     q.answers.forEach((ans, i) => {
       const btn = document.createElement("button");
       btn.className = "answer-btn";
       btn.textContent = ans;
-      btn.addEventListener("click", () => onAnswer(i));
+      btn.addEventListener("click", () => onAnswerMultipleChoice(i));
       answersEl.appendChild(btn);
     });
   }
 
-  function onAnswer(index, btn) {
+  function renderDragAndDrop(q) {
+    answersEl.innerHTML = "";
+
+    // Wrapper
+    const wrapper = document.createElement("div");
+    wrapper.className = "dragdrop-wrapper";
+
+    // --- Drag Items (oben) ---
+    const dragContainer = document.createElement("div");
+    dragContainer.className = "drag-container";
+
+    q.items.forEach((item) => {
+      const el = document.createElement("div");
+      el.className = "drag-item";
+      el.draggable = true;
+      el.dataset.correct = item.correctDrop;
+
+      // Falls ein Bild vorhanden ist, verwende es
+      if (item.img) {
+        const img = document.createElement("img");
+        img.src = item.img;
+        img.alt = item.text || "";
+        el.appendChild(img);
+      }
+
+      // Optional: Text darunter
+      if (item.text) {
+        const label = document.createElement("span");
+        label.textContent = item.text;
+        el.appendChild(label);
+      }
+
+      el.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", item.correctDrop);
+        el.classList.add("dragging");
+      });
+      el.addEventListener("dragend", () => el.classList.remove("dragging"));
+
+      dragContainer.appendChild(el);
+    });
+
+    // --- Drop Targets (unten) ---
+    const dropContainer = document.createElement("div");
+    dropContainer.className = "drop-container";
+
+    q.drops.forEach((drop) => {
+      const slot = document.createElement("div");
+      slot.className = "drop-slot";
+      slot.dataset.id = drop.label;
+
+      const label = document.createElement("span");
+      label.textContent = drop.label;
+      slot.appendChild(label);
+
+      slot.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        slot.classList.add("hover");
+      });
+      slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
+      slot.addEventListener("drop", (e) => {
+        e.preventDefault();
+        slot.classList.remove("hover");
+
+        const correctDrop = e.dataTransfer.getData("text/plain");
+        const dragging = document.querySelector(".dragging");
+        if (!dragging) return;
+
+        if (slot.dataset.id !== correctDrop) {
+          slot.classList.add("wrong");
+          setTimeout(() => slot.classList.remove("wrong"), 800);
+        } else {
+          slot.classList.add("correct");
+          slot.appendChild(dragging);
+          dragging.draggable = false;
+          dragging.classList.add("locked");
+
+          // Check, ob alle fertig sind
+          const allSlots = document.querySelectorAll(".drop-slot");
+          const done = Array.from(allSlots).every((s) =>
+            s.querySelector(".drag-item.locked")
+          );
+          if (done) {
+            const newScore = getScore() + 1;
+            setScore(newScore);
+            nextBtn.disabled = false;
+          }
+        }
+      });
+
+      dropContainer.appendChild(slot);
+    });
+
+    wrapper.appendChild(dragContainer);
+    wrapper.appendChild(dropContainer);
+    answersEl.appendChild(wrapper);
+  }
+
+  function onAnswerMultipleChoice(index, btn) {
     if (answered) return;
     answered = true;
     const q = allQuiz[currentQuiz].questions[currentQuestion];

@@ -14,6 +14,10 @@ if (quizBtns) {
   });
 }
 
+const scoreEl = document.createElement("div");
+let totalPoints = 0;
+let totalUnlocks = 0;
+
 const quizData = localStorage.getItem("allQuizzes");
 let listQuiz = {};
 if (quizData) {
@@ -22,14 +26,19 @@ if (quizData) {
 }
 
 function getQuizzes() {
+  const container = document.getElementById("Quiz_button_container");
+  const containerScore = document.getElementById("Quiz_score_container");
   Object.values(listQuiz).forEach((quiz) => {
     const quizKey = quiz.id; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
-    const unlocked = JSON.parse(
-      localStorage.getItem(`quizUnlock_${quizKey}`) || false
-    );
+    // sichere Auswertung des Unlock-Flags
+    const rawUnlock = localStorage.getItem(`quizUnlock_${quizKey}`);
+    const unlocked = rawUnlock ? JSON.parse(rawUnlock) : false;
     console.log(unlocked);
     if (unlocked) {
-      const qscore = localStorage.getItem(`quizScore_${quizKey}`) || 0;
+      const qscore = parseInt(
+        localStorage.getItem(`quizScore_${quizKey}`) || "0",
+        10
+      );
       const quizName = quiz.name || quizKey;
       const btn = document.createElement("button");
       btn.type = "button";
@@ -44,9 +53,31 @@ function getQuizzes() {
         )}`;
         window.location.href = url;
       });
-      document.getElementById("Quiz_button_container").appendChild(btn);
+      if (container) container.appendChild(btn);
+      if (scoreEl) {
+        totalPoints += Number.isNaN(qscore) ? 0 : qscore;
+      }
     }
   });
+
+  Object.values(listQuiz).forEach((quiz) => {
+    const quizKey = quiz.id;
+    if (localStorage.getItem(`quizUnlock_${quizKey}`)) {
+      totalUnlocks++;
+    }
+  });
+
+  if (totalUnlocks === 0) {
+    container.classList.toggle("hidden");
+    const resetB = document.getElementById("resetQuizzes");
+    resetB.classList.toggle("hidden");
+  }
+
+  if (scoreEl && totalPoints > 0) {
+    scoreEl.className = "points";
+    scoreEl.textContent = `Gesamtpunkte: ${totalPoints}`;
+    containerScore.appendChild(scoreEl);
+  }
 }
 
 function resetQuizUnlock() {

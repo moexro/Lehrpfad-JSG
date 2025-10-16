@@ -24,7 +24,7 @@ body {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-body {
+html {
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
     url("../Homepage/images/background3.jpg") no-repeat center center;
   background-size: cover;

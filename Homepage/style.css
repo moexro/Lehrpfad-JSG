@@ -211,8 +211,11 @@ body::before {
     padding: 8px 10px;
   }
   .button_container {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Buttons immer noch nebeneinander */
-    gap: 12px;
+    grid-template-columns: 1fr; /* Buttons immer noch nebeneinander */
+  }
+  .second-container {
+    width: 90%;       /* etwas schmaler */
+    padding: 20px;    /* kleinere Innenabstände */
   }
 }
 

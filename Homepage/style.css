@@ -203,7 +203,7 @@ body::before {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   .topbar {
     padding: 0 12px;
   }

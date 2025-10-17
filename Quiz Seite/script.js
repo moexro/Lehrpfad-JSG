@@ -415,6 +415,10 @@ if (loadOnly) {
 
   nextBtn.addEventListener("click", () => {
     currentQuestion += 1;
+    if(currentQuestion > allQuiz[currentQuiz].questions.length) {
+      nextBtn.innerHTML = "Quiz abschließen"  
+    }
+    
     if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
       // Quiz Ende
       questionEl.textContent =

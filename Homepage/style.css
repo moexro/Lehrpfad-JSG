@@ -162,6 +162,7 @@ body::before {
   gap: 16px;
   align-items: stretch;
   justify-content: center;
+  justify-items: center;
 }
 
 .second-container {
@@ -185,7 +186,6 @@ body::before {
   }
   .button_container {
     grid-template-columns: 1fr; /* nur eine Spalte pro Zeile */
-    justify-items: center;
     gap: 16px; /* etwas geringerer Abstand */
   }
 }

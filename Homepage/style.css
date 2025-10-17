@@ -39,7 +39,7 @@ body::before {
 /* Top bar */
 .topbar {
   position: fixed;
-  max-width: 96%;
+  max-width: 90%;
   margin: auto;
   border-radius: 10px;
   top: 0;
@@ -160,7 +160,7 @@ body::before {
   flex-wrap: wrap;
   gap: 16px;
   align-items: stretch;
-  justify-content: stretch;
+  justify-content: center;
 }
 
 .second-container {

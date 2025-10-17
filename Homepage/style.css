@@ -129,6 +129,7 @@ body::before {
 .get_to-quiz-btn {
   flex: 1 1 200px;
   max-width: 250px;
+  min-width: 200px;
   min-height: 80px;
   display: flex;
   font-size: 20px;
@@ -159,8 +160,8 @@ body::before {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  align-items: stretch;
-  justify-content: center;
+  align-items: space-evenly;
+  justify-content: space-eveny;
 }
 
 .second-container {

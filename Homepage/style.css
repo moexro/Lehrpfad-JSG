@@ -64,7 +64,7 @@ body::before {
   left: 0;
   right: 0;
   height: 36px;
-  max-width: 96%;
+  max-width: 90%;
   margin: auto;
   border-radius: 10px;
   padding: 0 20px;
@@ -160,8 +160,8 @@ body::before {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  align-items: space-evenly;
-  justify-content: space-eveny;
+  align-items: stretch;
+  justify-content: space-evenly;
 }
 
 .second-container {

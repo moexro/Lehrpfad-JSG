@@ -185,6 +185,7 @@ body::before {
   }
   .button_container {
     grid-template-columns: 1fr; /* nur eine Spalte pro Zeile */
+    justify-items: center;
     gap: 16px; /* etwas geringerer Abstand */
   }
 }

@@ -209,8 +209,8 @@ body::before {
     padding: 8px 10px;
   }
   .button_container {
-    grid-template-columns: 1fr; /* nur eine Spalte pro Zeile */
-    gap: 16px; /* etwas geringerer Abstand */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Buttons immer noch nebeneinander */
+    gap: 12px;
   }
 }
 

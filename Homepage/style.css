@@ -185,6 +185,9 @@ body::before {
 }
 
 .second-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 10px;
   margin: 36px auto;
   padding: 36px;

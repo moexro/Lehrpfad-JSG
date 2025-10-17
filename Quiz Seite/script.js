@@ -378,6 +378,10 @@ if (loadOnly) {
             const newScore = getScore() + 1;
             setScore(newScore);
             nextBtn.disabled = false;
+                if(currentQuestion > allQuiz[currentQuiz].questions.length) {
+     							 nextBtn.innerHTML = "Quiz abschließen";
+					    		}
+
           }
         }
       });
@@ -416,7 +420,7 @@ if (loadOnly) {
   nextBtn.addEventListener("click", () => {
     currentQuestion += 1;
     if(currentQuestion > allQuiz[currentQuiz].questions.length) {
-      nextBtn.innerHTML = "Quiz abschließen"  
+      nextBtn.innerHTML = "Quiz abschließen";
     }
     
     if (currentQuestion >= allQuiz[currentQuiz].questions.length) {

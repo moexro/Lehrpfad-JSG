@@ -47,6 +47,12 @@ body::before {
   background-size: cover;
   z-index: -10;
 }
+
+
+.text {
+	max-width: 600px;
+}
+
 /* Top bar */
 .topbar {
   position: fixed;

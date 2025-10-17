@@ -39,7 +39,7 @@ body::before {
 /* Top bar */
 .topbar {
   position: fixed;
-  max-width: 90%;
+  max-width: 98%;
   margin: auto;
   border-radius: 10px;
   top: 0;
@@ -149,7 +149,7 @@ body::before {
 /* page container */
 
 .container {
-  max-width: 85%;
+  max-width: 95%;
   margin: 36px auto;
   padding: 20px;
   color: #fff;

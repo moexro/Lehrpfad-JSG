@@ -12,6 +12,7 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial;
@@ -211,6 +212,10 @@ img {
   background: transparent;
   transition: 0.2s;
   cursor: grab;
+}
+
+.drop-slot {
+    border: 2px var(--button);
 }
 
 .drag-item img {

@@ -134,3 +134,4 @@ unlockFromLink();
 getQuizzes();
 resetButton();
 unlockButton();
+logo();

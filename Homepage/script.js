@@ -117,17 +117,19 @@ function unlockButton() {
 function unlockFromLink() {
   const params = new URLSearchParams(window.location.search);
   
-function logo() {
-  const unlockB = document.getElementById("logo");
-  unlockB.addEventListener("click", () => {
-    window.location.href = "https://www.jsg-karlstadt.de";
-  });
-}
+
 
   if (params.get("from") === "quizLoaded") {
     allQuizUnlock();
     window.location.href = "../Homepage/index.html";
   }
+}
+
+function logo() {
+  const unlockB = document.getElementById("logo");
+  unlockB.addEventListener("click", () => {
+    window.location.href = "https://www.jsg-karlstadt.de";
+  });
 }
 
 unlockFromLink();

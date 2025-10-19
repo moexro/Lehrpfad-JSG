@@ -123,20 +123,13 @@ function unlockFromLink() {
   }
 }
 
-function logo() {
-  const unlockB = document.getElementById("logo");
-  unlockB.addEventListener("click", () => {
-    window.location.href = "https://www.jsg-karlstadt.de";
-  });
-}
-
 function scrollToSection(id) {
   const el = document.getElementById(id);
 
   el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-const stationenB = document.getElementById("buttonToStation");
+const stationenB = document.getElementById("buttonToStations");
 const mentionsB = document.getElementById("buttonToMentions");
 
 stationenB.addEventListener("click", () => {
@@ -147,8 +140,25 @@ mentionsB.addEventListener("click", () => {
   scrollToSection("mentions");
 });
 
+//DROPDOWN MENÜ
+
+const dropBtn = document.getElementById("dropBtn");
+const dropdown = document.getElementById("dropcontent");
+
+dropBtn.addEventListener("click", (event) => {
+  event.stopPropagation(); // verhindert, dass das window-Event das Menü sofort schließt
+  if (dropdown.style.display === "block") {
+    dropdown.style.display = "none";
+  } else {
+    dropdown.style.display = "block";
+  }
+});
+
+window.addEventListener("click", () => {
+  dropdown.style.display = "none";
+});
+
 unlockFromLink();
 getQuizzes();
 resetButton();
 unlockButton();
-logo();

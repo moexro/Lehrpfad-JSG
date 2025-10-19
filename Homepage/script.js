@@ -151,7 +151,7 @@ dropBtn.addEventListener("click", (event) => {
   if (dropdown.classList.contains("hidden")) {
     dropBtn.textContent = "☰";
   } else {
-    dropBtn.textContent = "✖";
+    dropBtn.textContent = "X";
   }
 });
 

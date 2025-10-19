@@ -231,7 +231,7 @@ body::before {
 }
 
 .dropcontent {
-	display: block;
+	display: none;
   padding: 16px;
 }
 

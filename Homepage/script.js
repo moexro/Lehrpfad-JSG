@@ -116,8 +116,6 @@ function unlockButton() {
 
 function unlockFromLink() {
   const params = new URLSearchParams(window.location.search);
-  
-
 
   if (params.get("from") === "quizLoaded") {
     allQuizUnlock();
@@ -131,6 +129,23 @@ function logo() {
     window.location.href = "https://www.jsg-karlstadt.de";
   });
 }
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const stationenB = document.getElementById("buttonToStation");
+const mentionsB = document.getElementById("buttonToMentions");
+
+stationenB.addEventListener("click", () => {
+  scrollToSection("stations");
+});
+
+mentionsB.addEventListener("click", () => {
+  scrollToSection("mentions");
+});
 
 unlockFromLink();
 getQuizzes();

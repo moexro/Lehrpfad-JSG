@@ -69,6 +69,8 @@ body {
   font-size: 20px;
   font-style: bold;
   color: #fff;
+  z-index: 10;
+  cursor: pointer;
 }
 .question {
   font-size: 24px;
@@ -141,6 +143,7 @@ button#nextBtn {
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 4px 40px 50px rgba(0, 0, 0, 0.7);
+  z-index: 10;
 }
 
 .home-container {
@@ -214,11 +217,12 @@ img {
 }
 
 .drag-item {
-	border: 2px dashed var(--text);
+  font-size: large;
 }
-
 .drop-slot {
-    border: 2px var(--button);
+  font-size: larger;
+  font-weight: 500;
+  border: 2px dashed var(--text);
 }
 
 .drag-item img {

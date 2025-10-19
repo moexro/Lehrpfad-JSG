@@ -42,15 +42,14 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)),
-              url("../Homepage/images/background3.jpg") no-repeat center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
+    url("../Homepage/images/background3.jpg") no-repeat center center;
   background-size: cover;
   z-index: -10;
 }
 
-
 .text {
-	max-width: 500px;
+  max-width: 500px;
   width: 100%;
   text-align: center;
   margin: 0 auto;
@@ -65,11 +64,10 @@ body::before {
   top: 0;
   left: 0;
   right: 0;
-  height: var(--header-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 20px 20px;
   background: var(--topbar);
   color: #fff;
   backdrop-filter: blur(15px);
@@ -97,35 +95,35 @@ body::before {
 .topbar .left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 .brand {
-  width: 48px;
-  height: 48px;
   border-radius: 8px;
   background: var(--highlight);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  color: #fff;
 }
 .topbar .controls {
   display: flex;
   gap: 12px;
   align-items: center;
+  justify-content: center;
 }
 
 /* buttons as links */
 .btn {
   display: inline-block;
-  margin-top: 12px;
   padding: 10px 14px;
   border-radius: 8px;
   background: var(--button);
   color: #fff;
   text-decoration: none;
   font-weight: 600;
+  cursor: pointer;
 }
 .btn.secondary {
   background: var(--highlight);
@@ -155,7 +153,7 @@ body::before {
   font-size: 20px;
   border-radius: 10px;
   margin: 16px 16px;
-  padding: 0 16px; 
+  padding: 0 16px;
   background: var(--highlight);
   color: var(--textlight);
   backdrop-filter: blur(10px);
@@ -191,7 +189,7 @@ body::before {
   width: 95%;
   display: flex;
   flex-direction: column;
-	align-items: center; 
+  align-items: center;
   text-align: center;
   border-radius: 10px;
   margin: 36px auto;
@@ -201,6 +199,7 @@ body::before {
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  scroll-margin-top: 100px;
 }
 
 @media (max-width: 400px) {
@@ -214,8 +213,8 @@ body::before {
     grid-template-columns: 1fr; /* Buttons immer noch nebeneinander */
   }
   .second-container {
-    width: 90%;       /* etwas schmaler */
-    padding: 20px;    /* kleinere Innenabstände */
+    width: 90%; /* etwas schmaler */
+    padding: 20px; /* kleinere Innenabstände */
   }
 }
 

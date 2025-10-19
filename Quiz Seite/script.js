@@ -262,13 +262,21 @@ if (loadOnly) {
     }
 
     answered = false;
+
     nextBtn.disabled = true;
+    nextBtn.style.opacity = "0.5";
+    nextBtn.style.cursor = "not-allowed";
+
     nextBtn.classList.remove("hidden");
     scoreEl.classList.remove("hidden");
     if (homeBtn) homeBtn.classList.add("hidden");
 
     document.getElementById("quizTitle").textContent = quiz.name || "Unbekannt";
     questionEl.textContent = q.question;
+
+    if (currentQuestion === allQuiz[currentQuiz].questions.length - 1) {
+      nextBtn.innerHTML = "Quiz abschließen";
+    }
 
     if (quizType === "multipleChoice") {
       renderMultipleChoice(q);
@@ -378,10 +386,11 @@ if (loadOnly) {
             const newScore = getScore() + 1;
             setScore(newScore);
             nextBtn.disabled = false;
-                if(currentQuestion > allQuiz[currentQuiz].questions.length) {
-     							 nextBtn.innerHTML = "Quiz abschließen";
-					    		}
-
+            nextBtn.style.opacity = "1";
+            nextBtn.style.cursor = "pointer";
+            if (currentQuestion > allQuiz[currentQuiz].questions.length) {
+              nextBtn.innerHTML = "Quiz abschließen";
+            }
           }
         }
       });
@@ -415,14 +424,17 @@ if (loadOnly) {
 
     // Nächste Frage aktivieren
     nextBtn.disabled = false;
+    nextBtn.style.opacity = "1";
+    nextBtn.style.cursor = "pointer";
   }
 
   nextBtn.addEventListener("click", () => {
     currentQuestion += 1;
-    if(currentQuestion > allQuiz[currentQuiz].questions.length) {
-      nextBtn.innerHTML = "Quiz abschließen";
-    }
-    
+    quizEnde();
+    renderQuestion();
+  });
+
+  function quizEnde() {
     if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
       // Quiz Ende
       questionEl.textContent =
@@ -436,8 +448,7 @@ if (loadOnly) {
       homeBtn.classList.toggle("hidden");
       return;
     }
-    renderQuestion();
-  });
+  }
 
   // initialisierung
   getQuizID();

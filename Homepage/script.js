@@ -147,16 +147,14 @@ const dropdown = document.getElementById("dropcontent");
 
 dropBtn.addEventListener("click", (event) => {
   event.stopPropagation(); // verhindert, dass das window-Event das Menü sofort schließt
-  if (dropdown.style.display === "block") {
-    dropdown.style.display = "none";
+  dropdown.classList.toggle("hidden")
+  if (dropdown.classList.contains("hidden")) {
+    dropBtn.textContent = "☰";
   } else {
-    dropdown.style.display = "block";
+    dropBtn.textContent = "✖";
   }
 });
 
-window.addEventListener("click", () => {
-  dropdown.style.display = "none";
-});
 
 unlockFromLink();
 getQuizzes();

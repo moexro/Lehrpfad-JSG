@@ -220,9 +220,7 @@ body::before {
   }
 }
 
-.hidden {
-  display: none !important;
-}
+
 
 /* DROPDOWN MENÜ */
 
@@ -233,7 +231,7 @@ body::before {
 }
 
 .dropcontent {
-  display: none;
+	display: block;
   padding: 16px;
 }
 
@@ -259,4 +257,11 @@ body::before {
 /* Dropdown sichtbar beim Hover */
 .dropdown-menu:hover .dropdown-content {
   display: block;
+}
+
+
+/*hidden class*/
+
+.hidden {
+  display: none !important;
 }

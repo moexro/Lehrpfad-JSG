@@ -231,6 +231,7 @@ body::before {
 
 .dropcontent {
   position: fixed;
+  max-width: 75%;
   top: 40px;
   left: 0;
   right: 0;

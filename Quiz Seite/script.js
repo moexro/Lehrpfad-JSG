@@ -329,6 +329,7 @@ if (loadOnly) {
       const el = document.createElement("div");
       el.className = "drag-item";
       el.draggable = true;
+      el.dataset.failed = "false";
       el.dataset.correct = item.correctDrop;
 
       // Falls ein Bild vorhanden ist, verwende es
@@ -391,7 +392,7 @@ if (loadOnly) {
           dragging.draggable = false;
           dragging.classList.add("locked");
           
-          if (dragging.dataset.failed !== "false") {
+          if (dragging.dataset.failed === "false") {
       			const newScore = getScore() + 1;
       			setScore(newScore);
           }

@@ -60,9 +60,14 @@ const questionsQ2 = [
 const questionsQ3 = [
   {
     question: "Welche Maschine wird zum Ernten von Getreide eingesetzt?",
-    answers: ["Mähdrescher", "Pflug", "Sämaschine", "Güllefass"],
-    correctIndex: 0,
-    type: "multipleChoice",
+		type: "DragAndDrop",
+    items: [
+        { text: "Pflug", correctDrop: "Pflug" },
+        { text: "Mähdrescher", correctDrop: "Mähdrescher" },
+        { text: "Sähmaschine", correctDrop: "Sähmaschine" },
+      ],
+      drops: [{ label: "Pflug" }, { label: "Mähdrescher" }, { label: "Sähmaschine" }],
+    },
   },
   {
     question: "Wofür wird eine Ballenpresse verwendet?",

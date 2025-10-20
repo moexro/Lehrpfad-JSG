@@ -65,17 +65,6 @@ const questionsQ3 = [
     type: "multipleChoice",
   },
   {
-    question: "Ordne die Bilder den richtigen Begriffen zu:",
-    type: "DragAndDrop",
-    items: [
-      { text: "Mähwerk", correctDrop: "Mähwerk" },
-      { text: "Gerste", correctDrop: "Mähwerk" },
-      { text: "Kuh", correctDrop: "Tier" },
-      { text: "Traktor", correctDrop: "Maschine" },
-    ],
-    drops: [{ label: "Mähwerk" }, { label: "Tier" }, { label: "Maschine" }],
-  },
-  {
     question: "Wofür wird eine Ballenpresse verwendet?",
     answers: [
       "Zum Formen von Heu- oder Strohballen",

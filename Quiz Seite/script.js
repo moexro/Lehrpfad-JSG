@@ -65,6 +65,17 @@ const questionsQ3 = [
     type: "multipleChoice",
   },
   {
+    question: "Ordne die Bilder den richtigen Begriffen zu:",
+    type: "DragAndDrop",
+    items: [
+      { text: "Mähwerk", correctDrop: "Mähwerk" },
+      { text: "Gerste", correctDrop: "Mähwerk" },
+      { text: "Kuh", correctDrop: "Tier" },
+      { text: "Traktor", correctDrop: "Maschine" },
+    ],
+    drops: [{ label: "Mähwerk" }, { label: "Tier" }, { label: "Maschine" }],
+  },
+  {
     question: "Wofür wird eine Ballenpresse verwendet?",
     answers: [
       "Zum Formen von Heu- oder Strohballen",
@@ -120,18 +131,20 @@ const questionsQ4 = [
 ];
 
 const questionsQ5 = [
-  {
-    question: "Ordne die Bilder den richtigen Begriffen zu:",
-    type: "DragAndDrop",
-    items: [
-      { text: "Weizen", correctDrop: "Getreide" },
-      { text: "Gerste", correctDrop: "Getreide" },
-      { text: "Kuh", correctDrop: "Tier" },
-      { text: "Traktor", correctDrop: "Maschine" },
-    ],
-    drops: [{ label: "Getreide" }, { label: "Tier" }, { label: "Maschine" }],
-  },
+    {
+      question: "Ordne die Bilder den richtigen Begriffen zu:",
+      type: "DragAndDrop",
+      items: [
+        { text: "Weizen", correctDrop: "Getreide" },
+        { text: "Gerste", correctDrop: "Getreide" },
+        { text: "Kuh", correctDrop: "Tier" },
+        { text: "Traktor", correctDrop: "Maschine" },
+      ],
+      drops: [{ label: "Getreide" }, { label: "Tier" }, { label: "Maschine" }],
+    },
 ];
+
+
 
 //Liste mit Namen und Fragen aller auf der Seite aufrufbaren Quizze
 
@@ -371,11 +384,17 @@ if (loadOnly) {
         if (slot.dataset.id !== correctDrop) {
           slot.classList.add("wrong");
           setTimeout(() => slot.classList.remove("wrong"), 800);
+          dragging.dataset.failed = "true";
         } else {
           slot.classList.add("correct");
           slot.appendChild(dragging);
           dragging.draggable = false;
           dragging.classList.add("locked");
+          
+          if (dragging.dataset.failed !== "false") {
+      			const newScore = getScore() + 1;
+      			setScore(newScore);
+          }
 
           // Check, ob alle fertig sind
           const allSlots = document.querySelectorAll(".drop-slot");
@@ -383,8 +402,6 @@ if (loadOnly) {
             s.querySelector(".drag-item.locked")
           );
           if (done) {
-            const newScore = getScore() + 1;
-            setScore(newScore);
             nextBtn.disabled = false;
             nextBtn.style.opacity = "1";
             nextBtn.style.cursor = "pointer";

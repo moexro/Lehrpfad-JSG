@@ -147,10 +147,8 @@ const dropdown = document.getElementById("dropcontent");
 
 dropBtn.addEventListener("click", (event) => {
   event.stopPropagation(); // verhindert, dass das window-Event das Menü sofort schließt
-  const isHidden = dropdown.classList.toggle("hidden");
-  dropdown.classList.toggle("show", !isHidden);
-
-  dropBtn.textContent = isHidden ? "☰" : "x";
+  dropdown.classList.toggle("show");
+	dropBtn.textContent = dropdown.classList.contains("show") ? "X" : "☰";
 });
 
 

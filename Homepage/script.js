@@ -147,7 +147,8 @@ const dropdown = document.getElementById("dropcontent");
 
 dropBtn.addEventListener("click", (event) => {
   event.stopPropagation(); // verhindert, dass das window-Event das Menü sofort schließt
-  dropdown.classList.toggle("hidden")
+  dropdown.classList.toggle("hidden");
+  dropdown.classList.toggle("show");
   if (dropdown.classList.contains("hidden")) {
     dropBtn.textContent = "☰";
   } else {

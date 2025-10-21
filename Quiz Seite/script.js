@@ -59,15 +59,19 @@ const questionsQ2 = [
 
 const questionsQ3 = [
   {
-    question: "Welche Maschine wird zum Ernten von Getreide eingesetzt?",
-		type: "DragAndDrop",
+    question: "Ziehe die Bilder zu den richtigen Begriffen",
+    type: "DragAndDrop",
     items: [
-        { text: "Pflug", correctDrop: "Pflug" },
-        { text: "Mähdrescher", correctDrop: "Mähdrescher" },
-        { text: "Sähmaschine", correctDrop: "Sähmaschine" },
-      ],
-      drops: [{ label: "Pflug" }, { label: "Mähdrescher" }, { label: "Sähmaschine" }],
-    },
+      { text: "Pflug", correctDrop: "Pflug" },
+      { text: "Mähdrescher", correctDrop: "Mähdrescher" },
+      { text: "Sähmaschine", correctDrop: "Sähmaschine" },
+    ],
+    drops: [
+      { label: "Pflug" },
+      { label: "Mähdrescher" },
+      { label: "Sähmaschine" },
+    ],
+  },
   {
     question: "Wofür wird eine Ballenpresse verwendet?",
     answers: [

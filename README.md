@@ -1,3 +1,2 @@
-**BACKUP** **Version 0.1** mit funktionierenden Quizzen, Homepage und einem Menü. 
 
-Die Quizze sind hier noch Platzhalter und werden später ergänzt oder ausgetauscht!
+Das, was auf der Website erscheint, die Backups können per Pull Request darauf geladen werden.

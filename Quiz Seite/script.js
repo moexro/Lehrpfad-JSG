@@ -68,7 +68,6 @@ const questionsQ3 = [
       ],
       drops: [{ label: "Pflug" }, { label: "Mähdrescher" }, { label: "Sähmaschine" }],
     },
-  },
   {
     question: "Wofür wird eine Ballenpresse verwendet?",
     answers: [

@@ -62,9 +62,9 @@ const questionsQ3 = [
     question: "Ziehe die Bilder zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
-      { text: "Pflug", correctDrop: "Pflug" },
-      { text: "Mähdrescher", correctDrop: "Mähdrescher" },
-      { text: "Sähmaschine", correctDrop: "Sähmaschine" },
+      { text: "Pflug", correctDrop: "Pflug" , img: "../Ordner/Dateiname"},
+      { text: "Mähdrescher", correctDrop: "Mähdrescher", img: "../Ordner/Dateiname" },
+      { text: "Sähmaschine", correctDrop: "Sähmaschine", img: "../Ordner/Dateiname" },
     ],
     drops: [
       { label: "Pflug" },
@@ -90,7 +90,7 @@ const questionsQ3 = [
     type: "multipleChoice",
   },
 ];
-
+  
 const questionsQ4 = [
   {
     question: "Was ist ein Ziel der nachhaltigen Landwirtschaft?",

@@ -602,7 +602,6 @@ if (loadOnly) {
 
   // initialisierung
   getQuizID();
-  currentQuestion = 2;
   renderQuestion();
 
   // Home button: öffnet die in data-home angegebene URL in neuem Tab

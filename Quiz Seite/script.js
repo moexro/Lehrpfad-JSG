@@ -143,7 +143,7 @@ const questionsQ3 = [
 
   {
     question:
-      "Heu und Graß: Ziehe die Maschinen zu den richtigen Begriffen.jpg",
+      "Heu und Graß: Ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
       {

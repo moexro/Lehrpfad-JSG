@@ -57,30 +57,41 @@ const questionsQ2 = [
   },
 ];
 
+// Fragen zu den Maschinen
 
 const questionsQ3 = [
-
   {
-    question: "Ohne welche Maschine kann ein Bauer keine seiner Aufgaben erledigen?",
-    answers: [
-      "Pflug",
-      "Traktor",
-      "Rübenmaus",
-      "Güllefass",
-    ],
-    correctIndex: 2,
+    question:
+      "Ohne welche Maschine kann ein Bauer keine seiner Aufgaben erledigen?",
+    answers: ["Pflug", "Traktor", "Rübenmaus", "Güllefass"],
+    correctIndex: 1,
     type: "multipleChoice",
   },
 
-{
+  {
     question: "Feldbearbeitung: Ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
-      { text: "Pflug", correctDrop: "Pflug" , img: "../Bilder Maschinenquiz 2/Drehpflug"},
-      { text: "Grubber", correctDrop: "Grubber", img: "../Bilder Maschinenquiz 2/Grubber" },
-      { text: "Kreiselegge", correctDrop: "Kreiselegge", img: "../Bilder Maschinenquiz 2/Kreiselegge" },
-	{ text: "Walze", correctDrop: "Walze", img: "../Bilder Maschinenquiz 1/Walze" },
-
+      {
+        text: "Pflug",
+        correctDrop: "Pflug",
+        img: "images/MaschinenQuiz/Drehpflug.jpg",
+      },
+      {
+        text: "Grubber",
+        correctDrop: "Grubber",
+        img: "images/MaschinenQuiz/Grubber.jpg",
+      },
+      {
+        text: "Kreiselegge",
+        correctDrop: "Kreiselegge",
+        img: "images/MaschinenQuiz/Kreiselegge.jpg",
+      },
+      {
+        text: "Walze",
+        correctDrop: "Walze",
+        img: "images/MaschinenQuiz/Walze.jpg",
+      },
     ],
     drops: [
       { label: "Pflug" },
@@ -90,37 +101,81 @@ const questionsQ3 = [
     ],
   },
 
-{
-    question: "Ausbringen auf den Acker: Ziehe die Maschinen zu den richtigen Begriffen",
+  {
+    question:
+      "Ausbringen auf den Acker: Ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
-      { text: "Miststreuer", correctDrop: "Miststreuer" , img: "../Bilder Maschinenquiz 1/Miststreuer"},
-      { text: "Güllefass", correctDrop: "Güllefass", img: "../Bilder Maschinenquiz 2/Güllefass" },
-      { text: "Sämaschine", correctDrop: "Sämaschine", img: "../Bilder Maschinenquiz 1/Sämaschine" },
-	{ text: "Pflanzenschutzspritze", correctDrop: "Pflanzenschutzspritze", img: "../Bilder Maschinenquiz 1/Selbstfahrende Pflanzenschutzspritze" }, 
-	{ text: "Düngerstreuer", correctDrop: "Düngerstreuer", img: "../Bilder Maschinenquiz 2/Düngerstreuer" },
-
+      {
+        text: "Miststreuer",
+        correctDrop: "Miststreuer",
+        img: "images/MaschinenQuiz/Miststreuer.jpg",
+      },
+      {
+        text: "Güllefass",
+        correctDrop: "Güllefass",
+        img: "images/MaschinenQuiz/Guellefass.jpg",
+      },
+      {
+        text: "Sämaschine",
+        correctDrop: "Sämaschine",
+        img: "images/MaschinenQuiz/Saemaschine.jpg",
+      },
+      {
+        text: "Pflanzenschutzspritze",
+        correctDrop: "Pflanzenschutzspritze",
+        img: "images/MaschinenQuiz/Planzenschutzspritze.jpg",
+      },
+      {
+        text: "Düngerstreuer",
+        correctDrop: "Düngerstreuer",
+        img: "images/MaschinenQuiz/Duengerstreuer.jpg",
+      },
     ],
     drops: [
-      { label: "Pflug" },
-      { label: "Grubber" },
-      { label: "Kreiselegge" },
-      { label: "Walze" },
+      { label: "Miststreuer" },
+      { label: "Güllefass" },
       { label: "Sämaschine" },
+      { label: "Pflanzenschutzspritze" },
+      { label: "Düngerstreuer" },
     ],
   },
 
-{
-    question: "Heu und Graß: Ziehe die Maschinen zu den richtigen Begriffen",
+  {
+    question:
+      "Heu und Graß: Ziehe die Maschinen zu den richtigen Begriffen.jpg",
     type: "DragAndDrop",
     items: [
-      { text: "Frontmähwerk", correctDrop: "Frontmähwerk" , img: "../Bilder Maschinenquiz 3/Mähwerk"},
-      { text: "Heckmähwerk", correctDrop: "Heckmähwerk", img: "../Bilder Maschinenquiz 3/Heckmähwerk" },
-      { text: "Heuwender", correctDrop: "Heuwender", img: "../Bilder Maschinenquiz 3/Heuwender" },
-	{ text: "Schwader", correctDrop: "Schwader", img: "../Bilder Maschinenquiz 3/Schwader" }, 
-	{ text: "Ladewagen", correctDrop: "Ladewagen", img: "../Bilder Maschinenquiz 3/Ladewagen" },
-	{ text: "Ballenpresse", correctDrop: "Ballenpresse", img: "../Bilder Maschinenquiz 3/Ballenpresse" },
-
+      {
+        text: "Frontmähwerk",
+        correctDrop: "Frontmähwerk",
+        img: "images/MaschinenQuiz/Maehwerk.jpg",
+      },
+      {
+        text: "Heckmähwerk",
+        correctDrop: "Heckmähwerk",
+        img: "images/MaschinenQuiz/Heckmaehwerk.jpg",
+      },
+      {
+        text: "Heuwender",
+        correctDrop: "Heuwender",
+        img: "images/MaschinenQuiz/Heuwender.jpg",
+      },
+      {
+        text: "Schwader",
+        correctDrop: "Schwader",
+        img: "images/MaschinenQuiz/Schwader.jpg",
+      },
+      {
+        text: "Ladewagen",
+        correctDrop: "Ladewagen",
+        img: "images/MaschinenQuiz/Ladewagen.jpg",
+      },
+      {
+        text: "Ballenpresse",
+        correctDrop: "Ballenpresse",
+        img: "images/MaschinenQuiz/Ballenpresse.jpg",
+      },
     ],
     drops: [
       { label: "Frontmähwerk" },
@@ -129,30 +184,43 @@ const questionsQ3 = [
       { label: "Schwader" },
       { label: "Ladewagen" },
       { label: "Ballenpresse" },
-
     ],
   },
 
-{
+  {
     question: "Ernte: Ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
-      { text: "Feldhäcksler", correctDrop: "Feldhäcksler" , img: "../Bilder Maschinenquiz 4/Feldhäcksler"},
-      { text: "Mähdrescher", correctDrop: "Mähdrescher", img: "../Bilder Maschinenquiz 4/Mähdrescher" },
-      { text: "Rübenroder", correctDrop: "Rübenroder", img: "../Bilder Maschinenquiz 4/Rübenroder" },
-	{ text: "Rübenmaus", correctDrop: "Rübenmaus", img: "../Bilder Maschinenquiz 4/Rübenmaus" }, 
-
+      {
+        text: "Feldhäcksler",
+        correctDrop: "Feldhäcksler",
+        img: "images/MaschinenQuiz/Feldhaecksler.jpg",
+      },
+      {
+        text: "Mähdrescher",
+        correctDrop: "Mähdrescher",
+        img: "images/MaschinenQuiz/Maehdrescher.jpg",
+      },
+      {
+        text: "Rübenroder",
+        correctDrop: "Rübenroder",
+        img: "images/MaschinenQuiz/Ruebenroder.jpg",
+      },
+      {
+        text: "Rübenmaus",
+        correctDrop: "Rübenmaus",
+        img: "images/MaschinenQuiz/Ruebenmaus.jpg",
+      },
     ],
     drops: [
       { label: "Feldhäcksler" },
       { label: "Mähdrescher" },
       { label: "Rübenroder" },
       { label: "Rübenmaus" },
-
     ],
   },
 ];
-  
+
 const questionsQ4 = [
   {
     question: "Was ist ein Ziel der nachhaltigen Landwirtschaft?",
@@ -190,20 +258,18 @@ const questionsQ4 = [
 ];
 
 const questionsQ5 = [
-    {
-      question: "Ordne die Bilder den richtigen Begriffen zu:",
-      type: "DragAndDrop",
-      items: [
-        { text: "Weizen", correctDrop: "Getreide" },
-        { text: "Gerste", correctDrop: "Getreide" },
-        { text: "Kuh", correctDrop: "Tier" },
-        { text: "Traktor", correctDrop: "Maschine" },
-      ],
-      drops: [{ label: "Getreide" }, { label: "Tier" }, { label: "Maschine" }],
-    },
+  {
+    question: "Ordne die Bilder den richtigen Begriffen zu:",
+    type: "DragAndDrop",
+    items: [
+      { text: "Weizen", correctDrop: "Getreide" },
+      { text: "Gerste", correctDrop: "Getreide" },
+      { text: "Kuh", correctDrop: "Tier" },
+      { text: "Traktor", correctDrop: "Maschine" },
+    ],
+    drops: [{ label: "Getreide" }, { label: "Tier" }, { label: "Maschine" }],
+  },
 ];
-
-
 
 //Liste mit Namen und Fragen aller auf der Seite aufrufbaren Quizze
 
@@ -384,7 +450,10 @@ if (loadOnly) {
     const dragContainer = document.createElement("div");
     dragContainer.className = "drag-container";
 
-    q.items.forEach((item) => {
+    const shuffeleditems = shuffleArray([...q.items]);
+    const shuffeleddrops = shuffleArray([...q.drops]);
+
+    shuffeleditems.forEach((item) => {
       const el = document.createElement("div");
       el.className = "drag-item";
       el.draggable = true;
@@ -393,17 +462,17 @@ if (loadOnly) {
 
       // Falls ein Bild vorhanden ist, verwende es
       if (item.img) {
-        const img = document.createElement("img");
-        img.src = item.img;
-        img.alt = item.text || "";
-        el.appendChild(img);
-      }
-
-      // Optional: Text darunter
-      if (item.text) {
-        const label = document.createElement("span");
-        label.textContent = item.text;
-        el.appendChild(label);
+        el.style.backgroundImage = `url('${item.img}')`;
+        el.style.backgroundSize = "cover"; // Bild an Containergröße anpassen
+        el.style.backgroundPosition = "center"; // Bild zentrieren
+        el.style.backgroundRepeat = "no-repeat";
+      } else {
+        // Optional: Text darunter
+        if (item.text) {
+          const label = document.createElement("span");
+          label.textContent = item.text;
+          el.appendChild(label);
+        }
       }
 
       el.addEventListener("dragstart", (e) => {
@@ -419,7 +488,7 @@ if (loadOnly) {
     const dropContainer = document.createElement("div");
     dropContainer.className = "drop-container";
 
-    q.drops.forEach((drop) => {
+    shuffeleddrops.forEach((drop) => {
       const slot = document.createElement("div");
       slot.className = "drop-slot";
       slot.dataset.id = drop.label;
@@ -448,19 +517,23 @@ if (loadOnly) {
         } else {
           slot.classList.add("correct");
           slot.appendChild(dragging);
+          dragging.style.position = "relative"; // NICHT absolute
+          dragging.style.left = "0";
+          dragging.style.top = "0";
           dragging.draggable = false;
           dragging.classList.add("locked");
-          
+
           if (dragging.dataset.failed === "false") {
-      			const newScore = getScore() + 1;
-      			setScore(newScore);
+            const newScore = getScore() + 1;
+            setScore(newScore);
           }
 
           // Check, ob alle fertig sind
-          const allSlots = document.querySelectorAll(".drop-slot");
-          const done = Array.from(allSlots).every((s) =>
-            s.querySelector(".drag-item.locked")
+          const allItems = document.querySelectorAll(".drag-item");
+          const done = Array.from(allItems).every((s) =>
+            s.classList.contains("locked")
           );
+
           if (done) {
             nextBtn.disabled = false;
             nextBtn.style.opacity = "1";
@@ -495,7 +568,7 @@ if (loadOnly) {
     });
 
     if (index === q.correctIndex) {
-      const newScore = getScore() + 1;
+      const newScore = getScore() + 3;
       setScore(newScore);
     }
 
@@ -529,9 +602,18 @@ if (loadOnly) {
 
   // initialisierung
   getQuizID();
+  currentQuestion = 2;
   renderQuestion();
 
   // Home button: öffnet die in data-home angegebene URL in neuem Tab
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
   if (homeBtn) {
     homeBtn.addEventListener("click", () => {

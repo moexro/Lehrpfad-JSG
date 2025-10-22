@@ -9,10 +9,6 @@
   --container: rgba(59, 73, 50, 0.1);
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial;
@@ -51,6 +47,10 @@ body {
   margin-bottom: 24px;
   -webkit-text-fill-color: var(--text);
   text-align: center;
+}
+
+.quiz {
+  padding-bottom: 24px;
 }
 
 .controls {
@@ -191,6 +191,7 @@ img {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  min-width: 90%;
 }
 
 .drag-container,
@@ -199,37 +200,41 @@ img {
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
+  min-width: 100%;
 }
 
 .drag-item,
 .drop-slot {
-  width: 120px;
-  height: auto;
-  padding: 5%;
+  min-height: 20px;
   border-radius: 12px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: transparent;
   transition: 0.2s;
-  cursor: grab;
+  hyphens: auto;
+  word-break: break-word;
+  flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
+  max-width: 200px;
 }
 
 .drag-item {
   font-size: large;
+  cursor: grab;
+  width: 120px; /* fixe Breite für konsistente Anzeige */
+  height: 100px;
+  z-index: 10;
+  flex: 0 0 auto;
+  background-size: contain;
+  background-position: center;
 }
 .drop-slot {
   font-size: larger;
   font-weight: 500;
   border: 2px dashed var(--text);
-}
-
-.drag-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  pointer-events: none;
+  padding: 5%;
 }
 
 .drag-item.locked {

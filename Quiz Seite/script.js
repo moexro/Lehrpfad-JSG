@@ -57,37 +57,99 @@ const questionsQ2 = [
   },
 ];
 
+
 const questionsQ3 = [
+
   {
-    question: "Ziehe die Bilder zu den richtigen Begriffen",
+    question: "Ohne welche Maschine kann ein Bauer keine seiner Aufgaben erledigen?",
+    answers: [
+      "Pflug",
+      "Traktor",
+      "Rübenmaus",
+      "Güllefass",
+    ],
+    correctIndex: 2,
+    type: "multipleChoice",
+  },
+
+{
+    question: "Feldbearbeitung: Ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
-      { text: "Pflug", correctDrop: "Pflug" , img: "../Ordner/Dateiname"},
-      { text: "Mähdrescher", correctDrop: "Mähdrescher", img: "../Ordner/Dateiname" },
-      { text: "Sähmaschine", correctDrop: "Sähmaschine", img: "../Ordner/Dateiname" },
+      { text: "Pflug", correctDrop: "Pflug" , img: "../Bilder Maschinenquiz 2/Drehpflug"},
+      { text: "Grubber", correctDrop: "Grubber", img: "../Bilder Maschinenquiz 2/Grubber" },
+      { text: "Kreiselegge", correctDrop: "Kreiselegge", img: "../Bilder Maschinenquiz 2/Kreiselegge" },
+	{ text: "Walze", correctDrop: "Walze", img: "../Bilder Maschinenquiz 1/Walze" },
+
     ],
     drops: [
       { label: "Pflug" },
+      { label: "Grubber" },
+      { label: "Kreiselegge" },
+      { label: "Walze" },
+    ],
+  },
+
+{
+    question: "Ausbringen auf den Acker: Ziehe die Maschinen zu den richtigen Begriffen",
+    type: "DragAndDrop",
+    items: [
+      { text: "Miststreuer", correctDrop: "Miststreuer" , img: "../Bilder Maschinenquiz 1/Miststreuer"},
+      { text: "Güllefass", correctDrop: "Güllefass", img: "../Bilder Maschinenquiz 2/Güllefass" },
+      { text: "Sämaschine", correctDrop: "Sämaschine", img: "../Bilder Maschinenquiz 1/Sämaschine" },
+	{ text: "Pflanzenschutzspritze", correctDrop: "Pflanzenschutzspritze", img: "../Bilder Maschinenquiz 1/Selbstfahrende Pflanzenschutzspritze" }, 
+	{ text: "Düngerstreuer", correctDrop: "Düngerstreuer", img: "../Bilder Maschinenquiz 2/Düngerstreuer" },
+
+    ],
+    drops: [
+      { label: "Pflug" },
+      { label: "Grubber" },
+      { label: "Kreiselegge" },
+      { label: "Walze" },
+      { label: "Sämaschine" },
+    ],
+  },
+
+{
+    question: "Heu und Graß: Ziehe die Maschinen zu den richtigen Begriffen",
+    type: "DragAndDrop",
+    items: [
+      { text: "Frontmähwerk", correctDrop: "Frontmähwerk" , img: "../Bilder Maschinenquiz 3/Mähwerk"},
+      { text: "Heckmähwerk", correctDrop: "Heckmähwerk", img: "../Bilder Maschinenquiz 3/Heckmähwerk" },
+      { text: "Heuwender", correctDrop: "Heuwender", img: "../Bilder Maschinenquiz 3/Heuwender" },
+	{ text: "Schwader", correctDrop: "Schwader", img: "../Bilder Maschinenquiz 3/Schwader" }, 
+	{ text: "Ladewagen", correctDrop: "Ladewagen", img: "../Bilder Maschinenquiz 3/Ladewagen" },
+	{ text: "Ballenpresse", correctDrop: "Ballenpresse", img: "../Bilder Maschinenquiz 3/Ballenpresse" },
+
+    ],
+    drops: [
+      { label: "Frontmähwerk" },
+      { label: "Heckmähwerk" },
+      { label: "Heuwender" },
+      { label: "Schwader" },
+      { label: "Ladewagen" },
+      { label: "Ballenpresse" },
+
+    ],
+  },
+
+{
+    question: "Ernte: Ziehe die Maschinen zu den richtigen Begriffen",
+    type: "DragAndDrop",
+    items: [
+      { text: "Feldhäcksler", correctDrop: "Feldhäcksler" , img: "../Bilder Maschinenquiz 4/Feldhäcksler"},
+      { text: "Mähdrescher", correctDrop: "Mähdrescher", img: "../Bilder Maschinenquiz 4/Mähdrescher" },
+      { text: "Rübenroder", correctDrop: "Rübenroder", img: "../Bilder Maschinenquiz 4/Rübenroder" },
+	{ text: "Rübenmaus", correctDrop: "Rübenmaus", img: "../Bilder Maschinenquiz 4/Rübenmaus" }, 
+
+    ],
+    drops: [
+      { label: "Feldhäcksler" },
       { label: "Mähdrescher" },
-      { label: "Sähmaschine" },
+      { label: "Rübenroder" },
+      { label: "Rübenmaus" },
+
     ],
-  },
-  {
-    question: "Wofür wird eine Ballenpresse verwendet?",
-    answers: [
-      "Zum Formen von Heu- oder Strohballen",
-      "Zum Pflügen des Bodens",
-      "Zum Düngen von Feldern",
-      "Zum Säen von Getreide",
-    ],
-    correctIndex: 0,
-    type: "multipleChoice",
-  },
-  {
-    question: "Welche Maschine bringt Saatgut gleichmäßig auf dem Feld aus?",
-    answers: ["Sämaschine", "Miststreuer", "Mähdrescher", "Schlepper"],
-    correctIndex: 0,
-    type: "multipleChoice",
   },
 ];
   

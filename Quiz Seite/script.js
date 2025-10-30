@@ -69,7 +69,7 @@ const questionsQ3 = [
   },
 
   {
-    question: "Feldbearbeitung: Ziehe die Maschinen zu den richtigen Begriffen",
+    question: "Feldbearbeitung: Halte & ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
       {
@@ -103,7 +103,7 @@ const questionsQ3 = [
 
   {
     question:
-      "Ausbringen auf den Acker: Ziehe die Maschinen zu den richtigen Begriffen",
+      "Ausbringen auf den Acker: Halte & ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
       {
@@ -143,7 +143,7 @@ const questionsQ3 = [
 
   {
     question:
-      "Heu und Graß: Ziehe die Maschinen zu den richtigen Begriffen",
+      "Heu und Graß: Halte & ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
       {
@@ -188,7 +188,7 @@ const questionsQ3 = [
   },
 
   {
-    question: "Ernte: Ziehe die Maschinen zu den richtigen Begriffen",
+    question: "Ernte: Halte & ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
       {

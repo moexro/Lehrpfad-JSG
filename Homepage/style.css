@@ -24,7 +24,7 @@ body {
   box-sizing: border-box;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial;
-  color: var(--textbright);
+  color: var(--textlight);
   box-sizing: border-box;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   padding-top: var(--header-h);
@@ -273,7 +273,7 @@ body::before {
 
 
 /* Dropdown sichtbar beim Hover */
-.dropdown-menu:hover .dropdown-content {
+.dropdown-menu:hover .dropcontent {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;

@@ -222,14 +222,44 @@ img {
 
 .drag-item {
   font-size: large;
-  cursor: grab;
   width: 120px; /* fixe Breite für konsistente Anzeige */
   height: 100px;
   z-index: 10;
   flex: 0 0 auto;
   background-size: contain;
   background-position: center;
+  touch-action: none; /* verhindert Scrollen während Drag */
+  user-select: none;
+  cursor: grab;
 }
+
+.drag-item:active {
+  cursor: grabbing;
+}
+
+.drag-item img.drag-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none; /* verhindert Ruckeln beim Ziehen */
+}
+
+.dragging-ghost {
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(0, 0) !important;
+}
+
+.dragging {
+  position: absolute !important; /* wichtig */
+  z-index: 1000;
+  pointer-events: none; /* Maus kann weiterhin Slots erkennen */
+}
+
 .drop-slot {
   font-size: larger;
   font-weight: 500;

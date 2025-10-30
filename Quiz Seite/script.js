@@ -69,7 +69,8 @@ const questionsQ3 = [
   },
 
   {
-    question: "Feldbearbeitung: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+    question:
+      "Feldbearbeitung: Halte & ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
     items: [
       {
@@ -439,118 +440,116 @@ if (loadOnly) {
     });
   }
 
-function renderDragAndDrop(q) {
-  answersEl.innerHTML = "";
+  function renderDragAndDrop(q) {
+    answersEl.innerHTML = "";
 
-  const wrapper = document.createElement("div");
-  wrapper.className = "dragdrop-wrapper";
+    const wrapper = document.createElement("div");
+    wrapper.className = "dragdrop-wrapper";
 
-  // --- Quelle: Drag Items (oben) ---
-  const dragContainer = document.createElement("div");
-  dragContainer.className = "drag-container";
+    // --- Shuffle Items & Drops ---
+    const shuffledItems = shuffleArray([...q.items]);
+    const shuffledDrops = shuffleArray([...q.drops]);
 
-  const shuffledItems = shuffleArray([...q.items]);
-  const shuffledDrops = shuffleArray([...q.drops]);
+    // --- Drag-Container (oben) ---
+    const dragContainer = document.createElement("div");
+    dragContainer.className = "drag-container";
 
-  shuffledItems.forEach((item) => {
-    const el = document.createElement("div");
-    el.className = "drag-item";
-    el.dataset.correct = item.correctDrop;
+    shuffledItems.forEach((item) => {
+      const el = document.createElement("div");
+      el.className = "drag-item";
+      el.dataset.correct = item.correctDrop;
 
-    // 🔹 Wenn Bild vorhanden → nur Bild anzeigen
-    if (item.img) {
-      const img = document.createElement("img");
-      img.src = item.img;
-      img.alt = item.text || "";
-      img.className = "drag-img";
-      el.appendChild(img);
-    } 
-    // 🔹 Wenn kein Bild vorhanden → nur Text anzeigen
-    else if (item.text) {
-      const label = document.createElement("span");
-      label.textContent = item.text;
-      el.appendChild(label);
-    }
+      if (item.img) {
+        const img = document.createElement("img");
+        img.src = item.img;
+        img.alt = item.text || "";
+        img.className = "drag-img";
+        img.style.pointerEvents = "none"; // wichtig für Drag
+        el.appendChild(img);
+      } else if (item.text) {
+        const label = document.createElement("span");
+        label.textContent = item.text;
+        el.appendChild(label);
+      }
 
-    dragContainer.appendChild(el);
-  });
+      // Touch-Optimierung
+      el.style.touchAction = "none";
 
-  // --- Ziel: Drop-Zonen (unten) ---
-  const dropContainer = document.createElement("div");
-  dropContainer.className = "drop-container";
-
-  shuffledDrops.forEach((drop) => {
-    const slot = document.createElement("div");
-    slot.className = "drop-slot";
-    slot.dataset.id = drop.label;
-
-    const label = document.createElement("span");
-    label.textContent = drop.label;
-    slot.appendChild(label);
-
-    dropContainer.appendChild(slot);
-  });
-
-  wrapper.appendChild(dragContainer);
-  wrapper.appendChild(dropContainer);
-  answersEl.appendChild(wrapper);
-
-  // --- SortableJS Setup ---
-  new Sortable(dragContainer, {
-    group: {
-      name: "shared",
-      pull: true,  // echtes Verschieben
-      put: false,  // keine Items hinein
-    },
-    sort: false,
-    animation: 150,
-    forceFallback: true, // Touch-Unterstützung für Android/iOS
-  fallbackTolerance: 5,   // Touchbewegung ab 5px startet Drag
-  fallbackOnBody: true,   // stabileres Verhalten auf Android
-  touchStartThreshold: 3,
-  });
-
-  dropContainer.querySelectorAll(".drop-slot").forEach((slot) => {
-    new Sortable(slot, {
-      group: "shared",
-      animation: 150,
-      onAdd: (evt) => {
-        const item = evt.item;
-        const correct = item.dataset.correct;
-        const dropId = slot.dataset.id;
-
-        // ✅ Richtige Zuordnung
-        if (correct === dropId) {
-          slot.classList.add("correct");
-          item.classList.add("locked");
-          item.draggable = false;
-          item.style.pointerEvents = "none"; // fixiert
-          item.style.opacity = "1";
-
-          const newScore = getScore() + 1;
-          setScore(newScore);
-        } 
-        // ❌ Falsche Zuordnung → zurück
-        else {
-          slot.classList.add("wrong");
-          setTimeout(() => slot.classList.remove("wrong"), 800);
-          setTimeout(() => dragContainer.appendChild(item), 300);
-        }
-
-        // Prüfen, ob alle Items korrekt platziert
-        const totalItems = q.items.length;
-        const lockedItems = document.querySelectorAll(".drag-item.locked").length;
-
-        if (lockedItems === totalItems) {
-          nextBtn.disabled = false;
-          nextBtn.style.opacity = "1";
-          nextBtn.style.cursor = "pointer";
-        }
-      },
+      dragContainer.appendChild(el);
     });
-  });
-}
 
+    // --- Drop-Container (unten) ---
+    const dropContainer = document.createElement("div");
+    dropContainer.className = "drop-container";
+
+    shuffledDrops.forEach((drop) => {
+      const slot = document.createElement("div");
+      slot.className = "drop-slot";
+      slot.dataset.id = drop.label;
+
+      const label = document.createElement("span");
+      label.textContent = drop.label;
+      slot.appendChild(label);
+
+      dropContainer.appendChild(slot);
+    });
+
+    wrapper.appendChild(dragContainer);
+    wrapper.appendChild(dropContainer);
+    answersEl.appendChild(wrapper);
+
+    // --- SortableJS für Drag-Items ---
+    new Sortable(dragContainer, {
+      group: { name: "shared", pull: true, put: false },
+      sort: false,
+      animation: 150,
+      ghostClass: "dragging-ghost",
+      dragClass: "dragging",
+      forceFallback: true,
+      fallbackOnBody: true,
+    });
+
+    // --- SortableJS für Drop-Slots ---
+    dropContainer.querySelectorAll(".drop-slot").forEach((slot) => {
+      new Sortable(slot, {
+        group: { name: "items", pull: false, put: true }, // Items aufnehmen
+        sort: false, // Slots selbst nicht sortierbar
+        animation: 150,
+        onAdd: function (evt) {
+          const item = evt.item;
+          const correct = item.dataset.correct;
+          const dropId = evt.to.dataset.id;
+
+          if (correct === dropId) {
+            slot.classList.add("correct");
+            item.classList.add("locked");
+            item.draggable = false;
+            item.style.pointerEvents = "none";
+            item.style.opacity = "1";
+            if (!item.classList.contains("invalid")) {
+              setScore(getScore() + 1);
+            }
+          } else {
+            // falsches Item: springt automatisch zurück
+            item.classList.add("invalid");
+            evt.from.appendChild(item);
+            slot.classList.add("wrong");
+            setTimeout(() => slot.classList.remove("wrong"), 800);
+          }
+
+          // Prüfen, ob alle Items korrekt platziert
+          const totalItems = q.items.length;
+          const lockedItems =
+            document.querySelectorAll(".drag-item.locked").length;
+          if (lockedItems === totalItems) {
+            nextBtn.disabled = false;
+            nextBtn.style.opacity = "1";
+            nextBtn.style.cursor = "pointer";
+          }
+        },
+      });
+    });
+  }
 
   function onAnswerMultipleChoice(index, btn) {
     if (answered) return;

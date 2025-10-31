@@ -245,7 +245,7 @@ img {
 }
 
 .dragging-ghost {
-  display: none;
+  opacity: 0 !important;
   top: 0;
   left: 0;
   width: auto;

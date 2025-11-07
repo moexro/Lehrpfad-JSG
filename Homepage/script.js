@@ -145,12 +145,16 @@ mentionsB.addEventListener("click", () => {
 const dropBtn = document.getElementById("dropBtn");
 const dropdown = document.getElementById("dropcontent");
 
-dropBtn.addEventListener("click", (event) => {
-  event.stopPropagation(); // verhindert, dass das window-Event das Menü sofort schließt
-  dropdown.classList.toggle("show");
-	dropBtn.textContent = dropdown.classList.contains("show") ? "X" : "☰";
+// Toggle Dropdown beim Klick
+dropBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // Klick nicht nach außen weitergeben
+  dropdown.classList.toggle("open");
 });
 
+// Klick außerhalb schließt das Dropdown
+document.addEventListener("click", () => {
+  dropdown.classList.remove("open");
+});
 
 unlockFromLink();
 getQuizzes();

@@ -20,7 +20,7 @@ body {
   width: 100%;
   overflow-x: hidden;
   margin: 0;
-
+  word-break: break-word;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial;
@@ -125,8 +125,6 @@ body::before {
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
-}
-.btn.secondary {
   background: var(--highlight);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   height: 16px;
@@ -147,7 +145,7 @@ body::before {
 
 .get_to-quiz-btn {
   width: 100%;
-  height: 120px;
+  height: 100px;
   max-width: 250px;
   min-width: 200px;
   display: flex;
@@ -155,12 +153,11 @@ body::before {
   border-radius: 10px;
   margin: 16px 16px;
   padding: 0 16px;
-  background: var(--highlight);
-  color: var(--textlight);
+  background-color: transparent;
+  color: #fff;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  color: #fff;
   align-items: center;
   justify-content: center;
   font-weight: 600;
@@ -176,18 +173,21 @@ body::before {
   color: #fff;
 }
 
-.button_container {
-  display: grid;
+.stationcontainer {
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   width: 100%;
-  gap: 16px;
+  padding: 4px;
   align-items: stretch;
-  justify-content: center;
-  justify-items: center;
+  justify-content: space-around;
+}
+
+#resetQuizzes {
+  margin-bottom: 10px;
 }
 
 .second-container {
-  width: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -203,82 +203,46 @@ body::before {
   scroll-margin-top: 100px;
 }
 
-@media (max-width: 400px) {
-  .topbar {
-    padding: 0 12px;
-  }
-  .btn {
-    padding: 8px 10px;
-  }
-  .button_container {
-    grid-template-columns: 1fr; /* Buttons immer noch nebeneinander */
-  }
-  .second-container {
-    width: 90%; /* etwas schmaler */
-    padding: 20px; /* kleinere Innenabstände */
-  }
-}
-
-
-
 /* DROPDOWN MENÜ */
 
-/* Grundlayout */
-.dropdown-menu {
-  position: relative;
-  display: inline-block;
+.dropbtn {
+  background: url("images/menu.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 32px;
+  height: 32px;
 }
 
 .dropcontent {
-  background: var(--highlight);
+  background: var(--highlight) !important;
   position: fixed;
+  top: 84px;
+  left: 16px;
+  z-index: 10;
   max-width: 75%;
-  top: 40px;
-  left: 0;
-  right: 0;
   padding: 16px;
-  z-index: 100;
-	
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  z-index: 1010;
+  transform: translateZ(0);
   opacity: 0;
-  pointer-events: none;
-  transform: translateY(-40px);
-  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
-.dropcontent.show {
+.dropcontent.open {
+  margin-top: 32px;
+  display: flex;
   opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  backdrop-filter: blur(10px);
 }
-
 
 .dropcontent a {
-  display: block;
+  display: flex;
   padding: 12px;
   color: var(--textlight);
   text-decoration: none;
   font-weight: 600;
 }
-
-.dropbtn {
-  background-color: #3498db;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-weight: 700;
-}
-
-
-/* Dropdown sichtbar beim Hover */
-.dropdown-menu:hover .dropcontent {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
 
 /*hidden class*/
 
@@ -295,4 +259,67 @@ body::before {
   padding: 5px;
   font-size: 20px;
   font-weight: 600;
+}
+
+.menubar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 98%;
+  margin: auto;
+  border-radius: 20px;
+  background: var(--topbar); /* halbtransparent */
+  backdrop-filter: blur(15px); /* Blur-Effekt */
+  box-shadow: 4px -16px 20px rgba(0, 0, 0, 0.3); /* leichter Schatten nach oben */
+  z-index: 1000; /* immer über dem Inhalt */
+  padding: 16px;
+}
+
+.menubar a {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+#home {
+  background-image: url("images/home.png");
+}
+
+#member {
+  background-image: url("images/member.png");
+}
+
+#info {
+  background-image: url("images/info.png");
+}
+
+@media (max-width: 400px) {
+  .topbar {
+    padding: 0 12px;
+  }
+  .btn {
+    padding: 8px 10px;
+  }
+  .button_container {
+    grid-template-columns: 1fr; /* Buttons immer noch nebeneinander */
+  }
+  .second-container {
+    width: 90%; /* etwas schmaler */
+    padding: 12px; /* kleinere Innenabstände */
+  }
+  .get_to-quiz-btn {
+    padding: 0 8px;
+  }
+
+  .menubar {
+    display: flex !important;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .bottombar {
+    display: none;
+  }
 }

@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  		<meta name="apple-mobile-web-app-capable" content="yes">
-    		<meta name="theme-color" content="#1a1a1a">
-        
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#1a1a1a" />
+
     <title>JSG-Lehrpfad</title>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -14,41 +17,29 @@
     <header class="topbar" aria-label="Obere Leiste für wichtige Elemente">
       <div class="left">
         <nav class="dropdown-menu">
-          <div class="dropdownButton btn secondary" id="dropBtn">☰</div>
+          <div class="dropdown" id="dropdown">
+            <div class="dropbtn btn" id="dropBtn"></div>
+            
+          </div>
         </nav>
       </div>
 
       <div class="controls">
         <!-- Platzhalter für weitere wichtige Links -->
-        <a class="btn secondary" id="unlockQuizzes" href="#">Test-Unlock</a>
+        <a class="btn" id="unlockQuizzes" href="#">Test-Unlock</a>
       </div>
     </header>
-    
-    <div class="dropcontent second-container" id="dropcontent">
-            <a class="text" href="https://www.jsg-karlstadt.de" id="menuBtn"
-              >JSG-Homepage</a
-            >
-            <a class="text" href="#stations" id="buttonToStations"
-              >Zu den Stationen</a
-            >
-            <a class="text" href="#mentions" id="buttonToMentions"
-              >Die Mitwirkenden</a
-            >
-   </div>
-
-    <main class="container">
-      <h1 style="margin-top: 0">Startseite</h1>
-      <div class="second-container">
-        <h2>Dies ist ein Projekt des P-Seminars Geografie am JSG</h2>
-        <p class="text">
-          In diesem Projekt geht es darum, den entstehenden Lehrpfad zwischen
-          Karlstadt & Himmelstadt digital zu erweitern. <br />
-          <br />
-          Wir möchten die verschiedenen Stationen mit interaktiven Elementen wie
-          Quizzen aber auch Medien anreichern, um den Besuchern ein spannendes
-          und lehrreiches Erlebnis zu bieten.
-        </p>
-      </div>
+            <ul class="dropcontent second-container" id="dropcontent">
+              <a class="text" href="https://www.jsg-karlstadt.de" id="menuBtn"
+                >JSG-Homepage</a
+              >
+              <a class="text" href="#stations" id="buttonToStations"
+                >Zu den Stationen</a
+              >
+              <a class="text" href="#mentions" id="buttonToMentions"
+                >Die Mitwirkenden</a
+              >
+            </ul>
 
       <div class="second-container" id="stations">
         <h2>Freigeschaltete Stationen</h2>
@@ -63,7 +54,7 @@
           erneut zu spielen.
         </p>
         <div class="second-container">
-          <div class="button_container" id="Quiz_button_container"></div>
+          <div class="stationcontainer" id="Quiz_button_container"></div>
           <div id="Quiz_score_container"></div>
         </div>
         <a class="btn secondary" id="resetQuizzes" href="#"
@@ -91,21 +82,26 @@
         <br />
         <h3>Team</h3>
         <p class="text">
-          Binner Felix, Dirscherl Sina, Greindl Nela, 
-          Handel Klara, Hartmann Jonas, Hümmer Moritz, 
-          Kirchner Paula, Kluehspies Julia, Kuffner Mia, 
+          Binner Felix, Dirscherl Sina, Greindl Nela, Handel Klara, Hartmann
+          Jonas, Hümmer Moritz, Kirchner Paula, Kluehspies Julia, Kuffner Mia,
           Röder Adrian, Schwarz Angelina
         </p>
         <br />
-          <a href="https://www.aelf-ka.bayern.de" id="AELF"
-              >Unterstützt durch das Amt für Ernährung, Landwirtschaft und Forsten (AELF)
-          Karlstadt </a>
+        <a href="https://www.aelf-ka.bayern.de" id="AELF"
+          >Unterstützt durch das Amt für Ernährung, Landwirtschaft und Forsten
+          (AELF) Karlstadt
+        </a>
       </div>
     </main>
     <footer
       class="bottombar"
       aria-label="Untere Leiste für wichtige Elemente"
     ></footer>
+    <footer class="menubar" aria-label="Untere Leiste für wichtige Elemente">
+      <a id="home" href="#top"> </a>
+      <a id="info" href="#stations"> </a>
+      <a id="member" href="#mentions"></a>
+    </footer>
   </body>
 
   <script src="script.js"></script>

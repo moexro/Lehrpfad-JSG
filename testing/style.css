@@ -1,0 +1,50 @@
+body {
+  background-color: grey;
+}
+
+.menubar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  max-width: 98%;
+  margin: auto;
+  border-radius: 20px;
+  background: var(--topbar); /* halbtransparent */
+  backdrop-filter: blur(15px); /* Blur-Effekt */
+  box-shadow: 4px -16px 20px rgba(0, 0, 0, 0.3); /* leichter Schatten nach oben */
+  z-index: 1000; /* immer über dem Inhalt */
+  padding: 8px;
+}
+
+.menubar a {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+#home {
+  background-image: url("images/home.png");
+}
+
+#member {
+  background-image: url("images/member.png");
+}
+
+#info {
+  background-image: url("images/info.png");
+}
+
+@media (max-width: 400px) {
+  .menubar {
+    display: flex !important;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .bottombar {
+    display: none;
+  }
+}

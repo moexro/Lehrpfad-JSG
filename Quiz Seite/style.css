@@ -108,11 +108,8 @@ body {
 }
 
 /* Zusätzliche Anpassung für sehr kleine Bildschirme */
-@media (max-width: 600px) {
-  .answer-btn {
-    flex: 1 1 100%; /* Nimmt auf kleinen Tabs 100% der Breite ein */
-  }
-}
+
+
 
 .answer-btn:hover {
   transform: translateY(-2px);
@@ -287,3 +284,19 @@ img {
   border-color: #dc3545;
   background: transparent;
 }
+
+
+@media (max-width: 600px) {
+  .answer-btn {
+    flex: 1 1 100%; /* Nimmt auf kleinen Tabs 100% der Breite ein */
+  }
+}
+
+/* normale Hover für Desktop */
+@media (hover: hover) and (pointer: fine) {
+  .drop-slot:hover {
+    border-color: #007bff;
+    background: transparent;
+  }
+}
+

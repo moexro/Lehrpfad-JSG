@@ -1,3 +1,5 @@
+// --- Quiz-Daten ---
+
 const questionsQ1 = [
   {
     question: "Welche Pflanze wird in Deutschland am häufigsten angebaut?",
@@ -25,6 +27,7 @@ const questionsQ1 = [
   },
 ];
 
+// ... weitere Fragen Q2–Q5 wie in deinem Code ...
 const questionsQ2 = [
   {
     question: "Welche Nutztiere liefern sowohl Milch als auch Fleisch?",
@@ -187,7 +190,6 @@ const questionsQ3 = [
       { label: "Ballenpresse" },
     ],
   },
-
   {
     question: "Ernte: Halte & ziehe die Maschinen zu den richtigen Begriffen",
     type: "DragAndDrop",
@@ -274,350 +276,346 @@ const questionsQ5 = [
 
 //Liste mit Namen und Fragen aller auf der Seite aufrufbaren Quizze
 
+
+
 let allQuiz = {
   Q1: {
-    questions: questionsQ1,
-    name: "Über den Ackerbau",
-    id: "Q1",
+     questions: questionsQ1, 
+    name: "Über den Ackerbau", 
+    id: "Q1" 
   },
-  Q2: {
-    questions: questionsQ2,
-    name: "Über die Tierhaltung",
-    id: "Q2",
+  Q2: { 
+    questions: questionsQ2, 
+    name: "Über die Tierhaltung", id: "Q2" 
   },
-  Q3: {
-    questions: questionsQ3,
-    name: "Landwirtschaftliche Maschinen",
-    id: "Q3",
+  Q3: { 
+    questions: questionsQ3, 
+    name: "Landwirtschaftliche Maschinen", 
+    id: "Q3" 
   },
-  Q4: {
+  Q4: { 
     questions: questionsQ4,
-    name: "Nachhaltige Landwirtschaft",
-    id: "Q4",
-  },
-  Q5: {
-    questions: questionsQ5,
-    name: "Zuordnungsspiel",
-    id: "Q5",
+     name: "Nachhaltige Landwirtschaft", 
+     id: "Q4" 
+    },
+  Q5: { 
+    questions: questionsQ5, 
+    name: "Zuordnungsspiel", 
+    id: "Q5" 
   },
 };
 
 localStorage.setItem("allQuizzes", JSON.stringify(allQuiz));
 
-// --- Prüfen, ob nur Daten geladen werden sollen ---
-const loadOnlyParm = new URLSearchParams(window.location.search);
-const loadOnly = loadOnlyParm.get("loadOnlyQuizData") === "true";
+// --- Elemente ---
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const scoreEl = document.getElementById("score");
+const nextBtn = document.getElementById("nextBtn");
+const homeBtn = document.getElementById("homeBtn");
+homeBtn.classList.toggle("hidden");
 
-if (loadOnly) {
-  // nur Daten laden, Quiz nicht starten
-  setTimeout(() => {
-    window.location.href = "../Homepage/index.html?from=quizLoaded";
-  }, 500);
-} else {
-  let currentQuiz;
+let currentQuiz;
+let currentQuestion = 0;
+let answered = false;
 
-  function getQuizID() {
-    const parms = new URLSearchParams(window.location.search);
-    const q = parms.get("quiztype");
+// --- Quiz initialisieren ---
+function getQuizID() {
+  const parms = new URLSearchParams(window.location.search);
+  const q = parms.get("quiztype");
 
-    if (q && allQuiz[q]) {
-      currentQuiz = q;
-      localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
-      console.log(`Quiz ${currentQuiz} freigeschaltet.`);
-      if (
-        JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true
-      ) {
-        localStorage.setItem(`quizScore_${currentQuiz}`, "0");
-      }
-    } else {
-      currentQuiz = "null"; // Fallback
+  if (q && allQuiz[q]) {
+    currentQuiz = q;
+    localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
+    if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true) {
+      localStorage.setItem(`quizScore_${currentQuiz}`, "0");
     }
-
-    console.log(`Aktuelles Quiz: ${currentQuiz}`);
-  }
-
-  const questionEl = document.getElementById("question");
-  const answersEl = document.getElementById("answers");
-  const scoreEl = document.getElementById("score");
-  const nextBtn = document.getElementById("nextBtn");
-  const homeBtn = document.getElementById("homeBtn");
-  homeBtn.classList.toggle("hidden");
-
-  let currentQuestion = 0;
-  let answered = false;
-
-  function getScore() {
-    return parseInt(
-      localStorage.getItem(`quizScore_${currentQuiz}`) || "0",
-      10
-    );
-  }
-
-  function setScore(v) {
-    localStorage.setItem(`quizScore_${currentQuiz}`, String(v));
-    console.log(`Punkte für ${currentQuiz} gesetzt auf ${v}.`);
-    scoreEl.textContent = `Punkte: ${getScore()}`;
-    console.log(getScore());
-  }
-
-  // --- Rendering ---
-  function renderQuestion() {
-    // Validierung: existierendes Quiz ?
-    if (!currentQuiz || !allQuiz[currentQuiz]) {
-      document.getElementById("quizTitle").textContent =
-        "Dieses Quiz existiert nicht";
-      questionEl.textContent = "";
-      answersEl.innerHTML = "";
-      nextBtn.classList.toggle("hidden");
-      scoreEl.classList.toggle("hidden");
-      if (homeBtn) homeBtn.classList.toggle("hidden");
-      return;
-    }
-
-    // Wenn Quiz bereits als "done" markiert:
-    if (
-      JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`) || "false") ===
-      true
-    ) {
-      document.getElementById("quizTitle").textContent =
-        allQuiz[currentQuiz].name || "Unbekannt";
-      questionEl.textContent = "Dieses Quiz hast du schon abgeschlossen.";
-      answersEl.innerHTML = "";
-      nextBtn.classList.toggle("hidden");
-      scoreEl.classList.remove("hidden");
-      scoreEl.textContent = `Punktzahl: ${getScore()}`;
-      if (homeBtn) homeBtn.classList.toggle("hidden");
-      return;
-    }
-
-    const quiz = allQuiz[currentQuiz];
-    const q = quiz.questions[currentQuestion];
-    const quizType = q.type;
-
-    if (!q) {
-      questionEl.textContent = "Frage nicht gefunden.";
-      answersEl.innerHTML = "";
-      return;
-    }
-
-    answered = false;
-
-    nextBtn.disabled = true;
-    nextBtn.style.opacity = "0.5";
-    nextBtn.style.cursor = "not-allowed";
-
-    nextBtn.classList.remove("hidden");
-    scoreEl.classList.remove("hidden");
-    if (homeBtn) homeBtn.classList.add("hidden");
-
-    document.getElementById("quizTitle").textContent = quiz.name || "Unbekannt";
-    questionEl.textContent = q.question;
-
-    if (currentQuestion === allQuiz[currentQuiz].questions.length - 1) {
-      nextBtn.innerHTML = "Quiz abschließen";
-    }
-
-    if (quizType === "multipleChoice") {
-      renderMultipleChoice(q);
-    } else {
-      if (quizType === "DragAndDrop") {
-        renderDragAndDrop(q);
-      }
-    }
-  }
-
-  function renderMultipleChoice(q) {
-    // Normales Rendering einer Frage
-
-    answersEl.innerHTML = "";
-
-    q.answers.forEach((ans, i) => {
-      const btn = document.createElement("button");
-      btn.className = "answer-btn";
-      btn.textContent = ans;
-      btn.addEventListener("click", () => onAnswerMultipleChoice(i));
-      answersEl.appendChild(btn);
-    });
-  }
-
-  function renderDragAndDrop(q) {
-    answersEl.innerHTML = "";
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "dragdrop-wrapper";
-
-    // --- Shuffle Items & Drops ---
-    const shuffledItems = shuffleArray([...q.items]);
-    const shuffledDrops = shuffleArray([...q.drops]);
-
-    // --- Drag-Container (oben) ---
-    const dragContainer = document.createElement("div");
-    dragContainer.className = "drag-container";
-
-    shuffledItems.forEach((item) => {
-      const el = document.createElement("div");
-      el.className = "drag-item";
-      el.dataset.correct = item.correctDrop;
-
-      if (item.img) {
-        const img = document.createElement("img");
-        img.src = item.img;
-        img.alt = item.text || "";
-        img.className = "drag-img";
-        img.style.pointerEvents = "none"; // wichtig für Drag
-        el.appendChild(img);
-      } else if (item.text) {
-        const label = document.createElement("span");
-        label.textContent = item.text;
-        el.appendChild(label);
-      }
-
-      // Touch-Optimierung
-      el.style.touchAction = "none";
-
-      dragContainer.appendChild(el);
-    });
-
-    // --- Drop-Container (unten) ---
-    const dropContainer = document.createElement("div");
-    dropContainer.className = "drop-container";
-
-    shuffledDrops.forEach((drop) => {
-      const slot = document.createElement("div");
-      slot.className = "drop-slot";
-      slot.dataset.id = drop.label;
-
-      const label = document.createElement("span");
-      label.textContent = drop.label;
-      slot.appendChild(label);
-
-      dropContainer.appendChild(slot);
-    });
-
-    wrapper.appendChild(dragContainer);
-    wrapper.appendChild(dropContainer);
-    answersEl.appendChild(wrapper);
-
-    // --- SortableJS für Drag-Items ---
-    new Sortable(dragContainer, {
-      group: { name: "shared", pull: true, put: false },
-      sort: false,
-      animation: 150,
-      ghostClass: "dragging-ghost",
-      dragClass: "dragging",
-      forceFallback: true,
-      fallbackOnBody: true,
-    });
-
-    // --- SortableJS für Drop-Slots ---
-    dropContainer.querySelectorAll(".drop-slot").forEach((slot) => {
-      new Sortable(slot, {
-        group: { name: "items", pull: false, put: true }, // Items aufnehmen
-        sort: false, // Slots selbst nicht sortierbar
-        animation: 150,
-        onAdd: function (evt) {
-          const item = evt.item;
-          const correct = item.dataset.correct;
-          const dropId = evt.to.dataset.id;
-
-          if (correct === dropId) {
-            slot.classList.add("correct");
-            item.classList.add("locked");
-            item.draggable = false;
-            item.style.pointerEvents = "none";
-            item.style.opacity = "1";
-            if (!item.classList.contains("invalid")) {
-              setScore(getScore() + 1);
-            }
-          } else {
-            // falsches Item: springt automatisch zurück
-            item.classList.add("invalid");
-            evt.from.appendChild(item);
-            slot.classList.add("wrong");
-            setTimeout(() => slot.classList.remove("wrong"), 800);
-          }
-
-          // Prüfen, ob alle Items korrekt platziert
-          const totalItems = q.items.length;
-          const lockedItems =
-            document.querySelectorAll(".drag-item.locked").length;
-          if (lockedItems === totalItems) {
-            nextBtn.disabled = false;
-            nextBtn.style.opacity = "1";
-            nextBtn.style.cursor = "pointer";
-          }
-        },
-      });
-    });
-  }
-
-  function onAnswerMultipleChoice(index, btn) {
-    if (answered) return;
-    answered = true;
-    const q = allQuiz[currentQuiz].questions[currentQuestion];
-    const buttons = Array.from(document.querySelectorAll(".answer-btn"));
-    buttons.forEach((b, i) => {
-      b.disabled = true;
-      if (i === q.correctIndex) {
-        b.classList.add("correct");
-      } else if (i === index) {
-        b.classList.add("wrong");
-      }
-    });
-
-    if (index === q.correctIndex) {
-      const newScore = getScore() + 3;
-      setScore(newScore);
-    }
-
-    // Nächste Frage aktivieren
-    nextBtn.disabled = false;
-    nextBtn.style.opacity = "1";
-    nextBtn.style.cursor = "pointer";
-  }
-
-  nextBtn.addEventListener("click", () => {
-    currentQuestion += 1;
-    quizEnde();
-    renderQuestion();
-  });
-
-  function quizEnde() {
-    if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
-      // Quiz Ende
-      questionEl.textContent =
-        "Quiz beendet. Gut gemacht! Du hast " +
-        getScore() +
-        " Punkte erreicht.";
-      answersEl.innerHTML = "";
-      nextBtn.disabled = true;
-      nextBtn.classList.toggle("hidden");
-      scoreEl.classList.toggle("hidden");
-      homeBtn.classList.toggle("hidden");
-      return;
-    }
-  }
-
-  // initialisierung
-  getQuizID();
-  renderQuestion();
-
-  // Home button: öffnet die in data-home angegebene URL in neuem Tab
-
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  if (homeBtn) {
-    homeBtn.addEventListener("click", () => {
-      const target = homeBtn.getAttribute("data-home") || "#";
-      if (target === "#") return; // Default-Placeholder; nichts tun
-      localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
-      window.location.href = target;
-    });
+  } else {
+    currentQuiz = "null";
   }
 }
+
+function getScore() {
+  return parseInt(localStorage.getItem(`quizScore_${currentQuiz}`) || "0", 10);
+}
+
+function setScore(v) {
+  localStorage.setItem(`quizScore_${currentQuiz}`, String(v));
+  scoreEl.textContent = `Punkte: ${getScore()}`;
+}
+
+// --- Frage rendern ---
+function renderQuestion() {
+  if (!currentQuiz || !allQuiz[currentQuiz]) {
+    document.getElementById("quizTitle").textContent =
+      "Dieses Quiz existiert nicht";
+    questionEl.textContent = "";
+    answersEl.innerHTML = "";
+    nextBtn.classList.toggle("hidden");
+    scoreEl.classList.toggle("hidden");
+    if (homeBtn) homeBtn.classList.toggle("hidden");
+    return;
+  }
+
+  if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`) || "false") === true) {
+    document.getElementById("quizTitle").textContent =
+      allQuiz[currentQuiz].name || "Unbekannt";
+    questionEl.textContent = "Dieses Quiz hast du schon abgeschlossen.";
+    answersEl.innerHTML = "";
+    nextBtn.classList.toggle("hidden");
+    scoreEl.classList.remove("hidden");
+    scoreEl.textContent = `Punktzahl: ${getScore()}`;
+    if (homeBtn) homeBtn.classList.toggle("hidden");
+    return;
+  }
+
+  const quiz = allQuiz[currentQuiz];
+  const q = quiz.questions[currentQuestion];
+
+  if (!q) {
+    questionEl.textContent = "Frage nicht gefunden.";
+    answersEl.innerHTML = "";
+    return;
+  }
+
+  answered = false;
+
+  nextBtn.disabled = true;
+  nextBtn.style.opacity = "0.5";
+  nextBtn.style.cursor = "not-allowed";
+  nextBtn.classList.remove("hidden");
+  scoreEl.classList.remove("hidden");
+  if (homeBtn) homeBtn.classList.add("hidden");
+
+  document.getElementById("quizTitle").textContent = quiz.name || "Unbekannt";
+  questionEl.textContent = q.question;
+
+  if (currentQuestion === allQuiz[currentQuiz].questions.length - 1) {
+    nextBtn.innerHTML = "Quiz abschließen";
+  }
+
+  if (q.type === "multipleChoice") {
+    renderMultipleChoice(q);
+  } else if (q.type === "DragAndDrop") {
+    renderDragAndDrop(q);
+  }
+}
+
+// --- Multiple Choice ---
+function renderMultipleChoice(q) {
+  answersEl.innerHTML = "";
+  q.answers.forEach((ans, i) => {
+    const btn = document.createElement("button");
+    btn.className = "answer-btn";
+    btn.textContent = ans;
+    btn.addEventListener("click", () => onAnswerMultipleChoice(i));
+    answersEl.appendChild(btn);
+  });
+}
+
+function onAnswerMultipleChoice(index) {
+  if (answered) return;
+  answered = true;
+
+  const q = allQuiz[currentQuiz].questions[currentQuestion];
+  const buttons = Array.from(document.querySelectorAll(".answer-btn"));
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.correctIndex) b.classList.add("correct");
+    else if (i === index) b.classList.add("wrong");
+  });
+
+  if (index === q.correctIndex) {
+    setScore(getScore() + 3);
+  }
+
+  nextBtn.disabled = false;
+  nextBtn.style.opacity = "1";
+  nextBtn.style.cursor = "pointer";
+}
+
+// --- Drag & Drop ---
+function renderDragAndDrop(q) {
+  answersEl.innerHTML = "";
+  const wrapper = document.createElement("div");
+  wrapper.className = "dragdrop-wrapper";
+
+  const shuffledItems = shuffleArray([...q.items]);
+  const shuffledDrops = shuffleArray([...q.drops]);
+
+  const dragContainer = document.createElement("div");
+  dragContainer.className = "drag-container";
+
+  shuffledItems.forEach((item) => {
+    const el = document.createElement("div");
+    el.className = "drag-item";
+    el.dataset.correct = item.correctDrop;
+
+    if (item.img) {
+      const img = document.createElement("img");
+      img.src = item.img;
+      img.alt = item.text || "";
+      img.className = "drag-img";
+      el.appendChild(img);
+    } else if (item.text) {
+      const span = document.createElement("span");
+      span.textContent = item.text;
+      el.appendChild(span);
+    }
+
+    dragContainer.appendChild(el);
+  });
+
+  const dropContainer = document.createElement("div");
+  dropContainer.className = "drop-container";
+
+  shuffledDrops.forEach((drop) => {
+    const slot = document.createElement("div");
+    slot.className = "drop-slot";
+    slot.dataset.id = drop.label;
+
+    const label = document.createElement("span");
+    label.textContent = drop.label;
+    slot.appendChild(label);
+
+    dropContainer.appendChild(slot);
+  });
+
+  wrapper.appendChild(dragContainer);
+  wrapper.appendChild(dropContainer);
+  answersEl.appendChild(wrapper);
+
+  let draggedItem = null;
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  wrapper.querySelectorAll(".drag-item").forEach((item) => {
+    item.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      if (item.classList.contains("locked")) return;
+
+      isDragging = true;
+      draggedItem = item;
+      const rect = item.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+
+      item.style.width = rect.width + "px";
+      item.style.height = rect.height + "px";
+      item.style.position = "absolute";
+      item.style.zIndex = "1000";
+      item.style.pointerEvents = "none";
+      item.style.transition = "none";
+
+      document.body.appendChild(item);
+      moveAt(e.pageX, e.pageY);
+    });
+  });
+
+  document.addEventListener("pointermove", (e) => {
+    if (!isDragging || !draggedItem) return;
+    moveAt(e.pageX, e.pageY);
+  });
+
+  document.addEventListener("pointerup", (e) => {
+    if (!isDragging || !draggedItem) return;
+    isDragging = false;
+    const item = draggedItem;
+    draggedItem = null;
+
+    const drop = document.elementFromPoint(e.clientX, e.clientY)?.closest(".drop-slot");
+
+    if (drop) {
+      const correct = item.dataset.correct;
+      const dropId = drop.dataset.id;
+
+      if (correct === dropId) {
+        drop.classList.add("correct");
+        item.classList.add("locked");
+        item.style.position = "static";
+        item.style.pointerEvents = "none";
+        item.style.width = "";
+        item.style.height = "";
+        drop.appendChild(item);
+        setScore(getScore() + 1);
+      } else {
+        drop.classList.add("wrong");
+        setTimeout(() => drop.classList.remove("wrong"), 800);
+        resetItem(item);
+      }
+    } else {
+      resetItem(item);
+    }
+
+    checkAllLocked();
+  });
+
+  function moveAt(x, y) {
+    draggedItem.style.left = x - offsetX + "px";
+    draggedItem.style.top = y - offsetY + "px";
+  }
+
+  function resetItem(item) {
+    item.style.position = "static";
+    item.style.zIndex = "";
+    item.style.pointerEvents = "";
+    item.style.width = "";
+    item.style.height = "";
+    item.style.transition = "";
+    dragContainer.appendChild(item);
+  }
+
+  function checkAllLocked() {
+    const totalItems = q.items.length;
+    const lockedItems = wrapper.querySelectorAll(".drag-item.locked").length;
+    if (lockedItems === totalItems) {
+      nextBtn.disabled = false;
+      nextBtn.style.opacity = "1";
+      nextBtn.style.cursor = "pointer";
+    }
+  }
+}
+
+// --- Next Button ---
+nextBtn.addEventListener("click", () => {
+  currentQuestion++;
+  if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
+    quizEnde();
+    return;
+  }
+  renderQuestion();
+});
+
+function quizEnde() {
+  questionEl.textContent =
+    "Quiz beendet. Gut gemacht! Du hast " + getScore() + " Punkte erreicht.";
+  answersEl.innerHTML = "";
+  nextBtn.disabled = true;
+  nextBtn.classList.toggle("hidden");
+  scoreEl.classList.toggle("hidden");
+  homeBtn.classList.toggle("hidden");
+}
+
+// --- Hilfsfunktionen ---
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// --- Home Button ---
+if (homeBtn) {
+  homeBtn.addEventListener("click", () => {
+    const target = homeBtn.getAttribute("data-home") || "#";
+    if (target === "#") return;
+    localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
+    window.location.href = target;
+  });
+}
+
+// --- Quiz starten ---
+getQuizID();
+renderQuestion();

@@ -273,7 +273,7 @@ img {
   cursor: default;
 }
 
-.drop-slot.hover {
+.drop-slot:hover {
   border-color: #007bff;
   background: transparent;
 }

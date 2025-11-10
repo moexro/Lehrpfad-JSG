@@ -1,3 +1,7 @@
+
+
+
+
 // --- Quiz-Daten ---
 
 const questionsQ1 = [
@@ -306,6 +310,17 @@ let allQuiz = {
 };
 
 localStorage.setItem("allQuizzes", JSON.stringify(allQuiz));
+
+// --- unlock --- //
+
+function onlyUnlock() {
+  const parms = new URLSearchParams(window.location.search);
+  const loadOnly = parms.get("loadOnlyQuizData");
+  if(loadOnly) {
+    window.location.href = "../Homepage/index.html?from=quizLoaded";
+    return;
+  }
+}
 
 // --- Elemente ---
 const questionEl = document.getElementById("question");
@@ -616,6 +631,7 @@ if (homeBtn) {
   });
 }
 
+onlyUnlock();
 // --- Quiz starten ---
 getQuizID();
 renderQuestion();

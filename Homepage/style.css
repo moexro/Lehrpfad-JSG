@@ -1,13 +1,13 @@
 :root {
 	--header-h: 72px;
 	--bg: #f9fafb;
-	--topbar: rgba(59, 73, 50, 0.1);
-	--container: rgba(59, 73, 50, 0.1);
+	--container: rgba(59, 73, 50, 0.0001);
 	--accent: rgba(59, 73, 50, 0.4);
 	--highlight: rgba(255, 255, 255, 0.12);
 	--textlight: #ffffff;
 	--textdark: #172013;
 	--button: #506448;
+	--container-width: 90%;
 }
 
 html {
@@ -28,6 +28,7 @@ body {
 	box-sizing: border-box;
 	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 	padding-top: var(--header-h);
+	padding-bottom: var(--header-h);
 }
 
 body {
@@ -55,7 +56,6 @@ main {
 
 .text {
 	max-width: 500px;
-	width: 100%;
 	text-align: center;
 	margin: 0 auto;
 	color: var(--textlight);
@@ -78,7 +78,6 @@ main {
 	color: #fff;
 	backdrop-filter: blur(15px);
 	box-shadow: 4px 16px 20px rgba(0, 0, 0, 0.3);
-
 	z-index: 1000;
 }
 
@@ -119,6 +118,10 @@ main {
 	gap: 12px;
 	align-items: center;
 	justify-content: center;
+}
+
+#top {
+	scroll-margin-top: 100px;
 }
 
 /* buttons as links */
@@ -200,9 +203,9 @@ main {
 	border-radius: 10px;
 	margin: 36px auto;
 	padding: 36px;
-	background: var(--container);
+	background-color: var(--container);
 	color: var(--textlight);
-	backdrop-filter: blur(15px);
+	backdrop-filter: blur(8px);
 	border: 1px solid rgba(255, 255, 255, 0.06);
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 	scroll-margin-top: 100px;
@@ -210,35 +213,45 @@ main {
 
 /* DROPDOWN MENÜ */
 
-.dropbtn {
-	background: url("images/menu.png");
-	background-repeat: no-repeat;
-	background-position: center;
-	width: 32px;
-	height: 32px;
+.icon.dropbtn {
+	background-image: url("images/menu.svg");
+	cursor: pointer;
+}
+
+.overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5); /* 50 % Abdunklung */
+	backdrop-filter: blur(2px);
+	z-index: 800; /* unter dem Dropdown, über dem restlichen Inhalt */
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
 }
 
 .dropcontent {
-	background: var(--highlight) !important;
 	position: fixed;
-	top: 84px;
-	left: 16px;
+	top: 50px;
+	display: flex;
+	background: var(--highlight);
 	z-index: 10;
-	max-width: 75%;
+	width: var(--container-width);
 	padding: 16px;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: center;
-	z-index: 1010;
-	transform: translateZ(0);
+	justify-content: stretch;
+	z-index: 900;
 	opacity: 0;
+	transform: translateY(-100px);
+	transition: all 0.8s ease;
+	margin: auto;
+	backdrop-filter: blur(10px);
 }
 
 .dropcontent.open {
 	margin-top: 32px;
-	display: flex;
 	opacity: 1;
-	backdrop-filter: blur(10px);
+	transform: translateY(0);
 }
 
 .dropcontent a {
@@ -247,6 +260,7 @@ main {
 	color: var(--textlight);
 	text-decoration: none;
 	font-weight: 600;
+	filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
 }
 
 /*hidden class*/
@@ -282,22 +296,30 @@ main {
 	padding: 16px;
 }
 
-.menubar a {
+.icon {
 	display: block;
 	width: 32px;
 	height: 32px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.icon:hover {
+	filter: brightness(1.2);
+	filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
 }
 
 #home {
-	background-image: url("images/home.png");
+	background-image: url("images/home.svg");
 }
 
 #member {
-	background-image: url("images/member.png");
+	background-image: url("images/member.svg");
 }
 
 #info {
-	background-image: url("images/info.png");
+	background-image: url("images/info.svg");
 }
 
 @media (max-width: 400px) {

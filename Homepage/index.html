@@ -14,11 +14,15 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<header class="topbar" aria-label="Obere Leiste für wichtige Elemente">
+		<header
+			id="topbar"
+			class="topbar"
+			aria-label="Obere Leiste für wichtige Elemente"
+		>
 			<div class="left">
 				<nav class="dropdown-menu">
 					<div class="dropdown" id="dropdown">
-						<div class="dropbtn btn" id="dropBtn"></div>
+						<div class="icon dropbtn" id="dropBtn"></div>
 					</div>
 				</nav>
 			</div>
@@ -28,81 +32,83 @@
 				<a class="btn" id="unlockQuizzes" href="#">Test-Unlock</a>
 			</div>
 		</header>
-		<ul class="dropcontent second-container" id="dropcontent">
-			<a class="text" href="https://www.jsg-karlstadt.de" id="menuBtn"
-				>JSG-Homepage</a
-			>
-			<a class="text" href="#stations" id="buttonToStations"
-				>Zu den Stationen</a
-			>
-			<a class="text" href="#mentions" id="buttonToMentions"
-				>Die Mitwirkenden</a
-			>
-		</ul>
-
 		<main>
-			<h1 id="top">Startseite</h1>
-
-			<div class="second-container" id="stations">
-				<h2>Freigeschaltete Stationen</h2>
-				<h4>
-					Hier siehst du die Stationen, an denen du schon den QR-Code für das
-					Quiz gescannt hast:
-				</h4>
-
-				<p class="text">
-					Die Punkte, die du in den Quizzen gesammelt hast, kannst du mit deinen
-					Freunden vergleichen oder später auch zurücksetzen, um die Quizze
-					erneut zu spielen.
-				</p>
-				<div class="second-container">
-					<div class="stationcontainer" id="Quiz_button_container"></div>
-					<div id="Quiz_score_container"></div>
-				</div>
-				<a class="btn secondary" id="resetQuizzes" href="#"
-					>Setze hier deinen Fortschritt zurück</a
+			<ul class="dropcontent second-container" id="dropcontent">
+				<a class="text" href="https://www.jsg-karlstadt.de" id="menuBtn"
+					>JSG-Homepage</a
 				>
-			</div>
+				<a class="text" href="#stations" id="buttonToStations"
+					>Zu den Stationen</a
+				>
+				<a class="text" href="#mentions" id="buttonToMentions"
+					>Die Mitwirkenden</a
+				>
+			</ul>
+			<div id="page">
+				<h1 id="top">Startseite</h1>
 
-			<div class="second-container">
-				<h2>Coming Soon...</h2>
-			</div>
+				<div class="second-container" id="stations">
+					<h2>Freigeschaltete Stationen</h2>
+					<h4>
+						Hier siehst du die Stationen, an denen du schon den QR-Code für das
+						Quiz gescannt hast:
+					</h4>
 
-			<div class="second-container" id="mentions">
-				<h2>Mitwirkende:</h2>
-				<h3>Webentwicklung</h3>
-				<p class="text">Hümmer Moritz</p>
-				<br />
-				<h3>Quizdesign</h3>
-				<p class="text">...</p>
-				<br />
-				<h3>Inhaltliche Recherche</h3>
-				<p class="text">...</p>
-				<br />
-				<h3>Projektleitung</h3>
-				<p class="text">Hüttenhofer Ruprecht (StD)</p>
-				<br />
-				<h3>Team</h3>
-				<p class="text">
-					Binner Felix, Dirscherl Sina, Greindl Nela, Handel Klara, Hartmann
-					Jonas, Hümmer Moritz, Kirchner Paula, Kluehspies Julia, Kuffner Mia,
-					Röder Adrian, Schwarz Angelina
-				</p>
-				<br />
-				<a href="https://www.aelf-ka.bayern.de" id="AELF"
-					>Unterstützt durch das Amt für Ernährung, Landwirtschaft und Forsten
-					(AELF) Karlstadt
-				</a>
+					<p class="text">
+						Die Punkte, die du in den Quizzen gesammelt hast, kannst du mit
+						deinen Freunden vergleichen oder später auch zurücksetzen, um die
+						Quizze erneut zu spielen.
+					</p>
+					<div class="second-container">
+						<div class="stationcontainer" id="Quiz_button_container"></div>
+						<div id="Quiz_score_container"></div>
+					</div>
+					<a class="btn secondary" id="resetQuizzes" href="#"
+						>Setze hier deinen Fortschritt zurück</a
+					>
+				</div>
+
+				<div class="second-container">
+					<h2>Coming Soon...</h2>
+				</div>
+
+				<div class="second-container" id="mentions">
+					<h2>Mitwirkende:</h2>
+					<h3>Webentwicklung</h3>
+					<p class="text">Hümmer Moritz</p>
+					<br />
+					<h3>Quizdesign</h3>
+					<p class="text">...</p>
+					<br />
+					<h3>Inhaltliche Recherche</h3>
+					<p class="text">...</p>
+					<br />
+					<h3>Projektleitung</h3>
+					<p class="text">Hüttenhofer Ruprecht (StD)</p>
+					<br />
+					<h3>Team</h3>
+					<p class="text">
+						Binner Felix, Dirscherl Sina, Greindl Nela, Handel Klara, Hartmann
+						Jonas, Hümmer Moritz, Kirchner Paula, Kluehspies Julia, Kuffner Mia,
+						Röder Adrian, Schwarz Angelina
+					</p>
+					<br />
+					<a href="https://www.aelf-ka.bayern.de" id="AELF"
+						>Unterstützt durch das Amt für Ernährung, Landwirtschaft und Forsten
+						(AELF) Karlstadt
+					</a>
+				</div>
 			</div>
+			<div class="overlay"></div>
 		</main>
 		<footer
 			class="bottombar"
 			aria-label="Untere Leiste für wichtige Elemente"
 		></footer>
 		<footer class="menubar" aria-label="Untere Leiste für wichtige Elemente">
-			<a id="home" href="#top"> </a>
-			<a id="info" href="#stations"> </a>
-			<a id="member" href="#mentions"></a>
+			<a class="icon" id="home" href="#top"> </a>
+			<a class="icon" id="info" href="#stations"> </a>
+			<a class="icon" id="member" href="#mentions"></a>
 		</footer>
 	</body>
 

@@ -139,9 +139,13 @@ dropBtn.addEventListener("click", (e) => {
 	if (dropdown.classList.contains("open")) {
 		overlay.style.opacity = "1";
 		overlay.style.pointerEvents = "all";
+		topbar.style.filter = "brightness(2)";
+		dropdown.style.filter = "brightness(2)";
 	} else {
 		overlay.style.opacity = "0";
 		overlay.style.pointerEvents = "none";
+		topbar.style.filter = "brightness(1)";
+		dropdown.style.filter = "brightness(1)";
 	}
 });
 
@@ -149,6 +153,8 @@ overlay.addEventListener("click", () => {
 	dropdown.classList.remove("open");
 	overlay.style.opacity = "0";
 	overlay.style.pointerEvents = "none";
+	topbar.style.filter = "brightness(1)";
+	dropdown.style.filter = "brightness(1)";
 });
 
 // Klick außerhalb schließt das Dropdown
@@ -156,6 +162,8 @@ document.addEventListener("click", () => {
 	dropdown.classList.remove("open");
 	overlay.style.opacity = "0";
 	overlay.style.pointerEvents = "none";
+	topbar.style.filter = "brightness(1)";
+	dropdown.style.filter = "brightness(1)";
 });
 
 unlockFromLink();

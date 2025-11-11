@@ -129,7 +129,7 @@ const dropBtn = document.getElementById("dropBtn");
 const dropdown = document.getElementById("dropcontent");
 const page = document.getElementById("page");
 const topbar = document.getElementById("topbar");
-const overlay = document.querySelector(".overlay");
+
 
 // Toggle Dropdown beim Klick
 dropBtn.addEventListener("click", (e) => {
@@ -138,28 +138,19 @@ dropBtn.addEventListener("click", (e) => {
 	
 	const isOpen = dropdown.classList.contains("open");
 
-	overlay.style.opacity = isOpen ? "1" : "0";
-	overlay.style.pointerEvents = isOpen ? "all" : "none";
-
 	// Nur den Seiteninhalt abdunkeln
 	page.style.filter = isOpen ? "brightness(0.7)" : "brightness(1)";
+	topbar.style.filter = isOpen ? "brightness(2)" : "brightness(1)"; // topbar aufhellen
 	document.body.classList.toggle("dimmed", isOpen); //body::before abdunkeln
 });
 
-overlay.addEventListener("click", () => {
-	dropdown.classList.remove("open");
-	overlay.style.opacity = "0";
-	overlay.style.pointerEvents = "none";
-	page.style.filter = "brightness(1)";
-});
 
 // Klick außerhalb schließt das Dropdown
 document.addEventListener("click", (e) => {
 	if (!dropdown.contains(e.target) && e.target !== dropBtn) {
 	dropdown.classList.remove("open");
-	overlay.style.opacity = "0";
-	overlay.style.pointerEvents = "none";
 	page.style.filter = "brightness(1)";
+		topbar.style.filter = "brightness(1)";
 	document.body.classList.remove("dimmed");
 	}
 });

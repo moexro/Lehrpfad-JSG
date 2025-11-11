@@ -129,29 +129,36 @@ const dropBtn = document.getElementById("dropBtn");
 const dropdown = document.getElementById("dropcontent");
 const page = document.getElementById("page");
 const topbar = document.getElementById("topbar");
-
+const overlay = document.getElementById("overlay")
 
 // Toggle Dropdown beim Klick
 dropBtn.addEventListener("click", (e) => {
 	e.stopPropagation();
 	dropdown.classList.toggle("open");
-	
 	const isOpen = dropdown.classList.contains("open");
 
 	// Nur den Seiteninhalt abdunkeln
-	page.style.filter = isOpen ? "brightness(0.7)" : "brightness(1)";
-	topbar.style.filter = isOpen ? "brightness(2)" : "brightness(1)"; // topbar aufhellen
+
+	topbar.style.filter = isOpen ? "brightness(1.5)" : ""; // topbar aufhellen
+	dropdown.style.filter = isOpen ? "brightness(1.5)" : ""; // dropdown aufhellen
+
+	// page.style.filter = isOpen ? "brightness(0.4)" : "";
+	overlay.classList.toggle("open");
 	document.body.classList.toggle("dimmed", isOpen); //body::before abdunkeln
 });
 
-
 // Klick außerhalb schließt das Dropdown
 document.addEventListener("click", (e) => {
-	if (!dropdown.contains(e.target) && e.target !== dropBtn) {
-	dropdown.classList.remove("open");
-	page.style.filter = "brightness(1)";
-		topbar.style.filter = "brightness(1)";
-	document.body.classList.remove("dimmed");
+	if (e.target !== dropBtn) {
+		dropdown.classList.remove("open");
+		overlay.classList.remove("open");
+
+
+		topbar.style.filter = "";
+		dropdown.style.filter = ""; // topbar aufhellen
+
+		// page.style.filter = "";
+		document.body.classList.remove("dimmed");
 	}
 });
 

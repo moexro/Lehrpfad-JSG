@@ -135,17 +135,14 @@ const overlay = document.querySelector(".overlay");
 dropBtn.addEventListener("click", (e) => {
 	e.stopPropagation();
 	dropdown.classList.toggle("open");
+	
+	const isOpen = dropdown.classList.contains("open");
 
-	if (dropdown.classList.contains("open")) {
-		overlay.style.opacity = "1";
-		overlay.style.pointerEvents = "all";
-		topbar.style.filter = "brightness(2)";
-		dropdown.style.filter = "brightness(2)";
-	} else {
-		overlay.style.opacity = "0";
-		overlay.style.pointerEvents = "none";
-		topbar.style.filter = "brightness(1)";
-		dropdown.style.filter = "brightness(1)";
+	overlay.style.opacity = isOpen ? "1" : "0";
+	overlay.style.pointerEvents = isOpen ? "all" : "none";
+
+	// Nur den Seiteninhalt abdunkeln
+	page.style.filter = isOpen ? "brightness(0.4)" : "brightness(1)";
 	}
 });
 
@@ -153,8 +150,7 @@ overlay.addEventListener("click", () => {
 	dropdown.classList.remove("open");
 	overlay.style.opacity = "0";
 	overlay.style.pointerEvents = "none";
-	topbar.style.filter = "brightness(1)";
-	dropdown.style.filter = "brightness(1)";
+	page.style.filter = "brightness(1)";
 });
 
 // Klick außerhalb schließt das Dropdown
@@ -162,8 +158,7 @@ document.addEventListener("click", () => {
 	dropdown.classList.remove("open");
 	overlay.style.opacity = "0";
 	overlay.style.pointerEvents = "none";
-	topbar.style.filter = "brightness(1)";
-	dropdown.style.filter = "brightness(1)";
+	page.style.filter = "brightness(1)";
 });
 
 unlockFromLink();

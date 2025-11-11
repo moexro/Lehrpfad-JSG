@@ -225,16 +225,6 @@ main {
 	cursor: pointer;
 }
 
-.overlay {
-	position: fixed;
-	inset: 0;
-	background: rgba(0, 0, 0, 0.5); /* 50 % Abdunklung */
-	backdrop-filter: blur(2px);
-	z-index: 800; /* unter dem Dropdown, über dem restlichen Inhalt */
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.3s ease;
-}
 
 .dropcontent {
 	position: fixed;

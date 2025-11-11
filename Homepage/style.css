@@ -48,11 +48,12 @@ body::before {
 	background-size: cover;
 	z-index: -10;
 	filter: brightness(1);
+	transition: filter 0.8s ease;
 }
 
 body.dimmed::before {
   filter: brightness(0.7);
-		transition: all 0.8s ease;
+
 }
 
 main {

@@ -142,7 +142,7 @@ dropBtn.addEventListener("click", (e) => {
 	overlay.style.pointerEvents = isOpen ? "all" : "none";
 
 	// Nur den Seiteninhalt abdunkeln
-	page.style.filter = isOpen ? "brightness(0.4)" : "brightness(1)";
+	page.style.filter = isOpen ? "brightness(0.7)" : "brightness(1)";
 	document.body.classList.toggle("dimmed", isOpen); //body::before abdunkeln
 });
 

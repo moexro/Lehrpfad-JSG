@@ -154,11 +154,13 @@ overlay.addEventListener("click", () => {
 });
 
 // Klick außerhalb schließt das Dropdown
-document.addEventListener("click", () => {
+document.addEventListener("click", (e) => {
+	if (!dropdown.contains(e.target) && e.target !== dropBtn && !dropcontent.contains(e.target))
 	dropdown.classList.remove("open");
 	overlay.style.opacity = "0";
 	overlay.style.pointerEvents = "none";
 	page.style.filter = "brightness(1)";
+	}
 });
 
 unlockFromLink();

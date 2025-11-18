@@ -129,7 +129,8 @@ const dropBtn = document.getElementById("dropBtn");
 const dropdown = document.getElementById("dropcontent");
 const page = document.getElementById("page");
 const topbar = document.getElementById("topbar");
-const overlay = document.getElementById("overlay")
+const overlay = document.getElementById("overlay");
+const footer = document.getElementById("footer");
 
 // Toggle Dropdown beim Klick
 dropBtn.addEventListener("click", (e) => {
@@ -140,6 +141,7 @@ dropBtn.addEventListener("click", (e) => {
 	// Nur den Seiteninhalt abdunkeln
 
 	topbar.style.filter = isOpen ? "brightness(1.5)" : ""; // topbar aufhellen
+	footer.style.filter = isOpen ? "brightness(1.5)" : ""; // dropdown aufhellen
 	dropdown.style.filter = isOpen ? "brightness(1.5)" : ""; // dropdown aufhellen
 
 	// page.style.filter = isOpen ? "brightness(0.4)" : "";
@@ -156,8 +158,8 @@ document.addEventListener("click", (e) => {
 
 		topbar.style.filter = "";
 		dropdown.style.filter = ""; // topbar aufhellen
-
-		// page.style.filter = "";
+		footer.style.filter = ""; 
+		
 		document.body.classList.remove("dimmed");
 	}
 });

@@ -71,6 +71,10 @@ main {
 	padding: 5px;
 }
 
+h3 {
+  margin: 0 0 5px 0; /* top right bottom left */
+}
+
 #overlay {
 	position: fixed;
 	top: 0;

@@ -72,7 +72,7 @@ main {
 }
 
 h3 {
-  margin: 5px 0 5px 0; /* top right bottom left */
+	margin: 5px 0 5px 0; /* top right bottom left */
 }
 
 #overlay {
@@ -206,7 +206,7 @@ h3 {
 /* page container */
 
 .container {
-	max-width: 95%;
+	width: 95%;
 	margin: 36px auto;
 	padding: 20px;
 	color: #fff;
@@ -228,6 +228,7 @@ h3 {
 
 .second-container {
 	display: flex;
+	width: 90%;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;

@@ -123,8 +123,5 @@ function unlockFromLink() {
 	}
 }
 
-
-
-
-resetButton();
-unlockButton();
+unlockFromLink();
+getQuizzes();

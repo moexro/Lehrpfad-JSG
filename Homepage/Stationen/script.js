@@ -48,7 +48,7 @@ function getQuizzes() {
 			btn.innerHTML = `${quizName}: <br>${qscore} Punkte`;
 			btn.addEventListener("click", () => {
 				// Verwende forward slashes und encodiere den Parameter
-				const url = `../Quiz Seite/index.html?quiztype=${encodeURIComponent(
+				const url = `/QuizSeite/index.html?quiztype=${encodeURIComponent(
 					quizKey
 				)}`;
 				window.location.href = url;
@@ -107,21 +107,16 @@ function resetButton() {
 		}
 	});
 }
-function unlockButton() {
-	const unlockB = document.getElementById("unlockQuizzes");
-	unlockB.addEventListener("click", () => {
-		window.location.href = "../Quiz Seite/index.html?loadOnlyQuizData=true";
-	});
-}
 
 function unlockFromLink() {
 	const params = new URLSearchParams(window.location.search);
 
-	if (params.get("from") === "quizLoaded") {
+	if (params.get("from") === "quizzunlock") {
 		allQuizUnlock();
-		window.location.href = "../Homepage/index.html";
+		window.location.href = "/Homepage/Stationen/index.html";
 	}
 }
 
 unlockFromLink();
 getQuizzes();
+resetButton();

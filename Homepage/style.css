@@ -202,6 +202,7 @@ h3 {
 	justify-content: center;
 	font-weight: 600;
 	text-align: center; /* falls Text umbrechen darf */
+	cursor: pointer;
 }
 
 /* page container */

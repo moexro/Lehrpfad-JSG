@@ -25,13 +25,17 @@
 						<div class="icon dropbtn" id="dropBtn"></div>
 					</div>
 				</nav>
-            	<a class="btn" id="homebtn" href="/Homepage/index.html">Home</a>
-
+				<a class="btn" id="homebtn" href="/Homepage/index.html">Home</a>
 			</div>
 
 			<div class="controls">
 				<!-- Platzhalter für weitere wichtige Links -->
-				<a class="btn" id="unlockQuizzes" href="#">Test-Unlock</a>
+				<a
+					class="btn"
+					id="unlockQuizzes"
+					href="/QuizSeite/index.html?loadOnlyQuizData=true"
+					>Test-Unlock</a
+				>
 			</div>
 		</header>
 		<main>
@@ -39,10 +43,8 @@
 				<a class="text" href="https://www.jsg-karlstadt.de" id="menuBtn"
 					>JSG-Homepage</a
 				>
-				<a class="text" href="testing/index.html" id="menuBtn"
-					>Informationen</a
-				>
-				<a class="text" href="#stations" id="buttonToStations"
+				<a class="text" href="/Homepage/Informationen/" id="menuBtn">Informationen</a>
+				<a class="text" href="/Homepage/Stationen/" id="buttonToStations"
 					>Zu den Stationen</a
 				>
 				<a class="text" href="#mentions" id="buttonToMentions"
@@ -68,12 +70,10 @@
 						<div class="stationcontainer" id="Quiz_button_container"></div>
 						<div id="Quiz_score_container"></div>
 					</div>
-					<a class="btn secondary" id="resetQuizzes" href="#"
-						>Setze hier deinen Fortschritt zurück</a
-					>
+					<a class="btn secondary" id="resetQuizzes">
+						Setze hier deinen Fortschritt zurück
+					</a>
 				</div>
-
-				
 			</div>
 		</main>
 		<nav class="bottombar" id="bottombar"></nav>
@@ -82,13 +82,13 @@
 			class="menubar"
 			aria-label="Untere Leiste für wichtige Elemente"
 		>
-			<a class="icon" id="home" href="#top"> </a>
-			<a class="icon" id="info" href="#stations"> </a>
+			<a class="icon" id="home" href="/Homepage/"> </a>
+			<a class="icon" id="info" href="/Homepage/Informationen/"> </a>
 			<a class="icon" id="member" href="#mentions"></a>
 		</footer>
 	</body>
 	<div id="overlay"></div>
 
 	<script src="script.js"></script>
-    <script src="../overlay.js"></script>
+	<script src="../overlay.js"></script>
 </html>

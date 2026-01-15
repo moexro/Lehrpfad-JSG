@@ -312,7 +312,7 @@ function onlyUnlock() {
 	const parms = new URLSearchParams(window.location.search);
 	const loadOnly = parms.get("loadOnlyQuizData");
 	if (loadOnly) {
-		window.location.href = "../Homepage/index.html?from=quizLoaded";
+		window.location.href = "/Homepage/Stationen/index.html?from=quizzunlock"
 		return;
 	}
 }

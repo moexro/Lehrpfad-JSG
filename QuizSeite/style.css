@@ -1,0 +1,307 @@
+:root {
+	--text: #deffdb;
+	--card: #ffffff;
+	--button: #506448;
+	--accent: rgba(59, 73, 50, 0.4);
+	--buttonb: #172013;
+	--correct: #4caf4f8e;
+	--wrong: #9c3837c7;
+	--container: rgba(59, 73, 50, 0.1);
+}
+
+body {
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+		Arial;
+	margin: 0;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	box-sizing: border-box;
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+body::before {
+  content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+		url("/QuizSeite/images/backgroundquizStandard.jpg") 
+    no-repeat center center;
+	background-size: cover;
+}
+
+.container {
+	width: 100%;
+	max-width: 960px;
+	min-width: 300px;
+	background: var(--container);
+	backdrop-filter: blur(15px);
+	padding: 20px;
+	border-radius: 50px;
+	-webkit-text-fill-color: #ffffff;
+	display: inline-block;
+
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	box-shadow: 4px 40px 50px rgba(0, 0, 0, 0.7);
+}
+
+.title {
+	font-size: 32px;
+	font-weight: 700;
+	margin-bottom: 24px;
+	-webkit-text-fill-color: var(--text);
+	text-align: center;
+}
+
+.quiz {
+	padding-bottom: 24px;
+}
+
+.controls {
+	margin-top: 24px;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-shrink: 0;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	font-weight: 600;
+}
+
+.score {
+	text-align: center;
+	font-size: 20px;
+	font-style: bold;
+	color: #fff;
+	z-index: 10;
+	cursor: pointer;
+}
+.question {
+	font-size: 24px;
+	margin-bottom: 16px;
+	-webkit-text-fill-color: var(--text);
+	justify-content: center;
+	text-align: center;
+}
+
+.answers {
+	display: flex;
+	flex-wrap: wrap; /* Erlaubt das Umfließen in die nächste Zeile */
+	justify-content: center; /* Zentriert die Buttons */
+	gap: 10px; /* Abstand zwischen den Buttons */
+	-webkit-text-fill-color: #deffdb;
+	text-align: center;
+}
+
+.answer-btn {
+	hyphens: auto;
+	word-break: break-word;
+	flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
+	min-width: 150px; /* Mindestbreite für die Buttons */
+	max-width: 200px; /* Maximale Breite der Buttons */
+	padding: 15px;
+	font-size: 18px;
+	border-radius: 35px;
+	text-align: center;
+	background: var(--button);
+	cursor: pointer;
+	transition: transform 0.08s ease, box-shadow 0.08s ease;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	box-shadow: 4px 40px 50px rgba(0, 0, 0, 0.7);
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Zusätzliche Anpassung für sehr kleine Bildschirme */
+
+.answer-btn:hover {
+	transform: translateY(-2px);
+}
+.answer-btn:disabled {
+	opacity: 0.7;
+	cursor: default;
+}
+.answer-btn.correct {
+	background: var(--correct);
+	color: #fff;
+	border-color: rgba(0, 0, 0, 0.06);
+}
+.answer-btn.wrong {
+	background: var(--wrong);
+	color: #fff;
+	border-color: rgba(0, 0, 0, 0.06);
+}
+
+button#nextBtn {
+	font-weight: 600;
+	font-size: 18px;
+	padding: 15px 14px;
+	border-radius: 8px;
+	border: 0;
+	background: var(--accent);
+	color: #fff;
+	cursor: pointer;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	box-shadow: 4px 40px 50px rgba(0, 0, 0, 0.7);
+	z-index: 10;
+}
+
+.home-container {
+	margin-top: 14px;
+	display: flex;
+	justify-content: center;
+}
+#homeBtn {
+	padding: 15px 16px;
+	font-size: 18px;
+	border-radius: 999px;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, 0.12);
+	color: var(--text);
+	cursor: pointer;
+}
+#homeBtn:hover {
+	background: rgba(255, 255, 255, 0.04);
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+.img-fit-cover {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+}
+.img-fit-contain {
+	width: 100%;
+	height: 200px;
+	object-fit: contain;
+	background: transparent;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.dragdrop-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+	min-width: 90%;
+}
+
+.drag-container,
+.drop-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+	min-width: 100%;
+}
+
+.drag-item,
+.drop-slot {
+	min-height: 20px;
+	border-radius: 12px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	transition: 0.2s;
+	hyphens: auto;
+	word-break: break-word;
+	flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
+	max-width: 200px;
+}
+
+.drag-item {
+	font-size: large;
+	width: 120px; /* fixe Breite für konsistente Anzeige */
+	height: 100px;
+	z-index: 10;
+	flex: 0 0 auto;
+	background-size: contain;
+	background-position: center;
+	touch-action: none; /* verhindert Scrollen während Drag */
+	user-select: none;
+	cursor: grab;
+}
+
+.drag-item:active {
+	cursor: grabbing;
+}
+
+.drag-item img.drag-img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	pointer-events: none; /* verhindert Ruckeln beim Ziehen */
+}
+
+.dragging-ghost {
+	opacity: 0 !important;
+	top: 0;
+	left: 0;
+	width: auto;
+	height: auto;
+	z-index: 9999;
+	pointer-events: none;
+	transform: translate(0, 0) !important;
+}
+
+.dragging {
+	position: absolute !important; /* wichtig */
+	z-index: 1000;
+	pointer-events: none; /* Maus kann weiterhin Slots erkennen */
+}
+
+.drop-slot {
+	font-size: larger;
+	font-weight: 500;
+	border: 2px dashed var(--text);
+	padding: 5%;
+}
+
+.drag-item.locked {
+	opacity: 0.6;
+	cursor: default;
+}
+
+.drop-slot.hover {
+	border-color: #007bff;
+	background: transparent;
+}
+
+.drop-slot.correct {
+	border-color: #28a745;
+	background: transparent;
+}
+
+.drop-slot.wrong {
+	border-color: #dc3545;
+	background: transparent;
+}
+
+@media (max-width: 600px) {
+	.answer-btn {
+		flex: 1 1 100%; /* Nimmt auf kleinen Tabs 100% der Breite ein */
+	}
+}
+
+/* normale Hover für Desktop */
+@media (hover: hover) and (pointer: fine) {
+	.drop-slot:hover {
+		border-color: #007bff;
+		background: transparent;
+	}
+}

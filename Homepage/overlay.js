@@ -57,15 +57,15 @@ function createOverlay() {
 			text: "JSG-Homepage",
 		},
 		information: {
-			href: "Homepage/Informationen/",
+			href: "/Homepage/Informationen/",
 			text: "Informationen",
 		},
 		stationen: {
-			href: "Homepage/Stationen/",
+			href: "/Homepage/Stationen/",
 			text: "Zu den Stationen",
 		},
 		mitwirkende: {
-			href: "Homepage/#mentions",
+			href: "/Homepage/#mentions",
 			text: "Die Mitwirkenden",
 		},
 	};
@@ -88,15 +88,15 @@ function createOverlay() {
 	menubarbottom.id = "bottombar";
 	const icons = {
 		home: {
-			href: "Homepage/",
+			href: "/Homepage/",
 			id: "home",
 		},
 		info: {
-			href: "Homepage/Informationen/",
+			href: "/Homepage/Informationen/",
 			id: "info",
 		},
 		member: {
-			href: "Homepage/#member",
+			href: "/Homepage/#member",
 			id: "member",
 		},
 	};

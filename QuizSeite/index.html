@@ -5,9 +5,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Quiz Seite</title>
 		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="/Homepage/overlay.css" />
 	</head>
+	
 	<body>
-		<main class="container">
+		<div id="main"></div>
+		<header class="bar" id="topbar"></header>
+		<main class="container" id="page">
+			
+			
 			<h1 class="title" id="quizTitle">QUIZ</h1>
 
 			<section id="quiz" class="quiz">
@@ -25,9 +31,15 @@
 			<div class="home-container">
 				<button id="homeBtn" data-home=/Homepage/Stationen>Zurück zu den Stationen</button>
 			</div>
+		
 		</main>
+		
 
 		<script src="script.js"></script>
+		<script src="/Homepage/overlay.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+	
 	</body>
+	<div id="overlay"></div>
+	
 </html>

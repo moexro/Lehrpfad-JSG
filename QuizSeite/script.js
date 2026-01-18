@@ -27,7 +27,6 @@ const questionsQ1 = [
 	},
 ];
 
-// ... weitere Fragen Q2–Q5 wie in deinem Code ...
 const questionsQ2 = [
 	{
 		question: "Welche Nutztiere liefern sowohl Milch als auch Fleisch?",

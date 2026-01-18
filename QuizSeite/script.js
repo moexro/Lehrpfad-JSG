@@ -311,8 +311,7 @@ function onlyUnlock() {
 	const parms = new URLSearchParams(window.location.search);
 	const loadOnly = parms.get("loadOnlyQuizData");
 	if (loadOnly) {
-		window.location.href =
-			"/LEHRPFAD-JSG/Homepage/Stationen/index.html?from=quizzunlock";
+		window.location.href = "/Homepage/Stationen/index.html?from=quizzunlock";
 		return;
 	}
 }

@@ -1,6 +1,21 @@
 //Overlay der Website
 
 function createOverlay() {
+	document.addEventListener("DOMContentLoaded", () => {
+		const base = document.createElement("base");
+
+		// Prüfen, ob GitHub Pages
+		if (location.hostname.includes("github.io")) {
+			base.href = "/Lehrpfad-JSG"; // Root auf GitHub Pages
+		} else {
+			base.href = ""; // lokal, relativ zum aktuellen Ordner
+		}
+
+		// Base-Tag ganz vorne in <head> einfügen
+		const head = document.querySelector("head");
+		head.prepend(base);
+	});
+
 	const header = document.getElementById("topbar");
 	if (!header) return;
 	//linke Seite
@@ -24,7 +39,7 @@ function createOverlay() {
 	const homeBtn = document.createElement("a");
 	homeBtn.className = "btn";
 	homeBtn.id = "homebtn";
-	homeBtn.href = "/Lehrpfad-JSG/Homepage/";
+	homeBtn.href = "/Homepage/";
 	homeBtn.textContent = "Home";
 
 	left.appendChild(nav);
@@ -36,7 +51,7 @@ function createOverlay() {
 	if (header.classList.contains("withUnlock")) {
 		const unlockBtn = document.createElement("a");
 		unlockBtn.className = "btn";
-		unlockBtn.href = "/Lehrpfad-JSG/QuizSeite/index.html?loadOnlyQuizData=true";
+		unlockBtn.href = "/QuizSeite/index.html?loadOnlyQuizData=true";
 		unlockBtn.textContent = "Unlock";
 		controls.appendChild(unlockBtn);
 	}
@@ -57,15 +72,15 @@ function createOverlay() {
 			text: "JSG-Homepage",
 		},
 		information: {
-			href: "/Lehrpfad-JSG/Homepage/Informationen/",
+			href: "/Homepage/Informationen/",
 			text: "Informationen",
 		},
 		stationen: {
-			href: "/Lehrpfad-JSG/Homepage/Stationen/",
+			href: "/Homepage/Stationen/",
 			text: "Zu den Stationen",
 		},
 		mitwirkende: {
-			href: "/Lehrpfad-JSG/Homepage/#mentions",
+			href: "/Homepage/#mentions",
 			text: "Die Mitwirkenden",
 		},
 	};
@@ -88,15 +103,15 @@ function createOverlay() {
 	menubarbottom.id = "bottombar";
 	const icons = {
 		home: {
-			href: "/Lehrpfad-JSG/Homepage/",
+			href: "/Homepage/",
 			id: "home",
 		},
 		info: {
-			href: "/Lehrpfad-JSG/Homepage/Informationen/",
+			href: "/Homepage/Informationen/",
 			id: "info",
 		},
 		member: {
-			href: "/Lehrpfad-JSG/Homepage/#member",
+			href: "/Homepage/#member",
 			id: "member",
 		},
 	};

@@ -5,9 +5,9 @@ function createOverlay() {
 
 	// Prüfen, ob GitHub Pages
 	if (location.hostname.includes("github.io")) {
-		base.href = "/Lehrpfad-JSG"; // Root auf GitHub Pages
+		base.href = "/Lehrpfad-JSG/"; // Root auf GitHub Pages
 	} else {
-		base.href = ""; // lokal, relativ zum aktuellen Ordner
+		base.href = "/"; // lokal, relativ zum aktuellen Ordner
 	}
 
 	// Base-Tag ganz vorne in <head> einfügen
@@ -37,7 +37,7 @@ function createOverlay() {
 	const homeBtn = document.createElement("a");
 	homeBtn.className = "btn";
 	homeBtn.id = "homebtn";
-	homeBtn.href = "/Homepage/";
+	homeBtn.href = "Homepage/";
 	homeBtn.textContent = "Home";
 
 	left.appendChild(nav);
@@ -49,7 +49,7 @@ function createOverlay() {
 	if (header.classList.contains("withUnlock")) {
 		const unlockBtn = document.createElement("a");
 		unlockBtn.className = "btn";
-		unlockBtn.href = "/QuizSeite/index.html?loadOnlyQuizData=true";
+		unlockBtn.href = "QuizSeite/index.html?loadOnlyQuizData=true";
 		unlockBtn.textContent = "Unlock";
 		controls.appendChild(unlockBtn);
 	}
@@ -70,15 +70,15 @@ function createOverlay() {
 			text: "JSG-Homepage",
 		},
 		information: {
-			href: "/Homepage/Informationen/",
+			href: "Homepage/Informationen/",
 			text: "Informationen",
 		},
 		stationen: {
-			href: "/Homepage/Stationen/",
+			href: "Homepage/Stationen/",
 			text: "Zu den Stationen",
 		},
 		mitwirkende: {
-			href: "/Homepage/#mentions",
+			href: "Homepage/#mentions",
 			text: "Die Mitwirkenden",
 		},
 	};
@@ -101,15 +101,15 @@ function createOverlay() {
 	menubarbottom.id = "bottombar";
 	const icons = {
 		home: {
-			href: "/Homepage/",
+			href: "Homepage/",
 			id: "home",
 		},
 		info: {
-			href: "/Homepage/Informationen/",
+			href: "Homepage/Informationen/",
 			id: "info",
 		},
 		member: {
-			href: "/Homepage/#member",
+			href: "Homepage/#member",
 			id: "member",
 		},
 	};

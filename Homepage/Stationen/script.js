@@ -1,6 +1,3 @@
-
-
-
 function resetScore(q) {
 	let points = 0;
 	localStorage.setItem(`quizScore_${q}`, String(points));
@@ -40,7 +37,7 @@ function getQuizzes() {
 		if (unlocked) {
 			const qscore = parseInt(
 				localStorage.getItem(`quizScore_${quizKey}`) || "0",
-				10
+				10,
 			);
 			const quizName = quiz.name || quizKey;
 			const btn = document.createElement("button");
@@ -52,7 +49,7 @@ function getQuizzes() {
 			btn.addEventListener("click", () => {
 				// Verwende forward slashes und encodiere den Parameter
 				const url = `/QuizSeite/index.html?quiztype=${encodeURIComponent(
-					quizKey
+					quizKey,
 				)}`;
 				window.location.href = url;
 			});
@@ -101,7 +98,7 @@ function resetButton() {
 	const resetB = document.getElementById("resetQuizzes");
 	resetB.addEventListener("click", () => {
 		const confirmed = confirm(
-			"Willst du wirklich alle gespeicherten Daten löschen?"
+			"Willst du wirklich alle gespeicherten Daten löschen?",
 		);
 		if (confirmed) {
 			localStorage.clear();
@@ -114,9 +111,9 @@ function resetButton() {
 function unlockFromLink() {
 	const params = new URLSearchParams(window.location.search);
 
-	if (params.get("from") === "quizzunlock") {
+	if (params.get("from") === "quizunlock") {
 		allQuizUnlock();
-		window.location.href = "Homepage/Stationen/index.html";
+		window.location.href = "index.html";
 	}
 }
 

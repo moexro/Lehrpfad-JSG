@@ -1,4 +1,3 @@
-
 // --- Quiz-Daten ---
 
 const questionsQ1 = [
@@ -307,12 +306,19 @@ let allQuiz = {
 localStorage.setItem("allQuizzes", JSON.stringify(allQuiz));
 
 // --- unlock --- //
+let basehref = "";
+if (location.hostname.includes("github.io")) {
+	basehref = "/Lehrpfad-JSG/"; // GitHub Pages Root
+} else {
+	basehref = "/";
+}
 
 function onlyUnlock() {
 	const parms = new URLSearchParams(window.location.search);
 	const loadOnly = parms.get("loadOnlyQuizData");
 	if (loadOnly) {
-		window.location.href = "Homepage/Stationen/index.html?from=quizzunlock";
+		window.location.href =
+			basehref + "Homepage/Stationen/index.html?from=quizunlock";
 		return;
 	}
 }
@@ -639,9 +645,9 @@ if (homeBtn) {
 	});
 }
 
-
-
-onlyUnlock();
+document.addEventListener("DOMContentLoaded", () => {
+	onlyUnlock();
+});
 // --- Quiz starten ---
 getQuizID();
 renderQuestion();

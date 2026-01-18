@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 	<head>
 		<meta charset="UTF-8" />
@@ -10,47 +10,12 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="theme-color" content="#1a1a1a" />
 
-		<title>JSG-Lehrpfad</title>
+		<title>Stationen</title>
 		<link rel="stylesheet" href="../style.css" />
 	</head>
 	<body>
-		<header
-			id="topbar"
-			class="topbar"
-			aria-label="Obere Leiste für wichtige Elemente"
-		>
-			<div class="left">
-				<nav class="dropdown-menu">
-					<div class="dropdown" id="dropdown">
-						<div class="icon dropbtn" id="dropBtn"></div>
-					</div>
-				</nav>
-				<a class="btn" id="homebtn" href="/Lehrpfad-JSG/Homepage/index.html">Home</a>
-			</div>
-
-			<div class="controls">
-				<!-- Platzhalter für weitere wichtige Links -->
-				<a
-					class="btn"
-					id="unlockQuizzes"
-					href="/QuizSeite/index.html?loadOnlyQuizData=true"
-					>Test-Unlock</a
-				>
-			</div>
-		</header>
-		<main>
-			<ul class="dropcontent second-container" id="dropcontent">
-				<a class="text" href="https://www.jsg-karlstadt.de" id="menuBtn"
-					>JSG-Homepage</a
-				>
-				<a class="text" href="/Lehrpfad-JSG/Homepage/Informationen/" id="menuBtn">Informationen</a>
-				<a class="text" href="/Lehrpfad-JSG/Homepage/Stationen/" id="buttonToStations"
-					>Zu den Stationen</a
-				>
-				<a class="text" href="#mentions" id="buttonToMentions"
-					>Die Mitwirkenden</a
-				>
-			</ul>
+		<header id="topbar" class="bar"></header>
+		<main id="main">
 			<div id="page">
 				<h1 id="top">Stationen</h1>
 
@@ -76,15 +41,11 @@
 				</div>
 			</div>
 		</main>
-		<nav class="bottombar" id="bottombar"></nav>
-		<footer
-			id="footer"
-			class="menubar"
-			aria-label="Untere Leiste für wichtige Elemente"
-		>
-			<a class="icon" id="home" href="/Lehrpfad-JSG/Homepage/"> </a>
-			<a class="icon" id="info" href="/Lehrpfad-JSG/Homepage/Informationen/"> </a>
-			<a class="icon" id="member" href="#mentions"></a>
+		<nav class="bar" id="bottombar"></nav>
+		<footer id="footer" class="menubar">
+			<a class="icon" id="home" href="/Homepage/"> </a>
+			<a class="icon" id="info" href="/Homepage/Informationen/"> </a>
+			<a class="icon" id="member" href="/Homepage/index.html#mentions"></a>
 		</footer>
 	</body>
 	<div id="overlay"></div>

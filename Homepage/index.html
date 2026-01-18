@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 	<head>
 		<meta charset="UTF-8" />
@@ -14,40 +14,8 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<header
-			id="topbar"
-			class="topbar"
-			aria-label="Obere Leiste für wichtige Elemente"
-		>
-			<div class="left">
-				<nav class="dropdown-menu">
-					<div class="dropdown" id="dropdown">
-						<div class="icon dropbtn" id="dropBtn"></div>
-					</div>
-				</nav>
-				<a class="btn" id="homebtn" href="index.html">Home</a>
-			</div>
-
-			<div class="controls"></div>
-		</header>
-		<main>
-			<ul class="dropcontent second-container" id="dropcontent">
-				<a class="text" href="https://www.jsg-karlstadt.de" id="menuBtn"
-					>JSG-Homepage</a
-				>
-				<a class="text" href="Informationen/" id="menuBtn"
-					>Informationen</a
-				>
-				<a
-					class="text"
-					href="Stationen/"
-					id="buttonToStations"
-					>Zu den Stationen</a
-				>
-				<a class="text" href="#mentions" id="buttonToMentions"
-					>Die Mitwirkenden</a
-				>
-			</ul>
+		<header id="topbar" class="bar"></header>
+		<main id="main">
 			<div id="page">
 				<h1 id="top">Startseite</h1>
 
@@ -83,16 +51,12 @@
 				</div>
 			</div>
 		</main>
-		<nav class="bottombar" id="bottombar"></nav>
-		<footer
-			id="footer"
-			class="menubar"
-			aria-label="Untere Leiste für wichtige Elemente"
-		>
-			<a class="icon" id="home" href="index.html"> </a>
-			<a class="icon" id="info" href="Informationen/"> </a>
-			<a class="icon" id="member" href="#mentions"></a>
-		</footer>
+		<nav id="footer" class="menubar">
+			<a class="icon" id="home" href="/Homepage/"> </a>
+			<a class="icon" id="info" href="/Homepage/Informationen/"> </a>
+			<a class="icon" id="member" href="/Homepage/index.html#mentions"></a>
+		</nav>
+		<footer class="bar" id="bottombar"></footer>
 	</body>
 	<div id="overlay"></div>
 

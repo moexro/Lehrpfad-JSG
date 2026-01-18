@@ -24,7 +24,7 @@ function createOverlay() {
 	const homeBtn = document.createElement("a");
 	homeBtn.className = "btn";
 	homeBtn.id = "homebtn";
-	homeBtn.href = "/Homepage/";
+	homeBtn.href = "/Lehrpfad-JSG/Homepage/";
 	homeBtn.textContent = "Home";
 
 	left.appendChild(nav);
@@ -36,7 +36,7 @@ function createOverlay() {
 	if (header.classList.contains("withUnlock")) {
 		const unlockBtn = document.createElement("a");
 		unlockBtn.className = "btn";
-		unlockBtn.href = "/QuizSeite/index.html?loadOnlyQuizData=true";
+		unlockBtn.href = "/Lehrpfad-JSG/QuizSeite/index.html?loadOnlyQuizData=true";
 		unlockBtn.textContent = "Unlock";
 		controls.appendChild(unlockBtn);
 	}
@@ -57,15 +57,15 @@ function createOverlay() {
 			text: "JSG-Homepage",
 		},
 		information: {
-			href: "/Homepage/Informationen/",
+			href: "/Lehrpfad-JSG/Homepage/Informationen/",
 			text: "Informationen",
 		},
 		stationen: {
-			href: "/Homepage/Stationen/",
+			href: "/Lehrpfad-JSG/Homepage/Stationen/",
 			text: "Zu den Stationen",
 		},
 		mitwirkende: {
-			href: "/Homepage/#mentions",
+			href: "/Lehrpfad-JSG/Homepage/#mentions",
 			text: "Die Mitwirkenden",
 		},
 	};
@@ -88,15 +88,15 @@ function createOverlay() {
 	menubarbottom.id = "bottombar";
 	const icons = {
 		home: {
-			href: "https://www.jsg-karlstadt.de",
+			href: "/Lehrpfad-JSG/Homepage/",
 			id: "home",
 		},
 		info: {
-			href: "/Homepage/Informationen/",
+			href: "/Lehrpfad-JSG/Homepage/Informationen/",
 			id: "info",
 		},
 		member: {
-			href: "/Homepage/#member",
+			href: "/Lehrpfad-JSG/Homepage/#member",
 			id: "member",
 		},
 	};

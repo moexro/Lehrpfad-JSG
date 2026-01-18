@@ -1,6 +1,13 @@
 //Overlay der Website
 
 function createOverlay() {
+	let basehref = "";
+	if (location.hostname.includes("github.io")) {
+		basehref = "/Lehrpfad-JSG/"; // GitHub Pages Root
+	} else {
+		basehref = "/";
+	}
+
 	const header = document.getElementById("topbar");
 	if (!header) return;
 	//linke Seite
@@ -24,7 +31,7 @@ function createOverlay() {
 	const homeBtn = document.createElement("a");
 	homeBtn.className = "btn";
 	homeBtn.id = "homebtn";
-	homeBtn.href = "Homepage/";
+	homeBtn.href = basehref + "Homepage/";
 	homeBtn.textContent = "Home";
 
 	left.appendChild(nav);
@@ -57,15 +64,15 @@ function createOverlay() {
 			text: "JSG-Homepage",
 		},
 		information: {
-			href: "/Homepage/Informationen/",
+			href: basehref + "Homepage/Informationen/",
 			text: "Informationen",
 		},
 		stationen: {
-			href: "/Homepage/Stationen/",
+			href: basehref + "Homepage/Stationen/",
 			text: "Zu den Stationen",
 		},
 		mitwirkende: {
-			href: "/Homepage/#mentions",
+			href: basehref + "Homepage/#mentions",
 			text: "Die Mitwirkenden",
 		},
 	};
@@ -88,15 +95,15 @@ function createOverlay() {
 	menubarbottom.id = "bottombar";
 	const icons = {
 		home: {
-			href: "/Homepage/",
+			href: basehref + "Homepage/",
 			id: "home",
 		},
 		info: {
-			href: "/Homepage/Informationen/",
+			href: basehref + "Homepage/Informationen/",
 			id: "info",
 		},
 		member: {
-			href: "/Homepage/#member",
+			href: basehref + "Homepage/#member",
 			id: "member",
 		},
 	};

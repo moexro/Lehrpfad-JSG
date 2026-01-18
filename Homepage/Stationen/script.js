@@ -116,7 +116,7 @@ function unlockFromLink() {
 
 	if (params.get("from") === "quizzunlock") {
 		allQuizUnlock();
-		window.location.href = "/Homepage/Stationen/index.html";
+		window.location.href = "Homepage/Stationen/index.html";
 	}
 }
 

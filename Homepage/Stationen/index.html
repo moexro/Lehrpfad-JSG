@@ -1,13 +1,6 @@
 <!doctype html>
 <html lang="de">
 	<head>
-		<script>
-			const base = document.createElement("base");
-			if (location.hostname.includes("github.io")) {
-				base.href = "/Lehrpfad-JSG/"; // GitHub Pages Root
-			}
-			document.head.prepend(base);
-		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta
@@ -18,8 +11,8 @@
 		<meta name="theme-color" content="#1a1a1a" />
 
 		<title>Stationen</title>
-		<link rel="stylesheet" href="/Homepage/style.css" />
-		<link rel="stylesheet" href="/Homepage/overlay.css" />
+		<link rel="stylesheet" href="../style.css" />
+		<link rel="stylesheet" href="../overlay.css" />
 	</head>
 	<body>
 		<header id="topbar" class="bar withUnlock"></header>
@@ -53,5 +46,5 @@
 	<div id="overlay"></div>
 
 	<script src="script.js"></script>
-	<script src="/Homepage/overlay.js"></script>
+	<script src="../overlay.js"></script>
 </html>

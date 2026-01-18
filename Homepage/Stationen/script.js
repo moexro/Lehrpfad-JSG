@@ -1,3 +1,10 @@
+let basehref = "";
+if (location.hostname.includes("github.io")) {
+	basehref = "/Lehrpfad-JSG/"; // GitHub Pages Root
+} else {
+	basehref = "/";
+}
+
 function resetScore(q) {
 	let points = 0;
 	localStorage.setItem(`quizScore_${q}`, String(points));
@@ -48,9 +55,9 @@ function getQuizzes() {
 			btn.innerHTML = `${quizName}: <br>${qscore} Punkte`;
 			btn.addEventListener("click", () => {
 				// Verwende forward slashes und encodiere den Parameter
-				const url = `/QuizSeite/index.html?quiztype=${encodeURIComponent(
-					quizKey,
-				)}`;
+				const url =
+					basehref +
+					`QuizSeite/index.html?quiztype=${encodeURIComponent(quizKey)}`;
 				window.location.href = url;
 			});
 			if (container) container.appendChild(btn);

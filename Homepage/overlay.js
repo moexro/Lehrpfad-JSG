@@ -31,7 +31,7 @@ function createOverlay() {
 	const homeBtn = document.createElement("a");
 	homeBtn.className = "btn";
 	homeBtn.id = "homebtn";
-	homeBtn.href = basehref + "Homepage/";
+	homeBtn.href = basehref + "Homepage/index.html";
 	homeBtn.textContent = "Home";
 
 	left.appendChild(nav);
@@ -43,7 +43,7 @@ function createOverlay() {
 	if (header.classList.contains("withUnlock")) {
 		const unlockBtn = document.createElement("a");
 		unlockBtn.className = "btn";
-		unlockBtn.href = "QuizSeite/index.html?loadOnlyQuizData=true";
+		unlockBtn.href = basehref + "QuizSeite/index.html?loadOnlyQuizData=true";
 		unlockBtn.textContent = "Unlock";
 		controls.appendChild(unlockBtn);
 	}
@@ -64,15 +64,15 @@ function createOverlay() {
 			text: "JSG-Homepage",
 		},
 		information: {
-			href: basehref + "Homepage/Informationen/",
+			href: basehref + "Homepage/Informationen/index.html",
 			text: "Informationen",
 		},
 		stationen: {
-			href: basehref + "Homepage/Stationen/",
+			href: basehref + "Homepage/Stationen/index.html",
 			text: "Zu den Stationen",
 		},
 		mitwirkende: {
-			href: basehref + "Homepage/#mentions",
+			href: basehref + "Homepage/index.html#mentions",
 			text: "Die Mitwirkenden",
 		},
 	};
@@ -95,15 +95,15 @@ function createOverlay() {
 	menubarbottom.id = "bottombar";
 	const icons = {
 		home: {
-			href: basehref + "Homepage/",
+			href: basehref + "Homepage/index.html",
 			id: "home",
 		},
 		info: {
-			href: basehref + "Homepage/Informationen/",
+			href: basehref + "Homepage/Informationen/index.html",
 			id: "info",
 		},
 		member: {
-			href: basehref + "Homepage/#member",
+			href: basehref + "Homepage/index.html#member",
 			id: "member",
 		},
 	};

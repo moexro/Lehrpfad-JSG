@@ -273,6 +273,15 @@ const questionsQ5 = [
 	},
 ];
 
+const questionsQ6 = [
+	{
+		question: "Bewege dich dorthin!",
+		type: "locator",
+		lon: "9.8041856",
+		lat: "50.1415936",
+	},
+];
+
 //Liste mit Namen und Fragen aller auf der Seite aufrufbaren Quizze
 
 let allQuiz = {
@@ -300,6 +309,12 @@ let allQuiz = {
 		questions: questionsQ5,
 		name: "Zuordnungsspiel",
 		id: "Q5",
+	},
+	Q6: {
+		questions: questionsQ6,
+		name: "Standortsuche",
+		type: "locator",
+		id: "Q6",
 	},
 };
 
@@ -360,6 +375,10 @@ function setScore(v) {
 	scoreEl.textContent = `Punkte: ${getScore()}`;
 }
 
+function setCorrectLocation() {
+	localStorage.setItem(`located_${currentQuiz}`, true);
+}
+
 // --- Frage rendern ---
 function renderQuestion() {
 	if (!currentQuiz || !allQuiz[currentQuiz]) {
@@ -417,6 +436,8 @@ function renderQuestion() {
 		renderMultipleChoice(q);
 	} else if (q.type === "DragAndDrop") {
 		renderDragAndDrop(q);
+	} else if (q.type === "locator") {
+		renderLocator(q);
 	}
 }
 
@@ -606,24 +627,106 @@ function renderDragAndDrop(q) {
 	}
 }
 
+//distanzermittlung
+function distance(lat1, lon1, lat2, lon2) {
+	const R = 6371000; // Erdradius in Metern
+	const toRad = (deg) => (deg * Math.PI) / 180;
+
+	const φ1 = toRad(lat1);
+	const φ2 = toRad(lat2);
+	const Δφ = toRad(lat2 - lat1);
+	const Δλ = toRad(lon2 - lon1);
+
+	const a =
+		Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+		Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+
+	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+	return R * c;
+}
+
+//Locator Quiz
+function renderLocator(q) {
+	const targetlat = q.lat;
+	const targetlon = q.lon;
+
+	const mapsbtn = document.createElement("button");
+	const checkbtn = document.createElement("button");
+
+	mapsbtn.className = "answer-btn";
+	mapsbtn.textContent = "Hier kommst du zum Google-Maps Link";
+	answersEl.appendChild(mapsbtn);
+	mapsbtn.addEventListener("click", () => {
+		const mapsUrl = `https://www.google.com/maps?q=${targetlat},${targetlon}`;
+		window.open(mapsUrl, "_blank");
+	});
+
+	checkbtn.className = "answer-btn";
+	checkbtn.textContent =
+		"Hier kannst du nachschauen, ob du an der richtigen Position gelandet bist.";
+	answersEl.appendChild(checkbtn);
+	checkbtn.addEventListener("click", () => {
+		navigator.geolocation.getCurrentPosition(
+			(pos) => {
+				const lat = pos.coords.latitude;
+				const lon = pos.coords.longitude;
+
+				const target = { lat: targetlat, lon: targetlon }; // Beispiel
+				const radius = 10; // Meter
+
+				console.log(`${lat} + ${lon}`);
+				console.log(target);
+
+				if (distance(lat, lon, target.lat, target.lon) <= radius) {
+					alert("Du hast den richtigen Ort gefunden");
+					setCorrectLocation();
+
+					nextBtn.disabled = false;
+					nextBtn.style.opacity = "1";
+					nextBtn.style.cursor = "pointer";
+				} else {
+					alert("Das ist noch nicht der richtige Ort!");
+				}
+			},
+			() => {
+				alert("Standortzugriff verweigert oder nicht verfügbar");
+			},
+		);
+	});
+}
+
 // --- Next Button ---
 nextBtn.addEventListener("click", () => {
+	const type = allQuiz[currentQuiz].questions[currentQuestion].type;
+	const length = allQuiz[currentQuiz].questions.length;
+
 	currentQuestion++;
-	if (currentQuestion >= allQuiz[currentQuiz].questions.length) {
-		quizEnde();
+
+	console.log(type);
+	if (type === "locator" && currentQuestion >= length) {
+		quizEnde("locator");
+		return;
+	}
+	if (type === "normal" && currentQuestion >= length) {
+		quizEnde("normal");
 		return;
 	}
 	renderQuestion();
 });
 
-function quizEnde() {
-	questionEl.textContent =
-		"Quiz beendet. Gut gemacht! Du hast " + getScore() + " Punkte erreicht.";
+function quizEnde(type) {
 	answersEl.innerHTML = "";
 	nextBtn.disabled = true;
 	nextBtn.classList.toggle("hidden");
 	scoreEl.classList.toggle("hidden");
 	homeBtn.classList.toggle("hidden");
+	if (type === "normal") {
+		questionEl.textContent =
+			"Du hast das Quiz beendet und " + getScore() + " Punkte erreicht.";
+	} else if (type === "locator") {
+		questionEl.textContent = "Du hast den gesuchten Ort gefunden. Gut gemacht!";
+	}
 }
 
 // --- Hilfsfunktionen ---
@@ -641,7 +744,7 @@ if (homeBtn) {
 		const target = homeBtn.getAttribute("data-home") || "#";
 		if (target === "#") return;
 		localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
-		window.location.href = target;
+		window.location.href = basehref + target;
 	});
 }
 

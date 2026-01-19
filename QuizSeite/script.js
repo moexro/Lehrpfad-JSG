@@ -328,6 +328,11 @@ if (location.hostname.includes("github.io")) {
 	basehref = "/";
 }
 
+document.documentElement.style.setProperty(
+  "--quiz-bg",
+  `url("${basehref}QuizSeite/images/backgroundquizStandard.jpg")`
+);
+
 function onlyUnlock() {
 	const parms = new URLSearchParams(window.location.search);
 	const loadOnly = parms.get("loadOnlyQuizData");

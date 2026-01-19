@@ -148,11 +148,12 @@ resetButton();
 //Scanner
 
 const startBtn = document.getElementById("startScan");
+const video = document.getElementById("scannerVideo")
 
 let stream = null;
 let scanning = false;
 let detector = null;
-let video = null;
+
 
 async function startScanner() {
 	if (scanning) return; // verhindert, dass ein neuer Scan gestartet wird
@@ -165,11 +166,6 @@ async function startScanner() {
 
 	detector = new BarcodeDetector({ formats: ["qr_code"] });
 
-	video = document.createElement("video");
-	video.style.width = "100%";
-	video.style.maxWidth = "400px";
-	video.autoplay = true;
-	document.startBtn.appendChild(video);
 
 	stream = await navigator.mediaDevices.getUserMedia({
 		video: { facingMode: "environment" },

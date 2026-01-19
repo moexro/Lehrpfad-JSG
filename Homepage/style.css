@@ -91,7 +91,12 @@ h3 {
 	cursor: pointer;
 	background: var(--highlight);
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-	height: 16px;
+	min-height: 16px;
+}
+
+.btn.secondary {
+	max-width: 90%;
+	height: 32px;
 }
 
 .points {

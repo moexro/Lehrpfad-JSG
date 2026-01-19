@@ -144,3 +144,75 @@ function unlockFromLink() {
 unlockFromLink();
 getQuizzes();
 resetButton();
+
+//Scanner
+
+const startBtn = document.getElementById("startScan");
+
+let stream = null;
+let scanning = false;
+let detector = null;
+let video = null;
+
+async function startScanner() {
+	if (scanning) return; // verhindert, dass ein neuer Scan gestartet wird
+	scanning = true;
+
+	if (!("BarcodeDetector" in window)) {
+		alert("QR-Scanning wird von diesem Browser nicht unterstützt.");
+		return;
+	}
+
+	detector = new BarcodeDetector({ formats: ["qr_code"] });
+
+	video = document.createElement("video");
+	video.style.width = "100%";
+	video.style.maxWidth = "400px";
+	video.autoplay = true;
+	document.startBtn.appendChild(video);
+
+	stream = await navigator.mediaDevices.getUserMedia({
+		video: { facingMode: "environment" },
+	});
+	video.srcObject = stream;
+	video.style.display = "block";
+
+	readLoop();
+}
+
+async function readLoop() {
+	while (scanning) {
+		try {
+			const detections = await detector.detect(video);
+
+			if (detections.length > 0) {
+				const raw = detections[0].rawValue;
+
+				if (raw.startsWith("http://") || raw.startsWith("https://")) {
+					stopScanner();
+					window.location.href = raw;
+					return;
+				}
+			}
+		} catch (e) {
+			console.error(e);
+		}
+
+		await new Promise((r) => requestAnimationFrame(r));
+	}
+}
+
+function stopScanner() {
+	scanning = false;
+
+	if (stream) {
+		stream.getTracks().forEach((track) => track.stop());
+	}
+
+	if (video) {
+		video.remove();
+		video = null;
+	}
+}
+
+startBtn.addEventListener("click", startScanner);

@@ -146,69 +146,97 @@ getQuizzes();
 resetButton();
 
 //Scanner
-
 const startBtn = document.getElementById("startScan");
-const video = document.getElementById("scannerVideo")
+const qrContainer = document.getElementById("qr-scanner");
 
-let stream = null;
 let scanning = false;
-let detector = null;
+let html5QrScanner = null;
 
-
-async function startScanner() {
-	if (scanning) return; // verhindert, dass ein neuer Scan gestartet wird
+startBtn.addEventListener("click", async () => {
+	if (scanning) return;
 	scanning = true;
 
-	if (!("BarcodeDetector" in window)) {
-		alert("QR-Scanning wird von diesem Browser nicht unterstützt.");
-		return;
-	}
+	qrContainer.style.display = "block";
 
-	detector = new BarcodeDetector({ formats: ["qr_code"] });
-
-
-	stream = await navigator.mediaDevices.getUserMedia({
-		video: { facingMode: "environment" },
-	});
-	video.srcObject = stream;
-	video.style.display = "block";
-
-	readLoop();
-}
-
-async function readLoop() {
-	while (scanning) {
+	// Desktop/Browser mit BarcodeDetector
+	if ("BarcodeDetector" in window) {
 		try {
-			const detections = await detector.detect(video);
+			const detector = new BarcodeDetector({ formats: ["qr_code"] });
+			const stream = await navigator.mediaDevices.getUserMedia({
+				video: { facingMode: "environment" },
+			});
 
-			if (detections.length > 0) {
-				const raw = detections[0].rawValue;
+			const video = document.createElement("video");
+			video.srcObject = stream;
+			video.autoplay = true;
+			video.playsInline = true; // wichtig für iOS / Autoplay
+			video.muted = true; // Audio blockiert Autoplay sonst oft
+			qrContainer.appendChild(video);
 
-				if (raw.startsWith("http://") || raw.startsWith("https://")) {
-					stopScanner();
-					window.location.href = raw;
+			await video.play(); // sicherstellen, dass Video wirklich startet
+
+			const scanLoop = async () => {
+				if (!scanning) {
+					stream.getTracks().forEach((track) => track.stop());
+					video.remove();
+					qrContainer.style.display = "none";
 					return;
 				}
-			}
-		} catch (e) {
-			console.error(e);
+				try {
+					const detections = await detector.detect(video);
+					if (detections.length > 0) {
+						const raw = detections[0].rawValue;
+						if (raw.startsWith("http://") || raw.startsWith("https://")) {
+							scanning = false;
+							stream.getTracks().forEach((track) => track.stop());
+							video.remove();
+							qrContainer.style.display = "none";
+							window.location.href = raw;
+							return;
+						}
+					}
+				} catch (e) {
+					console.error(e);
+				}
+				requestAnimationFrame(scanLoop);
+			};
+			scanLoop();
+		} catch (err) {
+			console.warn(
+				"BarcodeDetector nicht verfügbar oder Kamera blockiert, Fallback wird genutzt:",
+				err,
+			);
+			fallbackHtml5Qr();
 		}
-
-		await new Promise((r) => requestAnimationFrame(r));
+	} else {
+		fallbackHtml5Qr();
 	}
+});
+
+function fallbackHtml5Qr() {
+	html5QrScanner = new Html5Qrcode("qr-scanner");
+	html5QrScanner
+		.start(
+			{ facingMode: "environment" },
+			{ fps: 10, qrbox: 250 },
+			(decodedText) => {
+				html5QrScanner.stop().then(() => {
+					qrContainer.style.display = "none";
+					scanning = false;
+					if (
+						decodedText.startsWith("http://") ||
+						decodedText.startsWith("https://")
+					) {
+						window.location.href = decodedText;
+					}
+				});
+			},
+			() => {},
+		)
+		.catch((err) => {
+			console.warn("QR-Scanner konnte nicht gestartet werden:", err);
+			scanning = false;
+			qrContainer.style.display = "none";
+			alert("QR-Scanning wird von diesem Gerät/Browser nicht unterstützt.");
+		});
 }
-
-function stopScanner() {
-	scanning = false;
-
-	if (stream) {
-		stream.getTracks().forEach((track) => track.stop());
-	}
-
-	if (video) {
-		video.remove();
-		video = null;
-	}
-}
-
-startBtn.addEventListener("click", startScanner);

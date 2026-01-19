@@ -39,14 +39,13 @@
 					<a class="btn secondary" id="resetQuizzes">
 						Setze hier deinen Fortschritt zurück
 					</a>
-					<a class="btn secondary" id="startScan"
-						>Hier kannst du den QR-Code einer Station scannen</a
-					>
-					<video
-						id="video"
+					<a class="btn secondary" id="startScan">
+						Hier kannst du den QR-Code einer Station scannen
+					</a>
+					<div
+						id="qr-scanner"
 						style="width: 100%; max-width: 400px; display: none"
-						autoplay
-					></video>
+					></div>
 				</div>
 			</div>
 		</main>
@@ -55,4 +54,5 @@
 
 	<script src="script.js"></script>
 	<script src="../overlay.js"></script>
+	<script src="https://unpkg.com/html5-qrcode@2.3.7/minified/html5-qrcode.min.js"></script>
 </html>

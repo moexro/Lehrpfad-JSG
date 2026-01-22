@@ -1,2 +1,1 @@
-MASTER
-erscheint auf der Website
+Die neuste Version

@@ -170,8 +170,7 @@ function overlay() {
 document.addEventListener("DOMContentLoaded", () => {
   createOverlay();
   overlay();
-  const url = setBodyBgFromBefore();
-  if (url) setBodyBgFromImage(url);
+  setBodyBgFromImage(setBodyBgFromBefore());
 });
 
 function setBodyBgFromBefore() {
@@ -188,6 +187,7 @@ function setBodyBgFromBefore() {
     layer = layer.trim();
     if (layer.startsWith("url(")) {
       const url = layer.slice(4, -1).replace(/["']/g, "");
+      console.log(url);
       return url;
     }
   }
@@ -202,11 +202,9 @@ function setBodyBgFromImage(imgSrc) {
   img.onload = () => {
     // Canvas erstellen
 
-    const scale = 50;
-
     const canvas = document.createElement("canvas");
-    canvas.width = scale;
-    canvas.height = scale;
+    canvas.width = img.width;
+    canvas.height = img.height;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
 
@@ -234,5 +232,7 @@ function setBodyBgFromImage(imgSrc) {
     document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
   };
 
-  img.onerror = () => {};
+  img.onerror = () => {
+    console.log(error);
+  };
 }

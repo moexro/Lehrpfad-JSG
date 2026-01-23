@@ -173,6 +173,14 @@ document.addEventListener("DOMContentLoaded", () => {
   setBodyBgFromImage(setBodyBgFromBefore());
 });
 
+function median(arr) {
+  arr.sort((a, b) => a - b);
+  const mid = Math.floor(arr.length / 2);
+  return arr.length % 2 !== 0
+    ? arr[mid]
+    : Math.round((arr[mid - 1] + arr[mid]) / 2);
+}
+
 function setBodyBgFromBefore() {
   const style = getComputedStyle(document.body, "::before"); // oder direkt body
   const bg =
@@ -224,22 +232,23 @@ function setBodyBgFromImage(imgSrc) {
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
 
-    let r = 0, g = 0, b = 0;
-    const pixelCount = canvas.width * canvas.height;
+    const rValues = [];
+    const gValues = [];
+    const bValues = [];
 
-    for (let i = 0; i < data.length; i += 4) {
-      r += data[i];
-      g += data[i + 1];
-      b += data[i + 2];
-    }
+		for (let i = 0; i < data.length; i += 4) {
+  		rValues.push(data[i]);
+      gValues.push(data[i + 1]);
+    	bValues.push(data[i + 2]);
+		}
     
-    
+    const rMedian = median(rValues);
+		const gMedian = median(gValues);
+		const bMedian = median(bValues);
 
-    document.body.style.backgroundColor =
-      `rgb(${Math.round(r / pixelCount)},` +
-      `${Math.round(g / pixelCount)},` +
-      `${Math.round(b / pixelCount)})`;
-  };
+		document.body.style.backgroundColor =
+  			`rgb(${rMedian}, ${gMedian}, ${bMedian})`;
+  	};
 
   img.onerror = () => {
     console.error("Bild konnte nicht geladen werden");

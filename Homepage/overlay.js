@@ -200,7 +200,7 @@ function setBodyBgFromImage(imgSrc) {
   img.src = imgSrc;
 
   img.onload = () => {
-    const sliceHeight = Math.floor(img.height / 16);
+    const sliceHeight = Math.floor(img.height / 32);
 
     const canvas = document.createElement("canvas");
     canvas.width = img.width;

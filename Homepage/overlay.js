@@ -203,19 +203,23 @@ function setBodyBgFromImage(imgSrc) {
     const sliceHeight = Math.floor(img.height / 32);
 
     const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = sliceHeight;
+    
 
     const ctx = canvas.getContext("2d");
+    
+    canvas.width  = img.naturalWidth;
+    canvas.height = sliceHeight;
+
 		ctx.drawImage(
-  			img,
-  			0, 0,            // source x,y  → START oben links
-  			img.width,
-  			sliceHeight,     // source height → NUR oberer Teil
-  			0, 0,
-  			img.width,
-        sliceHeight
-		);
+      img,
+      0, 0,
+      img.naturalWidth,
+      sliceHeight,
+      0, 0,
+      img.naturalWidth,
+      sliceHeight
+    );
+    
 
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;

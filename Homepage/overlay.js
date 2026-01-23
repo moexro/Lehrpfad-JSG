@@ -211,7 +211,7 @@ function setBodyBgFromImage(imgSrc) {
   			img,
   			0, 0,            // source x,y  → START oben links
   			img.width,
-  			sliceHeight,     // source height → NUR oberes Achtel
+  			sliceHeight,     // source height → NUR oberer Teil
   			0, 0,
   			img.width,
         sliceHeight

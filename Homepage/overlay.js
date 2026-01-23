@@ -196,43 +196,38 @@ function setBodyBgFromBefore() {
 
 function setBodyBgFromImage(imgSrc) {
   const img = new Image();
-  img.crossOrigin = "anonymous"; // falls Bild von extern
+  img.crossOrigin = "anonymous";
   img.src = imgSrc;
 
   img.onload = () => {
-    // Canvas erstellen
+    const sliceHeight = Math.floor(img.height / 16);
 
     const canvas = document.createElement("canvas");
     canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
+    canvas.height = sliceHeight;
 
-    // Pixel auslesen
-    const imageData = ctx.getImageData(0, 0, img.width, img.height);
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, img.width, sliceHeight);
+
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
 
-    let r = 0,
-      g = 0,
-      b = 0;
-    const pixelCount = img.width * img.height;
+    let r = 0, g = 0, b = 0;
+    const pixelCount = canvas.width * canvas.height;
 
     for (let i = 0; i < data.length; i += 4) {
       r += data[i];
       g += data[i + 1];
       b += data[i + 2];
-      // alpha ignorieren
     }
 
-    r = Math.round(r / pixelCount);
-    g = Math.round(g / pixelCount);
-    b = Math.round(b / pixelCount);
-
-    // Hintergrund setzen
-    document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    document.body.style.backgroundColor =
+      `rgb(${Math.round(r / pixelCount)},` +
+      `${Math.round(g / pixelCount)},` +
+      `${Math.round(b / pixelCount)})`;
   };
 
   img.onerror = () => {
-    console.log(error);
+    console.error("Bild konnte nicht geladen werden");
   };
 }

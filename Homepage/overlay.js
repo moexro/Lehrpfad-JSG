@@ -228,6 +228,13 @@ function setBodyBgFromImage(imgSrc) {
       g += data[i + 1];
       b += data[i + 2];
     }
+    
+    document.body.appendChild(canvas);
+		canvas.style.position = "fixed";
+		canvas.style.top = "0";
+		canvas.style.left = "0";
+		canvas.style.zIndex = "9999";
+		canvas.style.border = "2px solid red";
 
     document.body.style.backgroundColor =
       `rgb(${Math.round(r / pixelCount)},` +

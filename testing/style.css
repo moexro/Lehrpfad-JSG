@@ -42,12 +42,15 @@ nav {
 	align-items: center;
 	justify-content: center;
 	background-color: white
+	position: fixed;
+	left: 0;
+	top: 0;
 }
 
 
 a {
-	color: var(--textlight);
-	border: 1px solid white;
+	color: black;
+	border: 1px solid black;
 	height: 16px
 }
 

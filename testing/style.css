@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap");
+
+:root {
+  --colordark: #880d1e;
+  --colorbright: #dd2d4a;
+  --colorlight: #f26a8d;
+  --accent: #f49cbb;
+  --other: #cbeef3;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  word-break: break-word;
+  box-sizing: border-box;
+  font-family: "Pinyon Script", cursive;
+  box-sizing: border-box;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  color: var(--other);
+  font-size: 2rem;
+}
+
+body {
+  overflow-y: auto;
+  min-height: 100%;
+  background-color: var(--colorlight);
+}
+
+main {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  padding: 24px;
+  height: 30%;
+  width: 70%;
+  background-color: var(--colordark);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 20%;
+
+  border: 2px solid var(--accent);
+  border-radius: 40px;
+  box-shadow: 4px 8px 0 4px var(--accent);
+  text-align: center;
+}
+
+.checker {
+  display: inline-flex;
+  background-color: var(--colorbright);
+  color: var(--other);
+  border: 0;
+  width: 128px;
+  height: 48px;
+  font-size: 1rem;
+
+  justify-content: center;
+  align-items: center;
+  font-family:
+    "Lora", serif; /* Kombiniert mit einer passenden Serifen-Schrift */
+
+  text-decoration: none;
+  border-radius: 8px;
+}

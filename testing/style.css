@@ -24,7 +24,7 @@ body {
   box-sizing: border-box;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   color: var(--other);
-  font-size: 2rem;
+  font-size: 1.8em;
 }
 
 body {
@@ -48,8 +48,8 @@ main {
   background-color: var(--colordark);
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-  row-gap: 20%;
 
   border: 2px solid var(--accent);
   border-radius: 40px;
@@ -73,4 +73,35 @@ main {
 
   text-decoration: none;
   border-radius: 8px;
+}
+
+#heart-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999999;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transform: translate(0, 0) rotate(0deg);
+}
+
+.heart.floating {
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+  }
 }

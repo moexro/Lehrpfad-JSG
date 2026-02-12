@@ -40,6 +40,7 @@ body {
 body {
   overflow-y: auto;
   min-height: 100%;
+  background-color: var(--colormaindark);
 }
 
 body::before {

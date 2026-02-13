@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       heart.style.setProperty("--dy", rand(-150, 150) + "px");
       heart.style.setProperty("--rot", rand(-180, 180) + "deg");
 
-      heart.style.animationDuration = rand(30, 60) + "s";
+			heart.style.setProperty("--dur", rand(30, 60) + "s");
 
       overlay.appendChild(heart);
 

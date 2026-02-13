@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const yes = document.getElementById("yes");
   const no = document.getElementById("no");
 
-  const HEARTS = 45;
+  const HEARTS = 250;
   const overlay = document.getElementById("heart-overlay");
 
   function rand(min, max) {
@@ -58,5 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   no.addEventListener("click", () => {
     alert("Ey falsche Antwort");
+    overlay.innerHTML = "";
   });
 });

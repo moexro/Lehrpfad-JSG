@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  
   const yes = document.getElementById("yes");
   const no = document.getElementById("no");
 
@@ -16,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
       C3.8,0,0,3.8,0,8.4c0,9.5,16,21.2,16,21.2s16-11.7,16-21.2
       C32,3.8,28.2,0,23.6,0z"/>
   </svg>
-  `;
+  `
+  alert("Ja I know es war theoretisch schon, aber trotzdem, es gehört halt dazu ❤️");
+  ;
 
   yes.addEventListener("click", () => {
     alert("Yaaayyyyy");

@@ -328,10 +328,10 @@ if (location.hostname.includes("github.io")) {
 	basehref = "/";
 }
 
-document.documentElement.style.setProperty(
-  "--quiz-bg",
-  `url("${basehref}QuizSeite/images/backgroundquizStandard.jpg")`
-);
+// document.documentElement.style.setProperty(
+//   "--quiz-bg",
+//  `url("${basehref}QuizSeite/images/backgroundquizStandard.jpg")`
+// );
 
 function onlyUnlock() {
 	const parms = new URLSearchParams(window.location.search);
@@ -386,6 +386,16 @@ function setCorrectLocation() {
 
 // --- Frage rendern ---
 function renderQuestion() {
+	if (allQuiz[currentQuiz].questions.length <= currentQuestion) {
+		document.getElementById("quizTitle").textContent = "Quiz abgeschlossen";
+		questionEl.textContent = "Du hast alle Fragen beantwortet.";
+		answersEl.innerHTML = "";
+		nextBtn.classList.toggle("hidden");
+		scoreEl.classList.remove("hidden");
+		scoreEl.textContent = `Punkte: ${getScore()}`;
+		if (homeBtn) homeBtn.classList.toggle("hidden");
+		return;
+	}
 	if (!currentQuiz || !allQuiz[currentQuiz]) {
 		document.getElementById("quizTitle").textContent =
 			"Dieses Quiz existiert nicht";
@@ -707,6 +717,9 @@ nextBtn.addEventListener("click", () => {
 	const length = allQuiz[currentQuiz].questions.length;
 
 	currentQuestion++;
+
+	console.log(currentQuestion);
+	console.log(length);
 
 	console.log(type);
 	if (type === "locator" && currentQuestion >= length) {

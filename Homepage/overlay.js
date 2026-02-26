@@ -146,7 +146,6 @@ function overlay() {
     menu.style.filter = isOpen ? "brightness(1.5)" : ""; // dropdown aufhellen
     dropdown.style.filter = isOpen ? "brightness(1.5)" : ""; // dropdown aufhellen
 
-    // page.style.filter = isOpen ? "brightness(0.4)" : "";
     overlay.classList.toggle("open");
     document.body.classList.toggle("dimmed", isOpen); //body::before abdunkeln
   });

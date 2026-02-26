@@ -6,7 +6,7 @@ body::before {
 }
 
 body.dimmed::before {
-  filter: brightness(0.7);
+  filter: brightness(0.4);
 }
 
 #overlay {
@@ -124,8 +124,7 @@ body.dimmed::before {
   scroll-margin-top: 100px;
   border-radius: 10px;
 
-  background: var(--colormainlight);
-  color: var(--colorhightlight);
+  background: var(--colormaindark);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);

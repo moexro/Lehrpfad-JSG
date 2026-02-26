@@ -2,11 +2,11 @@
   --header-h: 72px;
   --container-width: 90%;
 
-  --colormainlight: rgba(58, 90, 64, 0.3);
-  --colormaindark: rgba(52, 78, 65, 0.75);
+  --colormainlight: rgba(179, 218, 186, 0.3);
+  --colormaindark: rgba(43, 64, 54, 0.75);
 
-  --colorseclight: rgba(163, 177, 138, 0.2);
-  --colorsecdark: rgba(88, 129, 87, 0.5);
+  --colorseclight: rgba(166, 219, 75, 0.2);
+  --colorsecdark: rgba(57, 120, 56, 0.5);
 
   --colorhightlight: rgb(254, 250, 224);
 }
@@ -51,8 +51,8 @@ body::before {
   width: 100%;
   height: 100%;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)),
-    url("../Homepage/images/background3.jpg") no-repeat center center;
+    var(--colormainlight)
+    no-repeat center center;
   background-size: cover;
   z-index: -10;
 }
@@ -63,10 +63,6 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-#page {
-  width: 95%;
 }
 
 .text {
@@ -134,13 +130,7 @@ h3 {
   cursor: pointer;
 }
 
-/* page container */
 
-.container {
-  width: 95%;
-  margin: 36px auto;
-  padding: 20px;
-}
 
 .stationcontainer {
   display: flex;
@@ -160,7 +150,7 @@ h3 {
   margin-bottom: 10px;
 }
 
-.second-container {
+.container {
   display: flex;
   width: 90%;
   flex-direction: column;
@@ -169,7 +159,7 @@ h3 {
   border-radius: 10px;
   margin: 36px auto;
   padding: 36px;
-  background-color: var(--colormainlight);
+  background-color: var(--colormaindark);
   backdrop-filter: blur(12px);
   border: 2px solid rgba(255, 255, 255, 0.08);
   box-shadow: 4px 8px 32px rgba(0, 0, 0, 0.6);

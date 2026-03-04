@@ -1,47 +1,58 @@
 <!doctype html>
 <html lang="de">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		
-		<meta name="apple-mobile-web-app-capable" content="yes" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<title>Stationen</title>
-		<link rel="stylesheet" href="../style.css" />
-		<link rel="stylesheet" href="../overlay.css" />
-	</head>
-	<body>
-		<header id="topbar" class="bar withUnlock"></header>
-		<main id="main">
-			
-				<h1 id="top">Stationen</h1>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
-				<div class="container" id="stations">
-					<h2>Freigeschaltete Stationen</h2>
-					<h4>
-						Hier siehst du die Stationen, an denen du schon den QR-Code für das
-						Quiz gescannt hast:
-					</h4>
+    <title>Stationen</title>
 
-					<p class="text">
-						Die Punkte, die du in den Quizzen gesammelt hast, kannst du mit
-						deinen Freunden vergleichen oder später auch zurücksetzen, um die
-						Quizze erneut zu spielen.
-					</p>
-					<div class="container" id="unlockcontainer">
-						<div class="stationcontainer" id="Quiz_button_container"></div>
-						<div id="Quiz_score_container"></div>
-					</div>
-					<a class="btn secondary" id="resetQuizzes">
-						Setze hier deinen Fortschritt zurück
-					</a>
-				</div>
-			
-		</main>
-	</body>
-	<div id="overlay"></div>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../overlay.css" />
 
-	<script src="script.js"></script>
-	<script src="../overlay.js"></script>
-	<script src="https://unpkg.com/html5-qrcode@2.3.7/minified/html5-qrcode.min.js"></script>
+    <script src="script.js"></script>
+    <script src="../overlay.js"></script>
+    <script src="https://unpkg.com/html5-qrcode@2.3.7/minified/html5-qrcode.min.js"></script>
+
+    <!-- jsQR Bibliothek -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+
+    <!-- Scanner CSS & JS -->
+    <link rel="stylesheet" href="qr-scanner.css" />
+    <script src="qr-scanner.js"></script>
+	
+  </head>
+  <body>
+    <header id="topbar" class="bar withUnlock"></header>
+    <main id="main">
+      <h1 id="top">Stationen</h1>
+
+      <div class="container" id="scanner">
+        <div id="qr-scanner"></div>
+      </div>
+
+      <div class="container" id="stations">
+        <h2>Freigeschaltete Stationen</h2>
+        <h4>
+          Hier siehst du die Stationen, an denen du schon den QR-Code für das
+          Quiz gescannt hast:
+        </h4>
+
+        <p class="text">
+          Die Punkte, die du in den Quizzen gesammelt hast, kannst du mit deinen
+          Freunden vergleichen oder später auch zurücksetzen, um die Quizze
+          erneut zu spielen.
+        </p>
+        <div class="container" id="unlockcontainer">
+          <div class="stationcontainer" id="Quiz_button_container"></div>
+          <div id="Quiz_score_container"></div>
+        </div>
+        <a class="btn secondary" id="resetQuizzes">
+          Setze hier deinen Fortschritt zurück
+        </a>
+      </div>
+    </main>
+    <div id="overlay"></div>
+  </body>
 </html>

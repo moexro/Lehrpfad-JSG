@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap");
+
+#qr-scanner {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --border: #1e1e1e;
+  --accent: #00ff88;
+  --accent-dim: rgba(0, 255, 136, 0.12);
+  --text: #f0f0f0;
+  --muted: #555;
+  --danger: #ff4466;
+
+  --colormainlight: rgba(179, 218, 186, 0.3);
+  --colormaindark: rgba(43, 64, 54, 0.75);
+
+  --colorseclight: rgba(166, 219, 75, 0.3);
+  --colorsecdark: rgba(57, 120, 56, 0.5);
+
+  --colorhightlight: rgb(254, 250, 224);
+
+
+  color: var(--colorhightlight);
+  width: 100%;
+  max-width: 480px;
+}
+
+#qr-scanner .qrs-card {
+  background: var(--colorsecdark);
+  border: 1px solid var(--colorhightlight);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Viewfinder */
+#qr-scanner .qrs-viewfinder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-bottom: 1px solid var(--colorhightlight);
+  overflow: hidden;
+}
+
+#qr-scanner .qrs-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#qr-scanner .qrs-canvas {
+  display: none;
+}
+
+#qr-scanner .qrs-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#qr-scanner .qrs-frame {
+  width: 58%;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+#qr-scanner .qrs-frame::before,
+#qr-scanner .qrs-frame::after,
+#qr-scanner .qrs-frame > span::before,
+#qr-scanner .qrs-frame > span::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--colorhightlight);
+  border-style: solid;
+}
+#qr-scanner .qrs-frame::before {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+#qr-scanner .qrs-frame::after {
+  top: 0;
+  right: 0;
+  border-width: 2px 2px 0 0;
+}
+#qr-scanner .qrs-frame > span::before {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 2px 2px;
+}
+#qr-scanner .qrs-frame > span::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+}
+
+#qr-scanner .qrs-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--colorhightlight),
+    transparent
+  );
+  animation: qrs-scan 2s ease-in-out infinite;
+  box-shadow: 0 0 12px var(--colorhightlight);
+  display: none;
+}
+@keyframes qrs-scan {
+  0% {
+    top: 10%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 90%;
+    opacity: 0;
+  }
+}
+
+#qr-scanner .qrs-idle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--colorseclight);
+  transition: opacity 0.3s;
+}
+#qr-scanner .qrs-idle.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#qr-scanner .qrs-idle svg {
+  opacity: 0.3;
+}
+
+#qr-scanner .qrs-idle p {
+  font-size: 13px;
+  color: var(--colorhightlight);
+  text-align: center;
+  padding: 0 24px;
+}
+
+#qr-scanner .qrs-flash {
+  position: absolute;
+  inset: 0;
+  background: var(--colorseclight);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.05s;
+}
+#qr-scanner .qrs-flash.active {
+  opacity: 0.18;
+}
+
+/* Controls */
+#qr-scanner .qrs-controls {
+  padding: 20px;
+}
+
+#qr-scanner .qrs-btn {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 10px;
+  border: none;
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.05em;
+  background: var(--colorseclight);
+  color: var(--colorhightlight);
+}
+#qr-scanner .qrs-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+#qr-scanner .qrs-btn:active {
+  transform: translateY(0);
+}
+
+/* Result */
+#qr-scanner .qrs-result {
+  border-top: 1px solid var(--colorhightlight);
+  padding: 20px;
+  min-height: 72px;
+}
+
+#qr-scanner .qrs-status {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  color: var(--colorhightlight);
+}
+#qr-scanner .qrs-status.ok {
+  color: var(--colorhightlight);
+}
+#qr-scanner .qrs-status.err {
+  color: var(--danger);
+}
+
+#qr-scanner .qrs-result-text {
+  font-size: 14px;
+  color: var(--colorhightlight);
+  word-break: break-all;
+  line-height: 1.6;
+}

@@ -345,16 +345,22 @@ function onlyUnlock() {
 }
 
 onlyUnlock();
-// --- Elemente ---
-const questionEl = document.getElementById("question");
-const answersEl = document.getElementById("answers");
-const scoreEl = document.getElementById("score");
-const nextBtn = document.getElementById("nextBtn");
-const homeBtn = document.getElementById("homeBtn");
+// --- DOM Loading ---
 
-let currentQuiz;
-let currentQuestion = 0;
-let answered = false;
+document.addEventListener("DOMContentLoaded", () => {
+  getQuizID();
+  renderQuestion();
+
+  const questionEl = document.getElementById("question");
+  const answersEl = document.getElementById("answers");
+  const scoreEl = document.getElementById("score");
+  const nextBtn = document.getElementById("nextBtn");
+  const homeBtn = document.getElementById("homeBtn");
+
+  let currentQuiz;
+  let currentQuestion = 0;
+  let answered = false;
+});
 
 // --- Quiz initialisieren ---
 function getQuizID() {
@@ -766,9 +772,3 @@ if (homeBtn) {
     window.location.href = basehref + target;
   });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  getQuizID();
-  renderQuestion();
-});
-

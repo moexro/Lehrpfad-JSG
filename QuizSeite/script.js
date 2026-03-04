@@ -348,9 +348,6 @@ onlyUnlock();
 // --- DOM Loading ---
 
 document.addEventListener("DOMContentLoaded", () => {
-  getQuizID();
-  renderQuestion();
-
   const questionEl = document.getElementById("question");
   const answersEl = document.getElementById("answers");
   const scoreEl = document.getElementById("score");
@@ -360,6 +357,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentQuiz;
   let currentQuestion = 0;
   let answered = false;
+
+  getQuizID();
+  renderQuestion();
 });
 
 // --- Quiz initialisieren ---

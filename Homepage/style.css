@@ -192,6 +192,21 @@ h3 {
     grid-template-columns: 1fr; /* Buttons immer noch nebeneinander */
   }
 
+  main {
+  margin-left: 2%;
+  margin-right: 2%;
+  max-width: 96%; /* passt zu den margins */
+  width: 96%; /* ← explizit setzen */
+  box-sizing: border-box;
+  }
+
+  .container {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+  }
+
   .get_to-quiz-btn {
     padding: 0 8px;
   }

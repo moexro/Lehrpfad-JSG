@@ -119,7 +119,6 @@ function createScanner() {
   function handleResult(text) {
     setStatus("ok", "✓ erkannt");
     resultEl.textContent = text;
-    addToHistory(text);
     stopCamera();
 
     if (/^https?:\/\//i.test(text)) {

@@ -346,17 +346,51 @@ function onlyUnlock() {
 
 onlyUnlock();
 // --- DOM Loading ---
+let currentQuiz;
+let currentQuestion = 0;
+let answered = false;
+
+let questionEl;
+let answersEl;
+let scoreEl;
+let nextBtn;
+let homeBtn;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const questionEl = document.getElementById("question");
-  const answersEl = document.getElementById("answers");
-  const scoreEl = document.getElementById("score");
-  const nextBtn = document.getElementById("nextBtn");
-  const homeBtn = document.getElementById("homeBtn");
+  questionEl = document.getElementById("question");
+  answersEl = document.getElementById("answers");
+  scoreEl = document.getElementById("score");
+  nextBtn = document.getElementById("nextBtn");
+  homeBtn = document.getElementById("homeBtn");
 
-  let currentQuiz;
-  let currentQuestion = 0;
-  let answered = false;
+  // --- Next Button ---
+  nextBtn.addEventListener("click", () => {
+    const type = allQuiz[currentQuiz].questions[currentQuestion].type;
+    const length = allQuiz[currentQuiz].questions.length;
+
+    currentQuestion++;
+
+    console.log(currentQuestion);
+    console.log(length);
+
+    console.log(type);
+    if (type === "locator" && currentQuestion >= length) {
+      quizEnde("locator");
+      return;
+    }
+    if (type === "normal" && currentQuestion >= length) {
+      quizEnde("normal");
+      return;
+    }
+    renderQuestion();
+  });
+
+  homeBtn.addEventListener("click", () => {
+    const target = homeBtn.getAttribute("data-home") || "#";
+    if (target === "#") return;
+    localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
+    window.location.href = basehref + target;
+  });
 
   getQuizID();
   renderQuestion();
@@ -718,28 +752,6 @@ function renderLocator(q) {
   });
 }
 
-// --- Next Button ---
-nextBtn.addEventListener("click", () => {
-  const type = allQuiz[currentQuiz].questions[currentQuestion].type;
-  const length = allQuiz[currentQuiz].questions.length;
-
-  currentQuestion++;
-
-  console.log(currentQuestion);
-  console.log(length);
-
-  console.log(type);
-  if (type === "locator" && currentQuestion >= length) {
-    quizEnde("locator");
-    return;
-  }
-  if (type === "normal" && currentQuestion >= length) {
-    quizEnde("normal");
-    return;
-  }
-  renderQuestion();
-});
-
 function quizEnde(type) {
   answersEl.innerHTML = "";
   nextBtn.disabled = true;
@@ -764,11 +776,3 @@ function shuffleArray(array) {
 }
 
 // --- Home Button ---
-if (homeBtn) {
-  homeBtn.addEventListener("click", () => {
-    const target = homeBtn.getAttribute("data-home") || "#";
-    if (target === "#") return;
-    localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
-    window.location.href = basehref + target;
-  });
-}

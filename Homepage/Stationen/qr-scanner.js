@@ -1,12 +1,4 @@
-window.onerror = function (msg, src, line) {
-  const el = document.getElementById("qr-scanner");
-  if (el) {
-    const err = document.createElement("p");
-    err.style = "color:red;font-weight:bold;padding:8px;";
-    err.textContent = `Fehler: ${msg} (Zeile ${line})`;
-    el.prepend(err);
-  }
-};
+
 
 function createScanner() {
   const root = document.getElementById("qr-scanner");
@@ -110,9 +102,6 @@ function createScanner() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     ctx.drawImage(video, 0, 0);
-
-    // DEBUG: Auflösung anzeigen
-    statusEl.textContent = `${canvas.width}x${canvas.height}`;
 
     const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const code = jsQR(img.data, img.width, img.height, {

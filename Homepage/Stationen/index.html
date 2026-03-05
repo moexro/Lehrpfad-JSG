@@ -21,6 +21,17 @@
     <!-- Scanner CSS & JS -->
     <link rel="stylesheet" href="qr-scanner.css" />
     <script src="qr-scanner.js"></script>
+
+    <!-- NEU: Leaflet JS + Karte JS (defer damit DOM bereit ist) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="karte.js" defer></script>
+
+    <!-- NEU: Leaflet + Karte -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+    />
+    <link rel="stylesheet" href="karte.css" />
   </head>
   <body>
     <header id="topbar" class="bar withUnlock"></header>
@@ -28,6 +39,11 @@
       <h1 id="top">Stationen</h1>
 
       <div class="container" id="scanner">
+        <h2>QR-Code-Scanner</h2>
+        <h4>
+          Mit diesem Scanner lassen sich die Codes an den Stationen ganz einfach
+          einscannen und wirst direkt weitergeleitet:
+        </h4>
         <div id="qr-scanner"></div>
       </div>
 
@@ -44,8 +60,8 @@
           erneut zu spielen.
         </p>
         <div class="container" id="unlockcontainer">
-          <div class="stationcontainer" id="Quiz_button_container"></div>
           <div id="Quiz_score_container"></div>
+          <div id="lehrpfad-map"></div>
         </div>
         <a class="btn secondary" id="resetQuizzes">
           Setze hier deinen Fortschritt zurück

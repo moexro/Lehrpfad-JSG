@@ -50,16 +50,18 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background:
-    var(--colormainlight)
-    no-repeat center center;
+  background: var(--colormainlight) no-repeat center center;
   background-size: cover;
   z-index: -10;
 }
 
 main {
-  margin: auto;
-  max-width: 95%;
+  margin-left: 5%;
+  margin-right: 5%;
+  max-width: 90%; /* passt zu den margins */
+  width: 90%; /* ← explizit setzen */
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,8 +132,6 @@ h3 {
   cursor: pointer;
 }
 
-
-
 .stationcontainer {
   display: flex;
   flex-wrap: wrap;
@@ -151,8 +151,12 @@ h3 {
 }
 
 .container {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+
   display: flex;
-  width: 90%;
   flex-direction: column;
   align-items: center;
   text-align: center;
@@ -187,10 +191,7 @@ h3 {
   .button_container {
     grid-template-columns: 1fr; /* Buttons immer noch nebeneinander */
   }
-  .second-container {
-    width: 90%; /* etwas schmaler */
-    padding: 12px; /* kleinere Innenabstände */
-  }
+
   .get_to-quiz-btn {
     padding: 0 8px;
   }

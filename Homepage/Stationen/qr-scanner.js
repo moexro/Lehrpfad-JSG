@@ -33,8 +33,7 @@ function createScanner() {
         <button class="qrs-btn">▶ Kamera starten</button>
       </div>
       <div class="qrs-result">
-        <p class="qrs-status">— bereit</p>
-        <p class="qrs-result-text"></p>
+        <p class="qrs-status"> bereit</p>
       </div>
     </div>
     

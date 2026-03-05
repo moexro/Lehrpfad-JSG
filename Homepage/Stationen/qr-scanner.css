@@ -199,8 +199,7 @@
 /* Result */
 #qr-scanner .qrs-result {
   border-top: 1px solid var(--colorhightlight);
-  padding: 20px;
-  min-height: 72px;
+  padding: 12px
 }
 
 #qr-scanner .qrs-status {
@@ -217,9 +216,3 @@
   color: var(--danger);
 }
 
-#qr-scanner .qrs-result-text {
-  font-size: 14px;
-  color: var(--colorhightlight);
-  word-break: break-all;
-  line-height: 1.6;
-}

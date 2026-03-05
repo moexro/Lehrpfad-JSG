@@ -32,77 +32,6 @@ if (quizData) {
   console.log(listQuiz);
 }
 
-function getQuizzes() {
-  const container = document.getElementById("Quiz_button_container");
-  const containerScore = document.getElementById("Quiz_score_container");
-
-  //falls keine Quizes freigeschalten sind
-  Object.values(listQuiz).forEach((quiz) => {
-    const quizKey = quiz.id;
-    if (localStorage.getItem(`quizUnlock_${quizKey}`)) {
-      totalUnlocks++;
-    }
-  });
-
-  if (totalUnlocks === 0) {
-    container.textContent = "Du hast noch kein Quiz freigeschaltet!";
-
-    const resetB = document.getElementById("resetQuizzes");
-    resetB.classList.add("forcehidden");
-    return;
-  }
-
-  Object.values(listQuiz).forEach((quiz) => {
-    const quizKey = quiz.id; // Annahme: Der Quiz-Schlüssel ist der Name des Quiz
-    // sichere Auswertung des Unlock-Flags
-    const rawUnlock = localStorage.getItem(`quizUnlock_${quizKey}`);
-    const unlocked = rawUnlock ? JSON.parse(rawUnlock) : false;
-    console.log(unlocked);
-    if (unlocked) {
-      const qscore = parseInt(
-        localStorage.getItem(`quizScore_${quizKey}`) || "0",
-        10,
-      );
-      const located = JSON.parse(localStorage.getItem(`located_${quizKey}`));
-      const quizName = quiz.name || quizKey;
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "get_to-quiz-btn";
-      btn.id = `quizBtn_${quizKey}`;
-      btn.setAttribute("data-quiz", quizKey);
-
-      if (quiz.type === "locator") {
-        let status;
-        if (located) {
-          status = "Du hast den richtigen Ort gefunden!";
-        } else {
-          status = "Diesen Ort musst du noch finden!";
-        }
-        btn.innerHTML = `${quizName}: <br> ${status}`;
-      } else {
-        btn.innerHTML = `${quizName}: <br>${qscore} Punkte`;
-      }
-
-      btn.addEventListener("click", () => {
-        // Verwende forward slashes und encodiere den Parameter
-        const url =
-          basehref +
-          `QuizSeite/index.html?quiztype=${encodeURIComponent(quizKey)}`;
-        window.location.href = url;
-      });
-      if (container) container.appendChild(btn);
-      if (scoreEl) {
-        totalPoints += Number.isNaN(qscore) ? 0 : qscore;
-      }
-    }
-  });
-
-  if (scoreEl && totalPoints > 0) {
-    scoreEl.className = "points";
-    scoreEl.textContent = `Gesamtpunkte: ${totalPoints}`;
-    containerScore.appendChild(scoreEl);
-  }
-}
 
 function resetQuizUnlock() {
   Object.values(listQuiz).forEach((quiz) => {
@@ -143,7 +72,6 @@ function unlockFromLink() {
 
 document.addEventListener("DOMContentLoaded", () => {
   unlockFromLink();
-  getQuizzes();
   resetButton();
 });
-//Scanner
+

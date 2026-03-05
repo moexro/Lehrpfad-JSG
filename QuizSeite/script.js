@@ -404,6 +404,7 @@ function getQuizID() {
   if (q && allQuiz[q]) {
     currentQuiz = q;
     localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
+    localStorage.setItem(`quizVisited_${currentQuiz}`, JSON.stringify(true)); // NEU
     if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true) {
       localStorage.setItem(`quizScore_${currentQuiz}`, "0");
     }
@@ -459,7 +460,6 @@ function renderQuestion() {
     nextBtn.classList.toggle("hidden");
     scoreEl.classList.remove("hidden");
     scoreEl.textContent = `Punktzahl: ${getScore()}`;
-    if (homeBtn) homeBtn.classList.toggle("hidden");
     return;
   }
 

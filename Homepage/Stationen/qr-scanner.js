@@ -111,6 +111,9 @@ function createScanner() {
     canvas.height = video.videoHeight;
     ctx.drawImage(video, 0, 0);
 
+    // DEBUG: Auflösung anzeigen
+    statusEl.textContent = `${canvas.width}x${canvas.height}`;
+
     const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const code = jsQR(img.data, img.width, img.height, {
       inversionAttempts: "dontInvert",

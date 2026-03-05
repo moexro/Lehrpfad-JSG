@@ -1,3 +1,13 @@
+window.onerror = function (msg, src, line) {
+  const el = document.getElementById("qr-scanner");
+  if (el) {
+    const err = document.createElement("p");
+    err.style = "color:red;font-weight:bold;padding:8px;";
+    err.textContent = `Fehler: ${msg} (Zeile ${line})`;
+    el.prepend(err);
+  }
+};
+
 function createScanner() {
   const root = document.getElementById("qr-scanner");
   if (!root) {
@@ -48,14 +58,12 @@ function createScanner() {
   const flash = root.querySelector(".qrs-flash");
   const statusEl = root.querySelector(".qrs-status");
   const resultEl = root.querySelector(".qrs-result-text");
-  
 
   // ── State ──────────────────────────────────────────────────────────────────
   let stream = null;
   let scanning = false;
   let animFrame = null;
   let lastResult = "";
-
 
   // ── Camera ────────────────────────────────────────────────────────────────
   async function startCamera() {
@@ -137,9 +145,7 @@ function createScanner() {
     flash.classList.add("active");
     setTimeout(() => flash.classList.remove("active"), 150);
   }
-
-
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   createScanner();

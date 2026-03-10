@@ -182,31 +182,13 @@ body.dimmed::before {
   filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
 }
 
-#home {
-  background-image: url("images/home.svg");
-}
 
-#member {
-  background-image: url("images/member.svg");
-}
-
-#info {
-  background-image: url("images/info.svg");
-}
 
 @media (max-width: 400px) {
-  .bar {
-    padding: 0 12px;
-  }
+
   .btn {
     padding: 8px 10px;
   }
-  #footer {
-    display: none;
-  }
-  .menubar {
-    display: flex !important;
-    justify-content: space-around;
-    align-items: center;
-  }
+
+  
 }

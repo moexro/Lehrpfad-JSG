@@ -90,33 +90,7 @@ function createOverlay() {
   }
 
   //Untere Leiste
-  const menubarbottom = document.createElement("nav");
-  menubarbottom.className = "menubar";
-  menubarbottom.id = "bottombar";
-  const icons = {
-    home: {
-      href: basehref + "Homepage/index.html",
-      id: "home",
-    },
-    info: {
-      href: basehref + "Homepage/Informationen/index.html",
-      id: "info",
-    },
-    member: {
-      href: basehref + "Homepage/index.html#member",
-      id: "member",
-    },
-  };
 
-  Object.values(icons).forEach((e) => {
-    const link = document.createElement("a");
-    link.className = "icon";
-    link.href = e.href;
-    link.id = e.id;
-    menubarbottom.appendChild(link);
-  });
-
-  document.body.appendChild(menubarbottom);
 
   const footer = document.createElement("footer");
   footer.className = "bar";

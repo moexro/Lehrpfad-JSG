@@ -774,5 +774,3 @@ function shuffleArray(array) {
   }
   return array;
 }
-
-// --- Home Button ---

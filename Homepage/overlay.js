@@ -1,34 +1,38 @@
-//Overlay der Website
+// Overlay der Website
+// DOM
+const header = document.getElementById("topbar");
+
+const left = document.createElement("div");
+const nav = document.createElement("nav");
+const dropdown = document.createElement("div");
+const icon = document.createElement("div");
+const homeBtn = document.createElement("a");
+const controls = document.createElement("div");
+const main = document.getElementById("main");
+const dropcontent = document.createElement("ul");
+const footer = document.createElement("footer");
 
 function createOverlay() {
-  let basehref = "";
-  if (location.hostname.includes("github.io")) {
-    basehref = "/Lehrpfad-JSG/"; // GitHub Pages Root
-  } else {
-    basehref = "/";
-  }
+  let basehref = location.hostname.includes("github.io")
+    ? "/Lehrpfad-JSG/"
+    : "/";
 
-  const header = document.getElementById("topbar");
   if (!header) return;
-  //linke Seite
-  const left = document.createElement("div");
+
+  // ── Linke Seite ──────────────────────────────────────────
   left.className = "left";
 
-  const nav = document.createElement("nav");
   nav.className = "dropdown-menu";
 
-  const dropdown = document.createElement("div");
   dropdown.className = "dropdown";
   dropdown.id = "dropdown";
 
-  const icon = document.createElement("div");
   icon.className = "icon dropbtn";
   icon.id = "dropBtn";
 
   dropdown.appendChild(icon);
   nav.appendChild(dropdown);
 
-  const homeBtn = document.createElement("a");
   homeBtn.className = "btn";
   homeBtn.id = "homebtn";
   homeBtn.href = basehref + "Homepage/index.html";
@@ -37,7 +41,7 @@ function createOverlay() {
   left.appendChild(nav);
   left.appendChild(homeBtn);
 
-  const controls = document.createElement("div");
+  // ── Rechte Seite / Controls ──────────────────────────────
   controls.className = "controls";
 
   if (header.classList.contains("withUnlock")) {
@@ -51,18 +55,15 @@ function createOverlay() {
   header.appendChild(left);
   header.appendChild(controls);
 
-  //Dropcontent
-  const main = document.getElementById("main");
-  const dropcontent = document.createElement("ul");
-  dropcontent.classList.add("dropcontent");
-  dropcontent.classList.add("second-container");
+  // ── Dropdown-Inhalt ──────────────────────────────────────
+  dropcontent.classList.add("dropcontent", "second-container");
   dropcontent.id = "dropcontent";
+  dropcontent.style.left = "0";
+  dropcontent.style.right = "0";
+  dropcontent.style.margin = "auto";
 
   const buttons = {
-    homepage: {
-      href: "https://www.jsg-karlstadt.de",
-      text: "JSG-Homepage",
-    },
+    homepage: { href: "https://www.jsg-karlstadt.de", text: "JSG-Homepage" },
     information: {
       href: basehref + "Homepage/Informationen/index.html",
       text: "Informationen",
@@ -89,58 +90,54 @@ function createOverlay() {
     main.appendChild(dropcontent);
   }
 
-  //Untere Leiste
-
-
-  const footer = document.createElement("footer");
+  // ── Footer ───────────────────────────────────────────────
   footer.className = "bar";
   footer.id = "footer";
   document.body.appendChild(footer);
 }
 
-//DROPDOWN MENÜ
-function overlay() {
+// ── Dropdown-Logik ───────────────────────────────────────
+function initOverlay() {
   const dropBtn = document.getElementById("dropBtn");
-  const dropdown = document.getElementById("dropcontent");
+  const dropContent = document.getElementById("dropcontent");
   const topbar = document.getElementById("topbar");
-  const overlay = document.getElementById("overlay");
-  const menu = document.getElementById("footer");
-  const footer = document.getElementById("bottombar");
+  const overlayEl = document.getElementById("overlay");
 
-  // Toggle Dropdown beim Klick
+  if (!dropBtn || !dropContent || !topbar || !overlayEl) return;
+
+  function openDropdown() {
+    dropContent.classList.add("open");
+    overlayEl.classList.add("open");
+    topbar.style.filter = "brightness(1.5)";
+    dropContent.style.filter = "brightness(1.5)";
+    document.body.classList.add("dimmed");
+  }
+
+  function closeDropdown() {
+    dropContent.classList.remove("open");
+    overlayEl.classList.remove("open");
+    topbar.style.filter = "";
+    dropContent.style.filter = "";
+    document.body.classList.remove("dimmed");
+  }
+
   dropBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    dropdown.classList.toggle("open");
-    const isOpen = dropdown.classList.contains("open");
-
-    // Nur den Seiteninhalt abdunkeln
-
-    topbar.style.filter = isOpen ? "brightness(1.5)" : ""; // topbar aufhellen
-    footer.style.filter = isOpen ? "brightness(1.5)" : ""; // dropdown aufhellen
-    menu.style.filter = isOpen ? "brightness(1.5)" : ""; // dropdown aufhellen
-    dropdown.style.filter = isOpen ? "brightness(1.5)" : ""; // dropdown aufhellen
-
-    overlay.classList.toggle("open");
-    document.body.classList.toggle("dimmed", isOpen); //body::before abdunkeln
+    dropContent.classList.contains("open") ? closeDropdown() : openDropdown();
   });
 
-  // Klick außerhalb schließt das Dropdown
   document.addEventListener("click", (e) => {
-    if (e.target !== dropBtn) {
-      dropdown.classList.remove("open");
-      overlay.classList.remove("open");
-
-      topbar.style.filter = "";
-      dropdown.style.filter = ""; // topbar aufhellen
-      footer.style.filter = "";
-      menu.style.filter = ""; // dropdown aufhellen
-
-      document.body.classList.remove("dimmed");
+    if (
+      !dropContent.contains(e.target) &&
+      e.target !== dropBtn &&
+      !dropdown.contains(e.target)
+    ) {
+      closeDropdown();
     }
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   createOverlay();
-  overlay();
+  initOverlay();
 });

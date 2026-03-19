@@ -1,5 +1,3 @@
-
-
 function createScanner() {
   const root = document.getElementById("qr-scanner");
   if (!root) {
@@ -139,5 +137,5 @@ function createScanner() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  createScanner();
+  // createScanner();
 });

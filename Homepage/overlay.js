@@ -56,7 +56,7 @@ function createOverlay() {
   header.appendChild(controls);
 
   // ── Dropdown-Inhalt ──────────────────────────────────────
-  dropcontent.classList.add("dropcontent", "second-container");
+  dropcontent.classList.add("dropcontent", "container");
   dropcontent.id = "dropcontent";
   dropcontent.style.left = "0";
   dropcontent.style.right = "0";

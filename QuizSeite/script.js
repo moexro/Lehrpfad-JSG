@@ -1,337 +1,10 @@
-// --- Quiz-Daten ---
-
-const questionsQ1 = [
-  {
-    question: "Welche Pflanze wird in Deutschland am häufigsten angebaut?",
-    answers: ["Weizen", "Mais", "Gerste", "Raps"],
-    correctIndex: 0,
-    type: "multipleChoice",
-  },
-  {
-    question: "Was versteht man unter Fruchtfolge?",
-    answers: [
-      "Die Reihenfolge der Ernte innerhalb eines Tages",
-      "Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre",
-      "Das Sortieren der Ernte nach Größe",
-      "Die Reihenfolge der Düngung",
-    ],
-    correctIndex: 1,
-    type: "multipleChoice",
-  },
-  {
-    question:
-      "Welche Maschine wird hauptsächlich zur Bodenbearbeitung vor der Aussaat eingesetzt?",
-    answers: ["Mähdrescher", "Pflug", "Ballenpresse", "Güllefass"],
-    correctIndex: 1,
-    type: "multipleChoice",
-  },
-];
-
-const questionsQ2 = [
-  {
-    question: "Welche Nutztiere liefern sowohl Milch als auch Fleisch?",
-    answers: ["Schafe", "Schweine", "Hühner", "Pferde"],
-    correctIndex: 0,
-    type: "multipleChoice",
-  },
-  {
-    question: "Was ist ein wichtiger Vorteil des ökologischen Landbaus?",
-    answers: [
-      "Höhere Erträge",
-      "Schnellere Erntezeiten",
-      "Verzicht auf synthetische Pflanzenschutzmittel",
-      "Niedrige Produktionskosten",
-    ],
-    correctIndex: 2,
-    type: "multipleChoice",
-  },
-  {
-    question:
-      "Wie nennt man die Haltung von Tieren auf dem gleichen Hof, auf dem auch ihre Futtermittel erzeugt werden?",
-    answers: [
-      "Intensivhaltung",
-      "Kreislaufwirtschaft",
-      "Stallfütterung",
-      "Selbstversorgungshaltung",
-    ],
-    correctIndex: 1,
-    type: "multipleChoice",
-  },
-];
-
-// Fragen zu den Maschinen
-
-const questionsQ3 = [
-  {
-    question:
-      "Ohne welche Maschine kann ein Bauer keine seiner Aufgaben erledigen?",
-    answers: ["Pflug", "Traktor", "Rübenmaus", "Güllefass"],
-    correctIndex: 1,
-    type: "multipleChoice",
-  },
-
-  {
-    question:
-      "Feldbearbeitung: Halte & ziehe die Maschinen zu den richtigen Begriffen",
-    type: "DragAndDrop",
-    items: [
-      {
-        text: "Pflug",
-        correctDrop: "Pflug",
-        img: "images/MaschinenQuiz/Drehpflug.jpg",
-      },
-      {
-        text: "Grubber",
-        correctDrop: "Grubber",
-        img: "images/MaschinenQuiz/Grubber.jpg",
-      },
-      {
-        text: "Kreiselegge",
-        correctDrop: "Kreiselegge",
-        img: "images/MaschinenQuiz/Kreiselegge.jpg",
-      },
-      {
-        text: "Walze",
-        correctDrop: "Walze",
-        img: "images/MaschinenQuiz/Walze.jpg",
-      },
-    ],
-    drops: [
-      { label: "Pflug" },
-      { label: "Grubber" },
-      { label: "Kreiselegge" },
-      { label: "Walze" },
-    ],
-  },
-
-  {
-    question:
-      "Ausbringen auf den Acker: Halte & ziehe die Maschinen zu den richtigen Begriffen",
-    type: "DragAndDrop",
-    items: [
-      {
-        text: "Miststreuer",
-        correctDrop: "Miststreuer",
-        img: "images/MaschinenQuiz/Miststreuer.jpg",
-      },
-      {
-        text: "Güllefass",
-        correctDrop: "Güllefass",
-        img: "images/MaschinenQuiz/Guellefass.jpg",
-      },
-      {
-        text: "Sämaschine",
-        correctDrop: "Sämaschine",
-        img: "images/MaschinenQuiz/Saemaschine.jpg",
-      },
-      {
-        text: "Pflanzenschutzspritze",
-        correctDrop: "Pflanzenschutzspritze",
-        img: "images/MaschinenQuiz/Planzenschutzspritze.jpg",
-      },
-      {
-        text: "Düngerstreuer",
-        correctDrop: "Düngerstreuer",
-        img: "images/MaschinenQuiz/Duengerstreuer.jpg",
-      },
-    ],
-    drops: [
-      { label: "Miststreuer" },
-      { label: "Güllefass" },
-      { label: "Sämaschine" },
-      { label: "Pflanzenschutzspritze" },
-      { label: "Düngerstreuer" },
-    ],
-  },
-
-  {
-    question:
-      "Heu und Graß: Halte & ziehe die Maschinen zu den richtigen Begriffen",
-    type: "DragAndDrop",
-    items: [
-      {
-        text: "Frontmähwerk",
-        correctDrop: "Frontmähwerk",
-        img: "images/MaschinenQuiz/Maehwerk.jpg",
-      },
-      {
-        text: "Heckmähwerk",
-        correctDrop: "Heckmähwerk",
-        img: "images/MaschinenQuiz/Heckmaehwerk.jpg",
-      },
-      {
-        text: "Heuwender",
-        correctDrop: "Heuwender",
-        img: "images/MaschinenQuiz/Heuwender.jpg",
-      },
-      {
-        text: "Schwader",
-        correctDrop: "Schwader",
-        img: "images/MaschinenQuiz/Schwader.jpg",
-      },
-      {
-        text: "Ladewagen",
-        correctDrop: "Ladewagen",
-        img: "images/MaschinenQuiz/Ladewagen.jpg",
-      },
-      {
-        text: "Ballenpresse",
-        correctDrop: "Ballenpresse",
-        img: "images/MaschinenQuiz/Ballenpresse.jpg",
-      },
-    ],
-    drops: [
-      { label: "Frontmähwerk" },
-      { label: "Heckmähwerk" },
-      { label: "Heuwender" },
-      { label: "Schwader" },
-      { label: "Ladewagen" },
-      { label: "Ballenpresse" },
-    ],
-  },
-  {
-    question: "Ernte: Halte & ziehe die Maschinen zu den richtigen Begriffen",
-    type: "DragAndDrop",
-    items: [
-      {
-        text: "Feldhäcksler",
-        correctDrop: "Feldhäcksler",
-        img: "images/MaschinenQuiz/Feldhaecksler.jpg",
-      },
-      {
-        text: "Mähdrescher",
-        correctDrop: "Mähdrescher",
-        img: "images/MaschinenQuiz/Maehdrescher.jpg",
-      },
-      {
-        text: "Rübenroder",
-        correctDrop: "Rübenroder",
-        img: "images/MaschinenQuiz/Ruebenroder.jpg",
-      },
-      {
-        text: "Rübenmaus",
-        correctDrop: "Rübenmaus",
-        img: "images/MaschinenQuiz/Ruebenmaus.jpg",
-      },
-    ],
-    drops: [
-      { label: "Feldhäcksler" },
-      { label: "Mähdrescher" },
-      { label: "Rübenroder" },
-      { label: "Rübenmaus" },
-    ],
-  },
-];
-
-const questionsQ4 = [
-  {
-    question: "Was ist ein Ziel der nachhaltigen Landwirtschaft?",
-    answers: [
-      "Maximaler kurzfristiger Gewinn",
-      "Erhaltung der Bodenfruchtbarkeit",
-      "Einsatz möglichst vieler Chemikalien",
-      "Monokulturen auf großen Flächen",
-    ],
-    correctIndex: 1,
-    type: "multipleChoice",
-  },
-  {
-    question: "Welche Methode hilft, den Boden zu schützen?",
-    answers: [
-      "Erosionsschutz durch Begrünung",
-      "Tiefpflügen jedes Jahr",
-      "Dauerhafte Brachlegung",
-      "Intensive Düngung",
-    ],
-    correctIndex: 0,
-    type: "multipleChoice",
-  },
-  {
-    question: "Was bedeutet der Begriff 'Biodiversität'?",
-    answers: [
-      "Die Vielfalt von Tier- und Pflanzenarten",
-      "Die Menge des angebauten Getreides",
-      "Die Reinheit des Grundwassers",
-      "Die Anzahl der Maschinen auf einem Hof",
-    ],
-    correctIndex: 0,
-    type: "multipleChoice",
-  },
-];
-
-const questionsQ5 = [
-  {
-    question: "Ordne die Bilder den richtigen Begriffen zu:",
-    type: "DragAndDrop",
-    items: [
-      { text: "Weizen", correctDrop: "Getreide" },
-      { text: "Gerste", correctDrop: "Getreide" },
-      { text: "Kuh", correctDrop: "Tier" },
-      { text: "Traktor", correctDrop: "Maschine" },
-    ],
-    drops: [{ label: "Getreide" }, { label: "Tier" }, { label: "Maschine" }],
-  },
-];
-
-const questionsQ6 = [
-  {
-    question: "Bewege dich dorthin!",
-    type: "locator",
-    lon: "9.8041856",
-    lat: "50.1415936",
-  },
-];
-
-//Liste mit Namen und Fragen aller auf der Seite aufrufbaren Quizze
-
-let allQuiz = {
-  Q1: {
-    questions: questionsQ1,
-    name: "Über den Ackerbau",
-    id: "Q1",
-  },
-  Q2: {
-    questions: questionsQ2,
-    name: "Über die Tierhaltung",
-    id: "Q2",
-  },
-  Q3: {
-    questions: questionsQ3,
-    name: "Landwirtschaftliche Maschinen",
-    id: "Q3",
-  },
-  Q4: {
-    questions: questionsQ4,
-    name: "Nachhaltige Landwirtschaft",
-    id: "Q4",
-  },
-  Q5: {
-    questions: questionsQ5,
-    name: "Zuordnungsspiel",
-    id: "Q5",
-  },
-  Q6: {
-    questions: questionsQ6,
-    name: "Standortsuche",
-    type: "locator",
-    id: "Q6",
-  },
-};
-
-localStorage.setItem("allQuizzes", JSON.stringify(allQuiz));
-
-// --- unlock --- //
+// --- Basepfad ---
 let basehref = "";
 if (location.hostname.includes("github.io")) {
-  basehref = "/Lehrpfad-JSG/"; // GitHub Pages Root
+  basehref = "/Lehrpfad-JSG/";
 } else {
   basehref = "/";
 }
-
-// document.documentElement.style.setProperty(
-//   "--quiz-bg",
-//  `url("${basehref}QuizSeite/images/backgroundquizStandard.jpg")`
-// );
 
 function onlyUnlock() {
   const parms = new URLSearchParams(window.location.search);
@@ -339,13 +12,15 @@ function onlyUnlock() {
   console.log(loadOnly);
   if (loadOnly == "true") {
     window.location.href =
-      basehref + "Homepage/Stationen/index.html?from=quizunlock";
+      basehref + "Homepage/index.html?from=quizunlock";
     return;
   }
 }
 
 onlyUnlock();
-// --- DOM Loading ---
+
+// --- Globale Zustandsvariablen ---
+let allQuiz = null;
 let currentQuiz;
 let currentQuestion = 0;
 let answered = false;
@@ -356,29 +31,46 @@ let scoreEl;
 let nextBtn;
 let homeBtn;
 
-document.addEventListener("DOMContentLoaded", () => {
+// --- Quiz-Daten laden, dann initialisieren ---
+fetch(basehref + "data/quizzes.json")
+  .then((res) => {
+    if (!res.ok) throw new Error("quizzes.json nicht gefunden");
+    return res.json();
+  })
+  .then((data) => {
+    allQuiz = data;
+    initQuiz();
+  })
+  .catch((err) => {
+    console.error("Fehler beim Laden der Quiz-Daten:", err);
+    const title = document.getElementById("quizTitle");
+    if (title) title.textContent = "Quiz konnte nicht geladen werden.";
+  });
+
+// --- DOM-Initialisierung (wird nach fetch aufgerufen) ---
+function initQuiz() {
+  document.addEventListener("DOMContentLoaded", () => setup());
+  if (document.readyState !== "loading") setup();
+}
+
+function setup() {
   questionEl = document.getElementById("question");
   answersEl = document.getElementById("answers");
   scoreEl = document.getElementById("score");
   nextBtn = document.getElementById("nextBtn");
   homeBtn = document.getElementById("homeBtn");
 
-  // --- Next Button ---
   nextBtn.addEventListener("click", () => {
     const type = allQuiz[currentQuiz].questions[currentQuestion].type;
     const length = allQuiz[currentQuiz].questions.length;
 
     currentQuestion++;
 
-    console.log(currentQuestion);
-    console.log(length);
-
-    console.log(type);
     if (type === "locator" && currentQuestion >= length) {
       quizEnde("locator");
       return;
     }
-    if (type === "normal" && currentQuestion >= length) {
+    if (type !== "locator" && currentQuestion >= length) {
       quizEnde("normal");
       return;
     }
@@ -394,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   getQuizID();
   renderQuestion();
-});
+}
 
 // --- Quiz initialisieren ---
 function getQuizID() {
@@ -404,7 +96,7 @@ function getQuizID() {
   if (q && allQuiz[q]) {
     currentQuiz = q;
     localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
-    localStorage.setItem(`quizVisited_${currentQuiz}`, JSON.stringify(true)); // NEU
+    localStorage.setItem(`quizVisited_${currentQuiz}`, JSON.stringify(true));
     if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true) {
       localStorage.setItem(`quizScore_${currentQuiz}`, "0");
     }
@@ -683,9 +375,9 @@ function renderDragAndDrop(q) {
   }
 }
 
-//distanzermittlung
+// --- Distanzberechnung ---
 function distance(lat1, lon1, lat2, lon2) {
-  const R = 6371000; // Erdradius in Metern
+  const R = 6371000;
   const toRad = (deg) => (deg * Math.PI) / 180;
 
   const φ1 = toRad(lat1);
@@ -702,7 +394,7 @@ function distance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-//Locator Quiz
+// --- Locator Quiz ---
 function renderLocator(q) {
   const targetlat = q.lat;
   const targetlon = q.lon;
@@ -728,8 +420,8 @@ function renderLocator(q) {
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
 
-        const target = { lat: targetlat, lon: targetlon }; // Beispiel
-        const radius = 10; // Meter
+        const target = { lat: targetlat, lon: targetlon };
+        const radius = 10;
 
         console.log(`${lat} + ${lon}`);
         console.log(target);
@@ -752,6 +444,7 @@ function renderLocator(q) {
   });
 }
 
+// --- Quiz Ende ---
 function quizEnde(type) {
   answersEl.innerHTML = "";
   nextBtn.disabled = true;

@@ -1,34 +1,58 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+:root {
+  --header-h: 72px;
+  --container-width: 90%;
+
+  --colormainlight: rgba(179, 218, 186, 0.3);
+  --colormaindark: rgba(43, 64, 54, 0.75);
+
+  --colorseclight: rgba(166, 219, 75, 0.2);
+  --colorsecdark: rgba(57, 120, 56, 0.5);
+
+  --colorhightlight: rgb(254, 250, 224);
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
 }
 
 html,
 body {
-  height: 100%;
-  background-color: #f0f0f0;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  word-break: break-word;
+  box-sizing: border-box;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
+  color: var(--colorhightlight);
+  box-sizing: border-box;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  padding-top: var(--header-h);
+  padding-bottom: var(--header-h);
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 20px;
-  margin: 160px 0 0 0;
-  color: var(--colorhightlight);
+  overflow-y: auto;
+  min-height: 100%;
+  background-color: var(--colormaindark);
 }
 
-:root {
-  --colormainlight: rgb(105, 123, 109);
-  --colormaindark: rgb(58, 81, 70);
-
-  --colorseclight: rgba(166, 219, 75, 1);
-  --colorsecdark: rgba(57, 120, 56, 1);
-
-  --colorhightlight: rgb(254, 250, 224);
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--colormainlight) no-repeat center center;
+  background-size: cover;
+  z-index: -10;
 }
 
 main {
@@ -44,33 +68,38 @@ main {
 }
 
 .text {
+  max-width: 500px;
   text-align: center;
-  margin: 4px 8px;
+  margin: 0 auto;
   color: var(--colorhightlight);
   padding: 5px;
 }
 
-.infobox {
-  background-color: var(--colormainlight);
-  border-radius: 10px;
-  padding: 16px;
-  margin: 12px auto;
-}
-
-.centered {
-  text-align: center;
-  max-width: 500px;
-}
-
 h1 {
   margin: 48px 0 0 0;
-  font-size: 36px;
-
-  color: var(--colormaindark);
 }
 
 h3 {
   margin: 5px 0 5px 0; /* top right bottom left */
+}
+
+/* buttons as links */
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--colormainlight);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  min-height: 16px;
+}
+
+.btn.secondary {
+  max-width: 90%;
+  height: 32px;
 }
 
 .points {
@@ -136,7 +165,7 @@ h3 {
   align-items: center;
   text-align: center;
   border-radius: 10px;
-  margin: 12px auto;
+  margin: 36px auto;
   padding: 36px;
   background-color: var(--colormaindark);
   backdrop-filter: blur(12px);
@@ -163,44 +192,26 @@ h3 {
 }
 
 @media (max-width: 400px) {
-
-  body {
-    padding: 0px;
+  .button_container {
+    grid-template-columns: 1fr; /* Buttons immer noch nebeneinander */
   }
 
   main {
-    max-width: 100%;
-    width: 100%; /* ← explizit setzen */
+    margin-left: 2%;
+    margin-right: 2%;
+    max-width: 96%; /* passt zu den margins */
+    width: 96%; /* ← explizit setzen */
     box-sizing: border-box;
-    margin: 0;
   }
 
   .container {
     width: 100%;
-    padding: 16px;
+    padding-left: 5%;
+    padding-right: 5%;
     box-sizing: border-box;
   }
 
   .get_to-quiz-btn {
     padding: 0 8px;
   }
-}
-
-/* spezielles für die stationen */
-
-#ernaehrung-images {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 16px;
-  margin: 12px 12px;
-}
-
-#ernaehrung-images svg {
-  width: 100%;
-  height: 180px;
-  color: var(--colorhightlight);
-}
-
-#placer {
-  height: 64px;
 }

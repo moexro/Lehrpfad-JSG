@@ -16,22 +16,15 @@ body.dimmed::before {
   background-color: rgba(0, 0, 0, 0.3);
   opacity: 0;
   z-index: -10;
-  transition: all 0.6s ease;
+  transition: all 0.15s ease;
 }
 
 #overlay.open {
   opacity: 1;
-  z-index: 800;
+  z-index: 1350;
   backdrop-filter: blur(15px);
 }
 
-.text {
-  max-width: 500px;
-  text-align: center;
-  margin: 0 auto;
-  color: var(--colorhightlight);
-  padding: 5px;
-}
 
 /* Top bar */
 .bar {
@@ -47,7 +40,7 @@ body.dimmed::before {
   background: var(--colormaindark);
   color: var(--colorhightlight);
   backdrop-filter: blur(15px);
-  z-index: 1000;
+  z-index: 1500;
 }
 
 #topbar {
@@ -95,6 +88,12 @@ body.dimmed::before {
   background: var(--colormainlight);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   height: 16px;
+  padding: 16px 32px;
+}
+
+.logo {
+  height: 64px;
+  object-fit: cover;
 }
 
 /* DROPDOWN MENÜ */
@@ -106,7 +105,7 @@ body.dimmed::before {
 
 .dropcontent {
   position: fixed;
-  top: 50px;
+  top: 64px;
 
   display: flex;
   flex-direction: column;
@@ -117,7 +116,7 @@ body.dimmed::before {
 
   opacity: 0;
 
-  z-index: 900;
+  z-index: 1400;
   border-radius: 10px;
   margin: 0 auto;
   max-width: 90%;
@@ -148,22 +147,6 @@ body.dimmed::before {
 
 #homebutton {
   display: block;
-}
-
-.menubar {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 98%;
-  margin: auto;
-  border-radius: 20px;
-  background: var(--colormaindark); /* halbtransparent */
-  backdrop-filter: blur(15px); /* Blur-Effekt */
-  box-shadow: 4px -16px 20px rgba(0, 0, 0, 0.3); /* leichter Schatten nach oben */
-  z-index: 1000; /* immer über dem Inhalt */
-  padding: 16px;
 }
 
 .icon {

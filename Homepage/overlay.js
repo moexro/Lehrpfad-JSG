@@ -44,13 +44,11 @@ function createOverlay() {
   // ── Rechte Seite / Controls ──────────────────────────────
   controls.className = "controls";
 
-  if (header.classList.contains("withUnlock")) {
-    const unlockBtn = document.createElement("a");
-    unlockBtn.className = "btn";
-    unlockBtn.href = basehref + "QuizSeite/index.html?loadOnlyQuizData=true";
-    unlockBtn.textContent = "Unlock";
-    controls.appendChild(unlockBtn);
-  }
+  const logoAELF = document.createElement("img");
+  logoAELF.src = basehref + "Homepage/images/LogoAELF.png";
+  logoAELF.alt = "Logo AELF";
+  logoAELF.className = "logo";
+  controls.appendChild(logoAELF);
 
   header.appendChild(left);
   header.appendChild(controls);
@@ -86,6 +84,13 @@ function createOverlay() {
     dropcontent.appendChild(link);
   });
 
+  if (header.classList.contains("withUnlock")) {
+    const unlockBtn = document.createElement("a");
+    unlockBtn.href = basehref + "QuizSeite/index.html?loadOnlyQuizData=true";
+    unlockBtn.textContent = "Dev-Unlock";
+    dropcontent.appendChild(unlockBtn);
+  }
+
   if (main) {
     main.appendChild(dropcontent);
   }
@@ -108,16 +113,12 @@ function initOverlay() {
   function openDropdown() {
     dropContent.classList.add("open");
     overlayEl.classList.add("open");
-    topbar.style.filter = "brightness(1.5)";
-    dropContent.style.filter = "brightness(1.5)";
     document.body.classList.add("dimmed");
   }
 
   function closeDropdown() {
     dropContent.classList.remove("open");
     overlayEl.classList.remove("open");
-    topbar.style.filter = "";
-    dropContent.style.filter = "";
     document.body.classList.remove("dimmed");
   }
 

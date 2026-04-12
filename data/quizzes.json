@@ -2,7 +2,7 @@
   "ernaehrung": {
     "name": "Ernährung",
     "id": "ernaehrung",
-    "questions": [
+    "leichtQuestions": [
       {
         "question": "Welche der Tiere bringen Milch?",
         "answers": [

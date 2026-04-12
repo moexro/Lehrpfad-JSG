@@ -39,6 +39,12 @@ function createOverlay() {
   const logoAELF = document.createElement("img");
   logoAELF.src = basehref + "media/images/LogoAELF.png";
   logoAELF.alt = "Logo AELF";
+
+  logoAELF.addEventListener("click", () => {
+    const ok = confirm("Du wirst auf die Seite des AELF weitergeleitet. Möchtest du fortfahren?");
+    if (ok)
+    window.open("https://www.aelf-ka.bayern.de", "_blank");
+  });  
   logoAELF.className = "logo";
   header.appendChild(logoAELF);
 

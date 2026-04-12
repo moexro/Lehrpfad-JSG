@@ -1,40 +1,34 @@
 {
-  "Q1": {
-    "name": "Über den Ackerbau",
-    "id": "Q1",
+  "ernaehrung": {
+    "name": "Ernährung",
+    "id": "ernaehrung",
     "questions": [
       {
-        "question": "Welche Pflanze wird in Deutschland am häufigsten angebaut?",
-        "answers": ["Weizen", "Mais", "Gerste", "Raps"],
-        "correctIndex": 0,
-        "type": "multipleChoice"
-      },
-      {
-        "question": "Was versteht man unter Fruchtfolge?",
+        "question": "Welche der Tiere bringen Milch?",
         "answers": [
-          "Die Reihenfolge der Ernte innerhalb eines Tages",
-          "Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre",
-          "Das Sortieren der Ernte nach Größe",
-          "Die Reihenfolge der Düngung"
+          "<svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='137.000000pt' height='193.000000pt' viewBox='0 0 137.000000 193.000000' preserveAspectRatio='xMidYMid meet'><g transform='translate(0.000000,193.000000) scale(0.100000,-0.100000)' fill='currentColor' stroke='none'><path d='M600 1903 c-23 -20 -33 -40 -37 -70 -5 -41 -8 -43 -38 -43 -43 0 -96 -37 -118 -83 -16 -31 -17 -42 -7 -72 16 -50 47 -67 112 -63 45 3 53 6 53 23 0 17 -6 20 -43 17 -31 -3 -49 2 -63 14 -60 55 30 144 116 113 19 -7 38 -10 41 -6 4 4 2 25 -5 47 -10 33 -9 45 4 70 29 55 98 46 140 -19 25 -39 46 -36 57 6 5 18 17 37 28 43 43 23 80 -30 80 -111 0 -38 -1 -39 -34 -39 -19 0 -69 -17 -117 -42 -114 -56 -218 -160 -273 -273 -47 -96 -105 -267 -135 -395 -19 -80 -20 -95 -8 -107 21 -21 31 -2 51 95 24 113 89 300 139 397 52 101 137 187 233 237 149 78 227 57 307 -84 20 -33 27 -61 27 -97 0 -44 -5 -56 -35 -89 -19 -22 -52 -51 -74 -66 -47 -33 -53 -46 -41 -83 5 -15 18 -91 30 -167 20 -138 32 -168 57 -143 9 9 10 22 4 47 -5 19 -17 92 -27 161 l-17 127 69 65 c65 61 70 64 90 50 29 -18 57 -78 58 -123 1 -29 -3 -36 -22 -38 -18 -3 -26 5 -42 43 -21 49 -43 56 -48 14 -3 -31 31 -86 62 -100 36 -17 73 -3 91 32 15 27 15 35 0 87 -9 31 -25 70 -36 85 l-21 28 69 -3 c62 -3 68 -1 71 17 7 52 -117 155 -188 155 -19 0 -31 9 -44 33 -25 42 -84 105 -117 122 -22 12 -27 23 -33 71 -15 127 -90 182 -163 120 l-28 -24 -28 24 c-41 35 -106 33 -147 -3z m626 -411 c10 -6 30 -22 43 -36 l24 -26 -66 0 -67 0 0 29 c0 16 -3 36 -6 45 -5 12 -1 14 24 7 16 -5 38 -13 48 -19z'/></g></svg> Huhn",
+          "<svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='152.000000pt' height='210.000000pt' viewBox='0 0 152.000000 210.000000' preserveAspectRatio='xMidYMid meet'><g transform='translate(0.000000,210.000000) scale(0.100000,-0.100000)' fill='currentColor' stroke='none'><path d='M490 2054 c-37 -59 -44 -95 -37 -194 l5 -78 -37 10 c-64 18 -162 3 -268 -42 -121 -50 -127 -53 -131 -73 -5 -25 98 -121 163 -151 32 -16 87 -33 122 -39 l62 -11 25 -55 c34 -76 44 -125 56 -270 6 -68 18 -140 26 -160 17 -41 76 -106 117 -127 15 -8 27 -21 27 -29 0 -20 90 -45 162 -45 80 0 127 20 134 60 4 16 11 30 16 30 20 0 69 43 100 88 32 46 33 50 34 157 0 106 2 114 42 213 23 56 42 111 42 122 0 14 9 21 38 25 168 27 269 83 317 174 18 36 8 61 -24 61 -9 0 -55 19 -102 41 -74 37 -93 42 -159 43 -41 1 -87 -2 -102 -7 l-28 -7 0 72 c0 113 -45 238 -86 238 -19 0 -23 -7 -29 -57 -9 -72 -28 -120 -62 -155 -26 -28 -28 -28 -153 -28 -126 0 -126 0 -146 28 -30 40 -36 60 -43 137 -5 63 -8 70 -28 73 -18 3 -29 -7 -53 -44z m40 -81 c0 -14 9 -45 21 -67 l21 -42 -28 -42 c-22 -33 -30 -39 -36 -28 -11 20 -14 165 -4 194 10 28 26 19 26 -15z m508 -24 c15 -63 15 -119 1 -156 -10 -26 -12 -27 -23 -9 -6 10 -22 32 -34 47 l-24 29 26 52 c14 29 26 60 26 70 0 36 17 17 28 -33z m-126 -135 c34 -6 42 -14 83 -84 25 -42 45 -80 45 -83 0 -4 14 -36 30 -70 38 -81 38 -126 1 -213 -16 -38 -35 -88 -42 -112 -9 -33 -16 -41 -28 -36 -9 3 -42 15 -74 25 -105 34 -289 19 -387 -31 -23 -12 -43 -20 -44 -18 -1 2 -7 37 -13 78 -6 41 -25 112 -43 157 l-33 83 27 35 c15 19 35 54 46 77 10 24 38 75 62 115 42 70 44 72 88 76 80 6 244 7 282 1z m-512 -64 c79 -15 82 -20 47 -92 -16 -34 -41 -77 -55 -96 -25 -32 -29 -34 -77 -30 -27 3 -75 17 -105 32 -60 29 -136 94 -123 106 29 24 170 74 254 89 4 1 30 -4 59 -9z m964 -31 c50 -23 93 -44 95 -46 9 -7 -63 -72 -107 -96 -46 -25 -164 -52 -197 -45 -13 2 -95 161 -95 183 0 2 17 13 38 24 26 14 57 20 106 21 60 0 81 -5 160 -41z m-399 -539 l50 -25 3 -63 c3 -57 0 -67 -27 -104 -44 -59 -60 -68 -107 -58 -60 14 -160 12 -228 -6 l-61 -16 -37 42 c-39 44 -58 92 -58 147 0 27 7 37 39 59 63 41 123 53 256 51 106 -2 126 -5 170 -27z m-141 -286 c35 -5 46 -11 46 -25 0 -25 -12 -30 -83 -32 -115 -2 -171 29 -89 51 47 13 68 14 126 6z'/></g></svg> Kuh",
+          "<svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='175.000000pt' height='177.000000pt' viewBox='0 0 175.000000 177.000000' preserveAspectRatio='xMidYMid meet'><g transform='translate(0.000000,177.000000) scale(0.100000,-0.100000)' fill='currentColor' stroke='none'><path d='M383 1762 c-20 -13 -36 -101 -31 -171 4 -51 13 -83 37 -128 l33 -61 -21 -41 c-37 -71 -54 -159 -55 -281 -1 -131 14 -192 64 -252 36 -44 129 -92 208 -109 81 -17 293 -6 417 21 170 37 254 89 302 188 24 50 28 68 27 142 -1 99 -31 219 -73 295 l-29 51 23 28 c36 45 49 106 41 199 -7 94 -14 127 -27 127 -6 0 -57 -47 -114 -104 l-105 -104 -67 21 c-84 27 -235 28 -331 3 l-63 -17 -67 60 c-37 32 -80 73 -97 91 -37 39 -58 51 -72 42z m122 -149 c74 -69 76 -72 55 -83 -13 -7 -42 -30 -66 -52 l-44 -40 -25 53 c-32 69 -39 108 -30 164 8 54 5 55 110 -42z m775 -66 c-5 -27 -19 -60 -29 -73 l-18 -23 -19 21 c-11 11 -36 31 -57 45 l-38 24 78 73 78 74 8 -46 c5 -27 4 -65 -3 -95z m-280 -9 c147 -43 244 -139 291 -287 26 -83 35 -211 20 -269 -15 -55 -77 -123 -137 -151 -113 -53 -381 -91 -513 -73 -131 19 -225 82 -256 170 -19 58 -20 213 -1 303 15 71 50 149 66 149 6 0 10 6 10 14 0 16 52 64 111 103 96 63 273 81 409 41z'/></g></svg> Schwein",
+          "<svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='150.000000pt' height='218.000000pt' viewBox='0 0 150.000000 218.000000' preserveAspectRatio='xMidYMid meet'><g transform='translate(0.000000,218.000000) scale(0.100000,-0.100000)' fill='currentColor' stroke='none'><path d='M523 2174 c-29 -12 -13 -41 32 -58 35 -14 51 -28 72 -64 33 -57 54 -131 42 -154 -8 -15 -13 -15 -56 -2 -77 24 -207 -4 -268 -57 -44 -39 -44 -61 -2 -92 53 -40 75 -48 175 -63 53 -8 98 -17 100 -19 2 -2 -1 -33 -9 -69 -18 -91 -2 -165 61 -291 27 -55 57 -123 65 -150 8 -28 23 -60 32 -70 19 -20 55 -99 88 -188 26 -74 48 -63 96 47 21 48 47 98 59 111 11 12 32 64 46 116 14 51 41 123 59 159 51 101 67 168 64 263 l-4 82 92 6 c105 8 167 32 208 81 23 27 24 33 12 52 -8 11 -38 34 -68 50 -47 26 -65 30 -134 30 -44 1 -97 -3 -117 -7 -31 -6 -37 -5 -32 7 3 7 1 17 -5 20 -13 9 16 92 46 132 13 18 42 44 63 58 44 29 49 41 23 55 -12 6 -37 3 -78 -10 -71 -22 -131 -74 -176 -155 -17 -30 -34 -54 -39 -54 -4 0 -13 -13 -20 -30 -11 -26 -18 -30 -49 -30 -33 0 -39 4 -54 35 -10 20 -24 35 -34 35 -12 0 -25 16 -37 47 -11 26 -35 64 -53 84 -47 51 -166 107 -200 93z m609 -112 c-11 -15 -28 -51 -37 -80 -18 -53 -21 -57 -49 -46 -14 6 -14 11 5 43 20 33 88 111 97 111 2 0 -6 -12 -16 -28z m-400 -75 c16 -32 17 -41 7 -48 -17 -10 -14 -14 -37 53 -22 66 -5 63 30 -5z m83 -107 c11 -35 45 -49 103 -43 48 5 55 9 64 34 8 25 13 28 41 23 53 -9 57 -12 57 -39 0 -35 20 -40 77 -21 25 9 63 16 82 15 l36 -1 -30 -10 c-72 -25 -134 -128 -116 -193 9 -32 8 -35 -13 -35 -47 0 -112 -104 -81 -130 16 -13 35 -5 35 15 0 10 6 11 29 2 l29 -11 -18 -50 c-10 -28 -32 -80 -49 -116 -17 -36 -39 -98 -49 -138 -20 -79 -32 -96 -74 -106 -42 -10 -36 16 14 57 62 51 50 67 -52 67 -94 0 -106 -11 -66 -63 42 -54 32 -75 -17 -37 -16 13 -32 41 -42 78 -9 31 -33 86 -52 121 -19 35 -43 86 -53 114 l-18 52 29 12 c16 7 29 17 29 24 0 6 8 2 18 -10 21 -25 47 -14 38 17 -9 27 -74 92 -93 92 -12 0 -14 7 -7 38 13 61 9 97 -15 131 -26 36 -88 71 -126 71 -14 0 -25 5 -25 10 0 20 96 11 145 -15 55 -27 78 -20 73 24 -2 19 2 27 22 32 47 13 68 10 75 -11z m588 -92 c48 -25 -47 -61 -146 -56 l-69 3 21 27 c34 42 136 56 194 26z m-844 -4 c32 -13 71 -49 71 -67 0 -9 -194 25 -220 38 -36 19 -37 23 -7 35 35 14 113 11 156 -6z m571 -241 c0 -13 -3 -13 -15 -3 -8 7 -12 16 -9 21 8 13 24 1 24 -18z m-457 11 c8 -8 -3 -34 -14 -34 -5 0 -9 9 -9 20 0 19 11 26 23 14z m232 -404 c-3 -5 -10 -10 -16 -10 -5 0 -9 5 -9 10 0 6 7 10 16 10 8 0 12 -4 9 -10z m12 -170 c-11 -27 -23 -47 -26 -44 -3 3 -13 25 -22 49 l-17 45 43 0 43 0 -21 -50z'/></g></svg> Ziege"
         ],
-        "correctIndex": 1,
+        "correctIndex": [1, 3],
         "type": "multipleChoice"
       },
       {
-        "question": "Welche Maschine wird hauptsächlich zur Bodenbearbeitung vor der Aussaat eingesetzt?",
-        "answers": ["Mähdrescher", "Pflug", "Ballenpresse", "Güllefass"],
-        "correctIndex": 1,
-        "type": "multipleChoice"
+        "question": "Ordne die Schritte in der richtigen Reihenfolge: Ernte, Produktion, Vermarktung, Verarbeitung",
+        "type": "ordering",
+        "items": ["Ernte", "Produktion", "Vermarktung", "Verarbeitung"],
+        "correctOrder": ["Ernte", "Produktion", "Verarbeitung", "Vermarktung"]
       }
     ]
   },
-  "Q2": {
+  "tierhaltung": {
     "name": "Über die Tierhaltung",
-    "id": "Q2",
+    "id": "tierhaltung",
     "questions": [
       {
         "question": "Welche Nutztiere liefern sowohl Milch als auch Fleisch?",
-        "answers": ["Schafe", "Schweine", "Hühner", "Pferde"],
+
         "correctIndex": 0,
         "type": "multipleChoice"
       },
@@ -62,9 +56,9 @@
       }
     ]
   },
-  "Q3": {
+  "maschinen": {
     "name": "Landwirtschaftliche Maschinen",
-    "id": "Q3",
+    "id": "maschinen",
     "questions": [
       {
         "question": "Ohne welche Maschine kann ein Bauer keine seiner Aufgaben erledigen?",
@@ -76,10 +70,26 @@
         "question": "Feldbearbeitung: Halte & ziehe die Maschinen zu den richtigen Begriffen",
         "type": "DragAndDrop",
         "items": [
-          { "text": "Pflug",       "correctDrop": "Pflug",       "img": "images/MaschinenQuiz/Drehpflug.jpg" },
-          { "text": "Grubber",     "correctDrop": "Grubber",     "img": "images/MaschinenQuiz/Grubber.jpg" },
-          { "text": "Kreiselegge", "correctDrop": "Kreiselegge", "img": "images/MaschinenQuiz/Kreiselegge.jpg" },
-          { "text": "Walze",       "correctDrop": "Walze",       "img": "images/MaschinenQuiz/Walze.jpg" }
+          {
+            "text": "Pflug",
+            "correctDrop": "Pflug",
+            "img": "images/MaschinenQuiz/Drehpflug.jpg"
+          },
+          {
+            "text": "Grubber",
+            "correctDrop": "Grubber",
+            "img": "images/MaschinenQuiz/Grubber.jpg"
+          },
+          {
+            "text": "Kreiselegge",
+            "correctDrop": "Kreiselegge",
+            "img": "images/MaschinenQuiz/Kreiselegge.jpg"
+          },
+          {
+            "text": "Walze",
+            "correctDrop": "Walze",
+            "img": "images/MaschinenQuiz/Walze.jpg"
+          }
         ],
         "drops": [
           { "label": "Pflug" },
@@ -92,11 +102,31 @@
         "question": "Ausbringen auf den Acker: Halte & ziehe die Maschinen zu den richtigen Begriffen",
         "type": "DragAndDrop",
         "items": [
-          { "text": "Miststreuer",          "correctDrop": "Miststreuer",          "img": "images/MaschinenQuiz/Miststreuer.jpg" },
-          { "text": "Güllefass",            "correctDrop": "Güllefass",            "img": "images/MaschinenQuiz/Guellefass.jpg" },
-          { "text": "Sämaschine",           "correctDrop": "Sämaschine",           "img": "images/MaschinenQuiz/Saemaschine.jpg" },
-          { "text": "Pflanzenschutzspritze","correctDrop": "Pflanzenschutzspritze","img": "images/MaschinenQuiz/Planzenschutzspritze.jpg" },
-          { "text": "Düngerstreuer",        "correctDrop": "Düngerstreuer",        "img": "images/MaschinenQuiz/Duengerstreuer.jpg" }
+          {
+            "text": "Miststreuer",
+            "correctDrop": "Miststreuer",
+            "img": "images/MaschinenQuiz/Miststreuer.jpg"
+          },
+          {
+            "text": "Güllefass",
+            "correctDrop": "Güllefass",
+            "img": "images/MaschinenQuiz/Guellefass.jpg"
+          },
+          {
+            "text": "Sämaschine",
+            "correctDrop": "Sämaschine",
+            "img": "images/MaschinenQuiz/Saemaschine.jpg"
+          },
+          {
+            "text": "Pflanzenschutzspritze",
+            "correctDrop": "Pflanzenschutzspritze",
+            "img": "images/MaschinenQuiz/Planzenschutzspritze.jpg"
+          },
+          {
+            "text": "Düngerstreuer",
+            "correctDrop": "Düngerstreuer",
+            "img": "images/MaschinenQuiz/Duengerstreuer.jpg"
+          }
         ],
         "drops": [
           { "label": "Miststreuer" },
@@ -110,12 +140,36 @@
         "question": "Heu und Gras: Halte & ziehe die Maschinen zu den richtigen Begriffen",
         "type": "DragAndDrop",
         "items": [
-          { "text": "Frontmähwerk", "correctDrop": "Frontmähwerk", "img": "images/MaschinenQuiz/Maehwerk.jpg" },
-          { "text": "Heckmähwerk",  "correctDrop": "Heckmähwerk",  "img": "images/MaschinenQuiz/Heckmaehwerk.jpg" },
-          { "text": "Heuwender",    "correctDrop": "Heuwender",    "img": "images/MaschinenQuiz/Heuwender.jpg" },
-          { "text": "Schwader",     "correctDrop": "Schwader",     "img": "images/MaschinenQuiz/Schwader.jpg" },
-          { "text": "Ladewagen",    "correctDrop": "Ladewagen",    "img": "images/MaschinenQuiz/Ladewagen.jpg" },
-          { "text": "Ballenpresse", "correctDrop": "Ballenpresse", "img": "images/MaschinenQuiz/Ballenpresse.jpg" }
+          {
+            "text": "Frontmähwerk",
+            "correctDrop": "Frontmähwerk",
+            "img": "images/MaschinenQuiz/Maehwerk.jpg"
+          },
+          {
+            "text": "Heckmähwerk",
+            "correctDrop": "Heckmähwerk",
+            "img": "images/MaschinenQuiz/Heckmaehwerk.jpg"
+          },
+          {
+            "text": "Heuwender",
+            "correctDrop": "Heuwender",
+            "img": "images/MaschinenQuiz/Heuwender.jpg"
+          },
+          {
+            "text": "Schwader",
+            "correctDrop": "Schwader",
+            "img": "images/MaschinenQuiz/Schwader.jpg"
+          },
+          {
+            "text": "Ladewagen",
+            "correctDrop": "Ladewagen",
+            "img": "images/MaschinenQuiz/Ladewagen.jpg"
+          },
+          {
+            "text": "Ballenpresse",
+            "correctDrop": "Ballenpresse",
+            "img": "images/MaschinenQuiz/Ballenpresse.jpg"
+          }
         ],
         "drops": [
           { "label": "Frontmähwerk" },
@@ -130,10 +184,26 @@
         "question": "Ernte: Halte & ziehe die Maschinen zu den richtigen Begriffen",
         "type": "DragAndDrop",
         "items": [
-          { "text": "Feldhäcksler", "correctDrop": "Feldhäcksler", "img": "images/MaschinenQuiz/Feldhaecksler.jpg" },
-          { "text": "Mähdrescher",  "correctDrop": "Mähdrescher",  "img": "images/MaschinenQuiz/Maehdrescher.jpg" },
-          { "text": "Rübenroder",   "correctDrop": "Rübenroder",   "img": "images/MaschinenQuiz/Ruebenroder.jpg" },
-          { "text": "Rübenmaus",    "correctDrop": "Rübenmaus",    "img": "images/MaschinenQuiz/Ruebenmaus.jpg" }
+          {
+            "text": "Feldhäcksler",
+            "correctDrop": "Feldhäcksler",
+            "img": "images/MaschinenQuiz/Feldhaecksler.jpg"
+          },
+          {
+            "text": "Mähdrescher",
+            "correctDrop": "Mähdrescher",
+            "img": "images/MaschinenQuiz/Maehdrescher.jpg"
+          },
+          {
+            "text": "Rübenroder",
+            "correctDrop": "Rübenroder",
+            "img": "images/MaschinenQuiz/Ruebenroder.jpg"
+          },
+          {
+            "text": "Rübenmaus",
+            "correctDrop": "Rübenmaus",
+            "img": "images/MaschinenQuiz/Ruebenmaus.jpg"
+          }
         ],
         "drops": [
           { "label": "Feldhäcksler" },
@@ -144,9 +214,9 @@
       }
     ]
   },
-  "Q4": {
+  "nachhaltig": {
     "name": "Nachhaltige Landwirtschaft",
-    "id": "Q4",
+    "id": "nachhaltig",
     "questions": [
       {
         "question": "Was ist ein Ziel der nachhaltigen Landwirtschaft?",
@@ -183,17 +253,17 @@
       }
     ]
   },
-  "Q5": {
+  "zuordnung": {
     "name": "Zuordnungsspiel",
-    "id": "Q5",
+    "id": "zuordnung",
     "questions": [
       {
         "question": "Ordne die Bilder den richtigen Begriffen zu:",
         "type": "DragAndDrop",
         "items": [
-          { "text": "Weizen",  "correctDrop": "Getreide" },
-          { "text": "Gerste",  "correctDrop": "Getreide" },
-          { "text": "Kuh",     "correctDrop": "Tier" },
+          { "text": "Weizen", "correctDrop": "Getreide" },
+          { "text": "Gerste", "correctDrop": "Getreide" },
+          { "text": "Kuh", "correctDrop": "Tier" },
           { "text": "Traktor", "correctDrop": "Maschine" }
         ],
         "drops": [
@@ -201,18 +271,6 @@
           { "label": "Tier" },
           { "label": "Maschine" }
         ]
-      }
-    ]
-  },
-  "Q6": {
-    "name": "Standortsuche",
-    "id": "Q6",
-    "questions": [
-      {
-        "question": "Bewege dich dorthin!",
-        "type": "locator",
-        "lon": "9.8041856",
-        "lat": "50.1415936"
       }
     ]
   }

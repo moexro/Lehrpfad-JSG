@@ -3,11 +3,11 @@
    ─────────────────────────────────────────────────────── */
 
 const LP_COORDS = {
-  Q1: [49.9446997, 9.7825362],
-  Q2: [49.9426253, 9.7924135],
-  Q3: [49.939822, 9.8011685],
-  Q4: [49.9315707, 9.8045507],
-  Q5: [49.9363771, 9.8037351],
+  ernaehrung: [49.9446997, 9.7825362],
+  tierhaltung: [49.9426253, 9.7924135],
+  maschinen: [49.939822, 9.8011685],
+  nachhaltig: [49.9315707, 9.8045507],
+  zuordnung: [49.9363771, 9.8037351],
 };
 
 const LP_DEFAULT_CENTER = [48.1351, 11.582];
@@ -30,14 +30,20 @@ function lp_isLocated(key) {
   return raw ? JSON.parse(raw) : false;
 }
 
-function lp_isVisited(quiz) {
-  if (quiz.type === "locator") return lp_isLocated(quiz.id);
-  const raw = localStorage.getItem(`quizVisited_${quiz.id}`);
-  return raw ? JSON.parse(raw) : false;
+function lp_isCompleted(quiz) {
+  const completed = localStorage.getItem(`quizDone_${quiz.id}`);
+  return completed ? JSON.parse(completed) : false;
 }
 
-function lp_makeIcon(visited) {
-  const fill = visited ? "#5cb85c" : "#d9534f";
+function lp_makeIcon(unlocked, completed) {
+  let fill;
+  if (completed) {
+    fill = "#FFD700"; // Gold für abgeschlossen
+  } else if (unlocked) {
+    fill = "#5cb85c"; // Grün für freigeschaltet
+  } else {
+    fill = "#d9534f"; // Rot für nicht freigeschaltet
+  }
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
     <path d="M15 0C6.716 0 0 6.716 0 15c0 9.375 13.5 25.5 14.5 26.8a.8.8 0 0 0 1 0C16.5 40.5 30 24.375 30 15 30 6.716 23.284 0 15 0z"
       fill="${fill}" stroke="#fff" stroke-width="2"/>
@@ -105,6 +111,19 @@ function lp_makeAccuracyCircle(map, lat, lng, accuracy) {
   }).addTo(map);
 }
 
+function lp_loadQuizData(basehref) {
+  return fetch(basehref + "data/quizzes.json")
+    .then((res) => {
+      if (!res.ok) throw new Error("quizzes.json nicht gefunden");
+      return res.json();
+    })
+    .then((data) => Object.values(data))
+    .catch((err) => {
+      console.warn("Quizdaten konnten nicht geladen werden:", err);
+      return [];
+    });
+}
+
 function lp_initMap() {
   const mapEl = document.getElementById("lehrpfad-map");
   if (!mapEl || typeof L === "undefined") return;
@@ -112,9 +131,6 @@ function lp_initMap() {
   const basehref = location.hostname.includes("github.io")
     ? "/Lehrpfad-JSG/"
     : "/";
-
-  const quizData = localStorage.getItem("allQuizzes");
-  const listQuiz = quizData ? Object.values(JSON.parse(quizData)) : [];
 
   const map = L.map("lehrpfad-map", {
     center: LP_DEFAULT_CENTER,
@@ -126,6 +142,98 @@ function lp_initMap() {
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 19,
   }).addTo(map);
+
+  lp_loadQuizData(basehref).then((listQuiz) => {
+    const quizById = {};
+    listQuiz.forEach((q) => {
+      if (q && q.id) quizById[q.id] = q;
+    });
+
+    let totalPoints = 0;
+    const bounds = [];
+
+    // Marker-Referenzen für spätere Updates speichern
+    const markerRefs = {};
+
+    Object.entries(LP_COORDS).forEach(([key, coords]) => {
+      const quiz = quizById[key];
+      const type = quiz ? quiz.type : null;
+      const unlocked = lp_isUnlocked(key);
+      const completed = quiz ? lp_isCompleted(quiz) : false;
+      const score = lp_getScore(key);
+
+      if (!isNaN(score)) totalPoints += score;
+      bounds.push(coords);
+
+      const marker = L.marker(coords, {
+        icon: lp_makeIcon(unlocked, completed),
+      }).addTo(map);
+
+      const quizUrl =
+        basehref + `QuizSeite/index.html?quiztype=${encodeURIComponent(key)}`;
+
+      const buildPopupHtml = (overrideUnlocked) => {
+        const isUnlocked =
+          overrideUnlocked !== undefined
+            ? overrideUnlocked
+            : lp_isUnlocked(key);
+        const isCompleted = quiz ? lp_isCompleted(quiz) : false;
+        const currentScore = lp_getScore(key);
+        const currentName = quiz ? quiz.name || key : key;
+
+        let statusText, pointsHtml;
+        if (!isUnlocked) {
+          statusText = "Noch nicht freigeschaltet";
+          pointsHtml = `<div class="lp-popup-points">🔒 Scanne den QR-Code vor Ort</div>`;
+        } else {
+          statusText = isCompleted ? "Abgeschlossen ✓" : "Freigeschaltet";
+          pointsHtml = `<div class="lp-popup-points">🏆 <strong>${currentScore}</strong> Punkte</div>`;
+        }
+
+        const statusClass = isCompleted
+          ? "completed"
+          : isUnlocked
+            ? "unlocked"
+            : "locked";
+        const quizBtn = isUnlocked
+          ? `<button class="lp-btn-quiz" onclick="window.location.href='${quizUrl}'">📝 Quiz</button>`
+          : `<button class="lp-btn-quiz" disabled style="opacity:.45;cursor:not-allowed">🔒 Quiz</button>`;
+
+        return `
+          <div class="lp-popup-bar ${statusClass}"></div>
+          <div class="lp-popup-inner">
+            <div class="lp-popup-title">${currentName}</div>
+            <div class="lp-popup-status ${statusClass}">${statusText}</div>
+            ${pointsHtml}
+            <div class="lp-popup-actions">
+              ${quizBtn}
+            </div>
+          </div>`;
+      };
+
+      marker.bindPopup(buildPopupHtml(), { maxWidth: 260 });
+
+      // Popup bei Öffnen neu aufbauen (aktuelle Daten)
+      marker.on("popupopen", () => {
+        marker.getPopup().setContent(buildPopupHtml());
+      });
+
+      markerRefs[key] = { marker, coords, quiz, type, buildPopupHtml };
+    });
+
+    if (bounds.length > 0) map.fitBounds(bounds, { padding: [36, 36] });
+
+    const scoreControl = L.control({ position: "topright" });
+    scoreControl.onAdd = () => {
+      const div = L.DomUtil.create("div", "lp-score-control");
+      div.textContent = `🏆 Gesamtpunkte: ${totalPoints}`;
+      return div;
+    };
+    scoreControl.addTo(map);
+
+    // ── GPS-Tracking starten ──────────────────────────────
+    lp_startTracking(map, markerRefs, basehref);
+  });
 
   // Koordinaten per Klick kopieren
   map.on("click", (e) => {
@@ -147,8 +255,9 @@ function lp_initMap() {
   const legend = document.createElement("div");
   legend.className = "lp-legend";
   legend.innerHTML = `
-    <div class="lp-legend-item"><div class="lp-legend-dot visited"></div><span>Besucht</span></div>
-    <div class="lp-legend-item"><div class="lp-legend-dot unvisited"></div><span>Noch nicht besucht</span></div>`;
+    <div class="lp-legend-item"><div class="lp-legend-dot completed"></div><span>Abgeschlossen</span></div>
+    <div class="lp-legend-item"><div class="lp-legend-dot unlocked"></div><span>Freigeschaltet</span></div>
+    <div class="lp-legend-item"><div class="lp-legend-dot locked"></div><span>Gesperrt</span></div>`;
   mapEl.insertAdjacentElement("afterend", legend);
 
   let totalPoints = 0;
@@ -166,51 +275,51 @@ function lp_initMap() {
     const quiz = quizById[key];
     const type = quiz ? quiz.type : null;
     const unlocked = lp_isUnlocked(key);
-    const visited = quiz ? lp_isVisited(quiz) : false;
-    const name = quiz && visited ? quiz.name || "" : "";
+    const completed = quiz ? lp_isCompleted(quiz) : false;
     const score = lp_getScore(key);
 
-    if (!isNaN(score) && visited) totalPoints += score;
+    if (!isNaN(score)) totalPoints += score;
     bounds.push(coords);
 
-    const marker = L.marker(coords, { icon: lp_makeIcon(visited) }).addTo(map);
+    const marker = L.marker(coords, {
+      icon: lp_makeIcon(unlocked, completed),
+    }).addTo(map);
 
-    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${coords[0]},${coords[1]}`;
     const quizUrl =
       basehref + `QuizSeite/index.html?quiztype=${encodeURIComponent(key)}`;
 
     const buildPopupHtml = (overrideUnlocked) => {
       const isUnlocked =
         overrideUnlocked !== undefined ? overrideUnlocked : lp_isUnlocked(key);
-      const isVisited = quiz ? lp_isVisited(quiz) : false;
+      const isCompleted = quiz ? lp_isCompleted(quiz) : false;
       const currentScore = lp_getScore(key);
-      const currentName = quiz && isVisited ? quiz.name || "" : "";
+      const currentName = quiz ? quiz.name || key : key;
 
       let statusText, pointsHtml;
-      if (type === "locator") {
-        const located = lp_isLocated(key);
-        statusText = located ? "Gefunden ✓" : "Noch nicht gefunden";
-        pointsHtml = `<div class="lp-popup-points">📍 ${located ? "Ort wurde gefunden!" : "Ort noch ausstehend"}</div>`;
-      } else if (!isUnlocked) {
+      if (!isUnlocked) {
         statusText = "Noch nicht freigeschaltet";
         pointsHtml = `<div class="lp-popup-points">🔒 Scanne den QR-Code vor Ort</div>`;
       } else {
-        statusText = isVisited ? "Besucht ✓" : "Noch nicht besucht";
-        pointsHtml = `<div class="lp-popup-points">🏆 <strong>${isVisited ? currentScore : 0}</strong> Punkte</div>`;
+        statusText = isCompleted ? "Abgeschlossen ✓" : "Freigeschaltet";
+        pointsHtml = `<div class="lp-popup-points">🏆 <strong>${currentScore}</strong> Punkte</div>`;
       }
 
+      const statusClass = isCompleted
+        ? "completed"
+        : isUnlocked
+          ? "unlocked"
+          : "locked";
       const quizBtn = isUnlocked
         ? `<button class="lp-btn-quiz" onclick="window.location.href='${quizUrl}'">📝 Quiz</button>`
         : `<button class="lp-btn-quiz" disabled style="opacity:.45;cursor:not-allowed">🔒 Quiz</button>`;
 
       return `
-        <div class="lp-popup-bar ${isVisited ? "visited" : "unvisited"}"></div>
+        <div class="lp-popup-bar ${statusClass}"></div>
         <div class="lp-popup-inner">
           <div class="lp-popup-title">${currentName}</div>
-          <div class="lp-popup-status ${isVisited ? "visited" : "unvisited"}">${statusText}</div>
+          <div class="lp-popup-status ${statusClass}">${statusText}</div>
           ${pointsHtml}
           <div class="lp-popup-actions">
-            <a class="lp-btn-maps" href="${mapsUrl}" target="_blank" rel="noopener">🗺️ Navigation</a>
             ${quizBtn}
           </div>
         </div>`;
@@ -231,7 +340,7 @@ function lp_initMap() {
   const scoreControl = L.control({ position: "topright" });
   scoreControl.onAdd = () => {
     const div = L.DomUtil.create("div", "lp-score-control");
-    div.textContent = `🏆 ${totalPoints} Punkte`;
+    div.textContent = `🏆 Gesamtpunkte: ${totalPoints}`;
     return div;
   };
   scoreControl.addTo(map);
@@ -480,11 +589,24 @@ function lp_startTracking(map, markerRefs, basehref) {
           // Station freischalten
           localStorage.setItem(`quizUnlock_${key}`, JSON.stringify(true));
 
+          // Infobox anzeigen
+          const infobox = document.getElementById(key);
+          if (infobox) {
+            infobox.style.display = "block";
+            // Scrolle zu der Station
+            infobox.scrollIntoView({ behavior: "smooth", block: "start" });
+            // Popup
+            const stationName = markerRefs[key]?.quiz?.name || key;
+            alert(
+              `Station ${stationName} freigeschaltet! Informationen sind nun verfügbar.`,
+            );
+          }
+
           // Marker-Icon aktualisieren
           const ref = markerRefs[key];
           if (ref) {
-            const isVisited = ref.quiz ? lp_isVisited(ref.quiz) : false;
-            ref.marker.setIcon(lp_makeIcon(isVisited));
+            const isCompleted = ref.quiz ? lp_isCompleted(ref.quiz) : false;
+            ref.marker.setIcon(lp_makeIcon(true, isCompleted));
           }
 
           // Toast-Benachrichtigung

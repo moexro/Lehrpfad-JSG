@@ -1,37 +1,37 @@
-// --- Basepfad ---
-let basehref = "";
-if (location.hostname.includes("github.io")) {
-  basehref = "/Lehrpfad-JSG/";
-} else {
-  basehref = "/";
-}
+// ============================================================
+// KONFIGURATION & BASEPFAD
+// ============================================================
 
-function onlyUnlock() {
-  const parms = new URLSearchParams(window.location.search);
-  const loadOnly = parms.get("loadOnlyQuizData");
-  console.log(loadOnly);
-  if (loadOnly == "true") {
-    window.location.href =
-      basehref + "Homepage/index.html?from=quizunlock";
-    return;
-  }
-}
+const basehref = location.hostname.includes("github.io")
+  ? "/Lehrpfad-JSG/"
+  : "/";
 
-onlyUnlock();
+// ============================================================
+// GLOBALER ZUSTAND
+// ============================================================
 
-// --- Globale Zustandsvariablen ---
 let allQuiz = null;
 let currentQuiz;
 let currentQuestion = 0;
 let answered = false;
+let selectedAnswers = [];
+let attemptedMultipleChoice = false;
 
-let questionEl;
-let answersEl;
-let scoreEl;
-let nextBtn;
-let homeBtn;
+let questionEl, answersEl, scoreEl, nextBtn, homeBtn;
 
-// --- Quiz-Daten laden, dann initialisieren ---
+// ============================================================
+// INITIALISIERUNG
+// ============================================================
+
+function checkOnlyUnlock() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("loadOnlyQuizData") === "true") {
+    window.location.href = basehref + "Homepage/index.html?from=quizunlock";
+  }
+}
+
+checkOnlyUnlock();
+
 fetch(basehref + "data/quizzes.json")
   .then((res) => {
     if (!res.ok) throw new Error("quizzes.json nicht gefunden");
@@ -47,10 +47,12 @@ fetch(basehref + "data/quizzes.json")
     if (title) title.textContent = "Quiz konnte nicht geladen werden.";
   });
 
-// --- DOM-Initialisierung (wird nach fetch aufgerufen) ---
 function initQuiz() {
-  document.addEventListener("DOMContentLoaded", () => setup());
-  if (document.readyState !== "loading") setup();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setup);
+  } else {
+    setup();
+  }
 }
 
 function setup() {
@@ -60,45 +62,61 @@ function setup() {
   nextBtn = document.getElementById("nextBtn");
   homeBtn = document.getElementById("homeBtn");
 
-  nextBtn.addEventListener("click", () => {
-    const type = allQuiz[currentQuiz].questions[currentQuestion].type;
-    const length = allQuiz[currentQuiz].questions.length;
-
-    currentQuestion++;
-
-    if (type === "locator" && currentQuestion >= length) {
-      quizEnde("locator");
-      return;
-    }
-    if (type !== "locator" && currentQuestion >= length) {
-      quizEnde("normal");
-      return;
-    }
-    renderQuestion();
-  });
-
-  homeBtn.addEventListener("click", () => {
-    const target = homeBtn.getAttribute("data-home") || "#";
-    if (target === "#") return;
-    localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
-    window.location.href = basehref + target;
-  });
+  nextBtn.addEventListener("click", onNextQuestion);
+  homeBtn.addEventListener("click", onHome);
 
   getQuizID();
   renderQuestion();
 }
 
-// --- Quiz initialisieren ---
+// ============================================================
+// NAVIGATION
+// ============================================================
+
+function onNextQuestion() {
+  const questions = allQuiz[currentQuiz].questions;
+  const type = questions[currentQuestion].type;
+  currentQuestion++;
+
+  if (currentQuestion >= questions.length) {
+    quizEnde("normal");
+  } else {
+    renderQuestion();
+  }
+}
+
+function onHome() {
+  const target = homeBtn.getAttribute("data-home");
+  if (!target || target === "#") return;
+  localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
+  window.location.href = basehref + target;
+}
+
+// ============================================================
+// QUIZ-ID & SCORE
+// ============================================================
+
 function getQuizID() {
-  const parms = new URLSearchParams(window.location.search);
-  const q = parms.get("quiztype");
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get("quiztype");
 
   if (q && allQuiz[q]) {
     currentQuiz = q;
     localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
-    localStorage.setItem(`quizVisited_${currentQuiz}`, JSON.stringify(true));
-    if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`)) !== true) {
+    if (
+      JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`) || "false") !==
+      true
+    ) {
       localStorage.setItem(`quizScore_${currentQuiz}`, "0");
+    }
+
+    // Wenn Quiz schon abgeschlossen, direkt zum Ende
+    if (
+      JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`) || "false") ===
+      true
+    ) {
+      quizEnde("normal");
+      return;
     }
   } else {
     currentQuiz = "null";
@@ -109,53 +127,53 @@ function getScore() {
   return parseInt(localStorage.getItem(`quizScore_${currentQuiz}`) || "0", 10);
 }
 
-function setScore(v) {
-  localStorage.setItem(`quizScore_${currentQuiz}`, String(v));
+function setScore(value) {
+  localStorage.setItem(`quizScore_${currentQuiz}`, String(value));
   scoreEl.textContent = `Punkte: ${getScore()}`;
 }
 
-function setCorrectLocation() {
-  localStorage.setItem(`located_${currentQuiz}`, true);
-}
+// ============================================================
+// FRAGE RENDERN
+// ============================================================
 
-// --- Frage rendern ---
 function renderQuestion() {
-  if (allQuiz[currentQuiz].questions.length <= currentQuestion) {
-    document.getElementById("quizTitle").textContent = "Quiz abgeschlossen";
-    questionEl.textContent = "Du hast alle Fragen beantwortet.";
-    answersEl.innerHTML = "";
-    nextBtn.classList.toggle("hidden");
-    scoreEl.classList.remove("hidden");
-    scoreEl.textContent = `Punkte: ${getScore()}`;
-    if (homeBtn) homeBtn.classList.toggle("hidden");
-    return;
-  }
+  selectedAnswers = [];
+  attemptedMultipleChoice = false;
+
+  const titleEl = document.getElementById("quizTitle");
+
+  // Quiz existiert nicht
   if (!currentQuiz || !allQuiz[currentQuiz]) {
-    document.getElementById("quizTitle").textContent =
-      "Dieses Quiz existiert nicht";
+    titleEl.textContent = "Dieses Quiz existiert nicht";
     questionEl.textContent = "";
     answersEl.innerHTML = "";
-    nextBtn.classList.toggle("hidden");
-    scoreEl.classList.toggle("hidden");
-    if (homeBtn) homeBtn.classList.toggle("hidden");
+    setUIState({ nextVisible: false, scoreVisible: false, homeVisible: false });
     return;
   }
 
-  if (
-    JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`) || "false") ===
-    true
-  ) {
-    document.getElementById("quizTitle").textContent =
-      allQuiz[currentQuiz].name || "Unbekannt";
+  // Quiz bereits abgeschlossen
+  if (JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`) || "false")) {
+    titleEl.textContent = allQuiz[currentQuiz].name || "Unbekannt";
     questionEl.textContent = "Dieses Quiz hast du schon abgeschlossen.";
     answersEl.innerHTML = "";
-    nextBtn.classList.toggle("hidden");
     scoreEl.classList.remove("hidden");
-    scoreEl.textContent = `Punktzahl: ${getScore()}`;
+    scoreEl.textContent = `Punkte: ${getScore()}`;
+    setUIState({ nextVisible: false, scoreVisible: true, homeVisible: true });
     return;
   }
 
   const quiz = allQuiz[currentQuiz];
+
+  // Alle Fragen beantwortet
+  if (currentQuestion >= quiz.questions.length) {
+    titleEl.textContent = "Quiz abgeschlossen";
+    questionEl.textContent = "Du hast alle Fragen beantwortet.";
+    answersEl.innerHTML = "";
+    scoreEl.textContent = `Punkte: ${getScore()}`;
+    setUIState({ nextVisible: false, scoreVisible: true, homeVisible: true });
+    return;
+  }
+
   const q = quiz.questions[currentQuestion];
 
   if (!q) {
@@ -165,76 +183,143 @@ function renderQuestion() {
   }
 
   answered = false;
+  titleEl.textContent = quiz.name || "Unbekannt";
+  questionEl.innerHTML = q.question;
 
-  nextBtn.disabled = true;
-  nextBtn.style.opacity = "0.5";
-  nextBtn.style.cursor = "not-allowed";
-  nextBtn.classList.remove("hidden");
-  scoreEl.classList.remove("hidden");
-  if (homeBtn) homeBtn.classList.add("hidden");
+  setNextBtn({ enabled: false });
+  setUIState({ nextVisible: true, scoreVisible: true, homeVisible: false });
 
-  document.getElementById("quizTitle").textContent = quiz.name || "Unbekannt";
-  questionEl.textContent = q.question;
-
-  if (currentQuestion === allQuiz[currentQuiz].questions.length - 1) {
-    nextBtn.innerHTML = "Quiz abschließen";
+  if (currentQuestion === quiz.questions.length - 1) {
+    nextBtn.textContent = "Quiz abschließen";
   }
 
-  if (q.type === "multipleChoice") {
-    renderMultipleChoice(q);
-  } else if (q.type === "DragAndDrop") {
-    renderDragAndDrop(q);
-  } else if (q.type === "locator") {
-    renderLocator(q);
-  }
+  if (q.type === "multipleChoice") renderMultipleChoice(q);
+  else if (q.type === "DragAndDrop") renderDragAndDrop(q);
+  else if (q.type === "ordering") renderOrdering(q);
 }
 
-// --- Multiple Choice ---
+// Hilfsfunktionen für UI-Zustand
+function setUIState({ nextVisible, scoreVisible, homeVisible }) {
+  nextBtn.classList.toggle("hidden", !nextVisible);
+  scoreEl.classList.toggle("hidden", !scoreVisible);
+  if (homeBtn) homeBtn.classList.toggle("hidden", !homeVisible);
+}
+
+function setNextBtn({ enabled }) {
+  nextBtn.disabled = !enabled;
+  nextBtn.style.opacity = enabled ? "1" : "0.5";
+  nextBtn.style.cursor = enabled ? "pointer" : "not-allowed";
+}
+
+// ============================================================
+// MULTIPLE CHOICE
+// ============================================================
+
 function renderMultipleChoice(q) {
+  selectedAnswers = [];
+  attemptedMultipleChoice = false;
   answersEl.innerHTML = "";
+
+  const container = document.createElement("div");
+  container.className = "mc-container";
+
+  const answerButtonsDiv = document.createElement("div");
+  answerButtonsDiv.className = "mc-answers";
+
   q.answers.forEach((ans, i) => {
     const btn = document.createElement("button");
-    btn.className = "answer-btn";
-    btn.textContent = ans;
-    btn.addEventListener("click", () => onAnswerMultipleChoice(i));
-    answersEl.appendChild(btn);
+    btn.className = "answer-btn mc-option";
+    btn.innerHTML = ans;
+    btn.dataset.index = i;
+    btn.addEventListener("click", () => onSelectMultipleChoice(i, btn));
+    answerButtonsDiv.appendChild(btn);
   });
+
+  const submitBtn = document.createElement("button");
+  submitBtn.className = "answer-btn mc-submit";
+  submitBtn.textContent = "Antworten abgeben";
+  submitBtn.addEventListener("click", () => onSubmitMultipleChoice(q));
+
+  container.appendChild(answerButtonsDiv);
+  container.appendChild(submitBtn);
+  answersEl.appendChild(container);
 }
 
-function onAnswerMultipleChoice(index) {
-  if (answered) return;
-  answered = true;
+function onSelectMultipleChoice(index, btnElement) {
+  const pos = selectedAnswers.indexOf(index);
+  if (pos !== -1) {
+    selectedAnswers.splice(pos, 1);
+    btnElement.classList.remove("selected");
+  } else {
+    selectedAnswers.push(index);
+    btnElement.classList.add("selected");
+  }
+}
 
-  const q = allQuiz[currentQuiz].questions[currentQuestion];
-  const buttons = Array.from(document.querySelectorAll(".answer-btn"));
-  buttons.forEach((b, i) => {
-    b.disabled = true;
-    if (i === q.correctIndex) b.classList.add("correct");
-    else if (i === index) b.classList.add("wrong");
-  });
-
-  if (index === q.correctIndex) {
-    setScore(getScore() + 3);
+function onSubmitMultipleChoice(q) {
+  if (selectedAnswers.length === 0) {
+    alert("Bitte wähle mindestens eine Antwort aus!");
+    return;
   }
 
-  nextBtn.disabled = false;
-  nextBtn.style.opacity = "1";
-  nextBtn.style.cursor = "pointer";
+  const buttons = Array.from(document.querySelectorAll(".mc-option"));
+  const submitBtn = document.querySelector(".mc-submit");
+  const correctIndices = Array.isArray(q.correctIndex)
+    ? q.correctIndex
+    : [q.correctIndex];
+
+  const isCorrect =
+    selectedAnswers.length === correctIndices.length &&
+    selectedAnswers.every((i) => correctIndices.includes(i));
+
+  if (isCorrect) {
+    buttons.forEach((b) => b.classList.add("correct"));
+
+    setTimeout(() => {
+      buttons.forEach((b, i) => {
+        b.disabled = true;
+        b.classList.remove("selected");
+        b.classList.toggle("correct", correctIndices.includes(i));
+      });
+
+      if (!attemptedMultipleChoice) setScore(getScore() + 3);
+
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = "0.5";
+      submitBtn.style.cursor = "not-allowed";
+
+      setNextBtn({ enabled: true });
+      answered = true;
+    }, 800);
+  } else {
+    attemptedMultipleChoice = true;
+    buttons.forEach((b) => b.classList.add("wrong"));
+
+    setTimeout(() => {
+      buttons.forEach((b) => b.classList.remove("wrong", "selected"));
+      selectedAnswers = [];
+      submitBtn.focus();
+    }, 800);
+  }
 }
 
-// --- Drag & Drop ---
+// ============================================================
+// DRAG & DROP
+// ============================================================
+
 function renderDragAndDrop(q) {
   answersEl.innerHTML = "";
+
   const wrapper = document.createElement("div");
   wrapper.className = "dragdrop-wrapper";
-
-  const shuffledItems = shuffleArray([...q.items]);
-  const shuffledDrops = shuffleArray([...q.drops]);
 
   const dragContainer = document.createElement("div");
   dragContainer.className = "drag-container";
 
-  shuffledItems.forEach((item) => {
+  const dropContainer = document.createElement("div");
+  dropContainer.className = "drop-container";
+
+  shuffleArray([...q.items]).forEach((item) => {
     const el = document.createElement("div");
     el.className = "drag-item";
     el.dataset.correct = item.correctDrop;
@@ -247,23 +332,20 @@ function renderDragAndDrop(q) {
       el.appendChild(img);
     } else if (item.text) {
       const span = document.createElement("span");
-      span.textContent = item.text;
+      span.innerHTML = item.text;
       el.appendChild(span);
     }
 
     dragContainer.appendChild(el);
   });
 
-  const dropContainer = document.createElement("div");
-  dropContainer.className = "drop-container";
-
-  shuffledDrops.forEach((drop) => {
+  shuffleArray([...q.drops]).forEach((drop) => {
     const slot = document.createElement("div");
     slot.className = "drop-slot";
     slot.dataset.id = drop.label;
 
     const label = document.createElement("span");
-    label.textContent = drop.label;
+    label.innerHTML = drop.label;
     slot.appendChild(label);
 
     dropContainer.appendChild(slot);
@@ -273,10 +355,30 @@ function renderDragAndDrop(q) {
   wrapper.appendChild(dropContainer);
   answersEl.appendChild(wrapper);
 
+  initDragAndDrop(wrapper, dragContainer, dropContainer, q);
+}
+
+function initDragAndDrop(wrapper, dragContainer, dropContainer, q) {
   let draggedItem = null;
   let isDragging = false;
   let offsetX = 0;
   let offsetY = 0;
+
+  function moveAt(x, y) {
+    draggedItem.style.left = x - offsetX + "px";
+    draggedItem.style.top = y - offsetY + "px";
+  }
+
+  function resetItem(item) {
+    item.style.cssText = "";
+    dragContainer.appendChild(item);
+  }
+
+  function checkAllLocked() {
+    const total = q.items.length;
+    const locked = wrapper.querySelectorAll(".drag-item.locked").length;
+    if (locked === total) setNextBtn({ enabled: true });
+  }
 
   wrapper.querySelectorAll(".drag-item").forEach((item) => {
     item.addEventListener("pointerdown", (e) => {
@@ -285,16 +387,19 @@ function renderDragAndDrop(q) {
 
       isDragging = true;
       draggedItem = item;
+
       const rect = item.getBoundingClientRect();
       offsetX = e.clientX - rect.left;
       offsetY = e.clientY - rect.top;
 
-      item.style.width = rect.width + "px";
-      item.style.height = rect.height + "px";
-      item.style.position = "absolute";
-      item.style.zIndex = "1000";
-      item.style.pointerEvents = "none";
-      item.style.transition = "none";
+      Object.assign(item.style, {
+        width: rect.width + "px",
+        height: rect.height + "px",
+        position: "absolute",
+        zIndex: "1000",
+        pointerEvents: "none",
+        transition: "none",
+      });
 
       document.body.appendChild(item);
       moveAt(e.pageX, e.pageY);
@@ -305,18 +410,19 @@ function renderDragAndDrop(q) {
     if (!isDragging || !draggedItem) return;
     moveAt(e.pageX, e.pageY);
 
+    dropContainer
+      .querySelectorAll(".drop-slot")
+      .forEach((s) => s.classList.remove("hover"));
     const hovering = document
       .elementFromPoint(e.clientX, e.clientY)
       ?.closest(".drop-slot");
-    dropContainer.querySelectorAll(".drop-slot").forEach((item) => {
-      item.classList.remove("hover");
-    });
     if (hovering) hovering.classList.add("hover");
   });
 
   document.addEventListener("pointerup", (e) => {
     if (!isDragging || !draggedItem) return;
     isDragging = false;
+
     const item = draggedItem;
     draggedItem = null;
 
@@ -324,146 +430,231 @@ function renderDragAndDrop(q) {
       .elementFromPoint(e.clientX, e.clientY)
       ?.closest(".drop-slot");
 
-    if (drop) {
-      const correct = item.dataset.correct;
-      const dropId = drop.dataset.id;
-
-      if (correct === dropId) {
-        drop.classList.add("correct");
-        item.classList.add("locked");
-        item.style.position = "static";
-        item.style.pointerEvents = "none";
-        item.style.width = "";
-        item.style.height = "";
-        drop.appendChild(item);
-        setScore(getScore() + 1);
-      } else {
+    if (drop && item.dataset.correct === drop.dataset.id) {
+      drop.classList.add("correct");
+      item.classList.add("locked");
+      Object.assign(item.style, {
+        position: "static",
+        pointerEvents: "none",
+        width: "",
+        height: "",
+      });
+      drop.appendChild(item);
+      setScore(getScore() + 1);
+    } else {
+      if (drop) {
         drop.classList.add("wrong");
         setTimeout(() => drop.classList.remove("wrong"), 800);
-        resetItem(item);
       }
-    } else {
       resetItem(item);
     }
 
     checkAllLocked();
   });
+}
 
-  function moveAt(x, y) {
-    draggedItem.style.left = x - offsetX + "px";
+// ============================================================
+// ORDERING
+// ============================================================
+
+let attemptedOrdering = false;
+
+function renderOrdering(q) {
+  attemptedOrdering = false;
+  answersEl.innerHTML = "";
+
+  const container = document.createElement("div");
+  container.className = "ordering-container";
+
+  const list = document.createElement("ul");
+  list.className = "ordering-list";
+
+  // WICHTIG: original Index korrekt behalten
+  q.items
+    .map((item, index) => ({ item, index }))
+    .sort(() => Math.random() - 0.5)
+    .forEach(({ item, index }) => {
+      const li = document.createElement("ul");
+      li.className = "ordering-item";
+      li.textContent = item;
+      li.dataset.originalIndex = index;
+      list.appendChild(li);
+    });
+
+  const submitBtn = document.createElement("button");
+  submitBtn.className = "answer-btn ordering-submit";
+  submitBtn.textContent = "Reihenfolge überprüfen";
+  submitBtn.addEventListener("click", () => onSubmitOrdering(q, list));
+
+  container.appendChild(list);
+  container.appendChild(submitBtn);
+  answersEl.appendChild(container);
+
+  initOrderingDrag(list);
+}
+
+function initOrderingDrag(list) {
+  let draggedItem = null;
+  let placeholder = document.createElement("li");
+  placeholder.className = "ordering-placeholder";
+
+  let offsetY = 0;
+  let isDragging = false;
+
+  function moveAt(y) {
     draggedItem.style.top = y - offsetY + "px";
   }
 
-  function resetItem(item) {
-    item.style.position = "static";
-    item.style.zIndex = "";
-    item.style.pointerEvents = "";
-    item.style.width = "";
-    item.style.height = "";
-    item.style.transition = "";
-    dragContainer.appendChild(item);
-  }
+  list.querySelectorAll(".ordering-item").forEach((item) => {
+    item.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
 
-  function checkAllLocked() {
-    const totalItems = q.items.length;
-    const lockedItems = wrapper.querySelectorAll(".drag-item.locked").length;
-    if (lockedItems === totalItems) {
-      nextBtn.disabled = false;
-      nextBtn.style.opacity = "1";
-      nextBtn.style.cursor = "pointer";
-    }
-  }
-}
+      draggedItem = item;
+      isDragging = true;
 
-// --- Distanzberechnung ---
-function distance(lat1, lon1, lat2, lon2) {
-  const R = 6371000;
-  const toRad = (deg) => (deg * Math.PI) / 180;
+      const rect = item.getBoundingClientRect();
+      offsetY = e.clientY - rect.top;
 
-  const φ1 = toRad(lat1);
-  const φ2 = toRad(lat2);
-  const Δφ = toRad(lat2 - lat1);
-  const Δλ = toRad(lon2 - lon1);
+      placeholder.style.height = rect.height + "px";
 
-  const a =
-    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+      item.classList.add("dragging");
 
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      Object.assign(item.style, {
+        width: rect.width + "px",
+        position: "absolute",
+        zIndex: "1000",
+        pointerEvents: "none",
+      });
 
-  return R * c;
-}
+      list.insertBefore(placeholder, item.nextSibling);
+      document.body.appendChild(item);
 
-// --- Locator Quiz ---
-function renderLocator(q) {
-  const targetlat = q.lat;
-  const targetlon = q.lon;
-
-  const mapsbtn = document.createElement("button");
-  const checkbtn = document.createElement("button");
-
-  mapsbtn.className = "answer-btn";
-  mapsbtn.textContent = "Hier kommst du zum Google-Maps Link";
-  answersEl.appendChild(mapsbtn);
-  mapsbtn.addEventListener("click", () => {
-    const mapsUrl = `https://www.google.com/maps?q=${targetlat},${targetlon}`;
-    window.open(mapsUrl, "_blank");
+      moveAt(e.pageY);
+    });
   });
 
-  checkbtn.className = "answer-btn";
-  checkbtn.textContent =
-    "Hier kannst du nachschauen, ob du an der richtigen Position gelandet bist.";
-  answersEl.appendChild(checkbtn);
-  checkbtn.addEventListener("click", () => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const lat = pos.coords.latitude;
-        const lon = pos.coords.longitude;
+  document.addEventListener("pointermove", (e) => {
+    if (!isDragging || !draggedItem) return;
 
-        const target = { lat: targetlat, lon: targetlon };
-        const radius = 10;
+    moveAt(e.pageY);
 
-        console.log(`${lat} + ${lon}`);
-        console.log(target);
-
-        if (distance(lat, lon, target.lat, target.lon) <= radius) {
-          alert("Du hast den richtigen Ort gefunden");
-          setCorrectLocation();
-
-          nextBtn.disabled = false;
-          nextBtn.style.opacity = "1";
-          nextBtn.style.cursor = "pointer";
-        } else {
-          alert("Das ist noch nicht der richtige Ort!");
-        }
-      },
-      () => {
-        alert("Standortzugriff verweigert oder nicht verfügbar");
-      },
+    const items = Array.from(
+      list.querySelectorAll(".ordering-item:not(.dragging)"),
     );
+
+    let placed = false;
+
+    for (let el of items) {
+      const rect = el.getBoundingClientRect();
+
+      if (e.clientY < rect.top + rect.height / 2) {
+        list.insertBefore(placeholder, el);
+        placed = true;
+        break;
+      }
+    }
+
+    if (!placed) {
+      list.appendChild(placeholder);
+    }
+  });
+
+  document.addEventListener("pointerup", () => {
+    if (!isDragging || !draggedItem) return;
+
+    isDragging = false;
+
+    draggedItem.classList.remove("dragging");
+
+    Object.assign(draggedItem.style, {
+      position: "static",
+      top: "",
+      width: "",
+      zIndex: "",
+      pointerEvents: "",
+    });
+
+    list.insertBefore(draggedItem, placeholder);
+    placeholder.remove();
+
+    draggedItem = null;
   });
 }
 
-// --- Quiz Ende ---
+function onSubmitOrdering(q, list) {
+  const items = list.querySelectorAll(".ordering-item");
+
+  const userOrder = Array.from(items).map((item) =>
+    parseInt(item.dataset.originalIndex),
+  );
+
+  // Berechne die korrekten Indices basierend auf correctOrder (falls vorhanden)
+  const correctOrder = q.correctOrder
+    ? q.correctOrder.map((correctItem) => q.items.indexOf(correctItem))
+    : Array.from({ length: q.items.length }, (_, i) => i);
+
+  const isCorrect = JSON.stringify(userOrder) === JSON.stringify(correctOrder);
+
+  if (isCorrect) {
+    items.forEach((item) => item.classList.add("correct"));
+
+    setTimeout(() => {
+      items.forEach((item) => {
+        item.classList.remove("correct");
+        item.style.pointerEvents = "none";
+      });
+
+      if (!attemptedOrdering) {
+        setScore(getScore() + 5);
+      }
+
+      setNextBtn({ enabled: true });
+      answered = true;
+    }, 800);
+  } else {
+    attemptedOrdering = true;
+
+    items.forEach((item) => item.classList.add("wrong"));
+
+    setTimeout(() => {
+      items.forEach((item) => item.classList.remove("wrong"));
+    }, 800);
+  }
+}
+
+// ============================================================
+// QUIZ ENDE
+// ============================================================
+
 function quizEnde(type) {
   answersEl.innerHTML = "";
-  nextBtn.disabled = true;
-  nextBtn.classList.toggle("hidden");
-  scoreEl.classList.toggle("hidden");
-  homeBtn.classList.toggle("hidden");
-  if (type === "normal") {
-    questionEl.textContent =
-      "Du hast das Quiz beendet und " + getScore() + " Punkte erreicht.";
-  } else if (type === "locator") {
-    questionEl.textContent = "Du hast den gesuchten Ort gefunden. Gut gemacht!";
-  }
+  setNextBtn({ enabled: false });
+  setUIState({ nextVisible: false, scoreVisible: true, homeVisible: true });
+  localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));
+
+  questionEl.textContent = `Du hast das Quiz beendet und ${getScore()} Punkte erreicht.`;
 }
 
-// --- Hilfsfunktionen ---
+// ============================================================
+// HILFSFUNKTIONEN
+// ============================================================
+
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+}
+
+function distance(lat1, lon1, lat2, lon2) {
+  const R = 6371000;
+  const toRad = (deg) => (deg * Math.PI) / 180;
+  const φ1 = toRad(lat1),
+    φ2 = toRad(lat2);
+  const Δφ = toRad(lat2 - lat1);
+  const Δλ = toRad(lon2 - lon1);
+  const a =
+    Math.sin(Δφ / 2) ** 2 + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }

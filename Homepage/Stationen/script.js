@@ -136,7 +136,7 @@ function showUnlockedStations() {
     const isUnlocked = localStorage.getItem(`quizUnlock_${quiz.id}`) === "true";
     const infobox = document.getElementById(quiz.id);
     if (infobox) {
-      infobox.style.display = isUnlocked ? "block" : "none";
+      infobox.style.display = isUnlocked ? "flex" : "none";
     }
   });
 }

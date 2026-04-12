@@ -19,6 +19,88 @@
         "type": "ordering",
         "items": ["Ernte", "Produktion", "Vermarktung", "Verarbeitung"],
         "correctOrder": ["Ernte", "Produktion", "Verarbeitung", "Vermarktung"]
+      },
+      {
+        "question": "Welche Pflande ist ein Getreide?",
+        "answers": ["Karotte", "Weizen", "Apfel"],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Welche Pflanze wird zur Zuckerherstellung genutzt?",
+        "answers": ["Mais", "Zuckerrübe", "Roggen"],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was passiert bei der Ernte?",
+        "answers": [
+          "Produkte werden verkauft",
+          "Pflanzen werden gesäht",
+          "Pflanzen werden eingesammelt"
+        ],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Schätze, wie viele Weizenkörner ungefähr benötigt werden, um 1kg Weizenmehl herzustellen.",
+        "correctAnswer": "20000",
+        "type": "guessTheNumber"
+      }
+    ],
+    "schwerQuestions": [
+      {
+        "question": "Welche Pflanze wird zur Herstellung von Zucker genutzt?",
+        "answers": ["Zuckerrübe", "zuckerrübe", "Zuckerrohr", "zuckerrohr"],
+        "type": "textInput"
+      },
+      {
+        "question": "Wofür wird Weizen hauptsächlich verwendet?",
+        "answers": ["Zucker", "Öl", "Brot & Nudeln"],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Bringe die Reihenfolge 'vom Acker zum Teller' in die richtige Reihenfolge.",
+        "type": "ordering",
+        "items": [
+          "Verarbeitung",
+          "Ernte bzw. Gewinnung",
+          "Produktion",
+          "Transport und Vermarktung"
+        ],
+        "correctOrder": [
+          "Produktion",
+          "Ernte bzw. Gewinnung",
+          "Verarbeitung",
+          "Transport und Vermarktung"
+        ]
+      },
+      {
+        "question": "Welche Aussage zu Mais ist richtig?",
+        "answers": [
+          "Wird nur als Tierfutter genutzt",
+          "Wird als Futter, Lebensmittel und Stärkeproduktion genutzt",
+          "Wird nur zu Brot verarbeitet"
+        ],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was passiert bei der Verarbeitung?",
+        "answers": [
+          "Rohprodukte werden weiterverarbeitet",
+          "Produkte werden verkauft",
+          "Tiere werden gefüttert"
+        ],
+        "correctIndex": 0,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Schätze, wie viele Weizenkörner ungefähr benötigt werden, um 1kg Weizenmehl herzustellen.",
+        "answers": ["20.000"],
+        "correctIndex": 0,
+        "type": "textInput"
       }
     ]
   },

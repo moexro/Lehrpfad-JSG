@@ -265,6 +265,9 @@ function renderQuestion() {
   if (q.type === "multipleChoice") renderMultipleChoice(q);
   else if (q.type === "DragAndDrop") renderDragAndDrop(q);
   else if (q.type === "ordering") renderOrdering(q);
+  else if (q.type === "guessTheNumber")
+    renderGuessTheNumber(q); // NEU
+  else if (q.type === "textInput") renderTextInput(q); // NEU
 }
 
 // Hilfsfunktionen für UI-Zustand
@@ -683,6 +686,161 @@ function onSubmitOrdering(q, list) {
       items.forEach((item) => item.classList.remove("wrong"));
     }, 800);
   }
+}
+
+// ============================================================
+// GUESS THE NUMBER
+// ============================================================
+
+function renderGuessTheNumber(q) {
+  answersEl.innerHTML = "";
+
+  const container = document.createElement("div");
+  container.className = "guess-container";
+
+  const inputRow = document.createElement("div");
+  inputRow.className = "guess-input-row";
+
+  const input = document.createElement("input");
+  input.type = "number";
+  input.className = "guess-input";
+  input.placeholder = "Deine Schätzung...";
+  input.min = "0";
+
+  const submitBtn = document.createElement("button");
+  submitBtn.className = "answer-btn guess-submit";
+  submitBtn.textContent = "Schätzen";
+  submitBtn.addEventListener("click", () => onSubmitGuess(q, input));
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") onSubmitGuess(q, input);
+  });
+
+  inputRow.appendChild(input);
+  inputRow.appendChild(submitBtn);
+
+  const resultLabel = document.createElement("div");
+  resultLabel.className = "guess-result";
+  resultLabel.textContent = "Gib eine Zahl ein und tippe auf Schätzen.";
+
+  container.appendChild(inputRow);
+  container.appendChild(resultLabel);
+  answersEl.appendChild(container);
+}
+
+function onSubmitGuess(q, input) {
+  const val = parseFloat(input.value);
+  if (isNaN(val) || val < 0) {
+    alert("Bitte eine gültige Zahl eingeben.");
+    return;
+  }
+
+  input.disabled = true;
+  const submitBtn = answersEl.querySelector(".guess-submit");
+  submitBtn.disabled = true;
+  submitBtn.style.opacity = "0.5";
+  submitBtn.style.cursor = "not-allowed";
+
+  const correct = q.correctAnswer;
+  const diff = Math.abs(val - correct) / correct;
+  const resultLabel = answersEl.querySelector(".guess-result");
+
+  let points = 0;
+
+  if (diff === 0) {
+    points = 5;
+    resultLabel.className = "guess-result correct";
+    resultLabel.textContent = `Perfekt! ${val} ist exakt richtig. +5 Punkte 🎉`;
+  } else if (diff <= 0.1) {
+    points = 3;
+    resultLabel.className = "guess-result close";
+    resultLabel.textContent = `Sehr nah dran! (Richtig: ${correct}, Abweichung: ${Math.round(diff * 100)}%) +3 Punkte`;
+  } else if (diff <= 0.25) {
+    points = 1;
+    resultLabel.className = "guess-result miss";
+    resultLabel.textContent = `Knapp daneben. (Richtig: ${correct}, Abweichung: ${Math.round(diff * 100)}%) +1 Punkt`;
+  } else {
+    points = 0;
+    resultLabel.className = "guess-result miss";
+    resultLabel.textContent = `Leider falsch. Die richtige Antwort war ${correct}. +0 Punkte`;
+  }
+
+  setScore(getScore() + points);
+  setNextBtn({ enabled: true });
+  answered = true;
+}
+
+// ============================================================
+// TEXT INPUT
+// ============================================================
+
+function renderTextInput(q) {
+  answersEl.innerHTML = "";
+
+  const container = document.createElement("div");
+  container.className = "textinput-container";
+
+  const inputRow = document.createElement("div");
+  inputRow.className = "textinput-row";
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "textinput-field";
+  input.placeholder = "Deine Antwort...";
+
+  const submitBtn = document.createElement("button");
+  submitBtn.className = "answer-btn textinput-submit";
+  submitBtn.textContent = "Antworten";
+  submitBtn.addEventListener("click", () => onSubmitTextInput(q, input));
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") onSubmitTextInput(q, input);
+  });
+
+  inputRow.appendChild(input);
+  inputRow.appendChild(submitBtn);
+
+  const feedback = document.createElement("div");
+  feedback.className = "textinput-feedback";
+
+  container.appendChild(inputRow);
+  container.appendChild(feedback);
+  answersEl.appendChild(container);
+
+  input.focus();
+}
+
+function onSubmitTextInput(q, input) {
+  const val = input.value.trim().toLowerCase();
+  if (!val) {
+    alert("Bitte eine Antwort eingeben.");
+    return;
+  }
+
+  input.disabled = true;
+  const submitBtn = answersEl.querySelector(".textinput-submit");
+  submitBtn.disabled = true;
+  submitBtn.style.opacity = "0.5";
+  submitBtn.style.cursor = "not-allowed";
+
+  // Alle akzeptierten Antworten normalisieren und vergleichen
+  const accepted = q.answers.map((a) => a.trim().toLowerCase());
+  const isCorrect = accepted.includes(val);
+
+  const feedback = answersEl.querySelector(".textinput-feedback");
+
+  if (isCorrect) {
+    feedback.className = "textinput-feedback correct";
+    feedback.textContent = `✓ Richtig! +2 Punkte`;
+    setScore(getScore() + 2);
+  } else {
+    feedback.className = "textinput-feedback wrong";
+    // Erste Antwort als Musterlösung anzeigen
+    feedback.textContent = `✗ Leider falsch. Richtig wäre: ${q.answers[0]}`;
+  }
+
+  setNextBtn({ enabled: true });
+  answered = true;
 }
 
 // ============================================================

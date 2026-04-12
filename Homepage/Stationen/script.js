@@ -162,15 +162,15 @@ function ensureQuizMode() {
     `;
 
     overlay.innerHTML = `
-      <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; max-width:320px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,.25);">
+      <div style="background: var(--colormaindark); border-radius:12px; padding:2rem; text-align:center; max-width:320px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,.25);">
         <h2 style="margin:0 0 .5rem; font-size:1.3rem;">Quizmodus wählen</h2>
-        <p style="margin:0 0 1.5rem; color:#555; font-size:.95rem;">Welchen Schwierigkeitsgrad möchtest du?</p>
+        <p style="margin:0 0 1.5rem; color: var(--colorhighlight); font-size:.95rem;">Welchen Schwierigkeitsgrad möchtest du spielen?</p>
         <div style="display:flex; gap:1rem; justify-content:center;">
-          <button id="modeLeicht" style="flex:1; padding:.75rem; border-radius:8px; border:2px solid #4caf50; background:#4caf50; color:#fff; font-size:1rem; cursor:pointer; font-weight:600;">
-            🟢 Leicht
+          <button id="modeLeicht" style="flex:1; padding:.75rem; border-radius:8px; border:2px solid #4caf50; background:#4caf50; color: var(--colorhighlight); font-size:1rem; cursor:pointer; font-weight:600;">
+            Leicht
           </button>
-          <button id="modeSchwer" style="flex:1; padding:.75rem; border-radius:8px; border:2px solid #f44336; background:#f44336; color:#fff; font-size:1rem; cursor:pointer; font-weight:600;">
-            🔴 Schwer
+          <button id="modeSchwer" style="flex:1; padding:.75rem; border-radius:8px; border:2px solid #f44336; background:#f44336; color: var(--colorhighlight); font-size:1rem; cursor:pointer; font-weight:600;">
+            Schwer
           </button>
         </div>
       </div>

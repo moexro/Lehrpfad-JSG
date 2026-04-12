@@ -430,3 +430,225 @@ img {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
+/* ============================================================
+   GUESS THE NUMBER
+   ============================================================ */
+
+.guess-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 90%;
+}
+
+.guess-input-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 420px;
+}
+
+.guess-input {
+  flex: 1 1 180px;
+  padding: 14px 18px;
+  font-size: 18px;
+  border-radius: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--colormaindark);
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 12px 48px rgba(0, 0, 0, 0.7);
+  outline: none;
+  text-align: center;
+  transition: border-color 0.2s ease;
+  -webkit-text-fill-color: #fff;
+}
+
+.guess-input:focus {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.guess-input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Pfeile in number-input ausblenden */
+.guess-input::-webkit-outer-spin-button,
+.guess-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.guess-submit {
+  flex: 0 0 auto;
+  padding: 14px 26px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 35px;
+  background: var(--colormainlight);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 4px 12px 48px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.guess-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.guess-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.guess-result {
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 16px;
+  max-width: 420px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.75);
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.75);
+  transition: background 0.3s ease;
+}
+
+.guess-result.correct {
+  background: var(--correct);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.guess-result.close {
+  background: rgba(180, 130, 30, 0.55);
+  color: var(--colorhightlight);
+  -webkit-text-fill-color: var(--colorhightlight);
+  border-color: rgba(255, 220, 100, 0.2);
+}
+
+.guess-result.miss {
+  background: var(--wrong);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================
+   TEXT INPUT
+   ============================================================ */
+
+.textinput-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 90%;
+}
+
+.textinput-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 480px;
+}
+
+.textinput-field {
+  flex: 1 1 200px;
+  padding: 14px 18px;
+  font-size: 18px;
+  border-radius: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--colormaindark);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 12px 48px rgba(0, 0, 0, 0.7);
+  outline: none;
+  text-align: center;
+  transition: border-color 0.2s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.textinput-field:focus {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.textinput-field:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.textinput-submit {
+  flex: 0 0 auto;
+  padding: 14px 26px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 35px;
+  background: var(--colormainlight);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 4px 12px 48px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.textinput-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.textinput-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.textinput-feedback {
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 16px;
+  max-width: 480px;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: background 0.3s ease;
+}
+
+.textinput-feedback.correct {
+  background: var(--correct);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
+
+.textinput-feedback.wrong {
+  background: var(--wrong);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
+
+/* Responsive: auf kleinen Bildschirmen alles full-width */
+@media (max-width: 600px) {
+  .guess-input,
+  .guess-submit,
+  .textinput-field,
+  .textinput-submit {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

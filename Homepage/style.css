@@ -87,8 +87,6 @@ main {
   gap: 12px;
 }
 
-
-
 #ernaehrung-audio-box {
   display: flex;
   align-items: center;
@@ -190,6 +188,34 @@ h3 {
 }
 
 /* spezielles für die stationen */
+
+.mode-container {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--colormainlight);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 18px 0;
+}
+
+.mode-title {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.mode-note {
+  margin: 0;
+  color: var(--colorhightlight);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  font-size: 0.96rem;
+}
+
+@media (max-width: 430px) {
+  .mode-container {
+    padding: 14px;
+  }
+}
 
 .imagebox {
   display: grid !important;

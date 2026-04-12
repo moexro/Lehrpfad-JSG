@@ -28,6 +28,8 @@ function init() {
 function setup() {
   unlockFromLink();
   resetButton();
+  const currentMode = ensureQuizMode();
+  renderQuizMode(currentMode);
   showUnlockedStations();
   setupErnaehrungAudioToggle();
 
@@ -139,6 +141,46 @@ function showUnlockedStations() {
       infobox.style.display = isUnlocked ? "flex" : "none";
     }
   });
+}
+
+function ensureQuizMode() {
+  let mode = localStorage.getItem("quizMode");
+  if (mode === "leicht" || mode === "schwer") {
+    return mode;
+  }
+
+  while (true) {
+    const answer = prompt(
+      "Welchen Quizmodus möchtest du verwenden? Bitte gib 'leicht' oder 'schwer' ein.",
+      "leicht",
+    );
+
+    if (answer === null) {
+      const useEasy = confirm(
+        "Du musst einen Modus wählen. Soll der Modus 'leicht' verwendet werden?",
+      );
+      mode = useEasy ? "leicht" : "schwer";
+      break;
+    }
+
+    const normalized = answer.trim().toLowerCase();
+    if (normalized === "leicht" || normalized === "schwer") {
+      mode = normalized;
+      break;
+    }
+
+    alert("Ungültige Eingabe. Gib bitte nur 'leicht' oder 'schwer' ein.");
+  }
+
+  localStorage.setItem("quizMode", mode);
+  return mode;
+}
+
+function renderQuizMode(mode) {
+  const modeText = document.getElementById("quizModeText");
+  if (!modeText) return;
+
+  modeText.textContent = `Modus: ${mode === "leicht" ? "Leicht" : "Schwer"}`;
 }
 
 // Ernährungsstaion
@@ -576,4 +618,3 @@ l-49 11 60 1 c45 1 73 -5 105 -21z m-335 -9 c4 -6 5 -13 2 -16 -8 -7 -47 7
 document.addEventListener("DOMContentLoaded", () => {
   loadErnaehrungsbilder();
 });
-

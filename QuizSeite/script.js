@@ -13,6 +13,8 @@ const basehref = location.hostname.includes("github.io")
 let allQuiz = null;
 let currentQuiz;
 let currentQuestion = 0;
+let currentQuizQuestions = [];
+let quizMode = "leicht";
 let answered = false;
 let selectedAnswers = [];
 let attemptedMultipleChoice = false;
@@ -56,6 +58,7 @@ function initQuiz() {
 }
 
 function setup() {
+  quizMode = ensureQuizMode();
   questionEl = document.getElementById("question");
   answersEl = document.getElementById("answers");
   scoreEl = document.getElementById("score");
@@ -74,7 +77,7 @@ function setup() {
 // ============================================================
 
 function onNextQuestion() {
-  const questions = allQuiz[currentQuiz].questions;
+  const questions = currentQuizQuestions;
   const type = questions[currentQuestion].type;
   currentQuestion++;
 
@@ -103,6 +106,8 @@ function getQuizID() {
   if (q && allQuiz[q]) {
     currentQuiz = q;
     localStorage.setItem(`quizUnlock_${currentQuiz}`, JSON.stringify(true));
+    currentQuizQuestions = getModeQuestions(allQuiz[currentQuiz]);
+
     if (
       JSON.parse(localStorage.getItem(`quizDone_${currentQuiz}`) || "false") !==
       true
@@ -120,11 +125,58 @@ function getQuizID() {
     }
   } else {
     currentQuiz = "null";
+    currentQuizQuestions = [];
   }
 }
 
 function getScore() {
   return parseInt(localStorage.getItem(`quizScore_${currentQuiz}`) || "0", 10);
+}
+
+function getModeQuestions(quiz) {
+  if (!quiz) {
+    return [];
+  }
+
+  const modeKey = quizMode === "leicht" ? "leichtQuestions" : "schwerQuestions";
+  if (Array.isArray(quiz[modeKey]) && quiz[modeKey].length > 0) {
+    return quiz[modeKey].slice();
+  }
+
+  return [];
+}
+
+function ensureQuizMode() {
+  const stored = localStorage.getItem("quizMode");
+  if (stored === "leicht" || stored === "schwer") {
+    return stored;
+  }
+
+  let mode = "leicht";
+  while (true) {
+    const answer = prompt(
+      "Welchen Quizmodus möchtest du verwenden? Bitte gib 'leicht' oder 'schwer' ein.",
+      "leicht",
+    );
+    if (answer === null) {
+      const useEasy = confirm(
+        "Du musst einen Modus wählen. Soll der Modus 'leicht' verwendet werden?",
+      );
+      mode = useEasy ? "leicht" : "schwer";
+      break;
+    }
+
+    const normalized = answer.trim().toLowerCase();
+    if (normalized === "leicht" || normalized === "schwer") {
+      mode = normalized;
+      break;
+    }
+
+    alert("Ungültige Eingabe. Gib bitte nur 'leicht' oder 'schwer' ein.");
+  }
+
+  localStorage.setItem("quizMode", mode);
+  return mode;
 }
 
 function setScore(value) {
@@ -163,9 +215,10 @@ function renderQuestion() {
   }
 
   const quiz = allQuiz[currentQuiz];
+  const questions = currentQuizQuestions;
 
   // Alle Fragen beantwortet
-  if (currentQuestion >= quiz.questions.length) {
+  if (currentQuestion >= questions.length) {
     titleEl.textContent = "Quiz abgeschlossen";
     questionEl.textContent = "Du hast alle Fragen beantwortet.";
     answersEl.innerHTML = "";
@@ -174,7 +227,7 @@ function renderQuestion() {
     return;
   }
 
-  const q = quiz.questions[currentQuestion];
+  const q = questions[currentQuestion];
 
   if (!q) {
     questionEl.textContent = "Frage nicht gefunden.";

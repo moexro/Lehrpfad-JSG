@@ -25,10 +25,10 @@ function init() {
   if (document.readyState !== "loading") setup();
 }
 
-function setup() {
+async function setup() {
   unlockFromLink();
   resetButton();
-  const currentMode = ensureQuizMode();
+  const currentMode = await ensureQuizMode();
   renderQuizMode(currentMode);
   showUnlockedStations();
   setupErnaehrungAudioToggle();
@@ -143,37 +143,53 @@ function showUnlockedStations() {
   });
 }
 
+// ============================================================
+// MODUS-AUSWAHL (Modal, kein prompt/confirm)
+// ============================================================
+
 function ensureQuizMode() {
-  let mode = localStorage.getItem("quizMode");
-  if (mode === "leicht" || mode === "schwer") {
-    return mode;
-  }
-
-  while (true) {
-    const answer = prompt(
-      "Welchen Quizmodus möchtest du verwenden? Bitte gib 'leicht' oder 'schwer' ein.",
-      "leicht",
-    );
-
-    if (answer === null) {
-      const useEasy = confirm(
-        "Du musst einen Modus wählen. Soll der Modus 'leicht' verwendet werden?",
-      );
-      mode = useEasy ? "leicht" : "schwer";
-      break;
+  return new Promise((resolve) => {
+    const stored = localStorage.getItem("quizMode");
+    if (stored === "leicht" || stored === "schwer") {
+      resolve(stored);
+      return;
     }
 
-    const normalized = answer.trim().toLowerCase();
-    if (normalized === "leicht" || normalized === "schwer") {
-      mode = normalized;
-      break;
-    }
+    const overlay = document.createElement("div");
+    overlay.style.cssText = `
+      position:fixed; inset:0; background:rgba(0,0,0,.6);
+      display:flex; align-items:center; justify-content:center; z-index:9999;
+    `;
 
-    alert("Ungültige Eingabe. Gib bitte nur 'leicht' oder 'schwer' ein.");
-  }
+    overlay.innerHTML = `
+      <div style="background:#fff; border-radius:12px; padding:2rem; text-align:center; max-width:320px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,.25);">
+        <h2 style="margin:0 0 .5rem; font-size:1.3rem;">Quizmodus wählen</h2>
+        <p style="margin:0 0 1.5rem; color:#555; font-size:.95rem;">Welchen Schwierigkeitsgrad möchtest du?</p>
+        <div style="display:flex; gap:1rem; justify-content:center;">
+          <button id="modeLeicht" style="flex:1; padding:.75rem; border-radius:8px; border:2px solid #4caf50; background:#4caf50; color:#fff; font-size:1rem; cursor:pointer; font-weight:600;">
+            🟢 Leicht
+          </button>
+          <button id="modeSchwer" style="flex:1; padding:.75rem; border-radius:8px; border:2px solid #f44336; background:#f44336; color:#fff; font-size:1rem; cursor:pointer; font-weight:600;">
+            🔴 Schwer
+          </button>
+        </div>
+      </div>
+    `;
 
-  localStorage.setItem("quizMode", mode);
-  return mode;
+    document.body.appendChild(overlay);
+
+    overlay.querySelector("#modeLeicht").addEventListener("click", () => {
+      localStorage.setItem("quizMode", "leicht");
+      overlay.remove();
+      resolve("leicht");
+    });
+
+    overlay.querySelector("#modeSchwer").addEventListener("click", () => {
+      localStorage.setItem("quizMode", "schwer");
+      overlay.remove();
+      resolve("schwer");
+    });
+  });
 }
 
 function renderQuizMode(mode) {
@@ -183,7 +199,7 @@ function renderQuizMode(mode) {
   modeText.textContent = `Modus: ${mode === "leicht" ? "Leicht" : "Schwer"}`;
 }
 
-// Ernährungsstaion
+// Ernährungsstation
 
 function loadErnaehrungsbilder() {
   const ernaehrungsbilder = document.getElementById("ernaehrung-images");
@@ -280,7 +296,7 @@ function loadErnaehrungsbilder() {
 32 l-32 29 -11 -28z"
     />
   </g>
-</svg
+</svg>
 
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">

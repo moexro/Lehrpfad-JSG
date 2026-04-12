@@ -499,7 +499,7 @@ function initOrderingDrag(list) {
   placeholder.className = "ordering-placeholder";
 
   let offsetY = 0;
-  let isDragging = false;
+  let activePointerId = null;
 
   function moveAt(y) {
     draggedItem.style.top = y - offsetY + "px";
@@ -510,11 +510,13 @@ function initOrderingDrag(list) {
       e.preventDefault();
 
       draggedItem = item;
-      isDragging = true;
+      activePointerId = e.pointerId;
+
+      // Pointer auf dem Element "festhalten" – funktioniert auch bei Touch
+      item.setPointerCapture(e.pointerId);
 
       const rect = item.getBoundingClientRect();
       offsetY = e.clientY - rect.top;
-
       placeholder.style.height = rect.height + "px";
 
       item.classList.add("dragging");
@@ -534,8 +536,7 @@ function initOrderingDrag(list) {
   });
 
   document.addEventListener("pointermove", (e) => {
-    if (!isDragging || !draggedItem) return;
-
+    if (!draggedItem || e.pointerId !== activePointerId) return;
     moveAt(e.pageY);
 
     const items = Array.from(
@@ -543,10 +544,8 @@ function initOrderingDrag(list) {
     );
 
     let placed = false;
-
     for (let el of items) {
       const rect = el.getBoundingClientRect();
-
       if (e.clientY < rect.top + rect.height / 2) {
         list.insertBefore(placeholder, el);
         placed = true;
@@ -554,15 +553,11 @@ function initOrderingDrag(list) {
       }
     }
 
-    if (!placed) {
-      list.appendChild(placeholder);
-    }
+    if (!placed) list.appendChild(placeholder);
   });
 
-  document.addEventListener("pointerup", () => {
-    if (!isDragging || !draggedItem) return;
-
-    isDragging = false;
+  document.addEventListener("pointerup", (e) => {
+    if (!draggedItem || e.pointerId !== activePointerId) return;
 
     draggedItem.classList.remove("dragging");
 
@@ -578,6 +573,7 @@ function initOrderingDrag(list) {
     placeholder.remove();
 
     draggedItem = null;
+    activePointerId = null;
   });
 }
 

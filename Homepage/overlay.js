@@ -7,7 +7,7 @@ const dropdown = document.createElement("div");
 const icon = document.createElement("div");
 const main = document.getElementById("main");
 const dropcontent = document.createElement("ul");
-const footer = document.createElement("footer");
+
 
 function createOverlay() {
   let basehref = location.hostname.includes("github.io")
@@ -90,11 +90,6 @@ function createOverlay() {
   if (main) {
     main.appendChild(dropcontent);
   }
-
-  // ── Footer ───────────────────────────────────────────────
-  footer.className = "bar";
-  footer.id = "footer";
-  document.body.appendChild(footer);
 }
 
 // ── Dropdown-Logik ───────────────────────────────────────

@@ -559,7 +559,7 @@ function initOrderingDrag(list) {
 
   document.addEventListener("pointerup", (e) => {
     if (!draggedItem || e.pointerId !== activePointerId) return;
-
+    e.preventDefault();
     draggedItem.classList.remove("dragging");
 
     Object.assign(draggedItem.style, {

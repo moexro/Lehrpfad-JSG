@@ -537,6 +537,7 @@ function initOrderingDrag(list) {
 
   document.addEventListener("pointermove", (e) => {
     if (!draggedItem || e.pointerId !== activePointerId) return;
+    e.preventDefault();
     moveAt(e.pageY);
 
     const items = Array.from(

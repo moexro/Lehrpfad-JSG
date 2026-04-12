@@ -49,6 +49,7 @@ main {
   margin: 4px 8px;
   color: var(--colorhightlight);
   padding: 5px;
+  word-break: break-word;
 }
 
 .btn {
@@ -101,41 +102,6 @@ h3 {
   margin-top: auto;
 }
 
-.get_to-quiz-btn {
-  width: 100%;
-  height: 100px;
-  max-width: 250px;
-  min-width: 200px;
-  display: flex;
-  font-size: 20px;
-  border-radius: 10px;
-  margin: 16px 16px;
-  padding: 0 16px;
-  background-color: transparent;
-  backdrop-filter: blur(10px);
-  color: var(--colorhightlight);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  text-align: center; /* falls Text umbrechen darf */
-  cursor: pointer;
-}
-
-.stationcontainer {
-  display: flex;
-  flex-wrap: wrap;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  width: 100%;
-  padding: 4px;
-  align-items: stretch;
-  justify-content: space-around;
-}
-
-#unlockcontainer {
-  background-color: var(--colorseclight);
-}
 
 #resetQuizzes {
   margin-bottom: 10px;
@@ -178,7 +144,7 @@ h3 {
   font-weight: 600;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 430px) {
   body {
     padding: 0px;
   }
@@ -195,10 +161,6 @@ h3 {
     padding: 16px;
     box-sizing: border-box;
   }
-
-  .get_to-quiz-btn {
-    padding: 0 8px;
-  }
 }
 
 /* spezielles für die stationen */
@@ -206,7 +168,7 @@ h3 {
 #ernaehrung-images {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 16px;
+  gap: 48px;
   margin: 12px 12px;
 }
 

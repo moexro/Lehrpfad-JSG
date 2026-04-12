@@ -70,7 +70,18 @@
             modernen Ernährung wie Zeitmangel, verarbeitete Lebensmittel und
             Informationsüberflutung. Aber hört selbst ...
           </p>
-          <audio src=""></audio>
+
+          <button onclick="document.getElementById('ernaehrung-audio').play()">
+            ▶ Play
+          </button>
+          <button onclick="document.getElementById('ernaehrung-audio').pause()">
+            ⏸ Pause
+          </button>
+
+          <audio
+            id="ernaehrung-audio"
+            src="../media/audio/Ernährung im Wandel.m4a"
+          ></audio>
           <p class="text">
             Unsere Ernährung ist eng mit der Landwirtschaft verbunden. Was wir
             essen, wächst auf Feldern, in Gewächshäusern oder wird durch
@@ -549,6 +560,5 @@ c48 -4 89 -9 90 -10z m78 -182 c-5 -48 -11 -67 -25 -74 -10 -6 -21 -10 -24
       <div id="placer"></div>
     </main>
     <div id="overlay"></div>
-    
   </body>
 </html>

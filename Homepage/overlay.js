@@ -25,6 +25,7 @@ function createOverlay() {
 
   icon.className = "icon dropbtn";
   icon.id = "dropBtn";
+  icon.style.backgroundImage = `url("${basehref}media/images/menu.svg")`;
 
   dropdown.appendChild(icon);
   nav.appendChild(dropdown);

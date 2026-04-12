@@ -11,7 +11,7 @@ const LP_COORDS = {
 };
 
 const LP_DEFAULT_CENTER = [48.1351, 11.582];
-const LP_DEFAULT_ZOOM = 15;
+const LP_DEFAULT_ZOOM = 10;
 
 // ── Proximity-Schwellwert in Metern ──────────────────────
 const LP_PROXIMITY_METERS = 5;
@@ -356,196 +356,38 @@ function lp_startTracking(map, markerRefs, basehref) {
   let userMarker = null;
   let accuracyCircle = null;
   let lastHeading = null;
-  // isFollowing: true = Karte folgt Nutzer (nur wenn er nah am Pfad ist)
-  // manualOverride: true = Nutzer hat manuell gescrollt, Auto-Follow pausiert
+
   let isFollowing = false;
   let manualOverride = false;
-  const LP_TRAIL_RADIUS_M = 1000; // < 1 km von mind. einer Station → Follow-Modus
+
+  const LP_TRAIL_RADIUS_M = 1000;
   const notifiedKeys = new Set();
 
-  // Bereits freigeschaltete Stationen als bekannt markieren
+  // 👉 NEU: verhindert initiales Reinzoomen
+  let initialViewLocked = true;
+
   Object.keys(LP_COORDS).forEach((key) => {
     if (lp_isUnlocked(key)) notifiedKeys.add(key);
   });
 
-  // "Meinen Standort anzeigen"-Button
-  const locateBtn = L.control({ position: "bottomright" });
-  locateBtn.onAdd = () => {
-    const btn = L.DomUtil.create("button", "lp-locate-btn");
-    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
-      <circle cx="12" cy="12" r="8" opacity=".3"/>
-    </svg>`;
-    btn.title = "Meinen Standort zentrieren";
-    btn.addEventListener("click", () => {
-      manualOverride = false;
-      if (userMarker) {
-        map.setView(userMarker.getLatLng(), Math.max(map.getZoom(), 17));
-      }
-    });
-    return btn;
-  };
-  locateBtn.addTo(map);
-
-  // "Alle Stationen anzeigen"-Button
-  const overviewBtn = L.control({ position: "bottomright" });
-  overviewBtn.onAdd = () => {
-    const btn = L.DomUtil.create("button", "lp-locate-btn");
-    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-      <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-    </svg>`;
-    btn.title = "Alle Stationen anzeigen";
-    btn.addEventListener("click", () => {
-      manualOverride = true;
-      map.fitBounds(Object.values(LP_COORDS), { padding: [36, 36] });
-    });
-    return btn;
-  };
-  overviewBtn.addTo(map);
-
-  // Manuelles Scrollen pausiert Auto-Follow
   map.on("dragstart", () => {
     manualOverride = true;
   });
 
-  // DeviceOrientation für Kompass-Heading
-  let deviceHeading = null;
-  let compassBtnEl = null;
-
-  function setCompassState(active, unavailable = false) {
-    if (!compassBtnEl) return;
-    if (unavailable) {
-      compassBtnEl.style.background = "#888";
-      compassBtnEl.style.color = "#ccc";
-      compassBtnEl.style.opacity = "0.5";
-      compassBtnEl.style.cursor = "not-allowed";
-      compassBtnEl.title = "Kein Kompasssensor vorhanden";
-      compassBtnEl.disabled = true;
-    } else {
-      compassBtnEl.style.background = active ? "#3a7d44" : "#9b2222";
-      compassBtnEl.style.color = "#fff";
-      compassBtnEl.style.opacity = "1";
-      compassBtnEl.style.cursor = "pointer";
-      compassBtnEl.disabled = false;
-      compassBtnEl.title = active
-        ? "Kompass aktiv"
-        : "Kompass inaktiv – tippen zum Aktivieren";
-    }
-  }
-
-  function handleOrientation(e) {
-    let heading = null;
-    if (e.webkitCompassHeading != null) {
-      heading = e.webkitCompassHeading;
-    } else if (e.alpha != null) {
-      heading = (360 - e.alpha) % 360;
-    }
-    if (heading == null) return;
-    deviceHeading = heading;
-    setCompassState(true);
-    if (userMarker) {
-      userMarker.setIcon(lp_makeUserIcon(deviceHeading));
-    }
-  }
-
-  function requestIOSOrientation() {
-    DeviceOrientationEvent.requestPermission()
-      .then((state) => {
-        if (state === "granted") {
-          window.addEventListener("deviceorientation", handleOrientation);
-          setCompassState(true);
-        } else {
-          setCompassState(false);
-        }
-      })
-      .catch(() => setCompassState(false));
-  }
-
-  // Kompass-Button immer anzeigen
-  const compassControl = L.control({ position: "bottomright" });
-  compassControl.onAdd = () => {
-    const btn = L.DomUtil.create("button", "lp-locate-btn lp-compass-btn");
-    btn.innerHTML = `🧭`;
-    compassBtnEl = btn;
-    setCompassState(false); // Startzustand: rot (wird ggf. zu grau wenn kein Sensor)
-
-    btn.addEventListener("click", () => {
-      if (
-        typeof DeviceOrientationEvent !== "undefined" &&
-        typeof DeviceOrientationEvent.requestPermission === "function"
-      ) {
-        // iOS 13+: Klick löst erneute Anfrage aus (einziger Weg nach Ablehnung)
-        requestIOSOrientation();
-      }
-    });
-
-    return btn;
-  };
-  compassControl.addTo(map);
-  // compassBtnEl ist jetzt gesetzt, da addTo onAdd synchron aufruft
-
-  const isIOS13 =
-    typeof DeviceOrientationEvent !== "undefined" &&
-    typeof DeviceOrientationEvent.requestPermission === "function";
-
-  if (isIOS13) {
-    // iOS 13+: requestPermission MUSS durch einen User-Gesture ausgelöst werden.
-    // Wir hängen uns einmalig an den nächsten Klick irgendwo auf der Seite,
-    // um die Erlaubnis so früh wie möglich — aber regelkonform — anzufragen.
-    const askOnFirstInteraction = () => {
-      document.removeEventListener("click", askOnFirstInteraction, {
-        once: true,
-      });
-      requestIOSOrientation();
-    };
-    document.addEventListener("click", askOnFirstInteraction, { once: true });
-  } else {
-    // Android / Desktop: Events registrieren
-    // Nach 2s ohne Event → kein Sensor vorhanden → Button grau/deaktiviert
-    let sensorDetected = false;
-    const sensorTimeout = setTimeout(() => {
-      if (!sensorDetected) setCompassState(false, true);
-    }, 2000);
-
-    const onOrientFirst = (e) => {
-      const hasHeading =
-        e.webkitCompassHeading != null || (e.alpha != null && e.alpha !== 0);
-      if (hasHeading) {
-        sensorDetected = true;
-        clearTimeout(sensorTimeout);
-      } else if (!sensorDetected) {
-        // Events kommen, aber kein Heading → kein Sensor
-        clearTimeout(sensorTimeout);
-        setCompassState(false, true);
-      }
-      handleOrientation(e);
-    };
-
-    window.addEventListener("deviceorientationabsolute", onOrientFirst, true);
-    window.addEventListener("deviceorientation", onOrientFirst, true);
-  }
-
-  // Geolocation Watch
   navigator.geolocation.watchPosition(
     (pos) => {
       const { latitude: lat, longitude: lng, accuracy, heading } = pos.coords;
 
-      // Heading: GPS-Heading wenn kein Geräte-Heading verfügbar
-      const h =
-        deviceHeading != null
-          ? deviceHeading
-          : heading != null && !isNaN(heading)
-            ? heading
-            : null;
+      const h = heading != null && !isNaN(heading) ? heading : null;
 
-      // Prüfen ob Nutzer innerhalb 1 km von mind. einer Station ist
       const wasNear = isFollowing;
+
       const isNearTrail = Object.values(LP_COORDS).some(
         (coords) =>
           lp_distanceMeters(lat, lng, coords[0], coords[1]) <=
           LP_TRAIL_RADIUS_M,
       );
+
       isFollowing = isNearTrail;
 
       if (!userMarker) {
@@ -553,31 +395,32 @@ function lp_startTracking(map, markerRefs, basehref) {
           icon: lp_makeUserIcon(h),
           zIndexOffset: 1000,
         }).addTo(map);
-        userMarker.bindPopup("<b>Du bist hier</b>");
 
         accuracyCircle = lp_makeAccuracyCircle(map, lat, lng, accuracy);
 
-        if (isNearTrail) {
-          // Nutzer ist beim Lehrpfad → auf Nutzer zentrieren
-          map.setView([lat, lng], 17);
-        }
-        // Sonst bleibt fitBounds aus lp_initMap aktiv
+        // ❌ KEIN setView mehr hier → Übersicht bleibt erhalten
+
+        // 👉 Nach erstem Fix freigeben
+        initialViewLocked = false;
       } else {
         userMarker.setLatLng([lat, lng]);
         userMarker.setIcon(lp_makeUserIcon(h));
         accuracyCircle.setLatLng([lat, lng]);
         accuracyCircle.setRadius(accuracy);
 
-        if (isNearTrail && !manualOverride) {
+        // 👉 Follow erst nach initialem Laden erlaubt
+        if (isNearTrail && !manualOverride && !initialViewLocked) {
           map.panTo([lat, lng], { animate: true, duration: 0.5 });
-        } else if (!isNearTrail && wasNear) {
-          // Nutzer hat den Pfad verlassen → zurück auf alle Stationen zoomen
+        }
+
+        // Wenn Nutzer weggeht → wieder Übersicht
+        else if (!isNearTrail && wasNear) {
           const allCoords = Object.values(LP_COORDS);
           map.fitBounds(allCoords, { padding: [36, 36] });
         }
       }
 
-      // ── Proximity-Check: Stationen innerhalb 5 m freischalten ──
+      // ── Proximity Unlock ──
       Object.entries(LP_COORDS).forEach(([key, coords]) => {
         if (notifiedKeys.has(key)) return;
 
@@ -586,64 +429,18 @@ function lp_startTracking(map, markerRefs, basehref) {
         if (dist <= LP_PROXIMITY_METERS) {
           notifiedKeys.add(key);
 
-          // Station freischalten
           localStorage.setItem(`quizUnlock_${key}`, JSON.stringify(true));
 
-          // Infobox anzeigen
-          const infobox = document.getElementById(key);
-          if (infobox) {
-            infobox.style.display = "block";
-            // Scrolle zu der Station
-            infobox.scrollIntoView({ behavior: "smooth", block: "start" });
-            // Popup
-            const stationName = markerRefs[key]?.quiz?.name || key;
-            alert(
-              `Station ${stationName} freigeschaltet! Informationen sind nun verfügbar.`,
-            );
-          }
-
-          // Marker-Icon aktualisieren
           const ref = markerRefs[key];
           if (ref) {
             const isCompleted = ref.quiz ? lp_isCompleted(ref.quiz) : false;
             ref.marker.setIcon(lp_makeIcon(true, isCompleted));
           }
-
-          // Toast-Benachrichtigung
-          const toast = document.createElement("div");
-          const stationName = markerRefs[key]?.quiz?.name || key;
-          toast.innerHTML = `🎯 <strong>Station ${key} in der Nähe!</strong><br><small>Automatisch freigeschaltet</small>`;
-          toast.style.cssText = `
-            position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
-            background:#2d4a2d;color:#fff;padding:12px 20px;border-radius:14px;
-            font-size:0.88rem;line-height:1.45;text-align:center;
-            box-shadow:0 6px 20px rgba(0,0,0,0.25);z-index:9999;
-            border:1.5px solid rgba(255,255,255,0.15);
-            animation:lp-slidein 0.35s ease, lp-fadeout 0.4s 3.6s forwards;`;
-          document.body.appendChild(toast);
-          setTimeout(() => toast.remove(), 4000);
-
-          // Vibration (falls unterstützt)
-          if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
         }
       });
     },
     (err) => {
       console.warn("Geolocation-Fehler:", err.message);
-
-      // Einmalige Fehlermeldung
-      if (err.code === err.PERMISSION_DENIED) {
-        const toast = document.createElement("div");
-        toast.textContent =
-          "📍 Standortzugriff verweigert – Tracking nicht möglich";
-        toast.style.cssText = `
-          position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-          background:#7a1f1f;color:#fff;padding:10px 18px;border-radius:20px;
-          font-size:0.85rem;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.2);
-          z-index:9999;`;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 4000);
-      }
     },
     {
       enableHighAccuracy: true,

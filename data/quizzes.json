@@ -21,7 +21,7 @@
         "correctOrder": ["Ernte", "Produktion", "Verarbeitung", "Vermarktung"]
       },
       {
-        "question": "Welche Pflande ist ein Getreide?",
+        "question": "Welche Pflanze ist ein Getreide?",
         "answers": ["Karotte", "Weizen", "Apfel"],
         "correctIndex": 1,
         "type": "multipleChoice"

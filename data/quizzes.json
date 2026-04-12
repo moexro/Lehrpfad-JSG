@@ -1,0 +1,219 @@
+{
+  "Q1": {
+    "name": "Über den Ackerbau",
+    "id": "Q1",
+    "questions": [
+      {
+        "question": "Welche Pflanze wird in Deutschland am häufigsten angebaut?",
+        "answers": ["Weizen", "Mais", "Gerste", "Raps"],
+        "correctIndex": 0,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was versteht man unter Fruchtfolge?",
+        "answers": [
+          "Die Reihenfolge der Ernte innerhalb eines Tages",
+          "Der Wechsel verschiedener Pflanzenarten auf einem Feld über mehrere Jahre",
+          "Das Sortieren der Ernte nach Größe",
+          "Die Reihenfolge der Düngung"
+        ],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Welche Maschine wird hauptsächlich zur Bodenbearbeitung vor der Aussaat eingesetzt?",
+        "answers": ["Mähdrescher", "Pflug", "Ballenpresse", "Güllefass"],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      }
+    ]
+  },
+  "Q2": {
+    "name": "Über die Tierhaltung",
+    "id": "Q2",
+    "questions": [
+      {
+        "question": "Welche Nutztiere liefern sowohl Milch als auch Fleisch?",
+        "answers": ["Schafe", "Schweine", "Hühner", "Pferde"],
+        "correctIndex": 0,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was ist ein wichtiger Vorteil des ökologischen Landbaus?",
+        "answers": [
+          "Höhere Erträge",
+          "Schnellere Erntezeiten",
+          "Verzicht auf synthetische Pflanzenschutzmittel",
+          "Niedrige Produktionskosten"
+        ],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Wie nennt man die Haltung von Tieren auf dem gleichen Hof, auf dem auch ihre Futtermittel erzeugt werden?",
+        "answers": [
+          "Intensivhaltung",
+          "Kreislaufwirtschaft",
+          "Stallfütterung",
+          "Selbstversorgungshaltung"
+        ],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      }
+    ]
+  },
+  "Q3": {
+    "name": "Landwirtschaftliche Maschinen",
+    "id": "Q3",
+    "questions": [
+      {
+        "question": "Ohne welche Maschine kann ein Bauer keine seiner Aufgaben erledigen?",
+        "answers": ["Pflug", "Traktor", "Rübenmaus", "Güllefass"],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Feldbearbeitung: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          { "text": "Pflug",       "correctDrop": "Pflug",       "img": "images/MaschinenQuiz/Drehpflug.jpg" },
+          { "text": "Grubber",     "correctDrop": "Grubber",     "img": "images/MaschinenQuiz/Grubber.jpg" },
+          { "text": "Kreiselegge", "correctDrop": "Kreiselegge", "img": "images/MaschinenQuiz/Kreiselegge.jpg" },
+          { "text": "Walze",       "correctDrop": "Walze",       "img": "images/MaschinenQuiz/Walze.jpg" }
+        ],
+        "drops": [
+          { "label": "Pflug" },
+          { "label": "Grubber" },
+          { "label": "Kreiselegge" },
+          { "label": "Walze" }
+        ]
+      },
+      {
+        "question": "Ausbringen auf den Acker: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          { "text": "Miststreuer",          "correctDrop": "Miststreuer",          "img": "images/MaschinenQuiz/Miststreuer.jpg" },
+          { "text": "Güllefass",            "correctDrop": "Güllefass",            "img": "images/MaschinenQuiz/Guellefass.jpg" },
+          { "text": "Sämaschine",           "correctDrop": "Sämaschine",           "img": "images/MaschinenQuiz/Saemaschine.jpg" },
+          { "text": "Pflanzenschutzspritze","correctDrop": "Pflanzenschutzspritze","img": "images/MaschinenQuiz/Planzenschutzspritze.jpg" },
+          { "text": "Düngerstreuer",        "correctDrop": "Düngerstreuer",        "img": "images/MaschinenQuiz/Duengerstreuer.jpg" }
+        ],
+        "drops": [
+          { "label": "Miststreuer" },
+          { "label": "Güllefass" },
+          { "label": "Sämaschine" },
+          { "label": "Pflanzenschutzspritze" },
+          { "label": "Düngerstreuer" }
+        ]
+      },
+      {
+        "question": "Heu und Gras: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          { "text": "Frontmähwerk", "correctDrop": "Frontmähwerk", "img": "images/MaschinenQuiz/Maehwerk.jpg" },
+          { "text": "Heckmähwerk",  "correctDrop": "Heckmähwerk",  "img": "images/MaschinenQuiz/Heckmaehwerk.jpg" },
+          { "text": "Heuwender",    "correctDrop": "Heuwender",    "img": "images/MaschinenQuiz/Heuwender.jpg" },
+          { "text": "Schwader",     "correctDrop": "Schwader",     "img": "images/MaschinenQuiz/Schwader.jpg" },
+          { "text": "Ladewagen",    "correctDrop": "Ladewagen",    "img": "images/MaschinenQuiz/Ladewagen.jpg" },
+          { "text": "Ballenpresse", "correctDrop": "Ballenpresse", "img": "images/MaschinenQuiz/Ballenpresse.jpg" }
+        ],
+        "drops": [
+          { "label": "Frontmähwerk" },
+          { "label": "Heckmähwerk" },
+          { "label": "Heuwender" },
+          { "label": "Schwader" },
+          { "label": "Ladewagen" },
+          { "label": "Ballenpresse" }
+        ]
+      },
+      {
+        "question": "Ernte: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          { "text": "Feldhäcksler", "correctDrop": "Feldhäcksler", "img": "images/MaschinenQuiz/Feldhaecksler.jpg" },
+          { "text": "Mähdrescher",  "correctDrop": "Mähdrescher",  "img": "images/MaschinenQuiz/Maehdrescher.jpg" },
+          { "text": "Rübenroder",   "correctDrop": "Rübenroder",   "img": "images/MaschinenQuiz/Ruebenroder.jpg" },
+          { "text": "Rübenmaus",    "correctDrop": "Rübenmaus",    "img": "images/MaschinenQuiz/Ruebenmaus.jpg" }
+        ],
+        "drops": [
+          { "label": "Feldhäcksler" },
+          { "label": "Mähdrescher" },
+          { "label": "Rübenroder" },
+          { "label": "Rübenmaus" }
+        ]
+      }
+    ]
+  },
+  "Q4": {
+    "name": "Nachhaltige Landwirtschaft",
+    "id": "Q4",
+    "questions": [
+      {
+        "question": "Was ist ein Ziel der nachhaltigen Landwirtschaft?",
+        "answers": [
+          "Maximaler kurzfristiger Gewinn",
+          "Erhaltung der Bodenfruchtbarkeit",
+          "Einsatz möglichst vieler Chemikalien",
+          "Monokulturen auf großen Flächen"
+        ],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Welche Methode hilft, den Boden zu schützen?",
+        "answers": [
+          "Erosionsschutz durch Begrünung",
+          "Tiefpflügen jedes Jahr",
+          "Dauerhafte Brachlegung",
+          "Intensive Düngung"
+        ],
+        "correctIndex": 0,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was bedeutet der Begriff 'Biodiversität'?",
+        "answers": [
+          "Die Vielfalt von Tier- und Pflanzenarten",
+          "Die Menge des angebauten Getreides",
+          "Die Reinheit des Grundwassers",
+          "Die Anzahl der Maschinen auf einem Hof"
+        ],
+        "correctIndex": 0,
+        "type": "multipleChoice"
+      }
+    ]
+  },
+  "Q5": {
+    "name": "Zuordnungsspiel",
+    "id": "Q5",
+    "questions": [
+      {
+        "question": "Ordne die Bilder den richtigen Begriffen zu:",
+        "type": "DragAndDrop",
+        "items": [
+          { "text": "Weizen",  "correctDrop": "Getreide" },
+          { "text": "Gerste",  "correctDrop": "Getreide" },
+          { "text": "Kuh",     "correctDrop": "Tier" },
+          { "text": "Traktor", "correctDrop": "Maschine" }
+        ],
+        "drops": [
+          { "label": "Getreide" },
+          { "label": "Tier" },
+          { "label": "Maschine" }
+        ]
+      }
+    ]
+  },
+  "Q6": {
+    "name": "Standortsuche",
+    "id": "Q6",
+    "questions": [
+      {
+        "question": "Bewege dich dorthin!",
+        "type": "locator",
+        "lon": "9.8041856",
+        "lat": "50.1415936"
+      }
+    ]
+  }
+}

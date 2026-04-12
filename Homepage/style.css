@@ -9,6 +9,7 @@ html,
 body {
   height: 100%;
   background-color: #f0f0f0;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: 20px;
-  margin: 160px 0 0 0;
+  margin: 80px 0 0 0;
   color: var(--colorhightlight);
 }
 
@@ -50,6 +51,21 @@ main {
   padding: 5px;
 }
 
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--colormainlight);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  height: 16px;
+  padding: 16px 32px;
+}
+
 .infobox {
   background-color: var(--colormainlight);
   border-radius: 10px;
@@ -65,7 +81,7 @@ main {
 h1 {
   margin: 48px 0 0 0;
   font-size: 36px;
-
+  scroll-margin-top: 128px;
   color: var(--colormaindark);
 }
 
@@ -163,7 +179,6 @@ h3 {
 }
 
 @media (max-width: 400px) {
-
   body {
     padding: 0px;
   }

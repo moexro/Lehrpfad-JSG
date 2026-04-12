@@ -2,12 +2,9 @@
 // DOM
 const header = document.getElementById("topbar");
 
-const left = document.createElement("div");
 const nav = document.createElement("nav");
 const dropdown = document.createElement("div");
 const icon = document.createElement("div");
-const homeBtn = document.createElement("a");
-const controls = document.createElement("div");
 const main = document.getElementById("main");
 const dropcontent = document.createElement("ul");
 const footer = document.createElement("footer");
@@ -20,8 +17,7 @@ function createOverlay() {
   if (!header) return;
 
   // ── Linke Seite ──────────────────────────────────────────
-  left.className = "left";
-
+  
   nav.className = "dropdown-menu";
 
   dropdown.className = "dropdown";
@@ -33,25 +29,18 @@ function createOverlay() {
   dropdown.appendChild(icon);
   nav.appendChild(dropdown);
 
-  homeBtn.className = "btn";
-  homeBtn.id = "homebtn";
-  homeBtn.href = basehref + "Homepage/index.html";
-  homeBtn.textContent = "Home";
 
-  left.appendChild(nav);
-  left.appendChild(homeBtn);
+
+  header.appendChild(nav);
 
   // ── Rechte Seite / Controls ──────────────────────────────
-  controls.className = "controls";
 
   const logoAELF = document.createElement("img");
-  logoAELF.src = basehref + "Homepage/images/LogoAELF.png";
+  logoAELF.src = basehref + "media/images/LogoAELF.png";
   logoAELF.alt = "Logo AELF";
   logoAELF.className = "logo";
-  controls.appendChild(logoAELF);
+  header.appendChild(logoAELF);
 
-  header.appendChild(left);
-  header.appendChild(controls);
 
   // ── Dropdown-Inhalt ──────────────────────────────────────
   dropcontent.classList.add("dropcontent", "container");
@@ -63,15 +52,15 @@ function createOverlay() {
   const buttons = {
     homepage: { href: "https://www.jsg-karlstadt.de", text: "JSG-Homepage" },
     information: {
-      href: basehref + "Homepage/Informationen/index.html",
+      href: "#info",
       text: "Informationen",
     },
     stationen: {
-      href: basehref + "Homepage/Stationen/index.html",
+      href: "#stations",
       text: "Zu den Stationen",
     },
     mitwirkende: {
-      href: basehref + "Homepage/index.html#mentions",
+      href: "#mentions",
       text: "Die Mitwirkenden",
     },
   };
@@ -128,13 +117,9 @@ function initOverlay() {
   });
 
   document.addEventListener("click", (e) => {
-    if (
-      !dropContent.contains(e.target) &&
-      e.target !== dropBtn &&
-      !dropdown.contains(e.target)
-    ) {
+    e.stopImmediatePropagation();
       closeDropdown();
-    }
+    
   });
 }
 

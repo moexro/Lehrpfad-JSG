@@ -25,7 +25,6 @@ body.dimmed::before {
   backdrop-filter: blur(15px);
 }
 
-
 /* Top bar */
 .bar {
   position: fixed;
@@ -34,13 +33,16 @@ body.dimmed::before {
   border-radius: 0 0 20px 20px;
   left: 0;
   right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+
   background: var(--colormaindark);
   color: var(--colorhightlight);
   backdrop-filter: blur(15px);
   z-index: 1500;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 32px;
 }
 
 #topbar {
@@ -55,42 +57,6 @@ body.dimmed::before {
   border-radius: 20px 20px 0 0;
 }
 
-.bar .left {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.bar .controls {
-  display: flex;
-  padding: 20px;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-}
-
-#top {
-  scroll-margin-top: 120px;
-}
-
-.btn {
-  display: flex;
-  align-items: center;
-  padding: 10px 14px;
-  border-radius: 8px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-  background: var(--colormainlight);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  height: 16px;
-  padding: 16px 32px;
-}
-
 .logo {
   height: 64px;
   object-fit: cover;
@@ -99,7 +65,7 @@ body.dimmed::before {
 /* DROPDOWN MENÜ */
 
 .icon.dropbtn {
-  background-image: url("images/menu.svg");
+  background-image: url("/media/images/menu.svg");
   cursor: pointer;
 }
 
@@ -143,10 +109,6 @@ body.dimmed::before {
   text-decoration: none;
   font-weight: 600;
   filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
-}
-
-#homebutton {
-  display: block;
 }
 
 .icon {

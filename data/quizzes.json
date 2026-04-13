@@ -98,7 +98,7 @@
       },
       {
         "question": "Schätze, wie viele Weizenkörner ungefähr benötigt werden, um 1kg Weizenmehl herzustellen.",
-        "answers": ["20.000"],
+        "answers": ["20000"],
         "correctIndex": 0,
         "type": "textInput"
       }

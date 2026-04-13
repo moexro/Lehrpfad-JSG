@@ -39,24 +39,21 @@ function createOverlay() {
 
   logoAELF.className = "logo aelf_link";
 	  header.appendChild(logoAELF);
-const aelf-link = document.querySelectorAll(".aelf_link");
+    
+const aelfLinks = document.querySelectorAll(".aelf_link");
 
-if (aelf-link) {
-  aelf-link.forEach((link) => {
+  aelfLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
     e.preventDefault(); // wichtig!
-
     const ok = confirm(
       "Du wirst auf die Seite des AELF weitergeleitet. Möchtest du fortfahren?",
     );
-
     if (ok) {
       window.open("https://www.aelf-ka.bayern.de", "_blank");
     }
   });
   });
-  }
-}
+
 
 
 

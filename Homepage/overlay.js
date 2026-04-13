@@ -39,7 +39,7 @@ function createOverlay() {
 
   logoAELF.className = "logo aelf-link";
 	  header.appendChild(logoAELF);
-const aelf-link = document.querySelectorAll(".aelf-link");
+const aelf-link = document.querySelectorAll(".aelf_link");
 
 if (aelf-link) {
   aelf-link.forEach((link) => {
@@ -54,6 +54,8 @@ if (aelf-link) {
       window.open("https://www.aelf-ka.bayern.de", "_blank");
     }
   });
+  });
+  }
 }
 
 

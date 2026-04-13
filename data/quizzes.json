@@ -104,12 +104,52 @@
       }
     ]
   },
-  "maschinen": {},
-  "energiewald": {},
-  "viehzucht": {},
-  "getreide-aufbau": {},
-  "getreideanbau": {},
-  "stillegung_und_hecken": {},
-  "verwendung_von_pflanzen": {},
-  "unterschiede": {}
+  "maschinen": {
+    "name": "Über die Maschinen",
+    "id": "maschinen",
+    "leichtQuestions": {},
+    "schwerQuestions": {}
+  },
+  "energiewald": {
+    "name": "Der Energiewald",
+    "id": "energiewald",
+    "leichtQuestions": {},
+    "schwerQuestions": {}
+  },
+  "viehzucht": {
+    "name": "Die Viehzucht",
+    "id": "viehzucht",
+    "leichtQuestions": {},
+    "schwerQuestions": {}
+  },
+  "getreide-aufbau": {
+    "name": "Der Aufbau des Getreides",
+    "id": "getreide-aufbau",
+    "leichtQuestions": {},
+    "schwerQuestions": {}
+  },
+  "getreideanbau": {
+    "name": "Wie man Getreide anbaut",
+    "id": "getreideanbau",
+    "leichtQuestions": {},
+    "schwerQuestions": {}
+  },
+  "stillegung_und_hecken": {
+    "name": "Stillegungsflächen und Hecken",
+    "id": "stillegung_und_hecken",
+    "leichtQuestions": {},
+    "schwerQuestions": {}
+  },
+  "verwendung_von_pflanzen": {
+    "name": "Verwendung verschiedener Pflanzen",
+    "id": "verwendung_von_pflanzen",
+    "leichtQuestions": {},
+    "schwerQuestions": {}
+  },
+  "unterschiede": {
+    "name": "Unterschiede verschiedener Pflanzen",
+    "id": "unterschiede",
+    "leichtQuestions": {},
+    "schwerQuestions": {}
+  }
 }

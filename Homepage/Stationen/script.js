@@ -32,13 +32,6 @@ async function setup() {
   renderQuizMode(currentMode);
   showUnlockedStations();
   setupErnaehrungAudioToggle();
-
-  const quizBtns = document.querySelectorAll(`[id^="quizBtn_"]`);
-  quizBtns.forEach((quizBtn) => {
-    quizBtn.addEventListener("click", () => {
-      resetScore(quizBtn.getAttribute("data-quiz"));
-    });
-  });
 }
 
 function setupErnaehrungAudioToggle() {
@@ -93,10 +86,6 @@ function setupErnaehrungAudioToggle() {
   updateTimeDisplay();
 }
 
-function resetScore(q) {
-  localStorage.setItem(`quizScore_${q}`, "0");
-  console.log(`Punkte für ${q} zurückgesetzt.`);
-}
 
 function resetQuizUnlock() {
   Object.values(listQuiz).forEach((quiz) => {

@@ -8,7 +8,6 @@ const icon = document.createElement("div");
 const main = document.getElementById("main");
 const dropcontent = document.createElement("ul");
 
-
 function createOverlay() {
   let basehref = location.hostname.includes("github.io")
     ? "/Lehrpfad-JSG/"
@@ -17,7 +16,7 @@ function createOverlay() {
   if (!header) return;
 
   // ── Linke Seite ──────────────────────────────────────────
-  
+
   nav.className = "dropdown-menu";
 
   dropdown.className = "dropdown";
@@ -30,8 +29,6 @@ function createOverlay() {
   dropdown.appendChild(icon);
   nav.appendChild(dropdown);
 
-
-
   header.appendChild(nav);
 
   // ── Rechte Seite / Controls ──────────────────────────────
@@ -40,14 +37,15 @@ function createOverlay() {
   logoAELF.src = basehref + "media/images/LogoAELF.png";
   logoAELF.alt = "Logo AELF";
 
-  logoAELF.addEventListener("click", () => {
-    const ok = confirm("Du wirst auf die Seite des AELF weitergeleitet. Möchtest du fortfahren?");
-    if (ok)
-    window.open("https://www.aelf-ka.bayern.de", "_blank");
-  });  
-  logoAELF.className = "logo";
-  header.appendChild(logoAELF);
+  logoAELF.className = "logo aelf-link";
 
+  document.querySelector(".aelf-link").addEventListener("click", () => {
+    const ok = confirm(
+      "Du wirst auf die Seite des AELF weitergeleitet. Möchtest du fortfahren?",
+    );
+    if (ok) window.open("https://www.aelf-ka.bayern.de", "_blank");
+  });
+  header.appendChild(logoAELF);
 
   // ── Dropdown-Inhalt ──────────────────────────────────────
   dropcontent.classList.add("dropcontent", "container");
@@ -120,8 +118,7 @@ function initOverlay() {
 
   document.addEventListener("click", (e) => {
     e.stopImmediatePropagation();
-      closeDropdown();
-    
+    closeDropdown();
   });
 }
 

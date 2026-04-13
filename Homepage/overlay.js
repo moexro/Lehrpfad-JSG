@@ -38,14 +38,25 @@ function createOverlay() {
   logoAELF.alt = "Logo AELF";
 
   logoAELF.className = "logo aelf-link";
+	  header.appendChild(logoAELF);
+const aelf-link = document.querySelectorAll(".aelf-link");
 
-  document.querySelector(".aelf-link").addEventListener("click", () => {
+if (aelf-link) {
+  aelf-link.forEach((link) => {
+    link.addEventListener("click", (e) => {
+    e.preventDefault(); // wichtig!
+
     const ok = confirm(
       "Du wirst auf die Seite des AELF weitergeleitet. Möchtest du fortfahren?",
     );
-    if (ok) window.open("https://www.aelf-ka.bayern.de", "_blank");
+
+    if (ok) {
+      window.open("https://www.aelf-ka.bayern.de", "_blank");
+    }
   });
-  header.appendChild(logoAELF);
+}
+
+
 
   // ── Dropdown-Inhalt ──────────────────────────────────────
   dropcontent.classList.add("dropcontent", "container");

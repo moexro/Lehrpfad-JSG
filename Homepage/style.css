@@ -1,3 +1,14 @@
+:root {
+  --colormainlight: rgb(105, 123, 109);
+  --colormaindark: rgb(58, 81, 70);
+
+  --colorseclight: rgb(150, 110, 75);
+  --colorsecdark: rgb(120, 85, 55);
+
+  --colorhightlight: rgb(254, 250, 224);
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -19,18 +30,13 @@ body {
   justify-content: flex-start;
   padding: 20px;
   margin: 80px 0 0 0;
+  color: var(--colormaindark)
+}
+
+body:before {
   color: var(--colorhightlight);
 }
 
-:root {
-  --colormainlight: rgb(105, 123, 109);
-  --colormaindark: rgb(58, 81, 70);
-
-  --colorseclight: rgb(150, 110, 75);
-  --colorsecdark: rgb(120, 85, 55);
-
-  --colorhightlight: rgb(254, 250, 224);
-}
 
 main {
   margin-left: 5%;

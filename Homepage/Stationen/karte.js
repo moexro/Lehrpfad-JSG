@@ -4,14 +4,10 @@
 
 const LP_COORDS = {
   ernaehrung: [49.9446997, 9.7825362],
-  tierhaltung: [49.9426253, 9.7924135],
-  maschinen: [49.939822, 9.8011685],
-  nachhaltig: [49.9315707, 9.8045507],
-  zuordnung: [49.9363771, 9.8037351],
 };
 
 const LP_DEFAULT_CENTER = [48.1351, 11.582];
-const LP_DEFAULT_ZOOM = 10;
+const LP_DEFAULT_ZOOM = 15;
 
 // ── Proximity-Schwellwert in Metern ──────────────────────
 const LP_PROXIMITY_METERS = 5;

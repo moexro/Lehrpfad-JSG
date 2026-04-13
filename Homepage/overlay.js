@@ -37,7 +37,7 @@ function createOverlay() {
   logoAELF.src = basehref + "media/images/LogoAELF.png";
   logoAELF.alt = "Logo AELF";
 
-  logoAELF.className = "logo aelf-link";
+  logoAELF.className = "logo aelf_link";
 	  header.appendChild(logoAELF);
 const aelf-link = document.querySelectorAll(".aelf_link");
 

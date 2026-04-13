@@ -56,13 +56,13 @@ function createOverlay() {
 
   const buttons = {
     homepage: { href: "https://www.jsg-karlstadt.de", text: "JSG-Homepage" },
-    information: {
-      href: "#info",
-      text: "Informationen",
-    },
     stationen: {
       href: "#stations",
       text: "Zu den Stationen",
+    },
+    information: {
+      href: "#info",
+      text: "Informationen",
     },
     mitwirkende: {
       href: "#mentions",

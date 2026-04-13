@@ -103,5 +103,13 @@
         "type": "textInput"
       }
     ]
-  }
+  },
+  "maschinen": {},
+  "energiewald": {},
+  "viehzucht": {},
+  "getreide-aufbau": {},
+  "getreideanbau": {},
+  "stillegung_und_hecken": {},
+  "verwendung_von_pflanzen": {},
+  "unterschiede": {}
 }

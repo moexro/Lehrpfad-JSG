@@ -3,15 +3,15 @@ Lehrpfad-Karte
 ─────────────────────────────────────────────────────── */
 
 const LP_COORDS = {
-ernaehrung: [49.9446997, 9.7825362],
-testing: [49.95962, 9,77946],
+testing: [49.9446997, 9.7825362],
+ernaehrung: [49.959698, 9.779226],
 };
 
 const LP_DEFAULT_CENTER = [48.1351, 11.582];
 const LP_DEFAULT_ZOOM = 15;
 
 // ── Proximity-Schwellwert in Metern ──────────────────────
-const LP_PROXIMITY_METERS = 5;
+const LP_PROXIMITY_METERS = 50;
 
 function lp_getScore(key) {
 return parseInt(localStorage.getItem(`quizScore_${key}`) || "0", 10);
@@ -124,16 +124,18 @@ attribution:
 maxZoom: 19,
 }).addTo(map);
 
+
+
 // Coordinaten per Klick kopieren
 map.on("click", (e) => {
 const { lat, lng } = e.latlng;
-const str = `"${lat.toFixed(7)}": [${lat.toFixed(7)}, ${lng.toFixed(7)}],`;
+const str = `[${lat.toFixed(7)}, ${lng.toFixed(7)}],`;
 navigator.clipboard.writeText(str).then(() => {
 const toast = document.createElement("div")
 toast.textContent = `📋 Kopiert: [${lat.toFixed(5)}, ${lng.toFixed(5)}]`;
 toast.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%); background:#2d4a2d;color:#fff;padding:8px 18px;border-radius:20px; font-size:0.85rem;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.2); z-index:9999;animation:fadeout 2s forwards;`;
 document.body.appendChild(toast);
-setTimeout(() => toast.remove(), 2000);
+setTimeout(() => toast.remove(), 10000);
 });
 });
 

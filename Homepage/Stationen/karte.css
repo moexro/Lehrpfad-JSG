@@ -120,12 +120,12 @@
 
 .lp-btn-maps {
   background: var(--colormaindark);
-  color: var(--colorhightlight) !important;
+  color: var(--colorhighlight) !important;
 }
 
 .lp-btn-quiz {
   background: var(--colormaindark);
-  color: var(--colorhightlight);
+  color: var(--colorhighlight);
 }
 
 /* Legende unter der Karte */
@@ -134,7 +134,7 @@
   gap: 16px;
   margin-bottom: 12px;
   font-size: 0.82rem;
-  color: var(--colorhightlight);
+  color: var(--colorhighlight);
 }
 
 .lp-legend-item {

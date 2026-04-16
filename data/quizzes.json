@@ -98,9 +98,8 @@
       },
       {
         "question": "Schätze, wie viele Weizenkörner ungefähr benötigt werden, um 1kg Weizenmehl herzustellen.",
-        "answers": ["20000"],
-        "correctIndex": 0,
-        "type": "textInput"
+        "correctAnswer": "20000",
+        "type": "guessTheNumber"
       }
     ]
   },
@@ -152,7 +151,23 @@
       ]
     }
     ],
-    "schwerQuestions": {}
+    "schwerQuestions": [
+      {
+        "question": "Wie viel Liter Wasser trinkt eine Kuh im Jahr?",
+        "type": "guessTheNumber",
+        "correctAnswer": "9000"
+      },
+      {
+        "question": "Welche Maßnahmen helfen dabei, Emissionen und Methanausstoß in der Tierhaltung zu reduzieren?",
+        "type": "multipleChoice",
+        "answers": [
+          "Mehr Tiere halten",
+          "Optimierte Fütterung, bessere Stalltechnik und Güllemanagement",
+          "Die Kühe nicht mehr melken und schlachten"
+        ],
+        "correctIndex": 1
+      }
+    ]
   },
   "getreide-aufbau": {
     "name": "Der Aufbau des Getreides",

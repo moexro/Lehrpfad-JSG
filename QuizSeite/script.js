@@ -415,11 +415,15 @@ function renderDragAndDrop(q) {
     const slot = document.createElement("div");
     slot.className = "drop-slot";
     slot.dataset.id = drop.label;
-
-    const label = document.createElement("span");
-    label.innerHTML = drop.label;
-    slot.appendChild(label);
-
+    if (drop.img) {
+      const img = document.createElement("img");
+      img.src = drop.img;
+      slot.appendChild(img);
+    } else if (drop.label) {
+      const label = document.createElement("span");
+      label.innerHTML = drop.label;
+      slot.appendChild(label);
+    }
     dropContainer.appendChild(slot);
   });
 

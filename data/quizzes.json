@@ -125,15 +125,29 @@
       "type": "DragAndDrop",
       "items": [
         {
-          "text": "test1",
-          "correctDrop": "test2",
-          "img": "/media/images/LogoAELF.png"
+          "correctDrop": "gras",
+          "img": "/media/images/Viehzucht/Kuh.png"
+        },
+        {
+          "correctDrop": "Apfel",
+          "img": "/media/images/Viehzucht/Schwein.png"
+        },
+        {
+          "correctDrop": "Mehlwurm",
+          "img": "/media/images/Viehzucht/Huhn.png"
         }
       ],
       "drops": 
       [
         {
-        "label": "test2"
+        "img": "/media/images/Viehzucht/Gras.jpg",
+        "label": "gras"
+        },
+        {
+        "label": "Apfel"
+        },
+        {
+        "label": "Mehlwurm"
         }
       ]
     }

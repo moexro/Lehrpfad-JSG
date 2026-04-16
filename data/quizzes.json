@@ -117,9 +117,27 @@
     "schwerQuestions": {}
   },
   "viehzucht": {
-    "name": "Die Viehzucht",
-    "id": "Tiere und Rassen",
-    "leichtQuestions": {},
+    "name": "Tiere und Rassen",
+    "id": "viehzucht",
+    "leichtQuestions": [
+      {
+      "question": "Ordne die Bilder zu",
+      "type": "DragAndDrop",
+      "items": [
+        {
+          "text": "test1",
+          "correctDrop": "test2",
+          "img": "/media/images/LogoAELF.png"
+        }
+      ],
+      "drops": 
+      [
+        {
+        "label": "test2"
+        }
+      ]
+    }
+    ],
     "schwerQuestions": {}
   },
   "getreide-aufbau": {

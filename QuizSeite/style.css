@@ -231,6 +231,7 @@ img {
   word-break: break-word;
   flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
   max-width: 200px;
+  max-height: 100px;
 }
 
 .drag-item {
@@ -279,6 +280,11 @@ img {
   font-weight: 500;
   border: 2px dashed var(--colorhightlight);
   padding: 5%;
+}
+
+.drop-slot img {
+  height: 100%;
+  object-fit: contain;
 }
 
 .drag-item.locked {

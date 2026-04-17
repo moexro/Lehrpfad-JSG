@@ -86,7 +86,6 @@ function setupErnaehrungAudioToggle() {
   updateTimeDisplay();
 }
 
-
 function resetQuizUnlock() {
   Object.values(listQuiz).forEach((quiz) => {
     localStorage.setItem(`quizUnlock_${quiz.id}`, JSON.stringify(false));
@@ -253,8 +252,7 @@ function loadErnaehrungsbilder() {
 116 9 0 14 8 13 18 -3 29 0 34 19 28 9 -2 27 -7 39 -11z m1 -53 c34 -17 48 -51
 37 -85 -9 -31 -20 -26 -56 23 -33 48 -78 75 -126 78 -19 1 -13 3 17 7 50 7 80
 2 128 -23z m-134 -56 c20 -7 26 -16 26 -40 0 -44 -21 -46 -64 -5 -21 19 -42
-35 -47 35 -6 0 -7 5 -4 10 8 13 56 13 89 0z m-198 -36 c17 -2 59 -25 95 -50
-35 52 49 80 42 87 -7 7 -21 -4 -42 -33z"
+35 -47 35 -6 0 -7 5 -4 10 8 13 56 13 89 0z"
     />
     <path
       d="M966 534 c-128 -11 -140 -14 -164 -38 -22 -22 -27 -37 -30 -95 -4
@@ -622,4 +620,16 @@ l-49 11 60 1 c45 1 73 -5 105 -21z m-335 -9 c4 -6 5 -13 2 -16 -8 -7 -47 7
 
 document.addEventListener("DOMContentLoaded", () => {
   loadErnaehrungsbilder();
+  initStationen();
 });
+
+function initStationen() {
+  const stationen = document.querySelectorAll(".infobox");
+  stationen.forEach((station) => {
+    const btn = document.createElement("a");
+    btn.classList.add("btn");
+    btn.textContent = "Zum Quiz";
+    btn.href = basehref + `QuizSeite/index.html?quiztype=` + station.id;
+    station.appendChild(btn);
+  });
+}

@@ -106,50 +106,204 @@
   "maschinen": {
     "name": "Über die Maschinen",
     "id": "maschinen",
-    "leichtQuestions": {},
-    "schwerQuestions": {}
+    "onemode_questions": [
+      {
+        "question": "Ohne welche Maschine kann ein Bauer keine seiner Aufgaben erledigen?",
+        "answers": ["Pflug", "Traktor", "Rübenmaus", "Güllefass"],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Feldbearbeitung: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          {
+            "text": "Pflug",
+            "correctDrop": "Pflug",
+            "img": "/media/images/Maschinen/Drehpflug.jpg"
+          },
+          {
+            "text": "Grubber",
+            "correctDrop": "Grubber",
+            "img": "/media/images/Maschinen/Grubber.jpg"
+          },
+          {
+            "text": "Kreiselegge",
+            "correctDrop": "Kreiselegge",
+            "img": "/media/images/Maschinen/Kreiselegge.jpg"
+          },
+          {
+            "text": "Walze",
+            "correctDrop": "Walze",
+            "img": "/media/images/Maschinen/Walze.jpg"
+          }
+        ],
+        "drops": [
+          { "label": "Pflug" },
+          { "label": "Grubber" },
+          { "label": "Kreiselegge" },
+          { "label": "Walze" }
+        ]
+      },
+      {
+        "question": "Ausbringen auf den Acker: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          {
+            "text": "Miststreuer",
+            "correctDrop": "Miststreuer",
+            "img": "/media/images/Maschinen/Miststreuer.jpg"
+          },
+          {
+            "text": "Güllefass",
+            "correctDrop": "Güllefass",
+            "img": "/media/images/Maschinen/Guellefass.jpg"
+          },
+          {
+            "text": "Sämaschine",
+            "correctDrop": "Sämaschine",
+            "img": "/media/images/Maschinen/Saemaschine.jpg"
+          },
+          {
+            "text": "Pflanzenschutzspritze",
+            "correctDrop": "Pflanzenschutzspritze",
+            "img": "/media/images/Maschinen/Planzenschutzspritze.jpg"
+          },
+          {
+            "text": "Düngerstreuer",
+            "correctDrop": "Düngerstreuer",
+            "img": "/media/images/Maschinen/Duengerstreuer.jpg"
+          }
+        ],
+        "drops": [
+          { "label": "Miststreuer" },
+          { "label": "Güllefass" },
+          { "label": "Sämaschine" },
+          { "label": "Pflanzenschutzspritze" },
+          { "label": "Düngerstreuer" }
+        ]
+      },
+      {
+        "question": "Heu und Gras: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          {
+            "text": "Frontmähwerk",
+            "correctDrop": "Frontmähwerk",
+            "img": "/media/images/Maschinen/Maehwerk.jpg"
+          },
+          {
+            "text": "Heckmähwerk",
+            "correctDrop": "Heckmähwerk",
+            "img": "/media/images/Maschinen/Heckmaehwerk.jpg"
+          },
+          {
+            "text": "Heuwender",
+            "correctDrop": "Heuwender",
+            "img": "/media/images/Maschinen/Heuwender.jpg"
+          },
+          {
+            "text": "Schwader",
+            "correctDrop": "Schwader",
+            "img": "/media/images/Maschinen/Schwader.jpg"
+          },
+          {
+            "text": "Ladewagen",
+            "correctDrop": "Ladewagen",
+            "img": "/media/images/Maschinen/Ladewagen.jpg"
+          },
+          {
+            "text": "Ballenpresse",
+            "correctDrop": "Ballenpresse",
+            "img": "/media/images/Maschinen/Ballenpresse.jpg"
+          }
+        ],
+        "drops": [
+          { "label": "Frontmähwerk" },
+          { "label": "Heckmähwerk" },
+          { "label": "Heuwender" },
+          { "label": "Schwader" },
+          { "label": "Ladewagen" },
+          { "label": "Ballenpresse" }
+        ]
+      },
+      {
+        "question": "Ernte: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          {
+            "text": "Feldhäcksler",
+            "correctDrop": "Feldhäcksler",
+            "img": "/media/images/Maschinen/Feldhaecksler.jpg"
+          },
+          {
+            "text": "Mähdrescher",
+            "correctDrop": "Mähdrescher",
+            "img": "/media/images/Maschinen/Maehdrescher.jpg"
+          },
+          {
+            "text": "Rübenroder",
+            "correctDrop": "Rübenroder",
+            "img": "/media/images/Maschinen/Ruebenroder.jpg"
+          },
+          {
+            "text": "Rübenmaus",
+            "correctDrop": "Rübenmaus",
+            "img": "/media/images/Maschinen/Ruebenmaus.jpg"
+          }
+        ],
+        "drops": [
+          { "label": "Feldhäcksler" },
+          { "label": "Mähdrescher" },
+          { "label": "Rübenroder" },
+          { "label": "Rübenmaus" }
+        ]
+      }
+    ],
+    "leichtQuestions": [],
+    "schwerQuestions": []
   },
   "energiewald": {
     "name": "Der Energiewald",
     "id": "energiewald",
-    "leichtQuestions": {},
-    "schwerQuestions": {}
+    "leichtQuestions": [],
+    "schwerQuestions": []
   },
+
   "viehzucht": {
     "name": "Tiere und Rassen",
     "id": "viehzucht",
     "leichtQuestions": [
       {
-      "question": "Ordne die Bilder zu",
-      "type": "DragAndDrop",
-      "items": [
-        {
-          "correctDrop": "gras",
-          "img": "/media/images/Viehzucht/Kuh.png"
-        },
-        {
-          "correctDrop": "Apfel",
-          "img": "/media/images/Viehzucht/Schwein.png"
-        },
-        {
-          "correctDrop": "Mehlwurm",
-          "img": "/media/images/Viehzucht/Huhn.png"
-        }
-      ],
-      "drops": 
-      [
-        {
-        "img": "/media/images/Viehzucht/Gras.jpg",
-        "label": "gras"
-        },
-        {
-        "label": "Apfel"
-        },
-        {
-        "label": "Mehlwurm"
-        }
-      ]
-    }
+        "question": "Ordne die Bilder zu",
+        "type": "DragAndDrop",
+        "items": [
+          {
+            "correctDrop": "gras",
+            "img": "/media/images/Viehzucht/Kuh.png"
+          },
+          {
+            "correctDrop": "Apfel",
+            "img": "/media/images/Viehzucht/Schwein.png"
+          },
+          {
+            "correctDrop": "Mehlwurm",
+            "img": "/media/images/Viehzucht/Huhn.png"
+          }
+        ],
+        "drops": [
+          {
+            "img": "/media/images/Viehzucht/Gras.jpg",
+            "label": "gras"
+          },
+          {
+            "label": "Apfel"
+          },
+          {
+            "label": "Mehlwurm"
+          }
+        ]
+      }
     ],
     "schwerQuestions": [
       {
@@ -172,31 +326,31 @@
   "getreide-aufbau": {
     "name": "Der Aufbau des Getreides",
     "id": "getreide-aufbau",
-    "leichtQuestions": {},
-    "schwerQuestions": {}
+    "leichtQuestions": [],
+    "schwerQuestions": []
   },
   "getreideanbau": {
     "name": "Wie man Getreide anbaut",
     "id": "getreideanbau",
-    "leichtQuestions": {},
-    "schwerQuestions": {}
+    "leichtQuestions": [],
+    "schwerQuestions": []
   },
   "stillegung_und_hecken": {
     "name": "Stillegungsflächen und Hecken",
     "id": "stillegung_und_hecken",
-    "leichtQuestions": {},
-    "schwerQuestions": {}
+    "leichtQuestions": [],
+    "schwerQuestions": []
   },
   "verwendung_von_pflanzen": {
     "name": "Verwendung verschiedener Pflanzen",
     "id": "verwendung_von_pflanzen",
-    "leichtQuestions": {},
-    "schwerQuestions": {}
+    "leichtQuestions": [],
+    "schwerQuestions": []
   },
   "unterschiede": {
     "name": "Unterschiede verschiedener Pflanzen",
     "id": "unterschiede",
-    "leichtQuestions": {},
-    "schwerQuestions": {}
+    "leichtQuestions": [],
+    "schwerQuestions": []
   }
 }

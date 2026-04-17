@@ -54,12 +54,21 @@ main {
   border-radius: 10px;
 }
 
-.text {
+p {
   text-align: center;
   margin: 4px 8px;
   color: var(--colorhighlight);
   padding: 5px;
   word-break: break-word;
+  width: 100%;
+}
+
+.uncentered {
+  text-align: left !important;
+} 
+
+strong {
+  font-size: 1.05rem;
 }
 
 .btn {
@@ -88,6 +97,8 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  width: 100%;
+  scroll-margin-top: 100px;
 }
 
 #ernaehrung-audio-box {
@@ -119,9 +130,6 @@ h1 {
   color: var(--colormaindark);
 }
 
-h3 {
-  margin: 5px 0 5px 0; /* top right bottom left */
-}
 
 .points {
   font-weight: 600;
@@ -217,6 +225,8 @@ h3 {
     padding: 14px;
   }
 }
+
+
 
 .imagebox {
   display: grid !important;

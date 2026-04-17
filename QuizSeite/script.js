@@ -19,7 +19,7 @@ let answered = false;
 let selectedAnswers = [];
 let attemptedMultipleChoice = false;
 
-let questionEl, answersEl, scoreEl, nextBtn, homeBtn;
+let questionEl, answersEl, scoreEl, nextBtn, homeBtn, skipBtn;
 
 // ============================================================
 // INITIALISIERUNG
@@ -64,8 +64,13 @@ async function setup() {
   scoreEl = document.getElementById("score");
   nextBtn = document.getElementById("nextBtn");
   homeBtn = document.getElementById("homeBtn");
+  skipBtn = document.getElementById("skipBtn");
 
   nextBtn.addEventListener("click", onNextQuestion);
+  skipBtn.addEventListener("click", () => {
+    answered = true;
+    onNextQuestion();
+  });
   homeBtn.addEventListener("click", onHome);
 
   getQuizID();
@@ -140,6 +145,11 @@ function getModeQuestions(quiz) {
   const modeKey = quizMode === "leicht" ? "leichtQuestions" : "schwerQuestions";
   if (Array.isArray(quiz[modeKey]) && quiz[modeKey].length > 0) {
     return quiz[modeKey].slice();
+  } else if (
+    Array.isArray(quiz.onemode_questions) &&
+    quiz.onemode_questions.length > 0
+  ) {
+    return quiz.onemode_questions.slice();
   }
 
   return [];
@@ -197,6 +207,10 @@ function ensureQuizMode() {
 function setScore(value) {
   localStorage.setItem(`quizScore_${currentQuiz}`, String(value));
   scoreEl.textContent = `Punkte: ${getScore()}`;
+  setTimeout(() => {
+  scoreEl.style.filter = "brightness(1.5)";
+  }, 100);
+  scoreEl.style.filter = "brightness(1)";
 }
 
 // ============================================================
@@ -255,19 +269,20 @@ function renderQuestion() {
   questionEl.innerHTML = q.question;
 
   setNextBtn({ enabled: false });
+  setSkipBtn({ enabled: false });
   setUIState({ nextVisible: true, scoreVisible: true, homeVisible: false });
 
-  // BUGFIX: war quiz.questions.length (existiert nicht), jetzt currentQuizQuestions.length
   if (currentQuestion === currentQuizQuestions.length - 1) {
     nextBtn.textContent = "Quiz abschließen";
   }
 
+  skipBtn.style.display = "none";
+
   if (q.type === "multipleChoice") renderMultipleChoice(q);
   else if (q.type === "DragAndDrop") renderDragAndDrop(q);
   else if (q.type === "ordering") renderOrdering(q);
-  else if (q.type === "guessTheNumber")
-    renderGuessTheNumber(q); // NEU
-  else if (q.type === "textInput") renderTextInput(q); // NEU
+  else if (q.type === "guessTheNumber") renderGuessTheNumber(q);
+  else if (q.type === "textInput") renderTextInput(q);
 }
 
 // Hilfsfunktionen für UI-Zustand
@@ -281,6 +296,13 @@ function setNextBtn({ enabled }) {
   nextBtn.disabled = !enabled;
   nextBtn.style.opacity = enabled ? "1" : "0.5";
   nextBtn.style.cursor = enabled ? "pointer" : "not-allowed";
+  nextBtn.animation = enabled ? "pulse 1.5s infinite" : "none";
+}
+
+function setSkipBtn({ enabled }) {
+  skipBtn.disabled = !enabled;
+  skipBtn.style.opacity = enabled ? "1" : "0.5";
+  skipBtn.style.cursor = enabled ? "pointer" : "not-allowed";
 }
 
 // ============================================================
@@ -288,6 +310,8 @@ function setNextBtn({ enabled }) {
 // ============================================================
 
 function renderMultipleChoice(q) {
+  skipBtn.style.display = "inline-block";
+
   selectedAnswers = [];
   attemptedMultipleChoice = false;
   answersEl.innerHTML = "";
@@ -362,9 +386,10 @@ function onSubmitMultipleChoice(q) {
 
       setNextBtn({ enabled: true });
       answered = true;
-    }, 800);
+    }, 200);
   } else {
     attemptedMultipleChoice = true;
+    setSkipBtn({ enabled: true });
     buttons.forEach((b) => b.classList.add("wrong"));
 
     setTimeout(() => {
@@ -516,10 +541,13 @@ function initDragAndDrop(wrapper, dragContainer, dropContainer, q) {
         height: "",
       });
       drop.appendChild(item);
-      setScore(getScore() + 1);
+      if (!item.dataset.attemted) {
+        setScore(getScore() + 1);
+      }
     } else {
       if (drop) {
         drop.classList.add("wrong");
+        item.dataset.attemted = "true";
         setTimeout(() => drop.classList.remove("wrong"), 800);
       }
       resetItem(item);

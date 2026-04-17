@@ -79,7 +79,6 @@ main {
   font-style: bold;
   color: #fff;
   z-index: 10;
-  transition: all 0.3s ease;
 }
 .question {
   font-size: 24px;
@@ -670,3 +669,5 @@ img {
 #nextBtn:enabled {
   animation: ring 2s ease-out;
 }
+
+

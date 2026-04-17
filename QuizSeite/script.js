@@ -206,11 +206,7 @@ function ensureQuizMode() {
 
 function setScore(value) {
   localStorage.setItem(`quizScore_${currentQuiz}`, String(value));
-  scoreEl.textContent = `Punkte: ${getScore()}`;
-  setTimeout(() => {
-  scoreEl.style.filter = "brightness(1.5)";
-  }, 100);
-  scoreEl.style.filter = "brightness(1)";
+  scoreEl.textContent = `Punkte: ${getScore()}`; // dann zurück
 }
 
 // ============================================================
@@ -881,6 +877,8 @@ function onSubmitTextInput(q, input) {
 
 function quizEnde(type) {
   answersEl.innerHTML = "";
+  skipBtn.style.display = "none";
+
   setNextBtn({ enabled: false });
   setUIState({ nextVisible: false, scoreVisible: true, homeVisible: true });
   localStorage.setItem(`quizDone_${currentQuiz}`, JSON.stringify(true));

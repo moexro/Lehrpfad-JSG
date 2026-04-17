@@ -297,10 +297,12 @@
             "label": "gras"
           },
           {
-            "label": "Apfel"
+            "label": "Apfel",
+            "img": "/media/images/Viehzucht/Apfel.png"
           },
           {
-            "label": "Mehlwurm"
+            "label": "Mehlwurm",
+            "img": "/media/images/Viehzucht/Mehlwürmer.png"
           }
         ]
       }

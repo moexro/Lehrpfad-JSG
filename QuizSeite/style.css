@@ -25,6 +25,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: var(--colorhightlight);
 }
 
 main {
@@ -44,7 +45,6 @@ main {
   backdrop-filter: blur(15px);
   padding: 20px;
   border-radius: 50px;
-  -webkit-text-fill-color: #ffffff;
   display: inline-block;
 
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -55,7 +55,6 @@ main {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 24px;
-  -webkit-text-fill-color: var(--text);
   text-align: center;
 }
 
@@ -83,7 +82,6 @@ main {
 .question {
   font-size: 24px;
   margin-bottom: 16px;
-  -webkit-text-fill-color: var(--text);
   justify-content: center;
   text-align: center;
 }
@@ -93,12 +91,14 @@ main {
   flex-wrap: wrap; /* Erlaubt das Umfließen in die nächste Zeile */
   justify-content: center; /* Zentriert die Buttons */
   gap: 10px; /* Abstand zwischen den Buttons */
-  -webkit-text-fill-color: #deffdb;
   text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .answer-btn {
   hyphens: auto;
+  color: var(--colorhightlight);
   word-break: break-word;
   flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
   min-width: 150px; /* Mindestbreite für die Buttons */

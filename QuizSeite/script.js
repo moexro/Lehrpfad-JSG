@@ -279,6 +279,7 @@ function renderQuestion() {
   else if (q.type === "ordering") renderOrdering(q);
   else if (q.type === "guessTheNumber") renderGuessTheNumber(q);
   else if (q.type === "textInput") renderTextInput(q);
+  else if (q.type === "YesOrNo") renderYesOrNo(q);
 }
 
 // Hilfsfunktionen für UI-Zustand
@@ -870,6 +871,60 @@ function onSubmitTextInput(q, input) {
   setNextBtn({ enabled: true });
   answered = true;
 }
+
+// ============================================================
+// YES OR NO
+// ============================================================
+function renderYesOrNo(q) {
+  
+  answersEl.innerHTML = "";
+
+  const container = document.createElement("div");
+  container.className = "mc-container";
+
+  const yes = document.createElement("button");
+  const no = document.createElement("button");
+
+  yes.innerHTML = "Ja"
+  yes.className = "answer-btn correct";
+  yes.addEventListener("click", () => {
+    onSubmitYesOrNo(q, "yes");
+  });
+  
+  no.innerHTML = "Nein";
+  no.className = "answer-btn wrong";
+  no.addEventListener("click", () => {
+    onSubmitYesOrNo(q, "no");
+  });
+
+  container.appendChild(yes);
+  container.appendChild(no);
+  answersEl.appendChild(container);  
+}
+
+function onSubmitYesOrNo (q, ans) {
+
+  answersEl.innerHTML = ""
+  let aussage;
+
+  if (q.answer === "yes") {
+    aussage = "korrekt";
+  } else { 
+    aussage = "falsch";
+  }
+
+  if (q.answer === ans) {
+    alert(`Genau, diese Aussage ist ${aussage}!`);
+    setScore(getScore() + 1);
+  } else {
+    alert(`Das stimmt leider nicht, diese Aussage ist ${aussage}!`);
+  }
+  
+  setNextBtn({ enabled: true });
+  answered = true;
+}
+
+
 
 // ============================================================
 // QUIZ ENDE

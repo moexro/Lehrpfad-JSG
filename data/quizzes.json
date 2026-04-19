@@ -275,7 +275,15 @@
     "id": "viehzucht",
     "leichtQuestions": [
       {
-        "question": "Ordne die Bilder zu",
+        "question": "Was ist das Grundfutter von Nutztieren?",
+        "type": "multipleChoice",
+        "answers": [
+          "Gras und Heu", "Brot und Zucker", "Reis und Fisch"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "question": "Welchem Tier gehört welcher Snack?",
         "type": "DragAndDrop",
         "items": [
           {
@@ -305,6 +313,30 @@
             "img": "/media/images/Viehzucht/Mehlwürmer.png"
           }
         ]
+      },
+      {
+        "question": "Warum bekommen Tiere hauptsächlich Salzlecksteine?",
+        "type": "multipleChoice",
+        "answers": [
+          "Zur Beschäftigung", "Damit sie schneller rennen", 
+          "Damit sie wichtige Mineralstoffe aufnehmen können"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "question": "Ist das Pupsen von Kühen schlecht für die Umwelt?",
+        "type": "YesOrNo",
+        "answer": "yes"
+      },
+      {
+        "question": "Warum gibt es verschiedene Rinderrassen?",
+        "type": "multipleChoice",
+        "answers": [
+          "Weil es verschieden große Ställe gibt", 
+          "Weil sie sich in Stärke, Nutzung und Anpassung unterscheiden",
+          "Damit mehr Tiere auf einem Hof stehen können"
+        ],
+        "correctIndex": 1
       }
     ],
     "schwerQuestions": [
@@ -322,6 +354,36 @@
           "Die Kühe nicht mehr melken und schlachten"
         ],
         "correctIndex": 1
+      },
+      {
+        "question": "Warum ist Grundfutter für Rinder so wichtig?",
+        "type": "multipleChoice",
+        "answers": [
+          "Es sorgt für eine gesunde Verdauung",
+          "Es macht die Milch süßer",
+          "Es ersetzt alle Mineralstoffe"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "question": "Wofür werden Legehennen und wofür Masthühner gehalten?",
+        "type": "multipleChoice",
+        "answers": [
+          "Legehennen für Fleischgewinnung, Masthühner für Eierproduktion.",
+          "Legehennen zur Eierproduktion, Masthühner zur Fleischgewinnung",
+          "Beide nur für die Fleischgewinnung"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "question": "Warum ist Direktvermarktung für Landwirte sinnvoll?",
+        "type": "multipleChoice",
+        "answers":[
+          "Sie verdienen mehr, weil Zwischenhändler wegfallen",
+          "Sie müssen weniger arbeiten",
+          "Sie brauchen weniger Maschinen"
+        ],
+        "correctIndex": 0
       }
     ]
   },

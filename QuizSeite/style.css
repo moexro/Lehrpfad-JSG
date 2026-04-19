@@ -100,9 +100,8 @@ main {
   hyphens: auto;
   color: var(--colorhightlight);
   word-break: break-word;
-  flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
   min-width: 150px; /* Mindestbreite für die Buttons */
-  max-width: 200px; /* Maximale Breite der Buttons */
+  max-width: 400px; /* Maximale Breite der Buttons */
   padding: 15px;
   font-size: 18px;
   border-radius: 35px;
@@ -220,17 +219,18 @@ img {
 .drag-item,
 .drop-slot {
   min-height: 20px;
+  max-height: 1200px;
   border-radius: 12px;
+  gap: 10px;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: 0.2s;
   hyphens: auto;
   word-break: break-word;
-  flex: 1 1 calc(50% - 20px); /* Nimmt bei größeren Tabs 50% der Breite ein */
-  max-width: 200px;
+  max-width: 150px;
 }
 
 .drag-item {
@@ -405,7 +405,7 @@ img {
 }
 
 .mc-option.selected {
-  color: var(--colormaindark);
+  color: var(--colorhightlight);
   border-color: var(--colorhightlight);
   box-shadow:
     0 0 0 2px var(--colorhightlight),

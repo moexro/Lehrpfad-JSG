@@ -28,9 +28,9 @@ body.dimmed::before {
 /* Top bar */
 .bar {
   position: fixed;
-  width: 98%;
+  width: 100%;
   margin: auto;
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 8px 8px;
   left: 0;
   right: 0;
 

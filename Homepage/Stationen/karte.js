@@ -4,6 +4,7 @@ Lehrpfad-Karte
 
 const LP_COORDS = {
 testing: [49.9446997, 9.7825362],
+viehzucht: [49.9678955, 9.6929537],
 ernaehrung: [49.959698, 9.779226],
 };
 
@@ -185,7 +186,7 @@ Object.entries(LP_COORDS).forEach(([key, coords]) => {
     let statusText, pointsHtml;
     if (!isUnlocked) {
       statusText = "Noch nicht freigeschaltet";
-      pointsHtml = `<div class="lp-popup-points">🔒 Scanne den QR-Code vor Ort</div>`;
+      pointsHtml = `<div class="lp-popup-points">🔒 Begebe dich zu dem Ort!</div>`;
     } else {
       statusText = isCompleted ? "Abgeschlossen ✓" : "Freigeschaltet";
       pointsHtml = `<div class="lp-popup-points">🏆 <strong>${currentScore}</strong> Punkte</div>`;
@@ -447,25 +448,26 @@ const { latitude: lat, longitude: lng, accuracy, heading } = pos.coords;
     }
   }
 
-  // ── Proximity-Check: Stationen innerhalb 5 m freischalten ──
+  // ── Proximity-Check ──
   Object.entries(LP_COORDS).forEach(([key, coords]) => {
     if (notifiedKeys.has(key)) return;
 
     const dist = lp_distanceMeters(lat, lng, coords[0], coords[1]);
 
     if (dist <= LP_PROXIMITY_METERS) {
-      notifiedKeys.add(key);
+  notifiedKeys.add(key);
 
+  waitForQuizMode().then(() => {
+    setTimeout(() => {
       localStorage.setItem(`quizUnlock_${key}`, JSON.stringify(true));
 
       const infobox = document.getElementById(key);
+      const stationName = markerRefs[key]?.quiz?.name || key;
+
       if (infobox) {
-        infobox.style.display = "block";
-        infobox.scrollIntoView({ behavior: "smooth", block: "start" });
-        const stationName = markerRefs[key]?.quiz?.name || key;
-        alert(
-          `Station ${stationName} freigeschaltet! Informationen sind nun verfügbar.`,
-        );
+        infobox.style.display = "flex";  
+        const ok = confirm(`Station ${stationName} freigeschaltet! Informationen sind jetzt verfügbar und du kannst das Quiz spielen.`);
+        if (ok) infobox.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
       const ref = markerRefs[key];
@@ -475,7 +477,6 @@ const { latitude: lat, longitude: lng, accuracy, heading } = pos.coords;
       }
 
       const toast = document.createElement("div");
-      const stationName = markerRefs[key]?.quiz?.name || key;
       toast.innerHTML = `🎯 <strong>Station ${stationName} in der Nähe!</strong><br><small>Automatisch freigeschaltet</small>`;
       toast.style.cssText = `
         position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
@@ -488,9 +489,13 @@ const { latitude: lat, longitude: lng, accuracy, heading } = pos.coords;
       setTimeout(() => toast.remove(), 4000);
 
       if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-    }
+
+    }, 1000); // 1 Sekunden Timeout nach Mode-Auswahl
   });
-},
+}
+  });
+}, 
+
 (err) => {
   console.warn("Geolocation-Fehler:", err.message);
 
@@ -515,24 +520,6 @@ const { latitude: lat, longitude: lng, accuracy, heading } = pos.coords;
 
 
 );
-}
-
-function lp_hookResetButton() {
-const btn = document.getElementById("resetQuizzes");
-if (!btn) return;
-const fresh = btn.cloneNode(true);
-btn.replaceWith(fresh);
-fresh.addEventListener("click", () => {
-const confirmed = confirm(
-"Willst du wirklich alle gespeicherten Daten löschen?",
-);
-if (confirmed) {
-localStorage.clear();
-alert("Alle Daten wurden gelöscht!");
-window.location.reload();
-sessionStorage.setItem("scrollTo", "stations");
-}
-});
 }
 
 // ── CSS für Animationen und Locate-Button einfügen ────────
@@ -601,5 +588,29 @@ document
 
 document.addEventListener("DOMContentLoaded", () => {
 lp_initMap();
-lp_hookResetButton();
 });
+
+function waitForQuizMode() {
+  return new Promise((resolve) => {
+    const existing = localStorage.getItem("quizMode");
+    if (existing === "leicht" || existing === "schwer") {
+      resolve(existing);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      const mode = localStorage.getItem("quizMode");
+      if (mode === "leicht" || mode === "schwer") {
+        clearInterval(interval);
+        resolve(mode);
+      }
+    }, 500);
+
+    window.addEventListener('keyReady', function handler(event) {
+      if (event.detail.key === 'quizMode') {
+        window.removeEventListener('keyReady', handler);
+        resolve(localStorage.getItem("quizMode"));
+      }
+    });
+  });
+}

@@ -14,16 +14,13 @@ fetch(basehref + "data/quizzes.json")
   })
   .then((data) => {
     listQuiz = data;
-    init();
+    setup();
   })
   .catch((err) => {
     console.error("Fehler beim Laden der Quiz-Daten:", err);
   });
 
-function init() {
-  document.addEventListener("DOMContentLoaded", () => setup());
-  if (document.readyState !== "loading") setup();
-}
+
 
 async function setup() {
   unlockFromLink();
@@ -101,7 +98,7 @@ function allQuizUnlock() {
 function resetButton() {
   const resetB = document.getElementById("resetQuizzes");
   if (!resetB) return;
-  resetB.addEventListener("click", () => {
+  resetB.addEventListener("click", (e) => {
     const confirmed = confirm(
       "Willst du wirklich alle gespeicherten Daten löschen?",
     );
@@ -110,6 +107,7 @@ function resetButton() {
       alert("Alle Daten wurden gelöscht!");
       window.location.reload();
     }
+    return;
   });
 }
 
@@ -163,8 +161,15 @@ function ensureQuizMode() {
         </div>
       </div>
     `;
+    if(document.body) {
+      document.body.appendChild(overlay);
+    } else {
+      document.addEventListener("DOMContentLoaded", (e) => {
+        document.body.appendChild(overlay);
+      });
+    }
 
-    document.body.appendChild(overlay);
+    
 
     overlay.querySelector("#modeLeicht").addEventListener("click", () => {
       localStorage.setItem("quizMode", "leicht");
@@ -177,6 +182,8 @@ function ensureQuizMode() {
       overlay.remove();
       resolve("schwer");
     });
+
+    window.dispatchEvent(new CustomEvent('keyReady', { detail: { key: 'quizMode' } }));
   });
 }
 

@@ -23,6 +23,7 @@ body {
   scroll-behavior: smooth;
 }
 
+
 body {
   display: flex;
   flex-direction: column;
@@ -31,6 +32,7 @@ body {
   padding: 20px;
   margin: 80px 0 0 0;
   color: var(--colorhighlight);
+  background-color:rgb(254, 253, 247);
 }
 
 

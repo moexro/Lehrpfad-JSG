@@ -389,9 +389,103 @@
   },
   "getreide-aufbau": {
     "name": "Der Aufbau des Getreides",
-    "id": "getreide-aufbau",
-    "leichtQuestions": [],
-    "schwerQuestions": []
+    "id": "getreide_aufbau",
+    "leichtQuestions": [
+      {
+        "question": "Wo wachsen die Körner bei der Getreidepflanze?",
+        "answers": ["In der Wurzel", "In der Ähre", "Im Blatt"],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Welche Aufgabe hat die Wurzel?",
+        "answers": ["Sie produziert Samen", "Sie schützt die Pflanze vor Tieren", "Sie nimmt Wasser und Nährstoffe auf"],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was ist der Halm?",
+        "answers": [
+          "Der lange Stiel der Pflanze",
+          "Die Blüte der Pflanze",
+          "Die Wurzel"
+        ],
+        "correctIndex": 0,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Wozu dient das Blatt?",
+        "answers": [
+          "Es speichert Wasser",
+          "Es hält die Pflanze im Boden fest", 
+          "Es hilft beim wachsen der Pflanze"
+        ],
+        "correctIndex": 3,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was ist das Korn?",
+        "answers": [
+          "Ein Teil der Wurzel",
+          "Der Samen der Pflanze", 
+          "Ein Blatt"
+        ],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      }
+    ],
+    "schwerQuestions": [
+      {
+        "question": "Was ist die Funktion der Granne?",
+        "answers": [
+          "Aufnahme von Wasser",
+          "Schutz der Pflanze und Unterstützung bei der Ausbreitung",
+          "Speicherung von Nährstoffen"
+        ],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was beschreibt die Ähre fachlich korrekt?",
+        "answers": [
+          "Den Stängel",
+          "Die Wurzelstruktur",
+          "Den Blütenstand mit Blüten und später Körnern"
+        ],
+        "correctIndex": 2,
+        "type": "multipleChoice" 
+      },
+      {
+        "question": "Welche Bestandteile haben die Knoten am Halm?",
+        "answers": [
+          "Keimling, Mehlkörner und Schale",
+          "Blatt, Halm und Wurzel",
+          "Granne, Ähre und Knoten"
+        ],
+        "correctIndex": 0,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Welche Funktion haben die Knoten am Halm?",
+        "answers": [
+          "Sie speichern Wasser",
+          "Sie produzieren Samen",
+          "Sie sind Ansatzstellen für Blätter und geben Stabilität"
+        ],
+        "correctIndex": 3,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was ist ein wesentliches Merkmal des Halms?",
+        "answers": [
+          "Er ist massiv und ohne Hohlräume",
+          "Er ist meist ein hohler Spross und sorgt für Stabilität",
+          "Er dient nur der Nährstoffspeicherung"
+        ],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      }
+    ]
   },
   "getreideanbau": {
     "name": "Wie man Getreide anbaut",

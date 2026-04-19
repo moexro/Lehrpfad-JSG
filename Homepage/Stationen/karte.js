@@ -3,9 +3,15 @@ Lehrpfad-Karte
 ─────────────────────────────────────────────────────── */
 
 const LP_COORDS = {
-testing: [49.9446997, 9.7825362],
-viehzucht: [49.9678955, 9.6929537],
-ernaehrung: [49.959698, 9.779226],
+  energiewald: [49.9441849, 9.7841595],
+  ernaehrung: [49.9450445, 9.7805376],
+  getreide_aufbau: [49.9437879, 9.788025],
+  stillegung_und_hecken: [49.9427626, 9.7922263],
+  maschinen: [49.941499, 9.7968739],
+  unterschiede: [49.9388751, 9.8023269],
+  viehzucht: [49.9301186, 9.8039912],
+  getreideanbau: [49.9365273, 9.8039345],
+  verwendung_von_pflanzen: [49.93362, 9.8037117],
 };
 
 const LP_DEFAULT_CENTER = [48.1351, 11.582];

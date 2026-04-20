@@ -106,7 +106,7 @@
   "maschinen": {
     "name": "Über die Maschinen",
     "id": "maschinen",
-    "onemode_questions": [
+    "leichtQuestions": [
       {
         "question": "Ohne welche Maschine kann ein Bauer keine seiner Aufgaben erledigen?",
         "answers": ["Pflug", "Traktor", "Rübenmaus", "Güllefass"],
@@ -117,26 +117,10 @@
         "question": "Feldbearbeitung: Halte & ziehe die Maschinen zu den richtigen Begriffen",
         "type": "DragAndDrop",
         "items": [
-          {
-            "text": "Pflug",
-            "correctDrop": "Pflug",
-            "img": "/media/images/Maschinen/Drehpflug.jpg"
-          },
-          {
-            "text": "Grubber",
-            "correctDrop": "Grubber",
-            "img": "/media/images/Maschinen/Grubber.jpg"
-          },
-          {
-            "text": "Kreiselegge",
-            "correctDrop": "Kreiselegge",
-            "img": "/media/images/Maschinen/Kreiselegge.jpg"
-          },
-          {
-            "text": "Walze",
-            "correctDrop": "Walze",
-            "img": "/media/images/Maschinen/Walze.jpg"
-          }
+          { "text": "Pflug", "correctDrop": "Pflug", "img": "/media/images/Maschinen/Drehpflug.jpg" },
+          { "text": "Grubber", "correctDrop": "Grubber", "img": "/media/images/Maschinen/Grubber.jpg" },
+          { "text": "Kreiselegge", "correctDrop": "Kreiselegge", "img": "/media/images/Maschinen/Kreiselegge.jpg" },
+          { "text": "Walze", "correctDrop": "Walze", "img": "/media/images/Maschinen/Walze.jpg" }
         ],
         "drops": [
           { "label": "Pflug" },
@@ -146,34 +130,55 @@
         ]
       },
       {
+        "question": "Welche Maschine wird verwendet, um Saatgut gleichmäßig in den Boden zu legen?",
+        "answers": ["Düngerstreuer", "Güllefass", "Sämaschine", "Walze"],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Heu und Gras: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "type": "DragAndDrop",
+        "items": [
+          { "text": "Heuwender", "correctDrop": "Heuwender", "img": "/media/images/Maschinen/Heuwender.jpg" },
+          { "text": "Schwader", "correctDrop": "Schwader", "img": "/media/images/Maschinen/Schwader.jpg" },
+          { "text": "Ladewagen", "correctDrop": "Ladewagen", "img": "/media/images/Maschinen/Ladewagen.jpg" },
+          { "text": "Ballenpresse", "correctDrop": "Ballenpresse", "img": "/media/images/Maschinen/Ballenpresse.jpg" }
+        ],
+        "drops": [
+          { "label": "Heuwender" },
+          { "label": "Schwader" },
+          { "label": "Ladewagen" },
+          { "label": "Ballenpresse" }
+        ]
+      },
+      {
+        "question": "Welche Maschine erntet Getreide wie Weizen oder Raps in einem einzigen Arbeitsgang?",
+        "answers": ["Feldhäcksler", "Rübenroder", "Mähdrescher", "Ladewagen"],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Wofür wird ein Güllefass verwendet?",
+        "answers": [
+          "Zum Verteilen von mineralischem Kunstdünger",
+          "Zum Ausbringen von flüssigem Mist auf den Acker",
+          "Zum Bewässern der Felder",
+          "Zum Transportieren von Getreide"
+        ],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      }
+    ],
+    "schwerQuestions": [
+      {
         "question": "Ausbringen auf den Acker: Halte & ziehe die Maschinen zu den richtigen Begriffen",
         "type": "DragAndDrop",
         "items": [
-          {
-            "text": "Miststreuer",
-            "correctDrop": "Miststreuer",
-            "img": "/media/images/Maschinen/Miststreuer.jpg"
-          },
-          {
-            "text": "Güllefass",
-            "correctDrop": "Güllefass",
-            "img": "/media/images/Maschinen/Guellefass.jpg"
-          },
-          {
-            "text": "Sämaschine",
-            "correctDrop": "Sämaschine",
-            "img": "/media/images/Maschinen/Saemaschine.jpg"
-          },
-          {
-            "text": "Pflanzenschutzspritze",
-            "correctDrop": "Pflanzenschutzspritze",
-            "img": "/media/images/Maschinen/Planzenschutzspritze.jpg"
-          },
-          {
-            "text": "Düngerstreuer",
-            "correctDrop": "Düngerstreuer",
-            "img": "/media/images/Maschinen/Duengerstreuer.jpg"
-          }
+          { "text": "Miststreuer", "correctDrop": "Miststreuer", "img": "/media/images/Maschinen/Miststreuer.jpg" },
+          { "text": "Güllefass", "correctDrop": "Güllefass", "img": "/media/images/Maschinen/Guellefass.jpg" },
+          { "text": "Sämaschine", "correctDrop": "Sämaschine", "img": "/media/images/Maschinen/Saemaschine.jpg" },
+          { "text": "Pflanzenschutzspritze", "correctDrop": "Pflanzenschutzspritze", "img": "/media/images/Maschinen/Planzenschutzspritze.jpg" },
+          { "text": "Düngerstreuer", "correctDrop": "Düngerstreuer", "img": "/media/images/Maschinen/Duengerstreuer.jpg" }
         ],
         "drops": [
           { "label": "Miststreuer" },
@@ -184,39 +189,15 @@
         ]
       },
       {
-        "question": "Heu und Gras: Halte & ziehe die Maschinen zu den richtigen Begriffen",
+        "question": "Heu und Gras (erweitert): Halte & ziehe die Maschinen zu den richtigen Begriffen",
         "type": "DragAndDrop",
         "items": [
-          {
-            "text": "Frontmähwerk",
-            "correctDrop": "Frontmähwerk",
-            "img": "/media/images/Maschinen/Maehwerk.jpg"
-          },
-          {
-            "text": "Heckmähwerk",
-            "correctDrop": "Heckmähwerk",
-            "img": "/media/images/Maschinen/Heckmaehwerk.jpg"
-          },
-          {
-            "text": "Heuwender",
-            "correctDrop": "Heuwender",
-            "img": "/media/images/Maschinen/Heuwender.jpg"
-          },
-          {
-            "text": "Schwader",
-            "correctDrop": "Schwader",
-            "img": "/media/images/Maschinen/Schwader.jpg"
-          },
-          {
-            "text": "Ladewagen",
-            "correctDrop": "Ladewagen",
-            "img": "/media/images/Maschinen/Ladewagen.jpg"
-          },
-          {
-            "text": "Ballenpresse",
-            "correctDrop": "Ballenpresse",
-            "img": "/media/images/Maschinen/Ballenpresse.jpg"
-          }
+          { "text": "Frontmähwerk", "correctDrop": "Frontmähwerk", "img": "/media/images/Maschinen/Maehwerk.jpg" },
+          { "text": "Heckmähwerk", "correctDrop": "Heckmähwerk", "img": "/media/images/Maschinen/Heckmaehwerk.jpg" },
+          { "text": "Heuwender", "correctDrop": "Heuwender", "img": "/media/images/Maschinen/Heuwender.jpg" },
+          { "text": "Schwader", "correctDrop": "Schwader", "img": "/media/images/Maschinen/Schwader.jpg" },
+          { "text": "Ladewagen", "correctDrop": "Ladewagen", "img": "/media/images/Maschinen/Ladewagen.jpg" },
+          { "text": "Ballenpresse", "correctDrop": "Ballenpresse", "img": "/media/images/Maschinen/Ballenpresse.jpg" }
         ],
         "drops": [
           { "label": "Frontmähwerk" },
@@ -231,26 +212,10 @@
         "question": "Ernte: Halte & ziehe die Maschinen zu den richtigen Begriffen",
         "type": "DragAndDrop",
         "items": [
-          {
-            "text": "Feldhäcksler",
-            "correctDrop": "Feldhäcksler",
-            "img": "/media/images/Maschinen/Feldhaecksler.jpg"
-          },
-          {
-            "text": "Mähdrescher",
-            "correctDrop": "Mähdrescher",
-            "img": "/media/images/Maschinen/Maehdrescher.jpg"
-          },
-          {
-            "text": "Rübenroder",
-            "correctDrop": "Rübenroder",
-            "img": "/media/images/Maschinen/Ruebenroder.jpg"
-          },
-          {
-            "text": "Rübenmaus",
-            "correctDrop": "Rübenmaus",
-            "img": "/media/images/Maschinen/Ruebenmaus.jpg"
-          }
+          { "text": "Feldhäcksler", "correctDrop": "Feldhäcksler", "img": "/media/images/Maschinen/Feldhaecksler.jpg" },
+          { "text": "Mähdrescher", "correctDrop": "Mähdrescher", "img": "/media/images/Maschinen/Maehdrescher.jpg" },
+          { "text": "Rübenroder", "correctDrop": "Rübenroder", "img": "/media/images/Maschinen/Ruebenroder.jpg" },
+          { "text": "Rübenmaus", "correctDrop": "Rübenmaus", "img": "/media/images/Maschinen/Ruebenmaus.jpg" }
         ],
         "drops": [
           { "label": "Feldhäcksler" },
@@ -258,10 +223,47 @@
           { "label": "Rübenroder" },
           { "label": "Rübenmaus" }
         ]
+      },
+      {
+        "question": "Was ist der Unterschied zwischen Frontmähwerk und Heckmähwerk?",
+        "answers": [
+          "Das Frontmähwerk mäht Getreide, das Heckmähwerk mäht Gras",
+          "Das Frontmähwerk ist vorne am Traktor montiert, das Heckmähwerk hinten",
+          "Das Frontmähwerk presst Ballen, das Heckmähwerk wendet das Heu",
+          "Es gibt keinen Unterschied – beide Begriffe bezeichnen dieselbe Maschine"
+        ],
+        "correctIndex": 1,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Welche Maschine wird eingesetzt, um Mais für die Silage zu ernten?",
+        "answers": ["Mähdrescher", "Rübenroder", "Feldhäcksler", "Schwader"],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Was ist die Aufgabe des Schwaders?",
+        "answers": [
+          "Er mäht das Gras auf dem Feld",
+          "Er presst das Heu zu runden Ballen",
+          "Er zieht getrocknetes Gras zu Reihen zusammen",
+          "Er transportiert das Heu in den Stall"
+        ],
+        "correctIndex": 2,
+        "type": "multipleChoice"
+      },
+      {
+        "question": "Welche zwei Maschinen werden zum Düngen des Ackers eingesetzt – eine für festen, eine für flüssigen Dünger?",
+        "answers": [
+          "Sämaschine und Walze",
+          "Miststreuer und Güllefass",
+          "Düngerstreuer und Pflanzenschutzspritze",
+          "Grubber und Pflug"
+        ],
+        "correctIndex": 1,
+        "type": "multipleChoice"
       }
-    ],
-    "leichtQuestions": [],
-    "schwerQuestions": []
+    ]
   },
   "energiewald": {
     "name": "Der Energiewald",
